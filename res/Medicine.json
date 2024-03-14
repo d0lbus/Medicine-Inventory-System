@@ -1,0 +1,743 @@
+{
+  "data": {
+    "Painkillers": {
+      "GenericName": [
+        {
+          "BrandName": [
+            {
+              "Form": "Tablet",
+              "Quantity": 40,
+              "Amount": 3
+            },
+            {
+              "Form": "Chewable Tablet",
+              "Quantity": 35,
+              "Amount": 6
+            },
+            {
+              "Form": "Suppository",
+              "Quantity": 43,
+              "Amount": 10
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 43,
+              "Amount": 6
+            },
+            {
+              "Form": "Liquid",
+              "Quantity": 47,
+              "Amount": 149.75
+            }
+          ]
+        },
+        {
+          "BrandName": [
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 18.75
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 46,
+              "Amount": 8
+            },
+            {
+              "Form": "Caplet",
+              "Quantity": 50,
+              "Amount": 10
+            },
+            {
+              "Form": "Intravenous Solution",
+              "Quantity": 50,
+              "Amount": 160
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 12
+            }
+          ]
+        },
+        {
+          "BrandName": [
+            {
+              "Form": "Tablet",
+              "Quantity": 48,
+              "Amount": 10.5
+            },
+            {
+              "Form": "Caplet",
+              "Quantity": 50,
+              "Amount": 13.5
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 10
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 10
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 8.5
+            }
+          ]
+        },
+        {
+          "BrandName": [
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 4
+            },
+            {
+              "Form": "Chewable Tablet",
+              "Quantity": 50,
+              "Amount": 2
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 5
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 7
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 1.5
+            }
+          ]
+        },
+        {
+          "BrandName": [
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 55
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 55
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 70
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 55
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 60
+            }
+          ]
+        }
+      ]
+    },
+    "SleepingPills": {
+      "GenericName": [
+        {
+          "BrandName": [
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 64.25
+            },
+            {
+              "Form": "Sublingual Tablet",
+              "Quantity": 50,
+              "Amount": 30
+            },
+            {
+              "Form": "Sublingual Tablet",
+              "Quantity": 50,
+              "Amount": 30
+            },
+            {
+              "Form": "Oral Spray",
+              "Quantity": 50,
+              "Amount": 25
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 24
+            }
+          ]
+        },
+        {
+          "BrandName": [
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 50
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 50
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 21.5
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 50
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 40
+            }
+          ]
+        },
+        {
+          "BrandName": [
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 30
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 15
+            },
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 17
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 30
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 33
+            }
+          ]
+        },
+        {
+          "BrandName": [
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 60
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 54
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 55
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 54
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 54
+            }
+          ]
+        },
+        {
+          "BrandName": [
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 33
+            },
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 34
+            },
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 34
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 45
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 30.5
+            }
+          ]
+        }
+      ]
+    },
+    "Antibiotics": {
+      "GenericName": [
+        {
+          "BrandName": [
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 16
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 10
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 12
+            },
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 9.5
+            },
+            {
+              "Form": "Suspension",
+              "Quantity": 50,
+              "Amount": 110
+            }
+          ]
+        },
+        {
+          "BrandName": [
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 50
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 55
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 75
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 50
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 45.5
+            }
+          ]
+        },
+        {
+          "BrandName": [
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 80
+            },
+            {
+              "Form": "Solution",
+              "Quantity": 50,
+              "Amount": 70
+            },
+            {
+              "Form": "Suspension",
+              "Quantity": 50,
+              "Amount": 100
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 70
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 65
+            }
+          ]
+        },
+        {
+          "BrandName": [
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 13.5
+            },
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 10
+            },
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 12
+            },
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 25
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 17
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 70
+            },
+            {
+              "Form": "Solution",
+              "Quantity": 50,
+              "Amount": 1400
+            },
+            {
+              "Form": "Solution",
+              "Quantity": 50,
+              "Amount": 1300
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 90
+            }
+          ]
+        }
+      ]
+    },
+    "ColdAndFluMedications": {
+      "GenericName": [
+        {
+          "BrandName": [
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 110
+            },
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 85
+            },
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 70
+            },
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 70
+            },
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 70
+            }
+          ]
+        },
+        {
+          "BrandName": [
+            {
+              "Form": "Nasal Spray",
+              "Quantity": 50,
+              "Amount": 150
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 75
+            },
+            {
+              "Form": "Nasal Spray",
+              "Quantity": 50,
+              "Amount": 145
+            },
+            {
+              "Form": "Nasal Spray",
+              "Quantity": 50,
+              "Amount": 145
+            },
+            {
+              "Form": "Nasal Spray",
+              "Quantity": 50,
+              "Amount": 155
+            }
+          ]
+        },
+        {
+          "BrandName": [
+            {
+              "Form": "Liquid",
+              "Quantity": 50,
+              "Amount": 99
+            },
+            {
+              "Form": "Oral Suspension",
+              "Quantity": 50,
+              "Amount": 250
+            },
+            {
+              "Form": "Liquid",
+              "Quantity": 50,
+              "Amount": 170
+            },
+            {
+              "Form": "Liquid",
+              "Quantity": 50,
+              "Amount": 100
+            },
+            {
+              "Form": "Liquid",
+              "Quantity": 50,
+              "Amount": 100
+            }
+          ]
+        },
+        {
+          "BrandName": [
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 70
+            },
+            {
+              "Form": "Liquid",
+              "Quantity": 50,
+              "Amount": 60
+            },
+            {
+              "Form": "Liquid",
+              "Quantity": 50,
+              "Amount": 80
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 2
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 2
+            }
+          ]
+        },
+        {
+          "BrandName": [
+            {
+              "Form": "Caplet",
+              "Quantity": 50,
+              "Amount": 3
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 3
+            },
+            {
+              "Form": "Liquid",
+              "Quantity": 50,
+              "Amount": 1199
+            },
+            {
+              "Form": "Liquid Gel",
+              "Quantity": 50,
+              "Amount": 890
+            },
+            {
+              "Form": "Powder for Oral",
+              "Quantity": 50,
+              "Amount": 1193
+            }
+          ]
+        }
+      ]
+    },
+    "Supplements": {
+      "GenericName": [
+        {
+          "BrandName": [
+            {
+              "Form": "Softgel Capsule",
+              "Quantity": 50,
+              "Amount": 4.5
+            },
+            {
+              "Form": "Softgel Capsule",
+              "Quantity": 50,
+              "Amount": 6
+            },
+            {
+              "Form": [
+                "Softgel Capsule",
+                "Liquid"
+              ],
+              "Quantity": 50,
+              "Amount": 22
+            },
+            {
+              "Form": "Softgel Capsule",
+              "Quantity": 50,
+              "Amount": 11
+            },
+            {
+              "Form": "Softgel Capsule",
+              "Quantity": 50,
+              "Amount": 10.5
+            }
+          ]
+        },
+        {
+          "BrandName": [
+            {
+              "Form": "Softgel Capsule",
+              "Quantity": 50,
+              "Amount": 5
+            },
+            {
+              "Form": "Softgel Capsule",
+              "Quantity": 50,
+              "Amount": 5
+            },
+            {
+              "Form": "Gummy",
+              "Quantity": 50,
+              "Amount": 2.5
+            },
+            {
+              "Form": "Softgel Capsule",
+              "Quantity": 50,
+              "Amount": 3
+            },
+            {
+              "Form": "Softgel Capsule",
+              "Quantity": 50,
+              "Amount": 4
+            }
+          ]
+        },
+        {
+          "BrandName": [
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 5
+            },
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 13
+            },
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 15
+            },
+            {
+              "Form": "Capsule",
+              "Quantity": 50,
+              "Amount": 9
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 4
+            }
+          ]
+        },
+        {
+          "BrandName": [
+            {
+              "Form": "Caplet",
+              "Quantity": 50,
+              "Amount": 5
+            },
+            {
+              "Form": "Chewable Tablet",
+              "Quantity": 50,
+              "Amount": 4
+            },
+            {
+              "Form": "Softgel Capsule",
+              "Quantity": 50,
+              "Amount": 5
+            },
+            {
+              "Form": "Gummy",
+              "Quantity": 50,
+              "Amount": 12
+            },
+            {
+              "Form": "Softgel Capsule",
+              "Quantity": 50,
+              "Amount": 3
+            }
+          ]
+        },
+        {
+          "BrandName": [
+            {
+              "Form": "Capsule",
+              "Quantity": 38,
+              "Amount": 6
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 4
+            },
+            {
+              "Form": "Softgel Capsule",
+              "Quantity": 50,
+              "Amount": 5
+            },
+            {
+              "Form": "Tablet",
+              "Quantity": 50,
+              "Amount": 4
+            }
+          ],
+          "BrandName": {
+            "Form": "Tablet",
+            "Quantity": 50,
+            "Amount": 8
+          }
+        }
+      ]
+    }
+  }
+}
