@@ -1,4 +1,4 @@
-package ClientGUI;
+package midproject.ViewClasses;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
