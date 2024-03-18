@@ -1,15 +1,6 @@
 package midproject.ViewClasses;
 
-//import Test.UserProfile;
-
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
 import java.awt.*;
-import java.awt.event.ComponentListener;
-import java.awt.event.KeyEvent;
-import java.io.File;
-import java.util.List;
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 /**
  * This class is used for designing the whole Client GUI program
@@ -1956,14 +1947,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private void nextButtonModeOfPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonModeOfPaymentActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nextButtonModeOfPaymentActionPerformed
-
-   /* public void loginSuccess(String userId) {
-        UserProfileReader userProfileReader = new UserProfileReader(userId, nameTextArea, personalInformationTextArea);
-        userProfileReader.readUserProfile();
-    }
-    /**
-     * @param args the command line arguments
-     */
 
     public static void main(String args[]) {
         try {
