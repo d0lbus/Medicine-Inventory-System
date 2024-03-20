@@ -14,10 +14,9 @@ import midproject.SharedClasses.UserDefinedExceptions.UserExistsException;
 
 import static midproject.SharedClasses.UserJSONProcessor.isValidCredentials;
 
-// servant class: implementation of ServerImplementation (rough implementation)
 public class ServerImplementation
 		extends UnicastRemoteObject implements ModelInterface {
-	// name is mapped to a messagecallback object
+
 	private Map<String, MessageCallback> msgCallbacks =
 			new Hashtable<>();
 

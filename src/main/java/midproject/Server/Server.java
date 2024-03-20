@@ -9,7 +9,7 @@ public class Server {
 			ModelInterface servant = new ServerImplementation();
 			Registry reg = LocateRegistry.createRegistry(1099);
 			reg.rebind("msgserver",servant);
-			System.out.println("message server running...");
+			System.out.println("Server running...");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
