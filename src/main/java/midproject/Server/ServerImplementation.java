@@ -40,7 +40,7 @@ public class ServerImplementation
 			msgCallbacks.put(username, msgCallback);
 			System.out.println("Login successful: " + username);
 		}
-        return false;
+        return true;
     }
 
 
