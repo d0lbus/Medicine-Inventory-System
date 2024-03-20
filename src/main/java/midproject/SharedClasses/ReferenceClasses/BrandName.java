@@ -8,7 +8,6 @@ public class BrandName implements Serializable {
     private String quantity;
     private String price;
 
-    // Constructors, getters, and setters
     public BrandName() {
     }
 

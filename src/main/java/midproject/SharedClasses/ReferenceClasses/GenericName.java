@@ -7,7 +7,6 @@ public class GenericName implements Serializable {
     private String _gname;
     private List<BrandName> brandName;
 
-    // Constructors, getters, and setters
     public GenericName() {
     }
 
