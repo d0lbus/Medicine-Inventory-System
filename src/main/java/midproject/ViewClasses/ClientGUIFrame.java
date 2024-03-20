@@ -20,7 +20,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         setResizable(false);
         this.cardLayout = (CardLayout) containerPanel.getLayout();
         setLocationRelativeTo(null);
-        Image logo = Toolkit.getDefaultToolkit().getImage("Icons/logo.png");
+        Image logo = Toolkit.getDefaultToolkit().getImage("/Icons/logo.png");
         setIconImage(logo);
     }
 
@@ -191,12 +191,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         titleLabel.setForeground(new java.awt.Color(255, 255, 255));
         titleLabel.setText("Quantum Drugstore");
 
-        iconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("Icons/logo.png"))); // NOI18N
-        iconLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                iconLabelMouseClicked(evt);
-            }
-        });
+        iconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/logo.png"))); // NOI18N
 
         profileLabel.setFont(new java.awt.Font("Sitka Heading", 1, 24)); // NOI18N
         profileLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -1933,7 +1928,10 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_pendingCheckbox5ActionPerformed
 
     private void storeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_storeLabelMouseClicked
-        // TODO add your handling code here:
+        containerPanel.removeAll();
+        containerPanel.add(choosePanel);
+        containerPanel.repaint();
+        containerPanel.revalidate();
     }//GEN-LAST:event_storeLabelMouseClicked
 
     private void cashOnDeliveryLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cashOnDeliveryLabelMouseClicked
