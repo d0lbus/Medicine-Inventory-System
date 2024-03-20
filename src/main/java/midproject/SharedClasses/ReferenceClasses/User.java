@@ -1,4 +1,4 @@
-package midproject.SharedClasses;
+package midproject.SharedClasses.ReferenceClasses;
 
 import java.io.Serializable;
 

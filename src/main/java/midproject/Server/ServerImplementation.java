@@ -4,50 +4,46 @@ import java.rmi.RemoteException;
 import java.util.*;
 import java.rmi.server.*;
 
-import midproject.SharedClasses.LogInAndLogOutInterface;
-import midproject.SharedClasses.MessageCallback;
-import midproject.SharedClasses.User;
-import midproject.SharedClasses.AlreadyLoggedInException;
-import midproject.SharedClasses.UserExistsException;
-import midproject.SharedClasses.NotLoggedInException;
+import midproject.SharedClasses.Interfaces.ModelInterface;
+import midproject.SharedClasses.Interfaces.MessageCallback;
+import midproject.SharedClasses.ReferenceClasses.User;
+import midproject.SharedClasses.UserDefinedExceptions.AlreadyLoggedInException;
+import midproject.SharedClasses.UserDefinedExceptions.AuthenticationFailedException;
+import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
+import midproject.SharedClasses.UserDefinedExceptions.UserExistsException;
 
-// servant class: implementation of MessageServer (rough implementation)
+import static midproject.SharedClasses.UserJSONProcessor.isValidCredentials;
+
+// servant class: implementation of ServerImplementation (rough implementation)
 public class ServerImplementation
-		extends UnicastRemoteObject implements LogInAndLogOutInterface {
+		extends UnicastRemoteObject implements ModelInterface {
 	// name is mapped to a messagecallback object
 	private Map<String, MessageCallback> msgCallbacks =
 			new Hashtable<>();
 
-	// required constructor that throws RemoteException
+
 	public ServerImplementation() throws RemoteException {
 	}
 
-	public void login(MessageCallback msgCallback)
-			throws RemoteException, UserExistsException,
-			AlreadyLoggedInException {
-		User user = msgCallback.getUser();
-		// check if callback instance already exists
+	public boolean login(MessageCallback msgCallback, String username, String password)
+			throws RemoteException, UserExistsException, AlreadyLoggedInException, AuthenticationFailedException {
+			User user = msgCallback.getUser();
+			String filepath = "res/UserInformation.json";
+
+		if (!isValidCredentials(username, password, filepath)) {
+			throw new AuthenticationFailedException("Invalid username or password.");
+		}
 		if (msgCallbacks.containsValue(msgCallback)) {
 			throw new AlreadyLoggedInException("Already logged in... you cannot login using the same client...");
-		} else if (msgCallbacks.containsKey(user.getUsername())) {
-			// different callback instance but same name
-			throw new UserExistsException("User name already exists, use another name...");
+		} else if (msgCallbacks.containsKey(username)) {
+			throw new UserExistsException("Username already exists, use another name...");
 		} else {
-			// new user, session; add msgCallback to the current collection of online clients
-			msgCallbacks.put(user.getUsername(), msgCallback);
-			System.out.println("login: " + user.getUsername());
-			System.out.print("online: [ ");
-			for (String name : msgCallbacks.keySet()) {
-				System.out.print(name + " ");
-			}
-			System.out.println("]");
-
-			// loop to send login notification to all clients
-			for (String name : msgCallbacks.keySet()) {
-				msgCallbacks.get(name).loginCall(user);
-			}
+			msgCallbacks.put(username, msgCallback);
+			System.out.println("Login successful: " + username);
 		}
-	}
+        return false;
+    }
+
 
 	// broadcast method implementation
 	public void broadcast(MessageCallback msgCallback, String msg)
@@ -75,8 +71,8 @@ public class ServerImplementation
 		// get current user of callback
 		User user = msgCallback.getUser();
 		// remove session/callback from the table
-		msgCallbacks.remove(user.getName());
-		System.out.println("- logout: " + user.getName());
+		msgCallbacks.remove(user.getUsername());
+		System.out.println("- logout: " + user.getUsername());
 		System.out.print("online: [ ");
 		for (String name : msgCallbacks.keySet()) {
 			System.out.print(name + " ");
@@ -88,4 +84,5 @@ public class ServerImplementation
 			msgCallbacks.get(name).logoutCall(user);
 		}
 	}
+
 }

@@ -1,9 +1,6 @@
 package midproject.ViewClasses;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.JToggleButton;
+import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -30,9 +27,13 @@ public class LoginFrame extends javax.swing.JFrame {
         initComponents();
     }
 
+    public JTextField getIpAddressTextField() {
+        return ipAddressTextField;
+    }
+
     // <editor-fold defaultstate="collapsed" desc="More Codes">
     private void initComponents() {
-
+        ipAddressTextField = new JTextField();
         blueColoredPanel = new javax.swing.JPanel();
         mainPanel = new javax.swing.JPanel();
         quantumLabel = new javax.swing.JLabel();
@@ -43,6 +44,11 @@ public class LoginFrame extends javax.swing.JFrame {
         usernameLabel = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
+
+        JLabel ipAddressLabel = new JLabel("IP Address");
+        ipAddressLabel.setHorizontalAlignment(JLabel.CENTER);
+        ipAddressLabel.setFont(new java.awt.Font("Sitka Heading", 1, 14)); // NOI18N
+        ipAddressLabel.setForeground(new java.awt.Color(60, 63, 65));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quantum Drugstore");
@@ -92,7 +98,11 @@ public class LoginFrame extends javax.swing.JFrame {
                                     .addComponent(usernameTextfield, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(passwordLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(usernameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(passwordField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE))
+                                    .addComponent(passwordField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+                                        .addComponent(ipAddressTextField, 150, 150, 250)
+                                        .addComponent(ipAddressLabel)
+                                        .addComponent(ipAddressTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                )
                                 .addGap(317, 317, 317))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                                 .addComponent(logInButton)
@@ -111,7 +121,11 @@ public class LoginFrame extends javax.swing.JFrame {
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(quantumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(ipAddressLabel)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED) // Control space between label and field
+                            .addComponent(ipAddressTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    )
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)
@@ -160,52 +174,6 @@ public class LoginFrame extends javax.swing.JFrame {
 
         pack();
 
-        /*
-        logInButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    File file = new File("res/UserInformation.xml");
-                    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-                    DocumentBuilder db = dbf.newDocumentBuilder();
-                    Document doc = db.parse(file);
-                    doc.getDocumentElement().normalize();
-                    NodeList nodeList = doc.getElementsByTagName("customers");
-
-                    String username = usernameTextfield.getText();
-                    String password = new String(passwordField.getPassword());
-
-                    for (int itr = 0; itr < nodeList.getLength(); itr++) {
-                        Node node = nodeList.item(itr);
-                        if (node.getNodeType() == Node.ELEMENT_NODE) {
-                            Element eElement = (Element) node;
-                            if (username == eElement.getElementsByTagName("username").item(0).getTextContent() && password == eElement.getElementsByTagName("password").item(0).getTextContent()) {
-                                // Authentication successful, close the login frame
-                                dispose();
-
-                                // Open the ClientGUIFrame
-                                java.awt.EventQueue.invokeLater(new Runnable() {
-                                    public void run() {
-                                        new ClientGUIFrame().setVisible(true);
-                                    }
-                                });
-                            } else {
-                                // Authentication failed, show an error message
-                                JOptionPane.showMessageDialog(LoginFrame.this, "Invalid username or password. Please try again.");
-                            }
-                        }
-                    }
-                } catch (ParserConfigurationException ex) {
-                    throw new RuntimeException(ex);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                } catch (SAXException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
-
-         */
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -231,6 +199,8 @@ public class LoginFrame extends javax.swing.JFrame {
     public JToggleButton getLogInButton() {
         return logInButton;
     }
+
+    private javax.swing.JTextField ipAddressTextField;
 
     private javax.swing.JPanel blueColoredPanel;
     private javax.swing.JLabel jLabel1;

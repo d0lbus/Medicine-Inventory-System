@@ -1,9 +1,13 @@
-package midproject.SharedClasses;
+package midproject.SharedClasses.Interfaces;
+
+import midproject.SharedClasses.ReferenceClasses.User;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public interface MessageCallback extends Remote {
+
+
 	// method to get the current user of the callback/session
 	public User getUser() throws RemoteException;
 

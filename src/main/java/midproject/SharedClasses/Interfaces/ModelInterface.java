@@ -1,13 +1,16 @@
-package midproject.SharedClasses;
+package midproject.SharedClasses.Interfaces;
 
-import midproject.Client.CallbackImplementation;
+import midproject.SharedClasses.UserDefinedExceptions.AlreadyLoggedInException;
+import midproject.SharedClasses.UserDefinedExceptions.AuthenticationFailedException;
+import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
+import midproject.SharedClasses.UserDefinedExceptions.UserExistsException;
 
 import java.rmi.*;
 
-public interface LogInAndLogOutInterface extends Remote {
+public interface ModelInterface extends Remote {
 	// method to log in to the chat system (msgCallback is used
 	// as a callback and session manager/identifier)
-	public void login(MessageCallback msgCallback, String username, String password)
+	public boolean login(MessageCallback msgCallback, String username, String password)
 			throws RemoteException, UserExistsException,
 			AlreadyLoggedInException, AuthenticationFailedException;
 

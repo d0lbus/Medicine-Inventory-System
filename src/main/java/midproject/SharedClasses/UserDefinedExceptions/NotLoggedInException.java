@@ -1,4 +1,4 @@
-package midproject.SharedClasses;
+package midproject.SharedClasses.UserDefinedExceptions;
 
 // custom exception class used to denote an error where
 // a client tries to log out/send broadcast while not
