@@ -15,17 +15,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserJSONProcessor {
+
+    private static final Gson gson = new Gson();
+
     public static User parseUserFromJson(String json) {
-        Gson gson = new Gson();
         return gson.fromJson(json, User.class);
     }
 
     public static String userToJson(User user) {
-        Gson gson = new Gson();
         return gson.toJson(user);
     }
+
     public static void addUserToJsonFile(User newUser, String filePath) {
-        Gson gson = new Gson();
         try (FileReader reader = new FileReader(filePath)) {
             Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
             List<User> users = gson.fromJson(reader, userListType);
@@ -45,8 +46,6 @@ public class UserJSONProcessor {
     public static boolean isValidCredentials(String username, String password, String filePath) {
         try {
             String json = new String(Files.readAllBytes(Paths.get(filePath)));
-            Gson gson = new Gson();
-
             Type userListType = new TypeToken<List<User>>(){}.getType();
             List<User> users = gson.fromJson(json, userListType);
 
@@ -62,7 +61,6 @@ public class UserJSONProcessor {
     }
 
     public static void updateUserInJsonFile(User updatedUser, String filePath) {
-        Gson gson = new Gson();
         try (FileReader reader = new FileReader(filePath)) {
             Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
             List<User> users = gson.fromJson(reader, userListType);
@@ -71,15 +69,12 @@ public class UserJSONProcessor {
                 System.out.println("No users found.");
                 return;
             }
-
-            // Find the user to update
             for (int i = 0; i < users.size(); i++) {
                 if (users.get(i).getUserId().equals(updatedUser.getUserId())) {
                     users.set(i, updatedUser);
                     break;
                 }
             }
-
             try (FileWriter writer = new FileWriter(filePath)) {
                 gson.toJson(users, writer);
             }
@@ -88,6 +83,36 @@ public class UserJSONProcessor {
         }
     }
 
+    public static void archiveUser(String userId, String originalFilePath, String archiveFilePath) {
+        try {
+            List<User> users = readUsersFromFile(originalFilePath);
+            List<User> archivedUsers = readUsersFromFile(archiveFilePath);
+
+            users.removeIf(user -> {
+                boolean match = user.getUserId().equals(userId);
+                if (match) archivedUsers.add(user);
+                return match;
+            });
+
+            writeUsersToFile(users, originalFilePath);
+            writeUsersToFile(archivedUsers, archiveFilePath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static List<User> readUsersFromFile(String filePath) throws Exception {
+        String json = new String(Files.readAllBytes(Paths.get(filePath)));
+        Type userListType = new TypeToken<List<User>>(){}.getType();
+        List<User> users = gson.fromJson(json, userListType);
+        return users != null ? users : new ArrayList<>();
+    }
+
+    private static void writeUsersToFile(List<User> users, String filePath) throws Exception {
+        try (FileWriter writer = new FileWriter(filePath)) {
+            gson.toJson(users, writer);
+        }
+    }
 
 
 }
