@@ -155,13 +155,13 @@ public class AdminDashBoardGUI extends javax.swing.JFrame {
         deleteAntibioticsButton = new javax.swing.JButton();
         editAntibioticsButton = new javax.swing.JButton();
         coldAndFluTablePanel = new javax.swing.JPanel();
-        JScrollPane3 = new javax.swing.JScrollPane();
+        //JScrollPane3 = new javax.swing.JScrollPane();
         coldAndFluTable = new javax.swing.JTable();
         addColdAndFluButton = new javax.swing.JButton();
         deleteColdAndFluButton = new javax.swing.JButton();
         editColdAndFluButton = new javax.swing.JButton();
         supplementsTablePanel = new javax.swing.JPanel();
-        JScrollPane4 = new javax.swing.JScrollPane();
+        //JScrollPane4 = new javax.swing.JScrollPane();
         supplementsTable = new javax.swing.JTable();
         addSupplementsButton = new javax.swing.JButton();
         deleteSupplementsButton = new javax.swing.JButton();
@@ -1084,7 +1084,7 @@ public class AdminDashBoardGUI extends javax.swing.JFrame {
         coldAndFluTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         coldAndFluTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         coldAndFluTable.getTableHeader().setReorderingAllowed(false);
-        JScrollPane3.setViewportView(coldAndFluTable);
+        //JScrollPane3.setViewportView(coldAndFluTable);
         coldAndFluTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (coldAndFluTable.getColumnModel().getColumnCount() > 0) {
             coldAndFluTable.getColumnModel().getColumn(0).setResizable(false);
@@ -1112,7 +1112,7 @@ public class AdminDashBoardGUI extends javax.swing.JFrame {
             coldAndFluTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(coldAndFluTablePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
+                //.addComponent(JScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(coldAndFluTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addColdAndFluButton)
@@ -1123,7 +1123,7 @@ public class AdminDashBoardGUI extends javax.swing.JFrame {
         coldAndFluTablePanelLayout.setVerticalGroup(
             coldAndFluTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(coldAndFluTablePanelLayout.createSequentialGroup()
-                .addComponent(JScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                //.addComponent(JScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(coldAndFluTablePanelLayout.createSequentialGroup()
                 .addGap(112, 112, 112)
@@ -1155,7 +1155,7 @@ public class AdminDashBoardGUI extends javax.swing.JFrame {
         supplementsTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         supplementsTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         supplementsTable.getTableHeader().setReorderingAllowed(false);
-        JScrollPane4.setViewportView(supplementsTable);
+        //JScrollPane4.setViewportView(supplementsTable);
         supplementsTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (supplementsTable.getColumnModel().getColumnCount() > 0) {
             supplementsTable.getColumnModel().getColumn(0).setResizable(false);
@@ -1183,7 +1183,7 @@ public class AdminDashBoardGUI extends javax.swing.JFrame {
             supplementsTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(supplementsTablePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
+                //.addComponent(JScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(supplementsTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addSupplementsButton)
@@ -1194,7 +1194,7 @@ public class AdminDashBoardGUI extends javax.swing.JFrame {
         supplementsTablePanelLayout.setVerticalGroup(
             supplementsTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(supplementsTablePanelLayout.createSequentialGroup()
-                .addComponent(JScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                //.addComponent(JScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(supplementsTablePanelLayout.createSequentialGroup()
                 .addGap(112, 112, 112)
