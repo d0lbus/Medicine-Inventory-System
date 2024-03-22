@@ -73,13 +73,51 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         oTable = new javax.swing.JTable();
         oViewButton = new javax.swing.JButton();
         orderLabel = new javax.swing.JLabel();
-        registrationPanel = new javax.swing.JPanel();
         dashboardPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        registrationPanel = new javax.swing.JPanel();
+        createAccountLabel = new javax.swing.JLabel();
+        firstNameTextField = new javax.swing.JTextField();
+        firstNameLabel = new javax.swing.JLabel();
+        lastNameLabel = new javax.swing.JLabel();
+        lastNameTextField = new javax.swing.JTextField();
+        middleNameLabel = new javax.swing.JLabel();
+        middleNameTextField = new javax.swing.JTextField();
+        birthdateLabel = new javax.swing.JLabel();
+        birthdateTextField = new javax.swing.JTextField();
+        ageLabel = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
+        genderLabel = new javax.swing.JLabel();
+        genderComboBox = new javax.swing.JComboBox<>();
+        personWithDisabilityLabel = new javax.swing.JLabel();
+        personWithDisabilityCheckBox = new javax.swing.JCheckBox();
+        streetAddressLabel = new javax.swing.JLabel();
+        streetAddressTextField = new javax.swing.JTextField();
+        aptSuiteOptionalLabel = new javax.swing.JLabel();
+        aptSuiteOptionalTextField = new javax.swing.JTextField();
+        municipalityLabel = new javax.swing.JLabel();
+        municipalityTextField = new javax.swing.JTextField();
+        provinceLabel = new javax.swing.JLabel();
+        provinceTextField = new javax.swing.JTextField();
+        zipCodeLabel = new javax.swing.JLabel();
+        zipCodeTextField = new javax.swing.JTextField();
+        emailAddressLabel = new javax.swing.JLabel();
+        emailAddressTextField = new javax.swing.JTextField();
+        contactNumberLabel = new javax.swing.JLabel();
+        contactNumberTextField = new javax.swing.JTextField();
+        setUsernameLabel = new javax.swing.JLabel();
+        setUsernameTextField = new javax.swing.JTextField();
+        setPasswordLabel = new javax.swing.JLabel();
+        setPasswordTextField = new javax.swing.JTextField();
+        confirmPasswordLabel = new javax.swing.JLabel();
+        confirmPasswordTextField = new javax.swing.JTextField();
+        createAccountButton = new javax.swing.JButton();
+        userTypeLabel = new javax.swing.JLabel();
+        userTypeComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -229,7 +267,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 .addGroup(homepagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sendMessageButton, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
         homepagePanelLayout.setVerticalGroup(
             homepagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -395,12 +433,12 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(archivedUsersPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addGroup(archivedUsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(aUsersUnarchiveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(aUsersViewButton, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                             .addComponent(aUsersEditButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(37, Short.MAX_VALUE))))
+                        .addContainerGap(39, Short.MAX_VALUE))))
             .addComponent(archivedUsersLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         archivedUsersPanelLayout.setVerticalGroup(
@@ -414,16 +452,15 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 .addGroup(archivedUsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(archivedUsersPanelLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(17, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(archivedUsersPanelLayout.createSequentialGroup()
                         .addGap(171, 171, 171)
                         .addComponent(aUsersUnarchiveButton)
                         .addGap(18, 18, 18)
                         .addComponent(aUsersViewButton)
                         .addGap(18, 18, 18)
-                        .addComponent(aUsersEditButton)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(aUsersEditButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         containerPanel.add(archivedUsersPanel, "archivedUsersPanel");
@@ -476,7 +513,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 .addGroup(pendingOrdersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pendingOrdersPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                         .addComponent(pViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22))
                     .addGroup(pendingOrdersPanelLayout.createSequentialGroup()
@@ -557,7 +594,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ordersPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                         .addComponent(oViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22))
                     .addGroup(ordersPanelLayout.createSequentialGroup()
@@ -589,19 +626,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         );
 
         containerPanel.add(ordersPanel, "ordersPanel");
-
-        javax.swing.GroupLayout registrationPanelLayout = new javax.swing.GroupLayout(registrationPanel);
-        registrationPanel.setLayout(registrationPanelLayout);
-        registrationPanelLayout.setHorizontalGroup(
-            registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1021, Short.MAX_VALUE)
-        );
-        registrationPanelLayout.setVerticalGroup(
-            registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 546, Short.MAX_VALUE)
-        );
-
-        containerPanel.add(registrationPanel, "registrationPanel");
 
         dashboardPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -674,7 +698,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
         dashboardPanelLayout.setVerticalGroup(
             dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -696,7 +720,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1021, Short.MAX_VALUE)
+            .addGap(0, 1026, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -704,6 +728,225 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         );
 
         containerPanel.add(jPanel5, "card9");
+
+        createAccountLabel.setFont(new java.awt.Font("Tw Cen MT Condensed", 0, 48)); // NOI18N
+        createAccountLabel.setText("CREATE ACCOUNT");
+
+        firstNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                firstNameTextFieldActionPerformed(evt);
+            }
+        });
+
+        firstNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        firstNameLabel.setText("First Name");
+
+        lastNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        lastNameLabel.setText("Last Name");
+
+        middleNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        middleNameLabel.setText("Middle Name");
+
+        birthdateLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        birthdateLabel.setText("Birthdate");
+
+        ageLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        ageLabel.setText("Age");
+
+        genderLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        genderLabel.setText("Gender");
+
+        genderComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
+
+        personWithDisabilityLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        personWithDisabilityLabel.setText("Person with Disability");
+
+        personWithDisabilityCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                personWithDisabilityCheckBoxActionPerformed(evt);
+            }
+        });
+
+        streetAddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        streetAddressLabel.setText("Street Address");
+
+        aptSuiteOptionalLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        aptSuiteOptionalLabel.setText("Apt, suite, etc (optional)");
+
+        municipalityLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        municipalityLabel.setText("City/Municipality");
+
+        provinceLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        provinceLabel.setText("Province");
+
+        zipCodeLabel.setText("Zip / Postal Code");
+
+        emailAddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        emailAddressLabel.setText("Email Address");
+
+        contactNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        contactNumberLabel.setText("Contact Number");
+
+        setUsernameLabel.setText("Set Username");
+
+        setPasswordLabel.setText("Set Password");
+
+        confirmPasswordLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        confirmPasswordLabel.setText("Confirm Password");
+
+        createAccountButton.setText("Create Account");
+        createAccountButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createAccountButtonActionPerformed(evt);
+            }
+        });
+
+        userTypeLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        userTypeLabel.setText("User Type");
+
+        userTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Client" }));
+
+        javax.swing.GroupLayout registrationPanelLayout = new javax.swing.GroupLayout(registrationPanel);
+        registrationPanel.setLayout(registrationPanelLayout);
+        registrationPanelLayout.setHorizontalGroup(
+            registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(registrationPanelLayout.createSequentialGroup()
+                .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(registrationPanelLayout.createSequentialGroup()
+                        .addGap(484, 484, 484)
+                        .addComponent(userTypeLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(userTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(registrationPanelLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(registrationPanelLayout.createSequentialGroup()
+                                    .addComponent(personWithDisabilityLabel)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(personWithDisabilityCheckBox))
+                                .addGroup(registrationPanelLayout.createSequentialGroup()
+                                    .addComponent(birthdateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(73, 73, 73)
+                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(registrationPanelLayout.createSequentialGroup()
+                                    .addComponent(birthdateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(86, 86, 86)
+                                    .addComponent(ageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(firstNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(firstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lastNameLabel)
+                                    .addComponent(lastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(middleNameLabel)
+                                    .addComponent(middleNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(registrationPanelLayout.createSequentialGroup()
+                                    .addComponent(genderLabel)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(genderComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(createAccountLabel))
+                        .addGap(50, 50, 50)
+                        .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(streetAddressLabel)
+                            .addComponent(streetAddressTextField)
+                            .addComponent(aptSuiteOptionalLabel)
+                            .addComponent(aptSuiteOptionalTextField)
+                            .addComponent(municipalityLabel)
+                            .addComponent(municipalityTextField)
+                            .addComponent(provinceLabel)
+                            .addComponent(provinceTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                            .addComponent(zipCodeLabel)
+                            .addComponent(zipCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(51, 51, 51)
+                        .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(emailAddressTextField)
+                            .addComponent(emailAddressLabel)
+                            .addComponent(contactNumberLabel)
+                            .addComponent(contactNumberTextField)
+                            .addComponent(setUsernameLabel)
+                            .addComponent(setUsernameTextField)
+                            .addComponent(setPasswordLabel)
+                            .addComponent(setPasswordTextField)
+                            .addComponent(confirmPasswordLabel)
+                            .addComponent(confirmPasswordTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))))
+                .addContainerGap(52, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registrationPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(createAccountButton)
+                .addGap(455, 455, 455))
+        );
+        registrationPanelLayout.setVerticalGroup(
+            registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(registrationPanelLayout.createSequentialGroup()
+                .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(registrationPanelLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(userTypeLabel)
+                            .addComponent(userTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(registrationPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(createAccountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(firstNameLabel)
+                    .addComponent(streetAddressLabel)
+                    .addComponent(emailAddressLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(firstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(streetAddressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(emailAddressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lastNameLabel)
+                    .addComponent(aptSuiteOptionalLabel)
+                    .addComponent(contactNumberLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(aptSuiteOptionalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(contactNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(middleNameLabel)
+                    .addComponent(municipalityLabel)
+                    .addComponent(setUsernameLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(middleNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(municipalityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(setUsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(birthdateLabel)
+                    .addComponent(ageLabel)
+                    .addComponent(provinceLabel)
+                    .addComponent(setPasswordLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(birthdateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(provinceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(setPasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(genderLabel)
+                    .addComponent(genderComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(zipCodeLabel)
+                    .addComponent(confirmPasswordLabel))
+                .addGap(27, 27, 27)
+                .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(personWithDisabilityLabel)
+                    .addComponent(personWithDisabilityCheckBox)
+                    .addComponent(zipCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(confirmPasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(createAccountButton)
+                .addGap(38, 38, 38))
+        );
+
+        containerPanel.add(registrationPanel, "registrationPanel");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -763,6 +1006,18 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_logoutMouseClicked1MouseClicked
 
+    private void personWithDisabilityCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personWithDisabilityCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_personWithDisabilityCheckBoxActionPerformed
+
+    private void createAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_createAccountButtonActionPerformed
+
+    private void firstNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_firstNameTextFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -805,12 +1060,29 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JTable aUsersTable;
     private javax.swing.JButton aUsersUnarchiveButton;
     private javax.swing.JButton aUsersViewButton;
+    private javax.swing.JLabel ageLabel;
+    private javax.swing.JLabel aptSuiteOptionalLabel;
+    private javax.swing.JTextField aptSuiteOptionalTextField;
     private javax.swing.JButton archivedUsersButton;
     private javax.swing.JLabel archivedUsersLabel;
     private javax.swing.JPanel archivedUsersPanel;
+    private javax.swing.JLabel birthdateLabel;
+    private javax.swing.JTextField birthdateTextField;
+    private javax.swing.JLabel confirmPasswordLabel;
+    private javax.swing.JTextField confirmPasswordTextField;
+    private javax.swing.JLabel contactNumberLabel;
+    private javax.swing.JTextField contactNumberTextField;
     private javax.swing.JPanel containerPanel;
+    private javax.swing.JButton createAccountButton;
+    private javax.swing.JLabel createAccountLabel;
     private javax.swing.JButton dashboardButton;
     private javax.swing.JPanel dashboardPanel;
+    private javax.swing.JLabel emailAddressLabel;
+    private javax.swing.JTextField emailAddressTextField;
+    private javax.swing.JLabel firstNameLabel;
+    private javax.swing.JTextField firstNameTextField;
+    private javax.swing.JComboBox<String> genderComboBox;
+    private javax.swing.JLabel genderLabel;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JPanel homepagePanel;
     private javax.swing.JButton inventoryButton;
@@ -825,8 +1097,15 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JLabel lastNameLabel;
+    private javax.swing.JTextField lastNameTextField;
     private javax.swing.JLabel logoutMouseClicked;
     private javax.swing.JLabel logoutMouseClicked1;
+    private javax.swing.JLabel middleNameLabel;
+    private javax.swing.JTextField middleNameTextField;
+    private javax.swing.JLabel municipalityLabel;
+    private javax.swing.JTextField municipalityTextField;
     private javax.swing.JLabel oSearchLabel;
     private javax.swing.JTextField oSearchTextfield;
     private javax.swing.JTable oTable;
@@ -841,6 +1120,10 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JLabel pendingOrderLabel;
     private javax.swing.JButton pendingOrdersButton;
     private javax.swing.JPanel pendingOrdersPanel;
+    private javax.swing.JCheckBox personWithDisabilityCheckBox;
+    private javax.swing.JLabel personWithDisabilityLabel;
+    private javax.swing.JLabel provinceLabel;
+    private javax.swing.JTextField provinceTextField;
     private javax.swing.JButton rUsersArchiveButton;
     private javax.swing.JButton rUsersEditButton;
     private javax.swing.JLabel rUsersSearchLabel;
@@ -853,5 +1136,15 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JPanel registeredUsersPanel;
     private javax.swing.JPanel registrationPanel;
     private javax.swing.JButton sendMessageButton;
+    private javax.swing.JLabel setPasswordLabel;
+    private javax.swing.JTextField setPasswordTextField;
+    private javax.swing.JLabel setUsernameLabel;
+    private javax.swing.JTextField setUsernameTextField;
+    private javax.swing.JLabel streetAddressLabel;
+    private javax.swing.JTextField streetAddressTextField;
+    private javax.swing.JComboBox<String> userTypeComboBox;
+    private javax.swing.JLabel userTypeLabel;
+    private javax.swing.JLabel zipCodeLabel;
+    private javax.swing.JTextField zipCodeTextField;
     // End of variables declaration//GEN-END:variables
 }
