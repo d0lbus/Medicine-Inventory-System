@@ -4,6 +4,8 @@
  */
 package midproject.ViewClasses;
 
+import javax.swing.*;
+
 /**
  *
  * @author Freskkie
@@ -222,6 +224,47 @@ public class Login extends javax.swing.JFrame {
                 new Login().setVisible(true);
             }
         });
+    }
+
+    public JLabel getIpAddressLabel() {
+        return ipAddressLabel;
+    }
+
+    public void setIpAddressLabel(JLabel ipAddressLabel) {
+        this.ipAddressLabel = ipAddressLabel;
+    }
+
+    public JTextField getIpAddressTextfield() {
+        return ipAddressTextfield;
+    }
+
+    public void setIpAddressTextfield(JTextField ipAddressTextfield) {
+        this.ipAddressTextfield = ipAddressTextfield;
+    }
+
+
+    public JToggleButton getLogInButton() {
+        return logInButton;
+    }
+
+    public void setLogInButton(JToggleButton logInButton) {
+        this.logInButton = logInButton;
+    }
+
+    public JPasswordField getPasswordField() {
+        return passwordField;
+    }
+
+    public void setPasswordField(JPasswordField passwordField) {
+        this.passwordField = passwordField;
+    }
+
+    public JTextField getUsernameTextfield() {
+        return usernameTextfield;
+    }
+
+    public void setUsernameTextfield(JTextField usernameTextfield) {
+        this.usernameTextfield = usernameTextfield;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
