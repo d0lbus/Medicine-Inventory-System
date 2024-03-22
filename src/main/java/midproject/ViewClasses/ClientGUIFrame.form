@@ -60,10 +60,10 @@
                   <Component id="iconLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="titleLabel" min="-2" pref="546" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                   <Component id="profileLabel" min="-2" pref="113" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="notificationsLabel" min="-2" pref="183" max="-2" attributes="0"/>
+                  <Component id="notificationsLabel" min="-2" pref="205" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="storeLabel" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -87,8 +87,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="cartLabel" alignment="0" max="32767" attributes="0"/>
                       <Component id="storeLabel" alignment="0" max="32767" attributes="0"/>
-                      <Component id="notificationsLabel" alignment="0" max="32767" attributes="0"/>
                       <Component id="profileLabel" alignment="0" max="32767" attributes="0"/>
+                      <Component id="notificationsLabel" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
