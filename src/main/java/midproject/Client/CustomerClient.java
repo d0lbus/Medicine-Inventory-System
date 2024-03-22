@@ -27,7 +27,7 @@ public class CustomerClient {
 		loginFrame.getLogInButton().addActionListener(e -> {
 			try {
 				String ipAddress = loginFrame.getIpAddressTextField().getText();
-				String username = loginFrame.getUsernameTextfield().getText();
+				String username = loginFrame.getUsernameTextField().getText();
 				String password = new String(loginFrame.getPasswordField().getPassword());
 
 				Registry registry = LocateRegistry.getRegistry(ipAddress);

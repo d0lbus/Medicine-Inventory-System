@@ -33,8 +33,8 @@ public class Login extends javax.swing.JFrame {
         quantumLabel = new javax.swing.JLabel();
         logInLabel = new javax.swing.JLabel();
         usernameLabel = new javax.swing.JLabel();
-        usernameTextfield = new javax.swing.JTextField();
-        ipAddressTextfield = new javax.swing.JTextField();
+        usernameTextField = new javax.swing.JTextField();
+        ipAddressTextField = new javax.swing.JTextField();
         ipAddressLabel = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
         passwordLabel = new javax.swing.JLabel();
@@ -61,15 +61,15 @@ public class Login extends javax.swing.JFrame {
         usernameLabel.setForeground(new java.awt.Color(60, 63, 65));
         usernameLabel.setText("Username");
 
-        usernameTextfield.addActionListener(new java.awt.event.ActionListener() {
+        usernameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usernameTextfieldActionPerformed(evt);
+                usernameTextFieldActionPerformed(evt);
             }
         });
 
-        ipAddressTextfield.addActionListener(new java.awt.event.ActionListener() {
+        ipAddressTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ipAddressTextfieldActionPerformed(evt);
+                ipAddressTextFieldActionPerformed(evt);
             }
         });
 
@@ -110,10 +110,10 @@ public class Login extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(ipAddressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ipAddressTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(ipAddressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(270, 270, 270))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(usernameTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(183, 183, 183)))
                         .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -130,11 +130,11 @@ public class Login extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(ipAddressLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ipAddressTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ipAddressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(usernameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(usernameTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(passwordLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -175,11 +175,11 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ipAddressTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ipAddressTextfieldActionPerformed
+    private void ipAddressTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ipAddressTextfieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ipAddressTextfieldActionPerformed
 
-    private void usernameTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTextfieldActionPerformed
+    private void usernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTextfieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_usernameTextfieldActionPerformed
 
@@ -234,12 +234,12 @@ public class Login extends javax.swing.JFrame {
         this.ipAddressLabel = ipAddressLabel;
     }
 
-    public JTextField getIpAddressTextfield() {
-        return ipAddressTextfield;
+    public JTextField getIpAddressTextField() {
+        return ipAddressTextField;
     }
 
-    public void setIpAddressTextfield(JTextField ipAddressTextfield) {
-        this.ipAddressTextfield = ipAddressTextfield;
+    public void setIpAddressTextField(JTextField ipAddressTextField) {
+        this.ipAddressTextField = ipAddressTextField;
     }
 
 
@@ -259,17 +259,17 @@ public class Login extends javax.swing.JFrame {
         this.passwordField = passwordField;
     }
 
-    public JTextField getUsernameTextfield() {
-        return usernameTextfield;
+    public JTextField getUsernameTextField() {
+        return usernameTextField;
     }
 
-    public void setUsernameTextfield(JTextField usernameTextfield) {
-        this.usernameTextfield = usernameTextfield;
+    public void setUsernameTextField(JTextField usernameTextField) {
+        this.usernameTextField = usernameTextField;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ipAddressLabel;
-    private javax.swing.JTextField ipAddressTextfield;
+    private javax.swing.JTextField ipAddressTextField;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JToggleButton logInButton;
@@ -278,6 +278,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel quantumLabel;
     private javax.swing.JLabel usernameLabel;
-    private javax.swing.JTextField usernameTextfield;
+    private javax.swing.JTextField usernameTextField;
     // End of variables declaration//GEN-END:variables
 }
