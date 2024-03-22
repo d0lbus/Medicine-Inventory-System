@@ -33,6 +33,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         profileLabel = new javax.swing.JLabel();
         storeLabel = new javax.swing.JLabel();
         cartLabel = new javax.swing.JLabel();
+        notificationsLabel = new javax.swing.JLabel();
         footerPanel = new javax.swing.JPanel();
         footerLabel = new javax.swing.JLabel();
         containerPanel = new javax.swing.JPanel();
@@ -41,50 +42,23 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         overthecounterButton = new javax.swing.JButton();
         instructionsLabel1 = new javax.swing.JLabel();
         categoryPanel = new javax.swing.JPanel();
-        searchPanel = new javax.swing.JPanel();
         searchTextfield = new javax.swing.JTextField();
-        comboBox1 = new javax.swing.JComboBox<>();
-        comboBox2 = new javax.swing.JComboBox<>();
-        comboBox3 = new javax.swing.JComboBox<>();
-        comboBox4 = new javax.swing.JComboBox<>();
-        comboBox5 = new javax.swing.JComboBox<>();
-        selectLabel = new javax.swing.JLabel();
         searchLabel = new javax.swing.JLabel();
-        categorySpinner1 = new javax.swing.JSpinner();
-        categorySpinner2 = new javax.swing.JSpinner();
-        categorySpinner3 = new javax.swing.JSpinner();
-        categorySpinner4 = new javax.swing.JSpinner();
-        categorySpinner5 = new javax.swing.JSpinner();
         addToCartButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        categoryTable = new javax.swing.JTable();
+        categoryComboBox = new javax.swing.JComboBox<>();
         backButton = new javax.swing.JButton();
         yourCartMainPanel = new javax.swing.JPanel();
         yourCartLabel = new javax.swing.JLabel();
-        yourCartPanel1 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        yourCartTextArea1 = new javax.swing.JTextArea();
-        cartCheckbox1 = new javax.swing.JCheckBox();
-        removeCartButton1 = new javax.swing.JButton();
-        yourCartPanel2 = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        yourCartTextArea2 = new javax.swing.JTextArea();
-        cartCheckbox2 = new javax.swing.JCheckBox();
-        removeCartButton2 = new javax.swing.JButton();
-        yourCartPanel3 = new javax.swing.JPanel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        yourCartTextArea3 = new javax.swing.JTextArea();
-        cartCheckbox3 = new javax.swing.JCheckBox();
-        removeCartButton3 = new javax.swing.JButton();
-        yourCartPanel4 = new javax.swing.JPanel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        yourCartTextArea4 = new javax.swing.JTextArea();
-        cartCheckbox4 = new javax.swing.JCheckBox();
-        removeCartButton4 = new javax.swing.JButton();
+        searchLabel1 = new javax.swing.JLabel();
+        searchTextfield1 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        categoryTable1 = new javax.swing.JTable();
+        removeButton = new javax.swing.JButton();
         submitButton = new javax.swing.JButton();
-        yourCartPanel5 = new javax.swing.JPanel();
-        jScrollPane19 = new javax.swing.JScrollPane();
-        yourCartTextArea5 = new javax.swing.JTextArea();
-        cartCheckbox5 = new javax.swing.JCheckBox();
-        removeCartButton5 = new javax.swing.JButton();
+        backYourCartButton = new javax.swing.JButton();
+        editOrderButton1 = new javax.swing.JButton();
         modeOfDeliveryPanel = new javax.swing.JPanel();
         modeOfDeliveryLabel = new javax.swing.JLabel();
         pickUpButton = new javax.swing.JButton();
@@ -117,11 +91,9 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         yourOrderLabel = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
         yourOrderTextArea = new javax.swing.JTextArea();
-        editOrderButton = new javax.swing.JButton();
         checkOutButton = new javax.swing.JButton();
         buttonSeparator = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
-        uploadButton = new javax.swing.JButton();
+        uploadPrescriptionButton = new javax.swing.JButton();
         placedOrderPanel = new javax.swing.JPanel();
         placedOrderLabel = new javax.swing.JLabel();
         jScrollPane11 = new javax.swing.JScrollPane();
@@ -129,13 +101,12 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         profilePanel = new javax.swing.JPanel();
         profileDetailsPanel = new javax.swing.JPanel();
         profileIcon = new javax.swing.JLabel();
-        jScrollPane13 = new javax.swing.JScrollPane();
-        nameTextArea = new javax.swing.JTextArea();
         cartIcon = new javax.swing.JLabel();
         envelopeIcon = new javax.swing.JLabel();
         orderHistoryLabel = new javax.swing.JLabel();
         helpLabel = new javax.swing.JLabel();
         logOutButton = new javax.swing.JButton();
+        nameOnlyLabel = new javax.swing.JLabel();
         partOftheProfilePanel = new javax.swing.JPanel();
         settingLabel = new javax.swing.JLabel();
         personalInformationLabel = new javax.swing.JLabel();
@@ -151,35 +122,9 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         saveButton = new javax.swing.JButton();
         jScrollPane18 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        pendingOrdersPanel = new javax.swing.JPanel();
-        pendingOrderLabel = new javax.swing.JLabel();
-        pendingCheckBoxPanel1 = new javax.swing.JPanel();
-        jScrollPane14 = new javax.swing.JScrollPane();
-        pendingTextArea1 = new javax.swing.JTextArea();
-        pendingCheckbox1 = new javax.swing.JCheckBox();
-        removePendingButton1 = new javax.swing.JButton();
-        pendingCheckBoxPanel3 = new javax.swing.JPanel();
-        jScrollPane15 = new javax.swing.JScrollPane();
-        pendingTextArea3 = new javax.swing.JTextArea();
-        pendingCheckbox3 = new javax.swing.JCheckBox();
-        removePendingButton3 = new javax.swing.JButton();
-        pendingCheckBoxPanel4 = new javax.swing.JPanel();
-        jScrollPane16 = new javax.swing.JScrollPane();
-        pendingTextArea4 = new javax.swing.JTextArea();
-        pendingCheckbox4 = new javax.swing.JCheckBox();
-        removePendingButton4 = new javax.swing.JButton();
-        pendingCheckBoxPanel2 = new javax.swing.JPanel();
-        jScrollPane17 = new javax.swing.JScrollPane();
-        pendingTextArea2 = new javax.swing.JTextArea();
-        pendingCheckbox2 = new javax.swing.JCheckBox();
-        removePendingButton2 = new javax.swing.JButton();
-        backButtonPendingOrder = new javax.swing.JButton();
-        checkOutForPendingOrdersButton = new javax.swing.JButton();
-        pendingCheckBoxPanel5 = new javax.swing.JPanel();
-        jScrollPane20 = new javax.swing.JScrollPane();
-        pendingTextArea5 = new javax.swing.JTextArea();
-        pendingCheckbox5 = new javax.swing.JCheckBox();
-        removePendingButton5 = new javax.swing.JButton();
+        notificationsPanel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        notificationsTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quantum Drugstore");
@@ -192,6 +137,11 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         titleLabel.setText("Quantum Drugstore");
 
         iconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/logo.png"))); // NOI18N
+        iconLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                iconLabelMouseClicked(evt);
+            }
+        });
 
         profileLabel.setFont(new java.awt.Font("Sitka Heading", 1, 24)); // NOI18N
         profileLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -210,9 +160,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 storeLabelMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                storeLabelMouseEntered(evt);
-            }
         });
 
         cartLabel.setFont(new java.awt.Font("Sitka Heading", 1, 24)); // NOI18N
@@ -225,6 +172,15 @@ public class ClientGUIFrame extends javax.swing.JFrame {
             }
         });
 
+        notificationsLabel.setFont(new java.awt.Font("Sitka Heading", 1, 24)); // NOI18N
+        notificationsLabel.setForeground(new java.awt.Color(255, 255, 255));
+        notificationsLabel.setText("NOTIFICATIONS");
+        notificationsLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                notificationsLabelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
         headerPanelLayout.setHorizontalGroup(
@@ -234,11 +190,13 @@ public class ClientGUIFrame extends javax.swing.JFrame {
                 .addComponent(iconLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(261, 261, 261)
-                .addComponent(profileLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(93, 93, 93)
+                .addComponent(profileLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(notificationsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(storeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cartLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
@@ -253,9 +211,10 @@ public class ClientGUIFrame extends javax.swing.JFrame {
             .addGroup(headerPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(profileLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cartLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(storeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cartLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(notificationsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(profileLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -322,7 +281,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         choosePanelLayout.setVerticalGroup(
             choosePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(choosePanelLayout.createSequentialGroup()
-                .addContainerGap(224, Short.MAX_VALUE)
+                .addContainerGap(253, Short.MAX_VALUE)
                 .addComponent(doctorIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(overthecounterButton)
@@ -335,44 +294,21 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
         categoryPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        searchPanel.setBackground(new java.awt.Color(255, 255, 255));
-        searchPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-
+        searchTextfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTextfieldActionPerformed(evt);
+            }
+        });
         searchTextfield.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 searchTextfieldKeyPressed(evt);
             }
         });
 
-        comboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None" }));
-
-        comboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None" }));
-
-        comboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None" }));
-
-        comboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None" }));
-
-        comboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None" }));
-
-        selectLabel.setFont(new java.awt.Font("Sitka Heading", 1, 18)); // NOI18N
-        selectLabel.setForeground(new java.awt.Color(33, 37, 41));
-        selectLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        selectLabel.setText("Select what brand of medicine");
-
         searchLabel.setFont(new java.awt.Font("Sitka Heading", 1, 18)); // NOI18N
         searchLabel.setForeground(new java.awt.Color(33, 37, 41));
         searchLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         searchLabel.setText("Search your generic medicine");
-
-        categorySpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50, 1));
-
-        categorySpinner2.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50, 1));
-
-        categorySpinner3.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50, 1));
-
-        categorySpinner4.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50, 1));
-
-        categorySpinner5.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50, 1));
 
         addToCartButton.setText("Add to cart");
         addToCartButton.addActionListener(new java.awt.event.ActionListener() {
@@ -381,71 +317,45 @@ public class ClientGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout searchPanelLayout = new javax.swing.GroupLayout(searchPanel);
-        searchPanel.setLayout(searchPanelLayout);
-        searchPanelLayout.setHorizontalGroup(
-            searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(searchPanelLayout.createSequentialGroup()
-                .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(searchPanelLayout.createSequentialGroup()
-                        .addGap(252, 252, 252)
-                        .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(selectLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(79, 79, 79)
-                        .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(categorySpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(categorySpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(categorySpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(categorySpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(categorySpinner5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(searchPanelLayout.createSequentialGroup()
-                        .addGap(342, 342, 342)
-                        .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(searchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(searchTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(searchPanelLayout.createSequentialGroup()
-                        .addGap(530, 530, 530)
-                        .addComponent(addToCartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(282, Short.MAX_VALUE))
-        );
-        searchPanelLayout.setVerticalGroup(
-            searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(searchPanelLayout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(searchLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addComponent(selectLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(categorySpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(categorySpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(categorySpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(categorySpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(categorySpinner5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
-                .addComponent(addToCartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
-        );
+        categoryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Category", "Generic Name", "Brand Name", "Form", "Price", "Stock"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        categoryTable.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jScrollPane1.setViewportView(categoryTable);
+
+        categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Painkillers", "Sleeping Pills", "Antibiotics", "Flu Medicines", "Supplements" }));
+        categoryComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoryComboBoxActionPerformed(evt);
+            }
+        });
 
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -458,21 +368,42 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         categoryPanel.setLayout(categoryPanelLayout);
         categoryPanelLayout.setHorizontalGroup(
             categoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(categoryPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(backButton)
-                .addGap(24, 1192, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, categoryPanelLayout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
-                .addComponent(searchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(addToCartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(548, 548, 548))
+            .addGroup(categoryPanelLayout.createSequentialGroup()
+                .addGroup(categoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(categoryPanelLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(backButton))
+                    .addGroup(categoryPanelLayout.createSequentialGroup()
+                        .addGap(156, 156, 156)
+                        .addComponent(searchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(categoryPanelLayout.createSequentialGroup()
+                        .addGap(156, 156, 156)
+                        .addGroup(categoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(categoryPanelLayout.createSequentialGroup()
+                                .addComponent(searchTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 969, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         categoryPanelLayout.setVerticalGroup(
             categoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(categoryPanelLayout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addComponent(searchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(91, Short.MAX_VALUE)
+                .addComponent(searchLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(categoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchTextfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(addToCartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -486,305 +417,134 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         yourCartLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         yourCartLabel.setText("Your Cart");
 
-        yourCartPanel1.setBackground(new java.awt.Color(237, 237, 233));
+        searchLabel1.setFont(new java.awt.Font("Sitka Heading", 1, 18)); // NOI18N
+        searchLabel1.setForeground(new java.awt.Color(33, 37, 41));
+        searchLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        searchLabel1.setText("Search your generic medicine");
 
-        yourCartTextArea1.setEditable(false);
-        yourCartTextArea1.setColumns(20);
-        yourCartTextArea1.setRows(5);
-        jScrollPane5.setViewportView(yourCartTextArea1);
-
-        cartCheckbox1.addActionListener(new java.awt.event.ActionListener() {
+        searchTextfield1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cartCheckbox1ActionPerformed(evt);
+                searchTextfield1ActionPerformed(evt);
+            }
+        });
+        searchTextfield1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                searchTextfield1KeyPressed(evt);
             }
         });
 
-        removeCartButton1.setText("Remove");
-        removeCartButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeCartButton1ActionPerformed(evt);
+        categoryTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Category", "Generic Name", "Brand Name", "Form", "Price", "Stock"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        categoryTable1.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jScrollPane2.setViewportView(categoryTable1);
 
-        javax.swing.GroupLayout yourCartPanel1Layout = new javax.swing.GroupLayout(yourCartPanel1);
-        yourCartPanel1.setLayout(yourCartPanel1Layout);
-        yourCartPanel1Layout.setHorizontalGroup(
-            yourCartPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yourCartPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cartCheckbox1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(removeCartButton1)
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
-        yourCartPanel1Layout.setVerticalGroup(
-            yourCartPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(yourCartPanel1Layout.createSequentialGroup()
-                .addGroup(yourCartPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(yourCartPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(yourCartPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(cartCheckbox1)))
-                .addContainerGap(8, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yourCartPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(removeCartButton1)
-                .addGap(36, 36, 36))
-        );
-
-        yourCartPanel2.setBackground(new java.awt.Color(237, 237, 233));
-
-        yourCartTextArea2.setEditable(false);
-        yourCartTextArea2.setColumns(20);
-        yourCartTextArea2.setRows(5);
-        jScrollPane6.setViewportView(yourCartTextArea2);
-
-        cartCheckbox2.addActionListener(new java.awt.event.ActionListener() {
+        removeButton.setText("Remove");
+        removeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cartCheckbox2ActionPerformed(evt);
+                removeButtonActionPerformed(evt);
             }
         });
-
-        removeCartButton2.setText("Remove");
-        removeCartButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeCartButton2ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout yourCartPanel2Layout = new javax.swing.GroupLayout(yourCartPanel2);
-        yourCartPanel2.setLayout(yourCartPanel2Layout);
-        yourCartPanel2Layout.setHorizontalGroup(
-            yourCartPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yourCartPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cartCheckbox2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(removeCartButton2)
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
-        yourCartPanel2Layout.setVerticalGroup(
-            yourCartPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(yourCartPanel2Layout.createSequentialGroup()
-                .addGroup(yourCartPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(yourCartPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(yourCartPanel2Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(cartCheckbox2)))
-                .addContainerGap(8, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yourCartPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(removeCartButton2)
-                .addGap(37, 37, 37))
-        );
-
-        yourCartPanel3.setBackground(new java.awt.Color(237, 237, 233));
-
-        yourCartTextArea3.setEditable(false);
-        yourCartTextArea3.setColumns(20);
-        yourCartTextArea3.setRows(5);
-        jScrollPane7.setViewportView(yourCartTextArea3);
-
-        cartCheckbox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cartCheckbox3ActionPerformed(evt);
-            }
-        });
-
-        removeCartButton3.setText("Remove");
-        removeCartButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeCartButton3ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout yourCartPanel3Layout = new javax.swing.GroupLayout(yourCartPanel3);
-        yourCartPanel3.setLayout(yourCartPanel3Layout);
-        yourCartPanel3Layout.setHorizontalGroup(
-            yourCartPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yourCartPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cartCheckbox3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(removeCartButton3)
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
-        yourCartPanel3Layout.setVerticalGroup(
-            yourCartPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(yourCartPanel3Layout.createSequentialGroup()
-                .addGroup(yourCartPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(yourCartPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(yourCartPanel3Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(cartCheckbox3)))
-                .addContainerGap(8, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yourCartPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(removeCartButton3)
-                .addGap(37, 37, 37))
-        );
-
-        yourCartPanel4.setBackground(new java.awt.Color(237, 237, 233));
-
-        yourCartTextArea4.setEditable(false);
-        yourCartTextArea4.setColumns(20);
-        yourCartTextArea4.setRows(5);
-        jScrollPane8.setViewportView(yourCartTextArea4);
-
-        cartCheckbox4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cartCheckbox4ActionPerformed(evt);
-            }
-        });
-
-        removeCartButton4.setText("Remove");
-        removeCartButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeCartButton4ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout yourCartPanel4Layout = new javax.swing.GroupLayout(yourCartPanel4);
-        yourCartPanel4.setLayout(yourCartPanel4Layout);
-        yourCartPanel4Layout.setHorizontalGroup(
-            yourCartPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yourCartPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cartCheckbox4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(removeCartButton4)
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
-        yourCartPanel4Layout.setVerticalGroup(
-            yourCartPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(yourCartPanel4Layout.createSequentialGroup()
-                .addGroup(yourCartPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(yourCartPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(yourCartPanel4Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(cartCheckbox4)))
-                .addContainerGap(8, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yourCartPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(removeCartButton4)
-                .addGap(36, 36, 36))
-        );
 
         submitButton.setText("Submit");
+        submitButton.setToolTipText("");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitButtonActionPerformed(evt);
             }
         });
 
-        yourCartPanel5.setBackground(new java.awt.Color(237, 237, 233));
-
-        yourCartTextArea5.setEditable(false);
-        yourCartTextArea5.setColumns(20);
-        yourCartTextArea5.setRows(5);
-        jScrollPane19.setViewportView(yourCartTextArea5);
-
-        cartCheckbox5.addActionListener(new java.awt.event.ActionListener() {
+        backYourCartButton.setText("Back");
+        backYourCartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cartCheckbox5ActionPerformed(evt);
+                backYourCartButtonCategoryActionPerformed(evt);
             }
         });
 
-        removeCartButton5.setText("Remove");
-        removeCartButton5.addActionListener(new java.awt.event.ActionListener() {
+        editOrderButton1.setText("Edit Order");
+        editOrderButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeCartButton5ActionPerformed(evt);
+                editOrderButton1ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout yourCartPanel5Layout = new javax.swing.GroupLayout(yourCartPanel5);
-        yourCartPanel5.setLayout(yourCartPanel5Layout);
-        yourCartPanel5Layout.setHorizontalGroup(
-            yourCartPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yourCartPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cartCheckbox5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(removeCartButton5)
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
-        yourCartPanel5Layout.setVerticalGroup(
-            yourCartPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(yourCartPanel5Layout.createSequentialGroup()
-                .addGroup(yourCartPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(yourCartPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(yourCartPanel5Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(cartCheckbox5)))
-                .addContainerGap(8, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yourCartPanel5Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(removeCartButton5)
-                .addGap(36, 36, 36))
-        );
 
         javax.swing.GroupLayout yourCartMainPanelLayout = new javax.swing.GroupLayout(yourCartMainPanel);
         yourCartMainPanel.setLayout(yourCartMainPanelLayout);
         yourCartMainPanelLayout.setHorizontalGroup(
             yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(yourCartMainPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(yourCartLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1272, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yourCartMainPanelLayout.createSequentialGroup()
-                .addGap(20, 346, Short.MAX_VALUE)
-                .addGroup(yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(yourCartMainPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(yourCartLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1272, Short.MAX_VALUE))
+                    .addGroup(yourCartMainPanelLayout.createSequentialGroup()
+                        .addGap(100, 100, 100)
                         .addGroup(yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(yourCartPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(yourCartPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(yourCartPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(yourCartPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(326, 326, 326))
-                    .addGroup(yourCartMainPanelLayout.createSequentialGroup()
-                        .addComponent(yourCartPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32))))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 969, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(searchLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(searchTextfield1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(70, 70, 70)
+                        .addGroup(yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(editOrderButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(yourCartMainPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(backYourCartButton)
+                .addGap(1066, 1066, 1066)
+                .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         yourCartMainPanelLayout.setVerticalGroup(
             yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(yourCartMainPanelLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(yourCartLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(18, 18, 18)
+                .addComponent(searchLabel1)
+                .addGap(5, 5, 5)
+                .addComponent(searchTextfield1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(yourCartPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(yourCartPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(yourCartPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(yourCartPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(yourCartPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(yourCartMainPanelLayout.createSequentialGroup()
+                        .addComponent(editOrderButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addGroup(yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(backYourCartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         containerPanel.add(yourCartMainPanel, "yourCartMainPanel");
@@ -883,7 +643,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
                     .addComponent(deliveryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
                 .addComponent(pickUpPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
                 .addGroup(modeOfDeliveryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nextButtonModeOfDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backButtonModeOfDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1029,7 +789,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
                 .addComponent(CVVLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CVVTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                 .addGroup(modeOfPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backButtonModeOfPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nextButtonModeOfPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1051,13 +811,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         yourOrderTextArea.setRows(5);
         jScrollPane10.setViewportView(yourOrderTextArea);
 
-        editOrderButton.setText("Edit Order");
-        editOrderButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editOrderButtonActionPerformed(evt);
-            }
-        });
-
         checkOutButton.setText("Check Out");
         checkOutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1065,49 +818,39 @@ public class ClientGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Sitka Display", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(60, 63, 65));
-        jLabel1.setText("Upload your prescription (optional)");
-
-        uploadButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        uploadButton.setText("Upload");
+        uploadPrescriptionButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        uploadPrescriptionButton.setText("Upload");
+        uploadPrescriptionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uploadPrescriptionButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout yourOrderPanelLayout = new javax.swing.GroupLayout(yourOrderPanel);
         yourOrderPanel.setLayout(yourOrderPanelLayout);
         yourOrderPanelLayout.setHorizontalGroup(
             yourOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(yourOrderPanelLayout.createSequentialGroup()
-                .addGroup(yourOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(yourOrderPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(yourOrderLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1272, Short.MAX_VALUE))
-                    .addGroup(yourOrderPanelLayout.createSequentialGroup()
-                        .addGap(545, 545, 545)
-                        .addComponent(checkOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yourOrderPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(yourOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yourOrderPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(395, 395, 395))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yourOrderPanelLayout.createSequentialGroup()
-                        .addComponent(buttonSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(429, 429, 429))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yourOrderPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(419, 419, 419))
+                .addGap(431, 431, 431)
+                .addComponent(buttonSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(yourOrderPanelLayout.createSequentialGroup()
                 .addGroup(yourOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(yourOrderPanelLayout.createSequentialGroup()
-                        .addGap(545, 545, 545)
-                        .addComponent(editOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addComponent(yourOrderLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(yourOrderPanelLayout.createSequentialGroup()
-                        .addGap(549, 549, 549)
-                        .addComponent(uploadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(yourOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(yourOrderPanelLayout.createSequentialGroup()
+                                .addGap(169, 169, 169)
+                                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 931, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(yourOrderPanelLayout.createSequentialGroup()
+                                .addGap(543, 543, 543)
+                                .addGroup(yourOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(checkOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(uploadPrescriptionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         yourOrderPanelLayout.setVerticalGroup(
             yourOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1115,18 +858,14 @@ public class ClientGUIFrame extends javax.swing.JFrame {
                 .addGap(65, 65, 65)
                 .addComponent(yourOrderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(checkOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(buttonSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(editOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(uploadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addComponent(uploadPrescriptionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59))
         );
 
         containerPanel.add(yourOrderPanel, "yourOrderPanel");
@@ -1153,8 +892,8 @@ public class ClientGUIFrame extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, placedOrderPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 777, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(246, 246, 246))
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 923, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(173, 173, 173))
         );
         placedOrderPanelLayout.setVerticalGroup(
             placedOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1162,8 +901,8 @@ public class ClientGUIFrame extends javax.swing.JFrame {
                 .addGap(99, 99, 99)
                 .addComponent(placedOrderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         containerPanel.add(placedOrderPanel, "placedOrderPanel");
@@ -1175,14 +914,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
         profileIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/profileBig.png"))); // NOI18N
 
-        nameTextArea.setEditable(false);
-        nameTextArea.setBackground(new java.awt.Color(255, 255, 255));
-        nameTextArea.setColumns(20);
-        nameTextArea.setFont(new java.awt.Font("Sitka Heading", 1, 18)); // NOI18N
-        nameTextArea.setRows(5);
-        jScrollPane13.setViewportView(nameTextArea);
-
-        cartIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/cartIcon.png"))); // NOI18N
+        cartIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/orderHistoryIcon.png"))); // NOI18N
 
         envelopeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/envelopeIcon.png"))); // NOI18N
 
@@ -1211,6 +943,10 @@ public class ClientGUIFrame extends javax.swing.JFrame {
             }
         });
 
+        nameOnlyLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        nameOnlyLabel.setForeground(new java.awt.Color(60, 63, 65));
+        nameOnlyLabel.setText("jLabel1");
+
         javax.swing.GroupLayout profileDetailsPanelLayout = new javax.swing.GroupLayout(profileDetailsPanel);
         profileDetailsPanel.setLayout(profileDetailsPanelLayout);
         profileDetailsPanelLayout.setHorizontalGroup(
@@ -1218,47 +954,45 @@ public class ClientGUIFrame extends javax.swing.JFrame {
             .addGroup(profileDetailsPanelLayout.createSequentialGroup()
                 .addGroup(profileDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(profileDetailsPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane13))
+                        .addGap(127, 127, 127)
+                        .addComponent(profileIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(profileDetailsPanelLayout.createSequentialGroup()
+                        .addGap(89, 89, 89)
                         .addGroup(profileDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameOnlyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(profileDetailsPanelLayout.createSequentialGroup()
-                                .addGap(127, 127, 127)
-                                .addComponent(profileIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(profileDetailsPanelLayout.createSequentialGroup()
-                                .addGap(89, 89, 89)
-                                .addGroup(profileDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cartIcon)
-                                    .addComponent(envelopeIcon))
+                                .addGroup(profileDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(envelopeIcon)
+                                    .addComponent(cartIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(profileDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(orderHistoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(helpLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(logOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 33, Short.MAX_VALUE)))
-                .addContainerGap())
+                                    .addComponent(logOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         profileDetailsPanelLayout.setVerticalGroup(
             profileDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(profileDetailsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(profileIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(nameOnlyLabel)
                 .addGroup(profileDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(profileDetailsPanelLayout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(cartIcon))
-                    .addGroup(profileDetailsPanelLayout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(orderHistoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(41, 41, 41)
+                        .addGap(77, 77, 77)
+                        .addComponent(orderHistoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, profileDetailsPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cartIcon)
+                        .addGap(29, 29, 29)))
                 .addGroup(profileDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(envelopeIcon)
                     .addComponent(helpLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(37, 37, 37)
                 .addComponent(logOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
 
         partOftheProfilePanel.setBackground(new java.awt.Color(237, 237, 233));
@@ -1373,7 +1107,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
                 .addComponent(profileDetailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(partOftheProfilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         profilePanelLayout.setVerticalGroup(
             profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1389,327 +1123,29 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
         containerPanel.add(profilePanel, "profilePanel");
 
-        pendingOrdersPanel.setBackground(new java.awt.Color(255, 255, 255));
+        notificationsTextArea.setEditable(false);
+        notificationsTextArea.setColumns(20);
+        notificationsTextArea.setRows(5);
+        jScrollPane3.setViewportView(notificationsTextArea);
 
-        pendingOrderLabel.setFont(new java.awt.Font("Sitka Heading", 1, 36)); // NOI18N
-        pendingOrderLabel.setForeground(new java.awt.Color(33, 37, 41));
-        pendingOrderLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        pendingOrderLabel.setText("Pending Orders");
-
-        pendingCheckBoxPanel1.setBackground(new java.awt.Color(237, 237, 233));
-
-        pendingTextArea1.setEditable(false);
-        pendingTextArea1.setColumns(20);
-        pendingTextArea1.setRows(5);
-        jScrollPane14.setViewportView(pendingTextArea1);
-
-        pendingCheckbox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pendingCheckbox1ActionPerformed(evt);
-            }
-        });
-
-        removePendingButton1.setText("Remove");
-        removePendingButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removePendingButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pendingCheckBoxPanel1Layout = new javax.swing.GroupLayout(pendingCheckBoxPanel1);
-        pendingCheckBoxPanel1.setLayout(pendingCheckBoxPanel1Layout);
-        pendingCheckBoxPanel1Layout.setHorizontalGroup(
-            pendingCheckBoxPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pendingCheckBoxPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pendingCheckbox1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(removePendingButton1)
-                .addContainerGap(13, Short.MAX_VALUE))
+        javax.swing.GroupLayout notificationsPanelLayout = new javax.swing.GroupLayout(notificationsPanel);
+        notificationsPanel.setLayout(notificationsPanelLayout);
+        notificationsPanelLayout.setHorizontalGroup(
+            notificationsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(notificationsPanelLayout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
         );
-        pendingCheckBoxPanel1Layout.setVerticalGroup(
-            pendingCheckBoxPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pendingCheckBoxPanel1Layout.createSequentialGroup()
-                .addGroup(pendingCheckBoxPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pendingCheckBoxPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pendingCheckBoxPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(pendingCheckbox1)))
-                .addContainerGap(8, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pendingCheckBoxPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(removePendingButton1)
-                .addGap(37, 37, 37))
+        notificationsPanelLayout.setVerticalGroup(
+            notificationsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(notificationsPanelLayout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
-        pendingCheckBoxPanel3.setBackground(new java.awt.Color(237, 237, 233));
-
-        pendingTextArea3.setEditable(false);
-        pendingTextArea3.setColumns(20);
-        pendingTextArea3.setRows(5);
-        jScrollPane15.setViewportView(pendingTextArea3);
-
-        pendingCheckbox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pendingCheckbox3ActionPerformed(evt);
-            }
-        });
-
-        removePendingButton3.setText("Remove");
-        removePendingButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removePendingButton3ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pendingCheckBoxPanel3Layout = new javax.swing.GroupLayout(pendingCheckBoxPanel3);
-        pendingCheckBoxPanel3.setLayout(pendingCheckBoxPanel3Layout);
-        pendingCheckBoxPanel3Layout.setHorizontalGroup(
-            pendingCheckBoxPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pendingCheckBoxPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pendingCheckbox3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(removePendingButton3)
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
-        pendingCheckBoxPanel3Layout.setVerticalGroup(
-            pendingCheckBoxPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pendingCheckBoxPanel3Layout.createSequentialGroup()
-                .addGroup(pendingCheckBoxPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pendingCheckBoxPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pendingCheckBoxPanel3Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(pendingCheckbox3)))
-                .addContainerGap(8, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pendingCheckBoxPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(removePendingButton3)
-                .addGap(37, 37, 37))
-        );
-
-        pendingCheckBoxPanel4.setBackground(new java.awt.Color(237, 237, 233));
-
-        pendingTextArea4.setEditable(false);
-        pendingTextArea4.setColumns(20);
-        pendingTextArea4.setRows(5);
-        jScrollPane16.setViewportView(pendingTextArea4);
-
-        pendingCheckbox4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pendingCheckbox4ActionPerformed(evt);
-            }
-        });
-
-        removePendingButton4.setText("Remove");
-        removePendingButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removePendingButton4ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pendingCheckBoxPanel4Layout = new javax.swing.GroupLayout(pendingCheckBoxPanel4);
-        pendingCheckBoxPanel4.setLayout(pendingCheckBoxPanel4Layout);
-        pendingCheckBoxPanel4Layout.setHorizontalGroup(
-            pendingCheckBoxPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pendingCheckBoxPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pendingCheckbox4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(removePendingButton4)
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
-        pendingCheckBoxPanel4Layout.setVerticalGroup(
-            pendingCheckBoxPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pendingCheckBoxPanel4Layout.createSequentialGroup()
-                .addGroup(pendingCheckBoxPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pendingCheckBoxPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pendingCheckBoxPanel4Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(pendingCheckbox4)))
-                .addContainerGap(8, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pendingCheckBoxPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(removePendingButton4)
-                .addGap(37, 37, 37))
-        );
-
-        pendingCheckBoxPanel2.setBackground(new java.awt.Color(237, 237, 233));
-
-        pendingTextArea2.setEditable(false);
-        pendingTextArea2.setColumns(20);
-        pendingTextArea2.setRows(5);
-        jScrollPane17.setViewportView(pendingTextArea2);
-
-        pendingCheckbox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pendingCheckbox2ActionPerformed(evt);
-            }
-        });
-
-        removePendingButton2.setText("Remove");
-        removePendingButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removePendingButton2ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pendingCheckBoxPanel2Layout = new javax.swing.GroupLayout(pendingCheckBoxPanel2);
-        pendingCheckBoxPanel2.setLayout(pendingCheckBoxPanel2Layout);
-        pendingCheckBoxPanel2Layout.setHorizontalGroup(
-            pendingCheckBoxPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pendingCheckBoxPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pendingCheckbox2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(removePendingButton2)
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
-        pendingCheckBoxPanel2Layout.setVerticalGroup(
-            pendingCheckBoxPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pendingCheckBoxPanel2Layout.createSequentialGroup()
-                .addGroup(pendingCheckBoxPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pendingCheckBoxPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pendingCheckBoxPanel2Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(pendingCheckbox2)))
-                .addContainerGap(8, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pendingCheckBoxPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(removePendingButton2)
-                .addGap(37, 37, 37))
-        );
-
-        backButtonPendingOrder.setText("Back");
-        backButtonPendingOrder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonPendingOrderbackButtonActionPerformed(evt);
-            }
-        });
-
-        checkOutForPendingOrdersButton.setText("Check Out");
-        checkOutForPendingOrdersButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkOutForPendingOrdersButtonActionPerformed(evt);
-            }
-        });
-
-        pendingCheckBoxPanel5.setBackground(new java.awt.Color(237, 237, 233));
-
-        pendingTextArea5.setEditable(false);
-        pendingTextArea5.setColumns(20);
-        pendingTextArea5.setRows(5);
-        jScrollPane20.setViewportView(pendingTextArea5);
-
-        pendingCheckbox5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pendingCheckbox5ActionPerformed(evt);
-            }
-        });
-
-        removePendingButton5.setText("Remove");
-        removePendingButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removePendingButton5ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pendingCheckBoxPanel5Layout = new javax.swing.GroupLayout(pendingCheckBoxPanel5);
-        pendingCheckBoxPanel5.setLayout(pendingCheckBoxPanel5Layout);
-        pendingCheckBoxPanel5Layout.setHorizontalGroup(
-            pendingCheckBoxPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pendingCheckBoxPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pendingCheckbox5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(removePendingButton5)
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
-        pendingCheckBoxPanel5Layout.setVerticalGroup(
-            pendingCheckBoxPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pendingCheckBoxPanel5Layout.createSequentialGroup()
-                .addGroup(pendingCheckBoxPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pendingCheckBoxPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pendingCheckBoxPanel5Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(pendingCheckbox5)))
-                .addContainerGap(8, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pendingCheckBoxPanel5Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(removePendingButton5)
-                .addGap(37, 37, 37))
-        );
-
-        javax.swing.GroupLayout pendingOrdersPanelLayout = new javax.swing.GroupLayout(pendingOrdersPanel);
-        pendingOrdersPanel.setLayout(pendingOrdersPanelLayout);
-        pendingOrdersPanelLayout.setHorizontalGroup(
-            pendingOrdersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pendingOrdersPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pendingOrderLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1272, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pendingOrdersPanelLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(backButtonPendingOrder)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pendingOrdersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pendingOrdersPanelLayout.createSequentialGroup()
-                        .addComponent(pendingCheckBoxPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(179, 179, 179)
-                        .addComponent(checkOutForPendingOrdersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pendingCheckBoxPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pendingCheckBoxPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pendingCheckBoxPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pendingCheckBoxPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29))
-        );
-        pendingOrdersPanelLayout.setVerticalGroup(
-            pendingOrdersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pendingOrdersPanelLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(pendingOrderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pendingCheckBoxPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(pendingCheckBoxPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(pendingCheckBoxPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(pendingOrdersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pendingOrdersPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pendingOrdersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(backButtonPendingOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(checkOutForPendingOrdersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(pendingOrdersPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(pendingCheckBoxPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(pendingCheckBoxPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(24, Short.MAX_VALUE))))
-        );
-
-        containerPanel.add(pendingOrdersPanel, "pendingOrdersPanel");
+        containerPanel.add(notificationsPanel, "card10");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1734,27 +1170,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
     private void iconLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconLabelMouseClicked
     }//GEN-LAST:event_iconLabelMouseClicked
-
-    private void cartLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartLabelMouseClicked
-        containerPanel.removeAll();
-        containerPanel.add(yourCartMainPanel);
-        containerPanel.repaint();
-        containerPanel.revalidate();
-    }//GEN-LAST:event_cartLabelMouseClicked
-
-    private void profileLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileLabelMouseClicked
-        containerPanel.removeAll();
-        containerPanel.add(profilePanel);
-        containerPanel.repaint();
-        containerPanel.revalidate();
-    }//GEN-LAST:event_profileLabelMouseClicked
-
-    private void storeLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_storeLabelMouseEntered
-        containerPanel.removeAll();
-        containerPanel.add(choosePanel);
-        containerPanel.repaint();
-        containerPanel.revalidate();
-    }//GEN-LAST:event_storeLabelMouseEntered
 
     private void overthecounterButtonActionPerformed(java.awt.event.ActionEvent evt) {
         containerPanel.removeAll();
@@ -1781,49 +1196,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonCategoryActionPerformed
 
 
-    private void removeCartButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCartButton4ActionPerformed
-
-    }//GEN-LAST:event_removeCartButton4ActionPerformed
-
-    private void removeCartButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCartButton2ActionPerformed
-
-    }//GEN-LAST:event_removeCartButton2ActionPerformed
-
-    private void removeCartButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCartButton3ActionPerformed
-
-    }//GEN-LAST:event_removeCartButton3ActionPerformed
-
-    private void removeCartButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCartButton1ActionPerformed
-
-    }//GEN-LAST:event_removeCartButton1ActionPerformed
-
-    private void removeCartButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCartButton5ActionPerformed
-
-    }//GEN-LAST:event_removeCartButton5ActionPerformed
-
-    private void cartCheckbox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cartCheckbox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cartCheckbox1ActionPerformed
-
-    private void cartCheckbox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cartCheckbox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cartCheckbox2ActionPerformed
-
-    private void cartCheckbox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cartCheckbox3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cartCheckbox3ActionPerformed
-
-    private void cartCheckbox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cartCheckbox4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cartCheckbox4ActionPerformed
-
-    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        containerPanel.removeAll();
-        containerPanel.add(modeOfDeliveryPanel);
-        containerPanel.repaint();
-        containerPanel.revalidate();
-    }//GEN-LAST:event_submitButtonActionPerformed
-
     private void pickUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pickUpButtonActionPerformed
 
     }//GEN-LAST:event_pickUpButtonActionPerformed
@@ -1835,7 +1207,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
     private void nextButtonModeOfPaymennextButtonModeOfDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonModeOfPaymennextButtonModeOfDeliveryActionPerformed
         containerPanel.removeAll();
-        containerPanel.add(yourOrderPanel);
+        containerPanel.add(modeOfPaymentPanel);
         containerPanel.repaint();
         containerPanel.revalidate();
     }//GEN-LAST:event_nextButtonModeOfPaymennextButtonModeOfDeliveryActionPerformed
@@ -1846,13 +1218,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         containerPanel.repaint();
         containerPanel.revalidate();
     }//GEN-LAST:event_backButtonModeOfDeliveryActionPerformed
-
-    private void editOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editOrderButtonActionPerformed
-        containerPanel.removeAll();
-        containerPanel.add(categoryPanel);
-        containerPanel.repaint();
-        containerPanel.revalidate();
-    }//GEN-LAST:event_editOrderButtonActionPerformed
 
     private void checkOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkOutButtonActionPerformed
         containerPanel.removeAll();
@@ -1874,66 +1239,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
     }//GEN-LAST:event_saveButtonActionPerformed
 
-    private void pendingCheckbox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pendingCheckbox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pendingCheckbox1ActionPerformed
-
-    private void pendingCheckbox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pendingCheckbox3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pendingCheckbox3ActionPerformed
-
-    private void pendingCheckbox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pendingCheckbox4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pendingCheckbox4ActionPerformed
-
-    private void pendingCheckbox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pendingCheckbox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pendingCheckbox2ActionPerformed
-
-    private void removePendingButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePendingButton1ActionPerformed
-    }//GEN-LAST:event_removePendingButton1ActionPerformed
-
-    private void removePendingButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePendingButton2ActionPerformed
-    }//GEN-LAST:event_removePendingButton2ActionPerformed
-
-    private void removePendingButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePendingButton3ActionPerformed
-    }//GEN-LAST:event_removePendingButton3ActionPerformed
-
-    private void removePendingButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePendingButton4ActionPerformed
-    }//GEN-LAST:event_removePendingButton4ActionPerformed
-
-    private void removePendingButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePendingButton5ActionPerformed
-    }//GEN-LAST:event_removePendingButton5ActionPerformed
-
-    private void backButtonPendingOrderbackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonPendingOrderbackButtonActionPerformed
-        containerPanel.removeAll();
-        //containerPanel.add(uploadPanel);
-        containerPanel.repaint();
-        containerPanel.revalidate();
-    }//GEN-LAST:event_backButtonPendingOrderbackButtonActionPerformed
-
-    private void checkOutForPendingOrdersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkOutForPendingOrdersButtonActionPerformed
-        containerPanel.removeAll();
-        containerPanel.add(modeOfDeliveryPanel);
-        containerPanel.repaint();
-        containerPanel.revalidate();
-    }//GEN-LAST:event_checkOutForPendingOrdersButtonActionPerformed
-
-    private void cartCheckbox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cartCheckbox5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cartCheckbox5ActionPerformed
-
-    private void pendingCheckbox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pendingCheckbox5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pendingCheckbox5ActionPerformed
-
-    private void storeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_storeLabelMouseClicked
-        containerPanel.removeAll();
-        containerPanel.add(choosePanel);
-        containerPanel.repaint();
-        containerPanel.revalidate();
-    }//GEN-LAST:event_storeLabelMouseClicked
-
     private void cashOnDeliveryLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cashOnDeliveryLabelMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_cashOnDeliveryLabelMouseClicked
@@ -1943,8 +1248,78 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonModeOfPaymentActionPerformed
 
     private void nextButtonModeOfPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonModeOfPaymentActionPerformed
-        // TODO add your handling code here:
+        containerPanel.removeAll();
+        containerPanel.add(yourOrderPanel);
+        containerPanel.repaint();
+        containerPanel.revalidate();
     }//GEN-LAST:event_nextButtonModeOfPaymentActionPerformed
+
+    private void searchTextfield1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextfield1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTextfield1KeyPressed
+
+    private void backYourCartButtonCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backYourCartButtonCategoryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_backYourCartButtonCategoryActionPerformed
+
+    private void uploadPrescriptionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadPrescriptionButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_uploadPrescriptionButtonActionPerformed
+
+    private void editOrderButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editOrderButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editOrderButton1ActionPerformed
+
+    private void cartLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartLabelMouseClicked
+        containerPanel.removeAll();
+        containerPanel.add(yourCartMainPanel);
+        containerPanel.repaint();
+        containerPanel.revalidate();
+    }//GEN-LAST:event_cartLabelMouseClicked
+
+    private void storeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_storeLabelMouseClicked
+        containerPanel.removeAll();
+        containerPanel.add(choosePanel);
+        containerPanel.repaint();
+        containerPanel.revalidate();
+    }//GEN-LAST:event_storeLabelMouseClicked
+
+    private void profileLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileLabelMouseClicked
+        containerPanel.removeAll();
+        containerPanel.add(profilePanel);
+        containerPanel.repaint();
+        containerPanel.revalidate();
+    }//GEN-LAST:event_profileLabelMouseClicked
+
+    private void notificationsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notificationsLabelMouseClicked
+        containerPanel.removeAll();
+        containerPanel.add(notificationsPanel);
+        containerPanel.repaint();
+        containerPanel.revalidate();
+    }//GEN-LAST:event_notificationsLabelMouseClicked
+
+    private void searchTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTextfieldActionPerformed
+
+    private void categoryComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_categoryComboBoxActionPerformed
+
+    private void searchTextfield1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextfield1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTextfield1ActionPerformed
+
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_removeButtonActionPerformed
+
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        containerPanel.removeAll();
+        containerPanel.add(modeOfDeliveryPanel);
+        containerPanel.repaint();
+        containerPanel.revalidate();
+    }//GEN-LAST:event_submitButtonActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -1980,32 +1355,19 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JButton backButtonModeOfDelivery;
     private javax.swing.JButton backButtonModeOfPayment;
-    private javax.swing.JButton backButtonPendingOrder;
+    private javax.swing.JButton backYourCartButton;
     private javax.swing.JSeparator buttonSeparator;
     private javax.swing.JLabel cardNumberLabel;
     private javax.swing.JTextField cardNumberTextfield;
-    private javax.swing.JCheckBox cartCheckbox1;
-    private javax.swing.JCheckBox cartCheckbox2;
-    private javax.swing.JCheckBox cartCheckbox3;
-    private javax.swing.JCheckBox cartCheckbox4;
-    private javax.swing.JCheckBox cartCheckbox5;
     private javax.swing.JLabel cartIcon;
     private javax.swing.JLabel cartLabel;
     private javax.swing.JLabel cashOnDeliveryLabel;
+    private javax.swing.JComboBox<String> categoryComboBox;
     private javax.swing.JPanel categoryPanel;
-    private javax.swing.JSpinner categorySpinner1;
-    private javax.swing.JSpinner categorySpinner2;
-    private javax.swing.JSpinner categorySpinner3;
-    private javax.swing.JSpinner categorySpinner4;
-    private javax.swing.JSpinner categorySpinner5;
+    private javax.swing.JTable categoryTable;
+    private javax.swing.JTable categoryTable1;
     private javax.swing.JButton checkOutButton;
-    private javax.swing.JButton checkOutForPendingOrdersButton;
     private javax.swing.JPanel choosePanel;
-    private javax.swing.JComboBox<String> comboBox1;
-    private javax.swing.JComboBox<String> comboBox2;
-    private javax.swing.JComboBox<String> comboBox3;
-    private javax.swing.JComboBox<String> comboBox4;
-    private javax.swing.JComboBox<String> comboBox5;
     private javax.swing.JPasswordField confirmPasswordField;
     private javax.swing.JLabel confirmPasswordLabel;
     private javax.swing.JPanel containerPanel;
@@ -2013,7 +1375,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JLabel currentPasswordLabel;
     private javax.swing.JButton deliveryButton;
     private javax.swing.JLabel doctorIcon;
-    private javax.swing.JButton editOrderButton;
+    private javax.swing.JButton editOrderButton1;
     private javax.swing.JLabel envelopeIcon;
     private javax.swing.JLabel footerLabel;
     private javax.swing.JPanel footerPanel;
@@ -2022,22 +1384,13 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JLabel helpLabel;
     private javax.swing.JLabel iconLabel;
     private javax.swing.JLabel instructionsLabel1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
-    private javax.swing.JScrollPane jScrollPane13;
-    private javax.swing.JScrollPane jScrollPane14;
-    private javax.swing.JScrollPane jScrollPane15;
-    private javax.swing.JScrollPane jScrollPane16;
-    private javax.swing.JScrollPane jScrollPane17;
     private javax.swing.JScrollPane jScrollPane18;
-    private javax.swing.JScrollPane jScrollPane19;
-    private javax.swing.JScrollPane jScrollPane20;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton logOutButton;
@@ -2051,31 +1404,17 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JTextField nameCardTextfield;
     private javax.swing.JLabel nameEwalletLabel;
     private javax.swing.JTextField nameEwalletTextfield;
-    private javax.swing.JTextArea nameTextArea;
+    private javax.swing.JLabel nameOnlyLabel;
     private javax.swing.JPasswordField newPasswordField;
     private javax.swing.JLabel newPasswordLabel;
     private javax.swing.JButton nextButtonModeOfDelivery;
     private javax.swing.JButton nextButtonModeOfPayment;
+    private javax.swing.JLabel notificationsLabel;
+    private javax.swing.JPanel notificationsPanel;
+    private javax.swing.JTextArea notificationsTextArea;
     private javax.swing.JLabel orderHistoryLabel;
     private javax.swing.JButton overthecounterButton;
     private javax.swing.JPanel partOftheProfilePanel;
-    private javax.swing.JPanel pendingCheckBoxPanel1;
-    private javax.swing.JPanel pendingCheckBoxPanel2;
-    private javax.swing.JPanel pendingCheckBoxPanel3;
-    private javax.swing.JPanel pendingCheckBoxPanel4;
-    private javax.swing.JPanel pendingCheckBoxPanel5;
-    private javax.swing.JCheckBox pendingCheckbox1;
-    private javax.swing.JCheckBox pendingCheckbox2;
-    private javax.swing.JCheckBox pendingCheckbox3;
-    private javax.swing.JCheckBox pendingCheckbox4;
-    private javax.swing.JCheckBox pendingCheckbox5;
-    private javax.swing.JLabel pendingOrderLabel;
-    private javax.swing.JPanel pendingOrdersPanel;
-    private javax.swing.JTextArea pendingTextArea1;
-    private javax.swing.JTextArea pendingTextArea2;
-    private javax.swing.JTextArea pendingTextArea3;
-    private javax.swing.JTextArea pendingTextArea4;
-    private javax.swing.JTextArea pendingTextArea5;
     private javax.swing.JLabel personalInformationLabel;
     private javax.swing.JTextArea personalInformationTextArea;
     private javax.swing.JLabel phoneNumberLabel;
@@ -2091,39 +1430,20 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel profileLabel;
     private javax.swing.JPanel profilePanel;
-    private javax.swing.JButton removeCartButton1;
-    private javax.swing.JButton removeCartButton2;
-    private javax.swing.JButton removeCartButton3;
-    private javax.swing.JButton removeCartButton4;
-    private javax.swing.JButton removeCartButton5;
-    private javax.swing.JButton removePendingButton1;
-    private javax.swing.JButton removePendingButton2;
-    private javax.swing.JButton removePendingButton3;
-    private javax.swing.JButton removePendingButton4;
-    private javax.swing.JButton removePendingButton5;
+    private javax.swing.JButton removeButton;
     private javax.swing.JButton saveButton;
     private javax.swing.JLabel searchLabel;
-    private javax.swing.JPanel searchPanel;
+    private javax.swing.JLabel searchLabel1;
     private javax.swing.JTextField searchTextfield;
-    private javax.swing.JLabel selectLabel;
+    private javax.swing.JTextField searchTextfield1;
     private javax.swing.JLabel settingLabel;
     private javax.swing.JLabel storeLabel;
     private javax.swing.JButton submitButton;
     private javax.swing.JLabel titleLabel;
-    private javax.swing.JButton uploadButton;
+    private javax.swing.JButton uploadPrescriptionButton;
     private javax.swing.JLabel visaIcon;
     private javax.swing.JLabel yourCartLabel;
     private javax.swing.JPanel yourCartMainPanel;
-    private javax.swing.JPanel yourCartPanel1;
-    private javax.swing.JPanel yourCartPanel2;
-    private javax.swing.JPanel yourCartPanel3;
-    private javax.swing.JPanel yourCartPanel4;
-    private javax.swing.JPanel yourCartPanel5;
-    private javax.swing.JTextArea yourCartTextArea1;
-    private javax.swing.JTextArea yourCartTextArea2;
-    private javax.swing.JTextArea yourCartTextArea3;
-    private javax.swing.JTextArea yourCartTextArea4;
-    private javax.swing.JTextArea yourCartTextArea5;
     private javax.swing.JLabel yourOrderLabel;
     private javax.swing.JPanel yourOrderPanel;
     private javax.swing.JTextArea yourOrderTextArea;

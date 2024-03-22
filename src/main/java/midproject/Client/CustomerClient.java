@@ -6,13 +6,13 @@ import java.rmi.registry.Registry;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.ViewClasses.ClientGUIFrame;
-import midproject.ViewClasses.LoginFrame;
+import midproject.ViewClasses.Login;
 
 import javax.swing.*;
 
 public class CustomerClient {
 
-	private static LoginFrame loginFrame = new LoginFrame();
+	private static Login loginFrame = new Login();
 	private static ClientGUIFrame clientGUIFrame = new ClientGUIFrame();
 
 	private static User user = new User();
@@ -48,3 +48,4 @@ public class CustomerClient {
 
 	}
 }
+
