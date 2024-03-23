@@ -47,6 +47,11 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         overthecounterButton = new javax.swing.JButton();
         instructionsLabel1 = new javax.swing.JLabel();
         categoryPanel = new javax.swing.JPanel();
+        selectQuantity = new javax.swing.JInternalFrame();
+        jSpinner1 = new javax.swing.JSpinner();
+        cancelButton = new javax.swing.JButton();
+        proceedButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         searchTextfield = new javax.swing.JTextField();
         searchLabel = new javax.swing.JLabel();
         addToCartButton = new javax.swing.JButton();
@@ -269,6 +274,10 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         choosePanel.setLayout(choosePanelLayout);
         choosePanelLayout.setHorizontalGroup(
             choosePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, choosePanelLayout.createSequentialGroup()
+                .addGap(0, 479, Short.MAX_VALUE)
+                .addComponent(instructionsLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(419, 419, 419))
             .addGroup(choosePanelLayout.createSequentialGroup()
                 .addGroup(choosePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(choosePanelLayout.createSequentialGroup()
@@ -277,11 +286,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
                     .addGroup(choosePanelLayout.createSequentialGroup()
                         .addGap(529, 529, 529)
                         .addComponent(overthecounterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, choosePanelLayout.createSequentialGroup()
-                .addGap(0, 479, Short.MAX_VALUE)
-                .addComponent(instructionsLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(419, 419, 419))
+                .addContainerGap(582, Short.MAX_VALUE))
         );
         choosePanelLayout.setVerticalGroup(
             choosePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,6 +303,57 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         containerPanel.add(choosePanel, "choosePanel");
 
         categoryPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        selectQuantity.setVisible(true);
+
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+
+        proceedButton.setText("Proceed");
+        proceedButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                proceedButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Select Quantity");
+
+        javax.swing.GroupLayout selectQuantityLayout = new javax.swing.GroupLayout(selectQuantity.getContentPane());
+        selectQuantity.getContentPane().setLayout(selectQuantityLayout);
+        selectQuantityLayout.setHorizontalGroup(
+            selectQuantityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(selectQuantityLayout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(cancelButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addComponent(proceedButton)
+                .addGap(66, 66, 66))
+            .addGroup(selectQuantityLayout.createSequentialGroup()
+                .addGap(131, 131, 131)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, selectQuantityLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(143, 143, 143))
+        );
+        selectQuantityLayout.setVerticalGroup(
+            selectQuantityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(selectQuantityLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(selectQuantityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancelButton)
+                    .addComponent(proceedButton))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
 
         searchTextfield.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -394,11 +450,16 @@ public class ClientGUIFrame extends javax.swing.JFrame {
                                 .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 969, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(159, Short.MAX_VALUE))
+            .addGroup(categoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(categoryPanelLayout.createSequentialGroup()
+                    .addGap(460, 460, 460)
+                    .addComponent(selectQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(460, Short.MAX_VALUE)))
         );
         categoryPanelLayout.setVerticalGroup(
             categoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(categoryPanelLayout.createSequentialGroup()
-                .addContainerGap(91, Short.MAX_VALUE)
+                .addContainerGap(93, Short.MAX_VALUE)
                 .addComponent(searchLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(categoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -411,6 +472,11 @@ public class ClientGUIFrame extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(categoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(categoryPanelLayout.createSequentialGroup()
+                    .addGap(276, 276, 276)
+                    .addComponent(selectQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(277, Short.MAX_VALUE)))
         );
 
         containerPanel.add(categoryPanel, "categoryPanel");
@@ -1188,10 +1254,8 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_searchTextfieldKeyPressed
 
     private void addToCartButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        containerPanel.removeAll();
-        containerPanel.add(yourCartMainPanel);
-        containerPanel.repaint();
-        containerPanel.revalidate();
+        selectQuantity.setVisible(true);
+
     }
     private void backButtonCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonCategoryActionPerformed
         containerPanel.removeAll();
@@ -1326,6 +1390,17 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         containerPanel.revalidate();
     }//GEN-LAST:event_submitButtonActionPerformed
 
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void proceedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedButtonActionPerformed
+        containerPanel.removeAll();
+        containerPanel.add(yourCartMainPanel);
+        containerPanel.repaint();
+        containerPanel.revalidate();
+    }//GEN-LAST:event_proceedButtonActionPerformed
+
     public static void main(String args[]) {
         FlatMacLightLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1344,6 +1419,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JButton backButtonModeOfPayment;
     private javax.swing.JButton backYourCartButton;
     private javax.swing.JSeparator buttonSeparator;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JLabel cardNumberLabel;
     private javax.swing.JTextField cardNumberTextfield;
     private javax.swing.JLabel cartIcon;
@@ -1371,6 +1447,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JLabel helpLabel;
     private javax.swing.JLabel iconLabel;
     private javax.swing.JLabel instructionsLabel1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
@@ -1379,6 +1456,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton logOutButton;
     private javax.swing.JLabel mastercardIcon;
@@ -1413,6 +1491,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JPanel placedOrderPanel;
     private javax.swing.JTextArea placedOrderTextArea;
     private javax.swing.JLabel privacyAndPolicyLabel;
+    private javax.swing.JButton proceedButton;
     private javax.swing.JPanel profileDetailsPanel;
     private javax.swing.JLabel profileIcon;
     private javax.swing.JLabel profileLabel;
@@ -1423,6 +1502,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JLabel searchLabel1;
     private javax.swing.JTextField searchTextfield;
     private javax.swing.JTextField searchTextfield1;
+    private javax.swing.JInternalFrame selectQuantity;
     private javax.swing.JLabel settingLabel;
     private javax.swing.JLabel storeLabel;
     private javax.swing.JButton submitButton;
