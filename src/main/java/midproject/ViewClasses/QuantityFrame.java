@@ -10,7 +10,7 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
  *
  * @author julianne
  */
-public class QuantityFrame extends javax.swing.JInternalFrame {
+public class QuantityFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form QuantityFrame
