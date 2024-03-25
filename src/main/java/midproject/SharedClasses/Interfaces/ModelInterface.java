@@ -8,9 +8,7 @@ import midproject.SharedClasses.UserDefinedExceptions.UserExistsException;
 import java.rmi.*;
 
 public interface ModelInterface extends Remote {
-	// method to log in to the chat system (msgCallback is used
-	// as a callback and session manager/identifier)
-	public boolean login(MessageCallback msgCallback, String username, String password)
+	public String login(MessageCallback msgCallback, String username, String password)
 			throws RemoteException, UserExistsException,
 			AlreadyLoggedInException, AuthenticationFailedException;
 
@@ -21,7 +19,10 @@ public interface ModelInterface extends Remote {
 
 	// method to logout from the chat system using msgCallback as
 	// the session manager/identifier
-	public void logout(MessageCallback msgCallback)
+	public void logout(MessageCallback msgCallback, String sessionID)
 			throws RemoteException, NotLoggedInException;
+
+
+
 
 }

@@ -2,6 +2,7 @@ package midproject.ViewClasses;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -1405,6 +1406,830 @@ public class ClientGUIFrame extends javax.swing.JFrame {
                 new ClientGUIFrame().setVisible(true);
             }
         });
+    }
+
+    public JLabel getCVVLabel() {
+        return CVVLabel;
+    }
+
+    public void setCVVLabel(JLabel CVVLabel) {
+        this.CVVLabel = CVVLabel;
+    }
+
+    public JTextField getCVVTextfield() {
+        return CVVTextfield;
+    }
+
+    public void setCVVTextfield(JTextField CVVTextfield) {
+        this.CVVTextfield = CVVTextfield;
+    }
+
+    public JButton getAddToCartButton() {
+        return addToCartButton;
+    }
+
+    public void setAddToCartButton(JButton addToCartButton) {
+        this.addToCartButton = addToCartButton;
+    }
+
+    public JButton getBackButton() {
+        return backButton;
+    }
+
+    public void setBackButton(JButton backButton) {
+        this.backButton = backButton;
+    }
+
+    public JButton getBackButtonModeOfDelivery() {
+        return backButtonModeOfDelivery;
+    }
+
+    public void setBackButtonModeOfDelivery(JButton backButtonModeOfDelivery) {
+        this.backButtonModeOfDelivery = backButtonModeOfDelivery;
+    }
+
+    public JButton getBackButtonModeOfPayment() {
+        return backButtonModeOfPayment;
+    }
+
+    public void setBackButtonModeOfPayment(JButton backButtonModeOfPayment) {
+        this.backButtonModeOfPayment = backButtonModeOfPayment;
+    }
+
+    public JButton getBackYourCartButton() {
+        return backYourCartButton;
+    }
+
+    public void setBackYourCartButton(JButton backYourCartButton) {
+        this.backYourCartButton = backYourCartButton;
+    }
+
+    public JSeparator getButtonSeparator() {
+        return buttonSeparator;
+    }
+
+    public void setButtonSeparator(JSeparator buttonSeparator) {
+        this.buttonSeparator = buttonSeparator;
+    }
+
+    public JButton getCancelButton() {
+        return cancelButton;
+    }
+
+    public void setCancelButton(JButton cancelButton) {
+        this.cancelButton = cancelButton;
+    }
+
+    public JLabel getCardNumberLabel() {
+        return cardNumberLabel;
+    }
+
+    public void setCardNumberLabel(JLabel cardNumberLabel) {
+        this.cardNumberLabel = cardNumberLabel;
+    }
+
+    public JTextField getCardNumberTextfield() {
+        return cardNumberTextfield;
+    }
+
+    public void setCardNumberTextfield(JTextField cardNumberTextfield) {
+        this.cardNumberTextfield = cardNumberTextfield;
+    }
+
+    public JLabel getCartIcon() {
+        return cartIcon;
+    }
+
+    public void setCartIcon(JLabel cartIcon) {
+        this.cartIcon = cartIcon;
+    }
+
+    public JLabel getCartLabel() {
+        return cartLabel;
+    }
+
+    public void setCartLabel(JLabel cartLabel) {
+        this.cartLabel = cartLabel;
+    }
+
+    public JLabel getCashOnDeliveryLabel() {
+        return cashOnDeliveryLabel;
+    }
+
+    public void setCashOnDeliveryLabel(JLabel cashOnDeliveryLabel) {
+        this.cashOnDeliveryLabel = cashOnDeliveryLabel;
+    }
+
+    public JComboBox<String> getCategoryComboBox() {
+        return categoryComboBox;
+    }
+
+    public void setCategoryComboBox(JComboBox<String> categoryComboBox) {
+        this.categoryComboBox = categoryComboBox;
+    }
+
+    public JPanel getCategoryPanel() {
+        return categoryPanel;
+    }
+
+    public void setCategoryPanel(JPanel categoryPanel) {
+        this.categoryPanel = categoryPanel;
+    }
+
+    public JTable getCategoryTable() {
+        return categoryTable;
+    }
+
+    public void setCategoryTable(JTable categoryTable) {
+        this.categoryTable = categoryTable;
+    }
+
+    public JTable getCategoryTable1() {
+        return categoryTable1;
+    }
+
+    public void setCategoryTable1(JTable categoryTable1) {
+        this.categoryTable1 = categoryTable1;
+    }
+
+    public JButton getCheckOutButton() {
+        return checkOutButton;
+    }
+
+    public void setCheckOutButton(JButton checkOutButton) {
+        this.checkOutButton = checkOutButton;
+    }
+
+    public JPanel getChoosePanel() {
+        return choosePanel;
+    }
+
+    public void setChoosePanel(JPanel choosePanel) {
+        this.choosePanel = choosePanel;
+    }
+
+    public JPasswordField getConfirmPasswordField() {
+        return confirmPasswordField;
+    }
+
+    public void setConfirmPasswordField(JPasswordField confirmPasswordField) {
+        this.confirmPasswordField = confirmPasswordField;
+    }
+
+    public JLabel getConfirmPasswordLabel() {
+        return confirmPasswordLabel;
+    }
+
+    public void setConfirmPasswordLabel(JLabel confirmPasswordLabel) {
+        this.confirmPasswordLabel = confirmPasswordLabel;
+    }
+
+    public JPanel getContainerPanel() {
+        return containerPanel;
+    }
+
+    public void setContainerPanel(JPanel containerPanel) {
+        this.containerPanel = containerPanel;
+    }
+
+    public JPasswordField getCurrentPasswordField() {
+        return currentPasswordField;
+    }
+
+    public void setCurrentPasswordField(JPasswordField currentPasswordField) {
+        this.currentPasswordField = currentPasswordField;
+    }
+
+    public JLabel getCurrentPasswordLabel() {
+        return currentPasswordLabel;
+    }
+
+    public void setCurrentPasswordLabel(JLabel currentPasswordLabel) {
+        this.currentPasswordLabel = currentPasswordLabel;
+    }
+
+    public JButton getDeliveryButton() {
+        return deliveryButton;
+    }
+
+    public void setDeliveryButton(JButton deliveryButton) {
+        this.deliveryButton = deliveryButton;
+    }
+
+    public JLabel getDoctorIcon() {
+        return doctorIcon;
+    }
+
+    public void setDoctorIcon(JLabel doctorIcon) {
+        this.doctorIcon = doctorIcon;
+    }
+
+    public JButton getEditOrderButton1() {
+        return editOrderButton1;
+    }
+
+    public void setEditOrderButton1(JButton editOrderButton1) {
+        this.editOrderButton1 = editOrderButton1;
+    }
+
+    public JLabel getEnvelopeIcon() {
+        return envelopeIcon;
+    }
+
+    public void setEnvelopeIcon(JLabel envelopeIcon) {
+        this.envelopeIcon = envelopeIcon;
+    }
+
+    public JLabel getFooterLabel() {
+        return footerLabel;
+    }
+
+    public void setFooterLabel(JLabel footerLabel) {
+        this.footerLabel = footerLabel;
+    }
+
+    public JPanel getFooterPanel() {
+        return footerPanel;
+    }
+
+    public void setFooterPanel(JPanel footerPanel) {
+        this.footerPanel = footerPanel;
+    }
+
+    public JLabel getGcashIcon() {
+        return gcashIcon;
+    }
+
+    public void setGcashIcon(JLabel gcashIcon) {
+        this.gcashIcon = gcashIcon;
+    }
+
+    public JPanel getHeaderPanel() {
+        return headerPanel;
+    }
+
+    public void setHeaderPanel(JPanel headerPanel) {
+        this.headerPanel = headerPanel;
+    }
+
+    public JLabel getHelpLabel() {
+        return helpLabel;
+    }
+
+    public void setHelpLabel(JLabel helpLabel) {
+        this.helpLabel = helpLabel;
+    }
+
+    public JLabel getIconLabel() {
+        return iconLabel;
+    }
+
+    public void setIconLabel(JLabel iconLabel) {
+        this.iconLabel = iconLabel;
+    }
+
+    public JLabel getInstructionsLabel1() {
+        return instructionsLabel1;
+    }
+
+    public void setInstructionsLabel1(JLabel instructionsLabel1) {
+        this.instructionsLabel1 = instructionsLabel1;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public JScrollPane getjScrollPane10() {
+        return jScrollPane10;
+    }
+
+    public void setjScrollPane10(JScrollPane jScrollPane10) {
+        this.jScrollPane10 = jScrollPane10;
+    }
+
+    public JScrollPane getjScrollPane11() {
+        return jScrollPane11;
+    }
+
+    public void setjScrollPane11(JScrollPane jScrollPane11) {
+        this.jScrollPane11 = jScrollPane11;
+    }
+
+    public JScrollPane getjScrollPane12() {
+        return jScrollPane12;
+    }
+
+    public void setjScrollPane12(JScrollPane jScrollPane12) {
+        this.jScrollPane12 = jScrollPane12;
+    }
+
+    public JScrollPane getjScrollPane18() {
+        return jScrollPane18;
+    }
+
+    public void setjScrollPane18(JScrollPane jScrollPane18) {
+        this.jScrollPane18 = jScrollPane18;
+    }
+
+    public JScrollPane getjScrollPane2() {
+        return jScrollPane2;
+    }
+
+    public void setjScrollPane2(JScrollPane jScrollPane2) {
+        this.jScrollPane2 = jScrollPane2;
+    }
+
+    public JScrollPane getjScrollPane3() {
+        return jScrollPane3;
+    }
+
+    public void setjScrollPane3(JScrollPane jScrollPane3) {
+        this.jScrollPane3 = jScrollPane3;
+    }
+
+    public JScrollPane getjScrollPane9() {
+        return jScrollPane9;
+    }
+
+    public void setjScrollPane9(JScrollPane jScrollPane9) {
+        this.jScrollPane9 = jScrollPane9;
+    }
+
+    public JSpinner getjSpinner1() {
+        return jSpinner1;
+    }
+
+    public void setjSpinner1(JSpinner jSpinner1) {
+        this.jSpinner1 = jSpinner1;
+    }
+
+    public JTextArea getjTextArea1() {
+        return jTextArea1;
+    }
+
+    public void setjTextArea1(JTextArea jTextArea1) {
+        this.jTextArea1 = jTextArea1;
+    }
+
+    public JButton getLogOutButton() {
+        return logOutButton;
+    }
+
+    public void setLogOutButton(JButton logOutButton) {
+        this.logOutButton = logOutButton;
+    }
+
+    public JLabel getMastercardIcon() {
+        return mastercardIcon;
+    }
+
+    public void setMastercardIcon(JLabel mastercardIcon) {
+        this.mastercardIcon = mastercardIcon;
+    }
+
+    public JLabel getMayaIcon() {
+        return mayaIcon;
+    }
+
+    public void setMayaIcon(JLabel mayaIcon) {
+        this.mayaIcon = mayaIcon;
+    }
+
+    public JLabel getModeOfDeliveryLabel() {
+        return modeOfDeliveryLabel;
+    }
+
+    public void setModeOfDeliveryLabel(JLabel modeOfDeliveryLabel) {
+        this.modeOfDeliveryLabel = modeOfDeliveryLabel;
+    }
+
+    public JLabel getModeOfDeliveryLabel1() {
+        return modeOfDeliveryLabel1;
+    }
+
+    public void setModeOfDeliveryLabel1(JLabel modeOfDeliveryLabel1) {
+        this.modeOfDeliveryLabel1 = modeOfDeliveryLabel1;
+    }
+
+    public JPanel getModeOfDeliveryPanel() {
+        return modeOfDeliveryPanel;
+    }
+
+    public void setModeOfDeliveryPanel(JPanel modeOfDeliveryPanel) {
+        this.modeOfDeliveryPanel = modeOfDeliveryPanel;
+    }
+
+    public JPanel getModeOfPaymentPanel() {
+        return modeOfPaymentPanel;
+    }
+
+    public void setModeOfPaymentPanel(JPanel modeOfPaymentPanel) {
+        this.modeOfPaymentPanel = modeOfPaymentPanel;
+    }
+
+    public JLabel getNameCardLabel() {
+        return nameCardLabel;
+    }
+
+    public void setNameCardLabel(JLabel nameCardLabel) {
+        this.nameCardLabel = nameCardLabel;
+    }
+
+    public JTextField getNameCardTextfield() {
+        return nameCardTextfield;
+    }
+
+    public void setNameCardTextfield(JTextField nameCardTextfield) {
+        this.nameCardTextfield = nameCardTextfield;
+    }
+
+    public JLabel getNameEwalletLabel() {
+        return nameEwalletLabel;
+    }
+
+    public void setNameEwalletLabel(JLabel nameEwalletLabel) {
+        this.nameEwalletLabel = nameEwalletLabel;
+    }
+
+    public JTextField getNameEwalletTextfield() {
+        return nameEwalletTextfield;
+    }
+
+    public void setNameEwalletTextfield(JTextField nameEwalletTextfield) {
+        this.nameEwalletTextfield = nameEwalletTextfield;
+    }
+
+    public JLabel getNameOnlyLabel() {
+        return nameOnlyLabel;
+    }
+
+    public void setNameOnlyLabel(JLabel nameOnlyLabel) {
+        this.nameOnlyLabel = nameOnlyLabel;
+    }
+
+    public JPasswordField getNewPasswordField() {
+        return newPasswordField;
+    }
+
+    public void setNewPasswordField(JPasswordField newPasswordField) {
+        this.newPasswordField = newPasswordField;
+    }
+
+    public JLabel getNewPasswordLabel() {
+        return newPasswordLabel;
+    }
+
+    public void setNewPasswordLabel(JLabel newPasswordLabel) {
+        this.newPasswordLabel = newPasswordLabel;
+    }
+
+    public JButton getNextButtonModeOfDelivery() {
+        return nextButtonModeOfDelivery;
+    }
+
+    public void setNextButtonModeOfDelivery(JButton nextButtonModeOfDelivery) {
+        this.nextButtonModeOfDelivery = nextButtonModeOfDelivery;
+    }
+
+    public JButton getNextButtonModeOfPayment() {
+        return nextButtonModeOfPayment;
+    }
+
+    public void setNextButtonModeOfPayment(JButton nextButtonModeOfPayment) {
+        this.nextButtonModeOfPayment = nextButtonModeOfPayment;
+    }
+
+    public JLabel getNotificationsLabel() {
+        return notificationsLabel;
+    }
+
+    public void setNotificationsLabel(JLabel notificationsLabel) {
+        this.notificationsLabel = notificationsLabel;
+    }
+
+    public JPanel getNotificationsPanel() {
+        return notificationsPanel;
+    }
+
+    public void setNotificationsPanel(JPanel notificationsPanel) {
+        this.notificationsPanel = notificationsPanel;
+    }
+
+    public JTextArea getNotificationsTextArea() {
+        return notificationsTextArea;
+    }
+
+    public void setNotificationsTextArea(JTextArea notificationsTextArea) {
+        this.notificationsTextArea = notificationsTextArea;
+    }
+
+    public JLabel getOrderHistoryLabel() {
+        return orderHistoryLabel;
+    }
+
+    public void setOrderHistoryLabel(JLabel orderHistoryLabel) {
+        this.orderHistoryLabel = orderHistoryLabel;
+    }
+
+    public JButton getOverthecounterButton() {
+        return overthecounterButton;
+    }
+
+    public void setOverthecounterButton(JButton overthecounterButton) {
+        this.overthecounterButton = overthecounterButton;
+    }
+
+    public JPanel getPartOftheProfilePanel() {
+        return partOftheProfilePanel;
+    }
+
+    public void setPartOftheProfilePanel(JPanel partOftheProfilePanel) {
+        this.partOftheProfilePanel = partOftheProfilePanel;
+    }
+
+    public JLabel getPersonalInformationLabel() {
+        return personalInformationLabel;
+    }
+
+    public void setPersonalInformationLabel(JLabel personalInformationLabel) {
+        this.personalInformationLabel = personalInformationLabel;
+    }
+
+    public JTextArea getPersonalInformationTextArea() {
+        return personalInformationTextArea;
+    }
+
+    public void setPersonalInformationTextArea(JTextArea personalInformationTextArea) {
+        this.personalInformationTextArea = personalInformationTextArea;
+    }
+
+    public JLabel getPhoneNumberLabel() {
+        return phoneNumberLabel;
+    }
+
+    public void setPhoneNumberLabel(JLabel phoneNumberLabel) {
+        this.phoneNumberLabel = phoneNumberLabel;
+    }
+
+    public JTextField getPhoneNumberTextfield() {
+        return phoneNumberTextfield;
+    }
+
+    public void setPhoneNumberTextfield(JTextField phoneNumberTextfield) {
+        this.phoneNumberTextfield = phoneNumberTextfield;
+    }
+
+    public JButton getPickUpButton() {
+        return pickUpButton;
+    }
+
+    public void setPickUpButton(JButton pickUpButton) {
+        this.pickUpButton = pickUpButton;
+    }
+
+    public JPanel getPickUpPanel() {
+        return pickUpPanel;
+    }
+
+    public void setPickUpPanel(JPanel pickUpPanel) {
+        this.pickUpPanel = pickUpPanel;
+    }
+
+    public JTextArea getPickUpTextArea() {
+        return pickUpTextArea;
+    }
+
+    public void setPickUpTextArea(JTextArea pickUpTextArea) {
+        this.pickUpTextArea = pickUpTextArea;
+    }
+
+    public JLabel getPlacedOrderLabel() {
+        return placedOrderLabel;
+    }
+
+    public void setPlacedOrderLabel(JLabel placedOrderLabel) {
+        this.placedOrderLabel = placedOrderLabel;
+    }
+
+    public JPanel getPlacedOrderPanel() {
+        return placedOrderPanel;
+    }
+
+    public void setPlacedOrderPanel(JPanel placedOrderPanel) {
+        this.placedOrderPanel = placedOrderPanel;
+    }
+
+    public JTextArea getPlacedOrderTextArea() {
+        return placedOrderTextArea;
+    }
+
+    public void setPlacedOrderTextArea(JTextArea placedOrderTextArea) {
+        this.placedOrderTextArea = placedOrderTextArea;
+    }
+
+    public JLabel getPrivacyAndPolicyLabel() {
+        return privacyAndPolicyLabel;
+    }
+
+    public void setPrivacyAndPolicyLabel(JLabel privacyAndPolicyLabel) {
+        this.privacyAndPolicyLabel = privacyAndPolicyLabel;
+    }
+
+    public JButton getProceedButton() {
+        return proceedButton;
+    }
+
+    public void setProceedButton(JButton proceedButton) {
+        this.proceedButton = proceedButton;
+    }
+
+    public JPanel getProfileDetailsPanel() {
+        return profileDetailsPanel;
+    }
+
+    public void setProfileDetailsPanel(JPanel profileDetailsPanel) {
+        this.profileDetailsPanel = profileDetailsPanel;
+    }
+
+    public JLabel getProfileIcon() {
+        return profileIcon;
+    }
+
+    public void setProfileIcon(JLabel profileIcon) {
+        this.profileIcon = profileIcon;
+    }
+
+    public JLabel getProfileLabel() {
+        return profileLabel;
+    }
+
+    public void setProfileLabel(JLabel profileLabel) {
+        this.profileLabel = profileLabel;
+    }
+
+    public JPanel getProfilePanel() {
+        return profilePanel;
+    }
+
+    public void setProfilePanel(JPanel profilePanel) {
+        this.profilePanel = profilePanel;
+    }
+
+    public JButton getRemoveButton() {
+        return removeButton;
+    }
+
+    public void setRemoveButton(JButton removeButton) {
+        this.removeButton = removeButton;
+    }
+
+    public JButton getSaveButton() {
+        return saveButton;
+    }
+
+    public void setSaveButton(JButton saveButton) {
+        this.saveButton = saveButton;
+    }
+
+    public JLabel getSearchLabel() {
+        return searchLabel;
+    }
+
+    public void setSearchLabel(JLabel searchLabel) {
+        this.searchLabel = searchLabel;
+    }
+
+    public JLabel getSearchLabel1() {
+        return searchLabel1;
+    }
+
+    public void setSearchLabel1(JLabel searchLabel1) {
+        this.searchLabel1 = searchLabel1;
+    }
+
+    public JTextField getSearchTextfield() {
+        return searchTextfield;
+    }
+
+    public void setSearchTextfield(JTextField searchTextfield) {
+        this.searchTextfield = searchTextfield;
+    }
+
+    public JTextField getSearchTextfield1() {
+        return searchTextfield1;
+    }
+
+    public void setSearchTextfield1(JTextField searchTextfield1) {
+        this.searchTextfield1 = searchTextfield1;
+    }
+
+    public JInternalFrame getSelectQuantity() {
+        return selectQuantity;
+    }
+
+    public void setSelectQuantity(JInternalFrame selectQuantity) {
+        this.selectQuantity = selectQuantity;
+    }
+
+    public JLabel getSettingLabel() {
+        return settingLabel;
+    }
+
+    public void setSettingLabel(JLabel settingLabel) {
+        this.settingLabel = settingLabel;
+    }
+
+    public JLabel getStoreLabel() {
+        return storeLabel;
+    }
+
+    public void setStoreLabel(JLabel storeLabel) {
+        this.storeLabel = storeLabel;
+    }
+
+    public JButton getSubmitButton() {
+        return submitButton;
+    }
+
+    public void setSubmitButton(JButton submitButton) {
+        this.submitButton = submitButton;
+    }
+
+    public JLabel getTitleLabel() {
+        return titleLabel;
+    }
+
+    public void setTitleLabel(JLabel titleLabel) {
+        this.titleLabel = titleLabel;
+    }
+
+    public JButton getUploadPrescriptionButton() {
+        return uploadPrescriptionButton;
+    }
+
+    public void setUploadPrescriptionButton(JButton uploadPrescriptionButton) {
+        this.uploadPrescriptionButton = uploadPrescriptionButton;
+    }
+
+    public JLabel getVisaIcon() {
+        return visaIcon;
+    }
+
+    public void setVisaIcon(JLabel visaIcon) {
+        this.visaIcon = visaIcon;
+    }
+
+    public JLabel getYourCartLabel() {
+        return yourCartLabel;
+    }
+
+    public void setYourCartLabel(JLabel yourCartLabel) {
+        this.yourCartLabel = yourCartLabel;
+    }
+
+    public JPanel getYourCartMainPanel() {
+        return yourCartMainPanel;
+    }
+
+    public void setYourCartMainPanel(JPanel yourCartMainPanel) {
+        this.yourCartMainPanel = yourCartMainPanel;
+    }
+
+    public JLabel getYourOrderLabel() {
+        return yourOrderLabel;
+    }
+
+    public void setYourOrderLabel(JLabel yourOrderLabel) {
+        this.yourOrderLabel = yourOrderLabel;
+    }
+
+    public JPanel getYourOrderPanel() {
+        return yourOrderPanel;
+    }
+
+    public void setYourOrderPanel(JPanel yourOrderPanel) {
+        this.yourOrderPanel = yourOrderPanel;
+    }
+
+    public JTextArea getYourOrderTextArea() {
+        return yourOrderTextArea;
+    }
+
+    public void setYourOrderTextArea(JTextArea yourOrderTextArea) {
+        this.yourOrderTextArea = yourOrderTextArea;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

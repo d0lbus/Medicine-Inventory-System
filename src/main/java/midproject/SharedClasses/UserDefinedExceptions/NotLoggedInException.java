@@ -4,4 +4,6 @@ package midproject.SharedClasses.UserDefinedExceptions;
 // a client tries to log out/send broadcast while not
 // logged in
 public class NotLoggedInException extends Exception {
+    public NotLoggedInException(String s) {
+    }
 }
