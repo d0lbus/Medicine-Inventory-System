@@ -22,8 +22,6 @@ public class ServerImplementation
 	private Map<String, MessageCallback> msgCallbacks = new ConcurrentHashMap<>();
 	private Map<String, String> sessionUserMap = new ConcurrentHashMap<>();
 
-
-
 	public ServerImplementation() throws RemoteException {
 	}
 

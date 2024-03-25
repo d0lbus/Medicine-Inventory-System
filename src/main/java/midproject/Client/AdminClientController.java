@@ -59,12 +59,7 @@ public class AdminClientController {
 
     private static void showClientGUI(){
         adminGUIFrame.setVisible(true);
-        /**
-         * 	PROFILE RELATED FUNCTIONS
-         *  Logout
-         *  Display Profile
-         *  Change Password
-         * */
+
 
     }
 }
