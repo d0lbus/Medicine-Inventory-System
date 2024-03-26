@@ -101,7 +101,7 @@ public class UserJSONProcessor {
         }
     }
 
-    private static List<User> readUsersFromFile(String filePath) throws Exception {
+    public static List<User> readUsersFromFile(String filePath) throws Exception {
         String json = new String(Files.readAllBytes(Paths.get(filePath)));
         Type userListType = new TypeToken<List<User>>(){}.getType();
         List<User> users = gson.fromJson(json, userListType);

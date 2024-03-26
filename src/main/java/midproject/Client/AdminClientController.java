@@ -65,6 +65,25 @@ public class AdminClientController {
     private static void showClientGUI(){
         adminGUIFrame.setVisible(true);
 
+        adminGUIFrame.getaUsersUnarchiveButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = adminGUIFrame.getaUsersTable().getSelectedRow();
+                if (row != -1) {
+                    String userId = (String) adminGUIFrame.getaUsersTable().getValueAt(row, 0);
+                    try {
+                        // Pass the required arguments to the unarchiveSelectedUsers() method
+                        msgserver.unarchiveSelectedUsers(userId, "res/UserInformation.json", "res/ArchiveFile.json");
+                        JOptionPane.showMessageDialog(adminGUIFrame, "User unarchived successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(adminGUIFrame, "Error unarchiving user: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a user to unarchive.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
 
     private static void initController() {
@@ -122,4 +141,3 @@ public class AdminClientController {
     }
 
 }
-
