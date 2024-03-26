@@ -114,5 +114,13 @@ public class UserJSONProcessor {
         }
     }
 
-
+    public static void saveUsersToFile(List<User> archivedUsers, String archiveFilePath) {
+        try {
+            try (FileWriter writer = new FileWriter(archiveFilePath)) {
+                gson.toJson(archivedUsers, writer);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
