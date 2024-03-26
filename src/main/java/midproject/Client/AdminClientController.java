@@ -33,7 +33,7 @@ public class AdminClientController {
 
     public static void main(String[] args) {
         initiateLoginProcess();
-        initController();
+        showClientGUI();
     }
 
     private static void initiateLoginProcess() {
@@ -84,9 +84,7 @@ public class AdminClientController {
                 }
             }
         });
-    }
 
-    private static void initController() {
         adminGUIFrame.getRegisteredUsersButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -137,7 +135,6 @@ public class AdminClientController {
             public void actionPerformed(ActionEvent e) {
             }
         });
-
     }
 
 }
