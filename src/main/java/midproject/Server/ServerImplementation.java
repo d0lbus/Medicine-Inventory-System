@@ -109,18 +109,14 @@ public class ServerImplementation
         UserJSONProcessor.saveUsersToFile(archivedUsers, archiveFilePath);
     }
 
-    public void viewArchivedUserDetails(String userId, String archiveFilePath) throws RemoteException, Exception {
-        try {
-            User archivedUser = UserJSONProcessor.getArchivedUser(userId, archiveFilePath);
-            if (archivedUser != null) {
-                System.out.println("Archived User Details:");
-                System.out.println(archivedUser);
-            } else {
-                throw new Exception("User not found in archive.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
+    public User viewArchivedUserDetails(String userId, String archiveFilePath) throws RemoteException, Exception {
+        User archivedUser = UserJSONProcessor.getArchivedUser(userId, archiveFilePath);
+
+        if (archivedUser != null) {
+            return archivedUser;
+        } else {
+            throw new Exception("User not found in archive.");
         }
     }
+    
 }
