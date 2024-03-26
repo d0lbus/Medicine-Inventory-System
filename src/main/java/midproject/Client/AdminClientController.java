@@ -91,6 +91,7 @@ public class AdminClientController {
                 if (row != -1) {
                     String userId = (String) adminGUIFrame.getrUsersTable().getValueAt(row, 0);
                     try {
+                        msgserver.viewArchivedUserDetails(userId, "res/ArchiveFile.json");
 
                         User archivedUser = UserJSONProcessor.getArchivedUser(userId, "res/ArchiveFile.json");
                         if (archivedUser != null) {

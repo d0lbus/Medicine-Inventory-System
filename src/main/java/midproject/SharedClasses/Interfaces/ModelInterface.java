@@ -24,4 +24,9 @@ public interface ModelInterface extends Remote {
 
     public void unarchiveSelectedUsers(String userId, String originalFilePath, String archiveFilePath)
             throws Exception;
+
+    public void viewArchivedUserDetails(String userId, String archiveFilePath) throws RemoteException, Exception;
+
+
+
 }
