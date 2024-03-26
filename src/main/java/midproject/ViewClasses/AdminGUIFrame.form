@@ -173,7 +173,7 @@
                           <Component id="registerButton" min="-2" pref="171" max="-2" attributes="0"/>
                           <Component id="sendMessageButton" min="-2" pref="171" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="151" max="32767" attributes="0"/>
+                      <EmptySpace pref="109" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -341,19 +341,16 @@
                           <Component id="rUsersSearchLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="rUsersSearchTextfield" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
+                              <Component id="rUsersViewButton" min="-2" pref="36" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" min="-2" pref="448" max="-2" attributes="0"/>
+                              <Component id="rUsersEditButton" min="-2" pref="36" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="rUsersArchiveButton" min="-2" pref="36" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="171" max="-2" attributes="0"/>
-                              <Component id="rUsersArchiveButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rUsersViewButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rUsersEditButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jScrollPane1" min="-2" pref="448" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="17" max="32767" attributes="0"/>
                   </Group>
@@ -401,6 +398,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="rUsersArchiveButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="78" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Archive"/>
               </Properties>
               <Events>
@@ -409,6 +409,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="rUsersViewButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="41" green="66" red="38" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="View User"/>
               </Properties>
               <Events>
@@ -417,6 +420,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="rUsersEditButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="59" green="45" red="12" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Edit User"/>
               </Properties>
               <Events>
@@ -463,13 +469,13 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jScrollPane2" min="-2" pref="803" max="-2" attributes="0"/>
-                              <EmptySpace pref="55" max="32767" attributes="0"/>
+                              <EmptySpace pref="34" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="aUsersUnarchiveButton" alignment="0" max="32767" attributes="0"/>
                                   <Component id="aUsersViewButton" alignment="0" pref="95" max="32767" attributes="0"/>
                                   <Component id="aUsersEditButton" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="56" max="32767" attributes="0"/>
+                              <EmptySpace pref="35" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -485,21 +491,18 @@
                           <Component id="aUsersSearchLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="aUsersSearchTextfield" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="aUsersViewButton" min="-2" pref="36" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jScrollPane2" min="-2" pref="448" max="-2" attributes="0"/>
+                              <Component id="aUsersEditButton" min="-2" pref="36" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="aUsersUnarchiveButton" min="-2" pref="36" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="171" max="-2" attributes="0"/>
-                              <Component id="aUsersUnarchiveButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="aUsersViewButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="aUsersEditButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jScrollPane2" min="-2" pref="448" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="17" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -545,8 +548,10 @@
             </Container>
             <Component class="javax.swing.JButton" name="aUsersUnarchiveButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="78" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Unarchive"/>
-                <Property name="actionCommand" type="java.lang.String" value="Unarchive"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aUsersUnarchiveButtonActionPerformed"/>
@@ -554,6 +559,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="aUsersViewButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="41" green="66" red="38" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="View User"/>
               </Properties>
               <Events>
@@ -562,6 +570,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="aUsersEditButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="59" green="45" red="12" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Edit User"/>
               </Properties>
               <Events>
@@ -602,7 +613,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jScrollPane3" min="-2" pref="803" max="-2" attributes="0"/>
-                              <EmptySpace pref="76" max="32767" attributes="0"/>
+                              <EmptySpace pref="34" max="32767" attributes="0"/>
                               <Component id="pViewButton" min="-2" pref="108" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                           </Group>
@@ -636,8 +647,8 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="pViewButton" min="-2" max="-2" attributes="0"/>
                                   <Component id="jScrollPane3" min="-2" pref="448" max="-2" attributes="0"/>
+                                  <Component id="pViewButton" min="-2" pref="36" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -685,13 +696,16 @@
             </Container>
             <Component class="javax.swing.JButton" name="pViewButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="41" green="66" red="38" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="View Orders"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="pendingOrderLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="18" style="0"/>
+                  <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="41" green="3f" red="3c" type="rgb"/>
@@ -722,7 +736,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jScrollPane4" min="-2" pref="803" max="-2" attributes="0"/>
-                              <EmptySpace pref="76" max="32767" attributes="0"/>
+                              <EmptySpace pref="34" max="32767" attributes="0"/>
                               <Component id="oViewButton" min="-2" pref="108" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                           </Group>
@@ -756,8 +770,8 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="oViewButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane4" alignment="0" min="-2" pref="448" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane4" min="-2" pref="448" max="-2" attributes="0"/>
+                                  <Component id="oViewButton" min="-2" pref="36" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -805,6 +819,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="oViewButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="41" green="66" red="38" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="View Orders"/>
               </Properties>
             </Component>
@@ -838,7 +855,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace pref="76" max="32767" attributes="0"/>
+                      <EmptySpace pref="63" max="32767" attributes="0"/>
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
@@ -846,7 +863,7 @@
                       <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1209,7 +1226,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jScrollPane5" min="-2" pref="803" max="-2" attributes="0"/>
-                              <EmptySpace pref="76" max="32767" attributes="0"/>
+                              <EmptySpace pref="34" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="iDeleteButton" alignment="0" pref="86" max="32767" attributes="0"/>
                                   <Component id="iAddButton" alignment="0" max="32767" attributes="0"/>
@@ -1247,13 +1264,13 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane5" alignment="0" min="-2" pref="448" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="iAddButton" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane5" min="-2" pref="448" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="iAddButton" min="-2" pref="36" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="iEditButton" min="-2" max="-2" attributes="0"/>
+                                      <Component id="iEditButton" min="-2" pref="36" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="iDeleteButton" min="-2" max="-2" attributes="0"/>
+                                      <Component id="iDeleteButton" min="-2" pref="36" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -1305,6 +1322,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="iAddButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="41" green="66" red="38" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Add"/>
               </Properties>
               <Events>
@@ -1325,6 +1345,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="iEditButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="59" green="45" red="12" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Edit"/>
               </Properties>
               <Events>
@@ -1333,6 +1356,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="iDeleteButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="78" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Delete"/>
               </Properties>
               <Events>
@@ -1426,7 +1452,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="84" max="32767" attributes="0"/>
+                      <EmptySpace pref="42" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
@@ -1832,7 +1858,7 @@
                           </Group>
                           <Component id="jScrollPane6" min="-2" pref="703" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="196" max="32767" attributes="0"/>
+                      <EmptySpace pref="154" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>

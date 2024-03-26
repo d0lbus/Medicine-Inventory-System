@@ -7,12 +7,14 @@ package midproject.ViewClasses;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  *
  * @author Freskkie
  */
 public class AdminGUIFrame extends javax.swing.JFrame {
+
 
     /**
      * Creates new form AdminGUIFrame

@@ -2,20 +2,22 @@ package midproject.Client;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.rmi.RemoteException;
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-
+import com.google.gson.*;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.User;
-import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
 import midproject.ViewClasses.AdminGUIFrame;
-import midproject.ViewClasses.ClientGUIFrame;
 import midproject.ViewClasses.Login;
-import java.awt.event.MouseAdapter;
-
+import java.util.regex.Pattern;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 public class AdminClientController {
 
@@ -69,9 +71,54 @@ public class AdminClientController {
         adminGUIFrame.getRegisteredUsersButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String jsonFilePath = "res/UserInformation.json";
+                try {
+                    Gson gson = new Gson();
+                    Reader reader = Files.newBufferedReader(Paths.get(jsonFilePath));
+                    JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
 
+                    DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getrUsersTable().getModel();
+
+                    model.setRowCount(0);
+
+                    for (JsonElement userElement : jsonArray) {
+                        JsonObject userObject = userElement.getAsJsonObject();
+                        Object[] rowData = {
+                                userObject.get("userId").getAsString(),
+                                userObject.get("lastName").getAsString(),
+                                userObject.get("firstName").getAsString(),
+                                userObject.get("userType").getAsString(),
+                                userObject.get("username").getAsString()
+                        };
+                        model.addRow(rowData);
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
+
+        adminGUIFrame.getrUsersSearchTextfield().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TableRowSorter<TableModel> sorter = new TableRowSorter<>(adminGUIFrame.getrUsersTable().getModel());
+                adminGUIFrame.getrUsersTable().setRowSorter(sorter);
+                String searchText = adminGUIFrame.getrUsersSearchTextfield().getText().trim().toLowerCase();
+
+                if (searchText.isEmpty()) {
+                    sorter.setRowFilter(null);
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + Pattern.quote(searchText), 1));
+                }
+            }
+        });
+
+        adminGUIFrame.getrUsersViewButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+
     }
 
 }
