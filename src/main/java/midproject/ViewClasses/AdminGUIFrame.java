@@ -4,8 +4,6 @@
  */
 package midproject.ViewClasses;
 
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
-
 import javax.swing.*;
 
 /**
@@ -298,7 +296,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 .addGroup(homepagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sendMessageButton, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
         homepagePanelLayout.setVerticalGroup(
             homepagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,6 +356,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(rUsersTable);
 
+        rUsersArchiveButton.setBackground(new java.awt.Color(120, 0, 0));
         rUsersArchiveButton.setText("Archive");
         rUsersArchiveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -365,6 +364,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
+        rUsersViewButton.setBackground(new java.awt.Color(56, 102, 65));
         rUsersViewButton.setText("View User");
         rUsersViewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -372,6 +372,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
+        rUsersEditButton.setBackground(new java.awt.Color(18, 69, 89));
         rUsersEditButton.setText("Edit User");
         rUsersEditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -416,17 +417,15 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 .addGroup(registeredUsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rUsersSearchLabel)
                     .addComponent(rUsersSearchTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(registeredUsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(registeredUsersPanelLayout.createSequentialGroup()
+                        .addComponent(rUsersViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(registeredUsersPanelLayout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(rUsersArchiveButton)
+                        .addComponent(rUsersEditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(rUsersViewButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(rUsersEditButton)))
+                        .addComponent(rUsersArchiveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -470,14 +469,15 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(aUsersTable);
 
+        aUsersUnarchiveButton.setBackground(new java.awt.Color(120, 0, 0));
         aUsersUnarchiveButton.setText("Unarchive");
-        aUsersUnarchiveButton.setActionCommand("Unarchive");
         aUsersUnarchiveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aUsersUnarchiveButtonActionPerformed(evt);
             }
         });
 
+        aUsersViewButton.setBackground(new java.awt.Color(56, 102, 65));
         aUsersViewButton.setText("View User");
         aUsersViewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -485,6 +485,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
+        aUsersEditButton.setBackground(new java.awt.Color(18, 69, 89));
         aUsersEditButton.setText("Edit User");
         aUsersEditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -511,12 +512,12 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(archivedUsersPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addGroup(archivedUsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(aUsersUnarchiveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(aUsersViewButton, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                             .addComponent(aUsersEditButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(56, Short.MAX_VALUE))))
+                        .addContainerGap(35, Short.MAX_VALUE))))
             .addComponent(archivedUsersLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         archivedUsersPanelLayout.setVerticalGroup(
@@ -527,18 +528,16 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 .addGroup(archivedUsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aUsersSearchLabel)
                     .addComponent(aUsersSearchTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(archivedUsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(archivedUsersPanelLayout.createSequentialGroup()
+                        .addComponent(aUsersViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(archivedUsersPanelLayout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(aUsersUnarchiveButton)
+                        .addComponent(aUsersEditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(aUsersViewButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(aUsersEditButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(aUsersUnarchiveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         containerPanel.add(archivedUsersPanel, "archivedUsersPanel");
@@ -575,9 +574,10 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(pTable);
 
+        pViewButton.setBackground(new java.awt.Color(56, 102, 65));
         pViewButton.setText("View Orders");
 
-        pendingOrderLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        pendingOrderLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         pendingOrderLabel.setForeground(new java.awt.Color(60, 63, 65));
         pendingOrderLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         pendingOrderLabel.setText("Pending Orders");
@@ -591,7 +591,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 .addGroup(pendingOrdersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pendingOrdersPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addComponent(pViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22))
                     .addGroup(pendingOrdersPanelLayout.createSequentialGroup()
@@ -617,8 +617,8 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                     .addGroup(pendingOrdersPanelLayout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addGroup(pendingOrdersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pViewButton)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -656,6 +656,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(oTable);
 
+        oViewButton.setBackground(new java.awt.Color(56, 102, 65));
         oViewButton.setText("View Orders");
 
         orderLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -672,7 +673,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ordersPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addComponent(oViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22))
                     .addGroup(ordersPanelLayout.createSequentialGroup()
@@ -698,8 +699,8 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                     .addGroup(ordersPanelLayout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(oViewButton)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(oViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -889,7 +890,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         dashboardPanelLayout.setHorizontalGroup(
             dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dashboardPanelLayout.createSequentialGroup()
-                .addContainerGap(76, Short.MAX_VALUE)
+                .addContainerGap(63, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -897,7 +898,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(95, 95, 95))
+                .addGap(66, 66, 66))
         );
         dashboardPanelLayout.setVerticalGroup(
             dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -952,6 +953,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(iTable);
 
+        iAddButton.setBackground(new java.awt.Color(56, 102, 65));
         iAddButton.setText("Add");
         iAddButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -964,6 +966,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         inventoryLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         inventoryLabel.setText("Inventory");
 
+        iEditButton.setBackground(new java.awt.Color(18, 69, 89));
         iEditButton.setText("Edit");
         iEditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -971,6 +974,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
+        iDeleteButton.setBackground(new java.awt.Color(120, 0, 0));
         iDeleteButton.setText("Delete");
         iDeleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -987,7 +991,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 .addGroup(inventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(inventoryPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addGroup(inventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(iDeleteButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                             .addComponent(iAddButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1018,11 +1022,11 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                         .addGroup(inventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(inventoryPanelLayout.createSequentialGroup()
-                                .addComponent(iAddButton)
+                                .addComponent(iAddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(iEditButton)
+                                .addComponent(iEditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(iDeleteButton)))))
+                                .addComponent(iDeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -1189,7 +1193,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                             .addComponent(setPasswordTextField)
                             .addComponent(confirmPasswordLabel)
                             .addComponent(confirmPasswordTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registrationPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(createAccountButton)
@@ -1305,7 +1309,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(154, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sendMessagePanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(sendButton)
@@ -1480,7 +1484,30 @@ public class AdminGUIFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        FlatMacLightLaf.setup();
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AdminGUIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AdminGUIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AdminGUIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AdminGUIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AdminGUIFrame().setVisible(true);
