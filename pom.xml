@@ -31,7 +31,7 @@
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
             <version>3.4</version>
-            <scope>runtime</scope>
+            <type>jar</type>
         </dependency>
     </dependencies>
 
