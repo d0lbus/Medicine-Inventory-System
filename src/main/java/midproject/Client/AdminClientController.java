@@ -11,6 +11,7 @@ import java.rmi.registry.Registry;
 import com.google.gson.*;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.User;
+import midproject.SharedClasses.UserJSONProcessor;
 import midproject.ViewClasses.AdminGUIFrame;
 import midproject.ViewClasses.Login;
 import java.util.regex.Pattern;
@@ -83,6 +84,51 @@ public class AdminClientController {
             }
         });
 
+        adminGUIFrame.getaUsersViewButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = adminGUIFrame.getrUsersTable().getSelectedRow();
+                if (row != -1) {
+                    String userId = (String) adminGUIFrame.getrUsersTable().getValueAt(row, 0);
+                    try {
+
+                        User archivedUser = UserJSONProcessor.getArchivedUser(userId, "res/ArchiveFile.json");
+                        if (archivedUser != null) {
+                            // Display archived user information using JOptionPane
+                            String userInfo = "User ID: " + archivedUser.getUserId() + "\n" +
+                                    "First Name: " + archivedUser.getFirstName() + "\n" +
+                                    "Last Name: " + archivedUser.getLastName() + "\n" +
+                                    "Middle Name: " + archivedUser.getMiddleName() + "\n" +
+                                    "Birthdate: " + archivedUser.getBirthdate() + "\n" +
+                                    "Age: " + archivedUser.getAge() + "\n" +
+                                    "Gender: " + archivedUser.getGender() + "\n" +
+                                    "Person with Disability: " + archivedUser.getPersonWithDisability() + "\n" +
+                                    "Email: " + archivedUser.getEmail() + "\n" +
+                                    "Contact Number: " + archivedUser.getContactNumber() + "\n" +
+                                    "Username: " + archivedUser.getUsername() + "\n" +
+                                    "Password: " + archivedUser.getPassword() + "\n" +
+                                    "Street: " + archivedUser.getStreet() + "\n" +
+                                    "Additional Address Details: " + archivedUser.getAdditionalAddressDetails() + "\n" +
+                                    "City: " + archivedUser.getCity() + "\n" +
+                                    "Province: " + archivedUser.getProvince() + "\n" +
+                                    "ZIP: " + archivedUser.getZip();
+                            JOptionPane.showMessageDialog(adminGUIFrame, userInfo, "Archived User Information", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(adminGUIFrame, "User not found in archive.", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(adminGUIFrame, "Error retrieving archived user information: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a user from the archived users table.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+
+
+
         adminGUIFrame.getRegisteredUsersButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -133,6 +179,8 @@ public class AdminClientController {
             public void actionPerformed(ActionEvent e) {
             }
         });
+
+
     }
 
 }
