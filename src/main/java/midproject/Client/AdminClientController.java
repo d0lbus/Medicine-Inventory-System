@@ -121,7 +121,7 @@ public class AdminClientController {
                         JOptionPane.showMessageDialog(adminGUIFrame, "Error retrieving archived user information: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a user from the archived users table.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a user from the table.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
