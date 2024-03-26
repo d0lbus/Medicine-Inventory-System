@@ -58,15 +58,12 @@ public class CustomerClientController {
 
 	private static void showClientGUI(){
 		clientGUIFrame.setVisible(true);
-
-
 		/**
 		 * 	PROFILE RELATED FUNCTIONS
 		 *  Logout
 		 *  Display Profile
 		 *  Change Password
 		 * */
-
 		clientGUIFrame.getLogOutButton().addActionListener(e ->{
 			try {
 				msgserver.logout(mci, sessionID);

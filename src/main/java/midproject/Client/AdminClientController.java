@@ -30,10 +30,8 @@ public class AdminClientController {
 
     private static String sessionID;
 
-
     public static void main(String[] args) {
         initiateLoginProcess();
-        showClientGUI();
     }
 
     private static void initiateLoginProcess() {
