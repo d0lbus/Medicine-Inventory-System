@@ -124,4 +124,18 @@ public class UserJSONProcessor {
         }
     }
 
+    public static User getArchivedUser(String userId, String archiveFilePath) {
+        try {
+            List<User> archivedUsers = readUsersFromFile(archiveFilePath);
+            for (User user : archivedUsers) {
+                if (user.getUserId().equals(userId)) {
+                    return user;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
