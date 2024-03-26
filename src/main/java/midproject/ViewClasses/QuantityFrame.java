@@ -1,16 +1,32 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package midproject.ViewClasses;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+
+import javax.swing.*;
 
 /**
  *
  * @author julianne
  */
 public class QuantityFrame extends javax.swing.JFrame {
+
+    // Add getter and setter methods for quantitySpinner
+    public int getQuantity() {
+        return (int) quantitySpinner.getValue();
+    }
+
+    public void setQuantity(int quantity) {
+        quantitySpinner.setValue(quantity);
+    }
+
+    // Add getter methods for buttons
+    public JButton getCancelButton() {
+        return cancelButton;
+    }
+
+    public JButton getProceedButton() {
+        return proceedButton;
+    }
 
     /**
      * Creates new form QuantityFrame
@@ -28,7 +44,7 @@ public class QuantityFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSpinner1 = new javax.swing.JSpinner();
+        quantitySpinner = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
         cancelButton = new javax.swing.JButton();
         proceedButton = new javax.swing.JButton();
@@ -36,7 +52,7 @@ public class QuantityFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quantity");
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50, 1));
+        quantitySpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50, 1));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Select Quantity");
@@ -64,7 +80,7 @@ public class QuantityFrame extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGap(116, 116, 116)
-                                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(quantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(0, 110, Short.MAX_VALUE))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addContainerGap()
@@ -79,7 +95,7 @@ public class QuantityFrame extends javax.swing.JFrame {
                                 .addGap(32, 32, 32)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(quantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(cancelButton)
@@ -113,7 +129,7 @@ public class QuantityFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JButton proceedButton;
+    private javax.swing.JSpinner quantitySpinner;
     // End of variables declaration//GEN-END:variables
 }
