@@ -71,7 +71,7 @@ public class AdminClientController {
                     String userId = (String) adminGUIFrame.getaUsersTable().getValueAt(row, 0);
                     try {
                         // Pass the required arguments to the unarchiveSelectedUsers() method
-                        msgserver.unarchiveSelectedUsers(userId, "UserInformation.json", "ArchiveFile.json");
+                        msgserver.unarchiveSelectedUsers(userId, "res/UserInformation.json", "res/ArchiveFile.json");
                         JOptionPane.showMessageDialog(adminGUIFrame, "User unarchived successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
                         ex.printStackTrace();
