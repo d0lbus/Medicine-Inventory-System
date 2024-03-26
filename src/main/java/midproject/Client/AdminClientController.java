@@ -1,5 +1,7 @@
 package midproject.Client;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -29,6 +31,7 @@ public class AdminClientController {
 
     public static void main(String[] args) {
         initiateLoginProcess();
+        initController();
     }
 
     private static void initiateLoginProcess() {
@@ -60,7 +63,16 @@ public class AdminClientController {
     private static void showClientGUI(){
         adminGUIFrame.setVisible(true);
 
-
     }
+
+    private static void initController() {
+        adminGUIFrame.getRegisteredUsersButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+    }
+
 }
 

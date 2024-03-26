@@ -16,15 +16,11 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     /**
      * Creates new form ClientGUIFrame
      */
-    private CardLayout cardLayout = new CardLayout();
 
     public ClientGUIFrame() {
         initComponents();
         setResizable(false);
-        this.cardLayout = (CardLayout) containerPanel.getLayout();
         setLocationRelativeTo(null);
-        Image logo = Toolkit.getDefaultToolkit().getImage("/Icons/logo.png");
-        setIconImage(logo);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

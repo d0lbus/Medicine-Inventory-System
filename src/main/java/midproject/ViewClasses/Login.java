@@ -4,9 +4,7 @@
  */
 package midproject.ViewClasses;
 
-import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-
 import javax.swing.*;
 
 /**

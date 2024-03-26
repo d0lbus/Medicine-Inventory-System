@@ -6,6 +6,8 @@ package midproject.ViewClasses;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
+import javax.swing.*;
+
 /**
  *
  * @author Freskkie
@@ -1484,6 +1486,478 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 new AdminGUIFrame().setVisible(true);
             }
         });
+    }
+
+    public JButton getaUsersEditButton() {
+        return aUsersEditButton;
+    }
+
+    public JLabel getaUsersSearchLabel() {
+        return aUsersSearchLabel;
+    }
+
+    public JTextField getaUsersSearchTextfield() {
+        return aUsersSearchTextfield;
+    }
+
+    public JTable getaUsersTable() {
+        return aUsersTable;
+    }
+
+    public JButton getaUsersUnarchiveButton() {
+        return aUsersUnarchiveButton;
+    }
+
+    public JButton getaUsersViewButton() {
+        return aUsersViewButton;
+    }
+
+    public JLabel getAgeLabel() {
+        return ageLabel;
+    }
+
+    public JLabel getAptSuiteOptionalLabel() {
+        return aptSuiteOptionalLabel;
+    }
+
+    public JTextField getAptSuiteOptionalTextField() {
+        return aptSuiteOptionalTextField;
+    }
+
+    public JButton getArchivedUsersButton() {
+        return archivedUsersButton;
+    }
+
+    public JLabel getArchivedUsersLabel() {
+        return archivedUsersLabel;
+    }
+
+    public JPanel getArchivedUsersPanel() {
+        return archivedUsersPanel;
+    }
+
+    public JLabel getBirthdateLabel() {
+        return birthdateLabel;
+    }
+
+    public JTextField getBirthdateTextField() {
+        return birthdateTextField;
+    }
+
+    public JComboBox<String> getComboBox() {
+        return comboBox;
+    }
+
+    public JLabel getConfirmPasswordLabel() {
+        return confirmPasswordLabel;
+    }
+
+    public JTextField getConfirmPasswordTextField() {
+        return confirmPasswordTextField;
+    }
+
+    public JLabel getContactNumberLabel() {
+        return contactNumberLabel;
+    }
+
+    public JTextField getContactNumberTextField() {
+        return contactNumberTextField;
+    }
+
+    public JPanel getContainerPanel() {
+        return containerPanel;
+    }
+
+    public JButton getCreateAccountButton() {
+        return createAccountButton;
+    }
+
+    public JLabel getCreateAccountLabel() {
+        return createAccountLabel;
+    }
+
+    public JButton getDashboardButton() {
+        return dashboardButton;
+    }
+
+    public JPanel getDashboardPanel() {
+        return dashboardPanel;
+    }
+
+    public JLabel getEmailAddressLabel() {
+        return emailAddressLabel;
+    }
+
+    public JTextField getEmailAddressTextField() {
+        return emailAddressTextField;
+    }
+
+    public JLabel getFirstNameLabel() {
+        return firstNameLabel;
+    }
+
+    public JTextField getFirstNameTextField() {
+        return firstNameTextField;
+    }
+
+    public JComboBox<String> getGenderComboBox() {
+        return genderComboBox;
+    }
+
+    public JLabel getGenderLabel() {
+        return genderLabel;
+    }
+
+    public JPanel getHeaderPanel() {
+        return headerPanel;
+    }
+
+    public JPanel getHomepagePanel() {
+        return homepagePanel;
+    }
+
+    public JButton getiAddButton() {
+        return iAddButton;
+    }
+
+    public JButton getiDeleteButton() {
+        return iDeleteButton;
+    }
+
+    public JButton getiEditButton() {
+        return iEditButton;
+    }
+
+    public JLabel getiSearchLabel() {
+        return iSearchLabel;
+    }
+
+    public JTextField getiSearchTextfield() {
+        return iSearchTextfield;
+    }
+
+    public JTable getiTable() {
+        return iTable;
+    }
+
+    public JButton getInventoryButton() {
+        return inventoryButton;
+    }
+
+    public JLabel getInventoryLabel() {
+        return inventoryLabel;
+    }
+
+    public JPanel getInventoryPanel() {
+        return inventoryPanel;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public JLabel getjLabel10() {
+        return jLabel10;
+    }
+
+    public JLabel getjLabel11() {
+        return jLabel11;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    public JLabel getjLabel4() {
+        return jLabel4;
+    }
+
+    public JLabel getjLabel5() {
+        return jLabel5;
+    }
+
+    public JLabel getjLabel6() {
+        return jLabel6;
+    }
+
+    public JLabel getjLabel7() {
+        return jLabel7;
+    }
+
+    public JLabel getjLabel8() {
+        return jLabel8;
+    }
+
+    public JLabel getjLabel9() {
+        return jLabel9;
+    }
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    public JPanel getjPanel4() {
+        return jPanel4;
+    }
+
+    public JPanel getjPanel5() {
+        return jPanel5;
+    }
+
+    public JPanel getjPanel6() {
+        return jPanel6;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public JScrollPane getjScrollPane2() {
+        return jScrollPane2;
+    }
+
+    public JScrollPane getjScrollPane3() {
+        return jScrollPane3;
+    }
+
+    public JScrollPane getjScrollPane4() {
+        return jScrollPane4;
+    }
+
+    public JScrollPane getjScrollPane5() {
+        return jScrollPane5;
+    }
+
+    public JScrollPane getjScrollPane6() {
+        return jScrollPane6;
+    }
+
+    public JTextField getjTextField6() {
+        return jTextField6;
+    }
+
+    public JLabel getLastNameLabel() {
+        return lastNameLabel;
+    }
+
+    public JTextField getLastNameTextField() {
+        return lastNameTextField;
+    }
+
+    public JLabel getLogoutMouseClicked() {
+        return logoutMouseClicked;
+    }
+
+    public JLabel getMenuMouseClicked() {
+        return menuMouseClicked;
+    }
+
+    public JLabel getMiddleNameLabel() {
+        return middleNameLabel;
+    }
+
+    public JTextField getMiddleNameTextField() {
+        return middleNameTextField;
+    }
+
+    public JLabel getMunicipalityLabel() {
+        return municipalityLabel;
+    }
+
+    public JTextField getMunicipalityTextField() {
+        return municipalityTextField;
+    }
+
+    public JLabel getoSearchLabel() {
+        return oSearchLabel;
+    }
+
+    public JTextField getoSearchTextfield() {
+        return oSearchTextfield;
+    }
+
+    public JTable getoTable() {
+        return oTable;
+    }
+
+    public JButton getoViewButton() {
+        return oViewButton;
+    }
+
+    public JLabel getOnlineUsersLabel() {
+        return onlineUsersLabel;
+    }
+
+    public JLabel getOrderLabel() {
+        return orderLabel;
+    }
+
+    public JButton getOrdersButton() {
+        return ordersButton;
+    }
+
+    public JPanel getOrdersPanel() {
+        return ordersPanel;
+    }
+
+    public JLabel getpSearchLabel() {
+        return pSearchLabel;
+    }
+
+    public JTextField getpSearchTextfield() {
+        return pSearchTextfield;
+    }
+
+    public JTable getpTable() {
+        return pTable;
+    }
+
+    public JButton getpViewButton() {
+        return pViewButton;
+    }
+
+    public JLabel getPendingOrderLabel() {
+        return pendingOrderLabel;
+    }
+
+    public JButton getPendingOrdersButton() {
+        return pendingOrdersButton;
+    }
+
+    public JLabel getPendingOrdersLabel() {
+        return pendingOrdersLabel;
+    }
+
+    public JPanel getPendingOrdersPanel() {
+        return pendingOrdersPanel;
+    }
+
+    public JCheckBox getPersonWithDisabilityCheckBox() {
+        return personWithDisabilityCheckBox;
+    }
+
+    public JLabel getPersonWithDisabilityLabel() {
+        return personWithDisabilityLabel;
+    }
+
+    public JLabel getProvinceLabel() {
+        return provinceLabel;
+    }
+
+    public JTextField getProvinceTextField() {
+        return provinceTextField;
+    }
+
+    public JButton getrUsersArchiveButton() {
+        return rUsersArchiveButton;
+    }
+
+    public JButton getrUsersEditButton() {
+        return rUsersEditButton;
+    }
+
+    public JLabel getrUsersSearchLabel() {
+        return rUsersSearchLabel;
+    }
+
+    public JTextField getrUsersSearchTextfield() {
+        return rUsersSearchTextfield;
+    }
+
+    public JTable getrUsersTable() {
+        return rUsersTable;
+    }
+
+    public JButton getrUsersViewButton() {
+        return rUsersViewButton;
+    }
+
+    public JButton getRegisterButton() {
+        return registerButton;
+    }
+
+    public JButton getRegisteredUsersButton() {
+        return registeredUsersButton;
+    }
+
+    public JLabel getRegisteredUsersLabel() {
+        return registeredUsersLabel;
+    }
+
+    public JPanel getRegisteredUsersPanel() {
+        return registeredUsersPanel;
+    }
+
+    public JPanel getRegistrationPanel() {
+        return registrationPanel;
+    }
+
+    public JButton getSendButton() {
+        return sendButton;
+    }
+
+    public JButton getSendMessageButton() {
+        return sendMessageButton;
+    }
+
+    public JPanel getSendMessagePanel() {
+        return sendMessagePanel;
+    }
+
+    public JTextArea getSendMessageTextArea() {
+        return sendMessageTextArea;
+    }
+
+    public JLabel getSetPasswordLabel() {
+        return setPasswordLabel;
+    }
+
+    public JTextField getSetPasswordTextField() {
+        return setPasswordTextField;
+    }
+
+    public JLabel getSetUsernameLabel() {
+        return setUsernameLabel;
+    }
+
+    public JTextField getSetUsernameTextField() {
+        return setUsernameTextField;
+    }
+
+    public JLabel getStreetAddressLabel() {
+        return streetAddressLabel;
+    }
+
+    public JTextField getStreetAddressTextField() {
+        return streetAddressTextField;
+    }
+
+    public JLabel getTotalOrdersLabel() {
+        return totalOrdersLabel;
+    }
+
+    public JLabel getTotalUsersLabel() {
+        return totalUsersLabel;
+    }
+
+    public JComboBox<String> getUserTypeComboBox() {
+        return userTypeComboBox;
+    }
+
+    public JLabel getUserTypeLabel() {
+        return userTypeLabel;
+    }
+
+    public JLabel getZipCodeLabel() {
+        return zipCodeLabel;
+    }
+
+    public JTextField getZipCodeTextField() {
+        return zipCodeTextField;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
