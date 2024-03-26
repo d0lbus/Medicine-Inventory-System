@@ -83,28 +83,40 @@ public class ServerImplementation
 
     @Override
     public void unarchiveSelectedUsers(String userId, String originalFilePath, String archiveFilePath) throws Exception {
-        // Retrieve the list of archived users
-        List<User> archivedUsers = UserJSONProcessor.readUsersFromFile(archiveFilePath);
 
-        // Find the user with the specified ID
-        User userToUnarchive = null;
-        for (User user : archivedUsers) {
-            if (user.getUserId().equals(userId)) {
-                userToUnarchive = user;
-                break;
+        try {
+
+            // Retrieve the list of archived users
+            List<User> archivedUsers = UserJSONProcessor.readUsersFromFile(archiveFilePath);
+
+            // Find the user with the specified ID
+            User userToUnarchive = null;
+            for (User user : archivedUsers) {
+                if (user.getUserId().equals(userId)) {
+                    userToUnarchive = user;
+                    break;
+                }
             }
+
+            // If user is not found in archive, throw exception
+            if (userToUnarchive == null) {
+                throw new Exception("User not found in archive");
+            }
+
+            // Add the user to the original file
+            UserJSONProcessor.addUserToJsonFile(userToUnarchive, originalFilePath);
+
+            // Remove the user from the archive file
+            archivedUsers.remove(userToUnarchive);
+            UserJSONProcessor.saveUsersToFile(archivedUsers, archiveFilePath);
+
+            System.out.println("Archived User Information:");
+            System.out.println("User ID: " + userToUnarchive.getUserId());
+            System.out.println("First Name: " + userToUnarchive.getFirstName());
+            System.out.println("Last Name: " + userToUnarchive.getLastName());
+
+        } catch (Exception e) {
+            throw new RemoteException("Error unarchiving user: " + e.getMessage());
         }
-
-        // If user is not found in archive, throw exception
-        if (userToUnarchive == null) {
-            throw new Exception("User not found in archive");
-        }
-
-        // Add the user to the original file
-        UserJSONProcessor.addUserToJsonFile(userToUnarchive, originalFilePath);
-
-        // Remove the user from the archive file
-        archivedUsers.remove(userToUnarchive);
-        UserJSONProcessor.saveUsersToFile(archivedUsers, archiveFilePath);
     }
 }
