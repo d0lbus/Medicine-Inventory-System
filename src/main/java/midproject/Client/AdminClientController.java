@@ -63,9 +63,6 @@ public class AdminClientController {
     private static void showClientGUI(){
         adminGUIFrame.setVisible(true);
 
-    }
-
-    private static void initController() {
         adminGUIFrame.getaUsersUnarchiveButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -85,7 +82,9 @@ public class AdminClientController {
                 }
             }
         });
+    }
 
+    private static void initController() {
         adminGUIFrame.getRegisteredUsersButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
