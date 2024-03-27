@@ -1,10 +1,18 @@
 package midproject.Server;
 
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.util.*;
 import java.rmi.server.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.Interfaces.MessageCallback;
 import midproject.SharedClasses.ReferenceClasses.User;
@@ -117,7 +125,8 @@ public class ServerImplementation
             throw new Exception("User not found in archive.");
         }
     }
-    public void searchArchivedUsers(String searchText) throws RemoteException {
+
+    /*public void searchArchivedUsers(String searchText) throws RemoteException {
         try {
             // Retrieve the list of archived users
             List<User> archivedUsers = UserJSONProcessor.searchArchivedUsers(searchText, "res/ArchivedUsers.json");
@@ -131,4 +140,25 @@ public class ServerImplementation
             throw new RemoteException("Error searching archived user: " + e.getMessage());
         }
     }
+     */
+
+    public List<User> getRegisteredUsers() throws RemoteException {
+        String jsonFilePath = "res/UserInformation.json";
+        List<User> users = new ArrayList<>();
+        try {
+            Reader reader = Files.newBufferedReader(Paths.get(jsonFilePath));
+            JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
+
+            Gson gson = new Gson();
+            for (JsonElement userElement : jsonArray) {
+                User user = gson.fromJson(userElement, User.class);
+                users.add(user);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RemoteException("Error reading from JSON file: " + e.getMessage());
+        }
+        return users;
+    }
+
 }

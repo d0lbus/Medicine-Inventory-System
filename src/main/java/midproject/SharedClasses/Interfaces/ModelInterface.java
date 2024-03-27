@@ -7,6 +7,7 @@ import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
 import midproject.SharedClasses.UserDefinedExceptions.UserExistsException;
 
 import java.rmi.*;
+import java.util.List;
 
 public interface ModelInterface extends Remote {
     public String login(MessageCallback msgCallback, String username, String password)
@@ -28,6 +29,6 @@ public interface ModelInterface extends Remote {
 
     public User viewArchivedUserDetails(String userId, String archiveFilePath) throws RemoteException, Exception;
 
-
+    public List<User> getRegisteredUsers() throws RemoteException;
 
 }

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
@@ -15,6 +16,8 @@ import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserJSONProcessor;
 import midproject.ViewClasses.AdminGUIFrame;
 import midproject.ViewClasses.Login;
+
+import java.util.List;
 import java.util.regex.Pattern;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -138,28 +141,22 @@ public class AdminClientController {
         adminGUIFrame.getRegisteredUsersButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String jsonFilePath = "res/UserInformation.json";
                 try {
-                    Gson gson = new Gson();
-                    Reader reader = Files.newBufferedReader(Paths.get(jsonFilePath));
-                    JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
-
+                    ModelInterface server = (ModelInterface) Naming.lookup("//localhost:1099/msgserver");
+                    List<User> registeredUsers = server.getRegisteredUsers();
                     DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getrUsersTable().getModel();
-
                     model.setRowCount(0);
 
-                    for (JsonElement userElement : jsonArray) {
-                        JsonObject userObject = userElement.getAsJsonObject();
-                        Object[] rowData = {
-                                userObject.get("userId").getAsString(),
-                                userObject.get("lastName").getAsString(),
-                                userObject.get("firstName").getAsString(),
-                                userObject.get("userType").getAsString(),
-                                userObject.get("username").getAsString()
-                        };
-                        model.addRow(rowData);
+                    for (User user : registeredUsers) {
+                        model.addRow(new Object[]{
+                                user.getUserId(),
+                                user.getLastName(),
+                                user.getFirstName(),
+                                user.getUserType(),
+                                user.getUsername()
+                        });
                     }
-                } catch (IOException ex) {
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }

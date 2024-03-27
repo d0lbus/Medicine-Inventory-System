@@ -24,5 +24,5 @@ public interface MessageCallback extends Remote {
 	// user logging out sent as parameter
 	public void logoutCall(User user) throws RemoteException;
 
-    public void sendArchivedUsersList(List<User> archivedUsers);
+    //public void sendArchivedUsersList(List<User> archivedUsers);
 }
