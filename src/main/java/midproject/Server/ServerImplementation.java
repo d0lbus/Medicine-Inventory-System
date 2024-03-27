@@ -122,6 +122,8 @@ public class ServerImplementation
     public List<User> getRegisteredUsers() throws RemoteException {
         return null;
     }
+
+
     /*
     public void searchArchivedUsers(String searchText) throws RemoteException {
         try {

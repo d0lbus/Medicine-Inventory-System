@@ -1,6 +1,8 @@
 package midproject.Client;
 
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -94,6 +96,20 @@ public class CustomerClientController {
 			}
 
 		});
+
+		clientGUIFrame.addWindowListener(new WindowAdapter() {
+				@Override
+				public void windowClosing(WindowEvent e) {
+					try {
+						msgserver.logout(mci, sessionID);
+						System.exit(0);
+					} catch (RemoteException ex) {
+						JOptionPane.showMessageDialog(clientGUIFrame, "Remote exception occurred.", "Error", JOptionPane.ERROR_MESSAGE);
+					} catch (NotLoggedInException ex) {
+						JOptionPane.showMessageDialog(clientGUIFrame, "You are not logged in.", "Logout Failed", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			});
 
 		clientGUIFrame.getProfileLabel().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {

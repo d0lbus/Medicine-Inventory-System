@@ -1,11 +1,11 @@
 package midproject.Client;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
@@ -14,6 +14,7 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.google.gson.*;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.User;
+import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
 import midproject.ViewClasses.AdminGUIFrame;
 import midproject.ViewClasses.Login;
 import java.util.regex.Pattern;
@@ -84,6 +85,40 @@ public class AdminClientController {
         adminGUIFrame = new AdminGUIFrame();
         adminGUIFrame.setVisible(true);
 
+        adminGUIFrame.getLogoutMouseClicked().addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    msgserver.logout(mci, sessionID);
+                    System.exit(0);
+                } catch (RemoteException ex) {
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Remote exception occurred.", "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (NotLoggedInException ex) {
+                    JOptionPane.showMessageDialog(adminGUIFrame, "You are not logged in.", "Logout Failed", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+
+        adminGUIFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    msgserver.logout(mci, sessionID);
+                    System.exit(0);
+                } catch (RemoteException ex) {
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Remote exception occurred.", "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (NotLoggedInException ex) {
+                    JOptionPane.showMessageDialog(adminGUIFrame, "You are not logged in.", "Logout Failed", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+
+
+
+
+
+
         adminGUIFrame.getaUsersUnarchiveButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -107,9 +142,9 @@ public class AdminClientController {
         adminGUIFrame.getaUsersViewButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int row = adminGUIFrame.getrUsersTable().getSelectedRow();
+                int row = adminGUIFrame.getaUsersTable().getSelectedRow();
                 if (row != -1) {
-                    String userId = (String) adminGUIFrame.getrUsersTable().getValueAt(row, 0);
+                    String userId = (String) adminGUIFrame.getaUsersTable().getValueAt(row, 0);
                     try {
                         User archivedUser = msgserver.viewArchivedUserDetails(userId, "res/ArchiveFile.json");
                         if (archivedUser != null) {
@@ -150,7 +185,6 @@ public class AdminClientController {
 
             }
         });
-
 
         adminGUIFrame.getRegisteredUsersButton().addActionListener(new ActionListener() {
             @Override
