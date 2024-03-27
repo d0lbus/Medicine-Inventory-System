@@ -7,8 +7,6 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 public interface MessageCallback extends Remote {
-
-
 	// method to get the current user of the callback/session
 	public User getUser() throws RemoteException;
 
@@ -22,7 +20,9 @@ public interface MessageCallback extends Remote {
 
 	// method called by server when a user logs out from the system
 	// user logging out sent as parameter
-	public void logoutCall(User user) throws RemoteException;
 
+	public void logoutCall(User user) throws RemoteException;
     //public void sendArchivedUsersList(List<User> archivedUsers);
+
+	public void updateOnlineUsers(int count) throws RemoteException;
 }

@@ -18,6 +18,7 @@ import java.awt.event.MouseAdapter;
 
 import javax.swing.*;
 
+
 public class CustomerClientController {
 
 	private static Login loginFrame = new Login();
@@ -26,7 +27,6 @@ public class CustomerClientController {
 	private static Registry registry;
 	private static ModelInterface msgserver;
 	private static CallbackImplementation mci;
-
 	private static String sessionID;
 
 
@@ -56,6 +56,7 @@ public class CustomerClientController {
 				registry = LocateRegistry.getRegistry(ipAddress);
 				msgserver = (ModelInterface) registry.lookup("msgserver");
 				mci = new CallbackImplementation(user);
+
 				sessionID = msgserver.login(mci, username, password);
 
 				if (sessionID != null) {

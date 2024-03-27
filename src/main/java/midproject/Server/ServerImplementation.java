@@ -25,8 +25,7 @@ import midproject.SharedClasses.UserJSONProcessor;
 import static midproject.SharedClasses.SessionIDGenerator.generateUniqueSessionId;
 import static midproject.SharedClasses.UserJSONProcessor.isValidCredentials;
 
-public class ServerImplementation
-        extends UnicastRemoteObject implements ModelInterface {
+public class ServerImplementation extends UnicastRemoteObject implements ModelInterface {
 
     private Map<String, MessageCallback> msgCallbacks = new ConcurrentHashMap<>();
     private Map<String, String> sessionUserMap = new ConcurrentHashMap<>();
@@ -51,12 +50,28 @@ public class ServerImplementation
         user.setUsername(username);
         String sessionId = generateUniqueSessionId();
         sessionUserMap.put(sessionId, username);
+
         msgCallbacks.put(username, msgCallback);
+
         msgCallback.loginCall(user);
 
         System.out.println("> User " + username + "logged in");
 
+        notifyOnlineUsersChanged();
         return sessionId;
+    }
+
+
+    public void notifyOnlineUsersChanged() {
+        int onlineUsersCount = sessionUserMap.size();
+        System.out.println("Updating online users count...");
+                msgCallbacks.values().forEach(callback -> {
+                    try {
+                        callback.updateOnlineUsers(onlineUsersCount);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                });
     }
 
     // broadcast method implementation
@@ -85,7 +100,10 @@ public class ServerImplementation
 
         msgCallbacks.remove(username);
         sessionUserMap.remove(sessionID);
+
+        notifyOnlineUsersChanged();
         msgCallback.logoutCall(user);
+
         System.out.println("> User " + username + "logged out");
     }
 
