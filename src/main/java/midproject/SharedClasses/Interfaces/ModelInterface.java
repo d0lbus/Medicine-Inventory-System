@@ -32,4 +32,8 @@ public interface ModelInterface extends Remote {
 
     public List<User> getRegisteredUsers() throws RemoteException;
 
+    public void updateRegisteredUsersTable(MessageCallback msgCallback) throws Exception;
+
+    public void updateRegisterUsersCount(MessageCallback msgCallback) throws Exception;
+
 }

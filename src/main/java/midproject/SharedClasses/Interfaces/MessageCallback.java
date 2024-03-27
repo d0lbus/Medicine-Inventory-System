@@ -26,4 +26,8 @@ public interface MessageCallback extends Remote {
     //public void sendArchivedUsersList(List<User> archivedUsers);
 
 	public void updateOnlineUsers(int count) throws RemoteException;
+
+	public void readUsersList(List<User> users) throws RemoteException;
+
+	public void countUsersList(List<User> users) throws RemoteException;
 }

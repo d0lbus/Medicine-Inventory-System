@@ -78,7 +78,7 @@ public class AdminClientController {
         });
     }
 
-    private static void showClientGUI() throws RemoteException {
+    private static void showClientGUI() throws Exception {
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (Exception ex) {
@@ -86,6 +86,9 @@ public class AdminClientController {
         }
 
         adminGUIFrame.setVisible(true);
+
+        msgserver.updateRegisteredUsersTable(mci);
+        msgserver.updateRegisterUsersCount(mci);
 
         adminGUIFrame.getDashboardButton().addActionListener(new ActionListener() {
             @Override
@@ -187,36 +190,6 @@ public class AdminClientController {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-            }
-        });
-
-        adminGUIFrame.getRegisteredUsersButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String jsonFilePath = "res/UserInformation.json";
-                try {
-                    Gson gson = new Gson();
-                    Reader reader = Files.newBufferedReader(Paths.get(jsonFilePath));
-                    JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
-
-                    DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getrUsersTable().getModel();
-
-                    model.setRowCount(0);
-
-                    for (JsonElement userElement : jsonArray) {
-                        JsonObject userObject = userElement.getAsJsonObject();
-                        Object[] rowData = {
-                                userObject.get("userId").getAsString(),
-                                userObject.get("lastName").getAsString(),
-                                userObject.get("firstName").getAsString(),
-                                userObject.get("userType").getAsString(),
-                                userObject.get("username").getAsString()
-                        };
-                        model.addRow(rowData);
-                    }
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
             }
         });
 

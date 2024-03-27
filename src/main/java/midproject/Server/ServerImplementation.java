@@ -107,6 +107,18 @@ public class ServerImplementation extends UnicastRemoteObject implements ModelIn
         System.out.println("> User " + username + "logged out");
     }
 
+    public synchronized void updateRegisteredUsersTable(MessageCallback msgCallback) throws Exception {
+        String filepath = "res/UserInformation.json";
+        List<User> usersList = UserJSONProcessor.readUsersFromFile(filepath);
+        msgCallback.readUsersList(usersList);
+    }
+
+    public synchronized void updateRegisterUsersCount(MessageCallback msgCallback) throws Exception {
+        String filepath = "res/UserInformation.json";
+        List<User> usersList = UserJSONProcessor.readUsersFromFile(filepath);
+        msgCallback.countUsersList(usersList);
+    }
+
     @Override
     public void unarchiveSelectedUsers(String userId, String originalFilePath, String archiveFilePath) throws Exception {
 
