@@ -16,6 +16,7 @@ public class User implements Serializable {
 	private String contactNumber;
 	private String username;
 	private String password;
+	private String confirmPassword;
 	private String street;
 	private String additionalAddressDetails;
 	private String city;
@@ -70,6 +71,8 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
+	public void setConfirmPassword(String confirmPassword){this.confirmPassword = confirmPassword;}
+
 	public void setStreet(String street) {
 		this.street = street;
 	}
@@ -114,7 +117,7 @@ public class User implements Serializable {
 						   String age, String gender,
 						   String personWithDisability,
 						   String email, String contactNumber,
-						   String username, String password,
+						   String username, String password, String confirmPassword,
 						   String street, String additionalAddressDetails,
 						   String city, String province, String zip) {
 		this.userId = userId;
@@ -130,6 +133,7 @@ public class User implements Serializable {
 		this.contactNumber = contactNumber;
 		this.username = username;
 		this.password = password;
+		this.confirmPassword = confirmPassword;
 		this.street = street;
 		this.additionalAddressDetails = additionalAddressDetails;
 		this.city = city;
@@ -272,6 +276,14 @@ public class User implements Serializable {
 	public String getPassword() {
 		return password;
 	}
+
+	/**
+	 * Getter for the confirmation password used for authentication.
+	 *
+	 * @return The password of the user.
+	 */
+
+	public String getConfirmPassword(){return  confirmPassword;}
 
 	/**
 	 * Getter for the street address of the user.
