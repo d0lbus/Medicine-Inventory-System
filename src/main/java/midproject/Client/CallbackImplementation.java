@@ -32,10 +32,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		});
 	}
 
-	public CallbackImplementation(User user) throws RemoteException {
-		this.user = user;
-	}
-
 	public CallbackImplementation(User user, AdminGUIFrame adminGUIFrame) throws RemoteException {
 		this.user = user;
 		this.adminGUIFrame = adminGUIFrame;

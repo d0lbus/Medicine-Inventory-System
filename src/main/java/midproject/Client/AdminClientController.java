@@ -28,7 +28,7 @@ import javax.swing.table.TableRowSorter;
 public class AdminClientController {
 
     private static Login loginFrame = new Login();
-    private static AdminGUIFrame adminGUIFrame = new AdminGUIFrame();
+    private static AdminGUIFrame adminGUIFrame = AdminGUIFrame.getInstance();
     private static User user = new User();
     private static Registry registry;
     private static ModelInterface msgserver;
@@ -85,7 +85,6 @@ public class AdminClientController {
             System.err.println("Failed to initialize FlatLaf for AdminGUIFrame");
         }
 
-        adminGUIFrame = new AdminGUIFrame();
         adminGUIFrame.setVisible(true);
 
         adminGUIFrame.getDashboardButton().addActionListener(new ActionListener() {

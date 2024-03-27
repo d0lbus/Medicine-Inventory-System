@@ -52,11 +52,9 @@ public class ServerImplementation extends UnicastRemoteObject implements ModelIn
         user.setUsername(username);
         String sessionId = generateUniqueSessionId();
         sessionUserMap.put(sessionId, username);
-
         msgCallbacks.put(username, msgCallback);
 
         msgCallback.loginCall(user);
-
         System.out.println("> User " + username + "logged in");
 
         notifyOnlineUsersChanged();

@@ -13,6 +13,8 @@ import javax.swing.*;
  */
 public class ClientGUIFrame extends javax.swing.JFrame {
 
+    private static ClientGUIFrame instance;
+
     /**
      * Creates new form ClientGUIFrame
      */
@@ -21,6 +23,13 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
+    }
+
+    public static ClientGUIFrame getInstance() {
+        if (instance == null) {
+            instance = new ClientGUIFrame();
+        }
+        return instance;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

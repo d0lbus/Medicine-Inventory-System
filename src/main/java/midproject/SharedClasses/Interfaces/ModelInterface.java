@@ -5,6 +5,7 @@ import midproject.SharedClasses.UserDefinedExceptions.AlreadyLoggedInException;
 import midproject.SharedClasses.UserDefinedExceptions.AuthenticationFailedException;
 import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
 import midproject.SharedClasses.UserDefinedExceptions.UserExistsException;
+import midproject.ViewClasses.AdminGUIFrame;
 
 import java.rmi.*;
 import java.util.List;

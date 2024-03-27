@@ -16,6 +16,8 @@ import java.awt.*;
 public class AdminGUIFrame extends javax.swing.JFrame {
 
 
+    private static AdminGUIFrame instance;
+
     /**
      * Creates new form AdminGUIFrame
      */
@@ -23,6 +25,12 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         initComponents();
     }
 
+    public static AdminGUIFrame getInstance() {
+        if (instance == null) {
+            instance = new AdminGUIFrame();
+        }
+        return instance;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

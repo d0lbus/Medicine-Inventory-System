@@ -12,6 +12,7 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
+import midproject.ViewClasses.AdminGUIFrame;
 import midproject.ViewClasses.ClientGUIFrame;
 import midproject.ViewClasses.Login;
 import java.awt.event.MouseAdapter;
@@ -22,7 +23,7 @@ import javax.swing.*;
 public class CustomerClientController {
 
 	private static Login loginFrame = new Login();
-	private static ClientGUIFrame clientGUIFrame = new ClientGUIFrame();
+	private static ClientGUIFrame clientGUIFrame = ClientGUIFrame.getInstance();
 	private static User user = new User();
 	private static Registry registry;
 	private static ModelInterface msgserver;
@@ -55,8 +56,7 @@ public class CustomerClientController {
 
 				registry = LocateRegistry.getRegistry(ipAddress);
 				msgserver = (ModelInterface) registry.lookup("msgserver");
-				mci = new CallbackImplementation(user);
-
+				mci = new CallbackImplementation(user, clientGUIFrame);
 				sessionID = msgserver.login(mci, username, password);
 
 				if (sessionID != null) {
@@ -78,7 +78,6 @@ public class CustomerClientController {
 				System.err.println("Failed to initialize FlatLaf for AdminGUIFrame");
 			}
 
-			clientGUIFrame = new ClientGUIFrame();
 			clientGUIFrame.setVisible(true);
 		/**
 		 * 	PROFILE RELATED FUNCTIONS

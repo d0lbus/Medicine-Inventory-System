@@ -1,6 +1,7 @@
 package midproject.SharedClasses.Interfaces;
 
 import midproject.SharedClasses.ReferenceClasses.User;
+import midproject.ViewClasses.AdminGUIFrame;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
