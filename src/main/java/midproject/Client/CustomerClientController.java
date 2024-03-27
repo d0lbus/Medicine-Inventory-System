@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.User;
@@ -28,8 +29,17 @@ public class CustomerClientController {
 
 
 	public static void main(String[] args) {
-		initiateLoginProcess();
-		FlatMacLightLaf.setup();
+		try {
+			UIManager.setLookAndFeel(new FlatLightLaf());
+		} catch (Exception ex) {
+			System.err.println("Failed to initialize FlatLaf");
+		}
+
+		SwingUtilities.invokeLater(() -> {
+			loginFrame = new Login();
+			initiateLoginProcess();
+			loginFrame.setVisible(true);
+		});
 	}
 
 	private static void initiateLoginProcess() {
@@ -58,9 +68,15 @@ public class CustomerClientController {
 			}
 		});
 	}
+		private static void showClientGUI() {
+			try {
+				UIManager.setLookAndFeel(new FlatLightLaf());
+			} catch (Exception ex) {
+				System.err.println("Failed to initialize FlatLaf for AdminGUIFrame");
+			}
 
-	private static void showClientGUI(){
-		clientGUIFrame.setVisible(true);
+			clientGUIFrame = new ClientGUIFrame();
+			clientGUIFrame.setVisible(true);
 		/**
 		 * 	PROFILE RELATED FUNCTIONS
 		 *  Logout
