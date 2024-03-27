@@ -6,8 +6,8 @@ import midproject.SharedClasses.ReferenceClasses.User;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import java.io.FileReader;
-import java.io.FileWriter;
+
+import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -159,5 +159,58 @@ public class UserJSONProcessor {
         // For example, you can check if the user's name contains the search text
         return user.getFirstName().toLowerCase().contains(searchText.toLowerCase()) ||
                 user.getLastName().toLowerCase().contains(searchText.toLowerCase());
+    }
+    public static List<String> loadUserIdsFromJsonFile(String filePath, String idTrackerFilePath) {
+        List<String> userIds = new ArrayList<>();
+
+        try (BufferedReader jsonReader = new BufferedReader(new FileReader(filePath))) {
+            StringBuilder jsonContent = new StringBuilder();
+            String line;
+            while ((line = jsonReader.readLine()) != null) {
+                jsonContent.append(line);
+            }
+
+            String json = jsonContent.toString().trim();
+            if (json.startsWith("[") && json.endsWith("]")) {
+                json = json.substring(1, json.length() - 1); // Remove square brackets
+                String[] userObjects = json.split("\\},\\{"); // Split by '},{'
+                for (String userObject : userObjects) {
+                    String[] fields = userObject.split(",");
+                    for (String field : fields) {
+                        if (field.contains("\"userId\":")) {
+                            String[] parts = field.split(":");
+                            if (parts.length == 2) {
+                                String userId = parts[1].replaceAll("\"", "").trim();
+                                userIds.add(userId);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Read and update ID tracker file
+        try (BufferedReader br = new BufferedReader(new FileReader(idTrackerFilePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                userIds.add(line.trim());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return userIds;
+    }
+
+    public static void appendIdToTrackerFile(String id, String idTrackerFilePath) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(idTrackerFilePath, true))) {
+            bw.write(id);
+            bw.newLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
