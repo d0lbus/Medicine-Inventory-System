@@ -12,8 +12,10 @@ import java.rmi.registry.Registry;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.google.gson.*;
+import midproject.Server.ServerImplementation;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.User;
+import midproject.SharedClasses.UserDefinedExceptions.InvalidInputException;
 import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
 import midproject.ViewClasses.AdminGUIFrame;
 import midproject.ViewClasses.Login;
@@ -240,7 +242,19 @@ public class AdminClientController {
             }
         });
 
-
+        adminGUIFrame.getCreateAccountButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    ServerImplementation server = new ServerImplementation();
+                    server.registerUser(adminGUIFrame);
+                } catch (RemoteException ex) {
+                    ex.printStackTrace();
+                } catch (InvalidInputException ex) {
+                    JOptionPane.showMessageDialog(adminGUIFrame, ex.getMessage(), "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
 
 }
