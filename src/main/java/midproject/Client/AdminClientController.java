@@ -2,8 +2,7 @@ package midproject.Client;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.rmi.registry.LocateRegistry;
@@ -129,6 +128,10 @@ public class AdminClientController {
         });
 
         adminGUIFrame.getaUsersSearchTextfield().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
         });
 
 
@@ -183,7 +186,129 @@ public class AdminClientController {
             }
         });
 
+        adminGUIFrame.getCreateAccountButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (validateInputs()) {
+                    try {
+                        String jsonFilePath = "res/UserInfo.json";
+                        Gson gson = new Gson();
+                        User newUser = new User();
+                        newUser.setUserId(generateUserId());
+                        newUser.setFirstName(adminGUIFrame.getFirstNameTextField().getText());
+                        newUser.setLastName(adminGUIFrame.getLastNameTextField().getText());
+                        newUser.setMiddleName(adminGUIFrame.getMiddleNameTextField().getText());
+                        newUser.setBirthdate(adminGUIFrame.getBirthdateTextField().getText());
+                        newUser.setAge(adminGUIFrame.getAgeTextField().getText());
+                        // newUser.setGender(adminGUIFrame.getGenderComboBox().getText());
+                        newUser.setPersonWithDisability(adminGUIFrame.getPersonWithDisabilityCheckBox().getText());
+                        newUser.setEmail(adminGUIFrame.getEmailAddressTextField().getText());
+                        newUser.setContactNumber(adminGUIFrame.getContactNumberTextField().getText());
+                        newUser.setUsername(adminGUIFrame.getSetUsernameTextField().getText());
+                        newUser.setPassword(new String(adminGUIFrame.getSetPasswordTextField().getText()));
+                        newUser.setStreet(adminGUIFrame.getStreetAddressTextField().getText());
+                        // newUser.setAdditionalAddressDetails(adminGUIFrame.getAdditionalAddressDetailsField().getText());
+                        newUser.setCity(adminGUIFrame.getMunicipalityTextField().getText());
+                        newUser.setProvince(adminGUIFrame.getProvinceTextField().getText());
+                        newUser.setZip(adminGUIFrame.getZipCodeTextField().getText());
 
+                        String userJson = gson.toJson(newUser);
+
+                        // Read existing content from the file
+                        String existingContent = "";
+                        try (BufferedReader br = new BufferedReader(new FileReader(jsonFilePath))) {
+                            StringBuilder sb = new StringBuilder();
+                            String line;
+                            while ((line = br.readLine()) != null) {
+                                sb.append(line);
+                            }
+                            existingContent = sb.toString();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+
+                        // Update existing content with new user JSON
+                        if (existingContent.isEmpty()) {
+                            existingContent = "[" + userJson + "]";
+                        } else {
+                            existingContent = existingContent.substring(0, existingContent.length() - 1) + ",\n" + userJson + "]";
+                        }
+
+                        // Write the updated content back to the file
+                        FileWriter fileWriter = new FileWriter(jsonFilePath);
+                        fileWriter.write(existingContent);
+                        fileWriter.close();
+
+                        JOptionPane.showMessageDialog(adminGUIFrame, "User created successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                        // Clear form fields after successful creation
+                        clearFormFields();
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(adminGUIFrame, "Error creating user: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
     }
 
+    private static String generateUserId() {
+        // Implement logic to generate user ID
+        return "U" + (int) (Math.random() * 1000);
+    }
+
+    private static void clearFormFields() {
+        // Implement logic to clear form fields after successful creation
+        adminGUIFrame.getFirstNameTextField().setText("");
+        adminGUIFrame.getLastNameTextField().setText("");
+        adminGUIFrame.getMiddleNameTextField().setText("");
+        adminGUIFrame.getBirthdateTextField().setText("");
+        adminGUIFrame.getAgeTextField().setText("");
+        adminGUIFrame.getGenderComboBox().setSelectedIndex(0);
+        adminGUIFrame.getPersonWithDisabilityCheckBox().setText("");
+        adminGUIFrame.getEmailAddressTextField().setText("");
+        adminGUIFrame.getContactNumberTextField().setText("");
+        adminGUIFrame.getSetUsernameTextField().setText("");
+        adminGUIFrame.getSetPasswordTextField().setText("");
+        adminGUIFrame.getStreetAddressTextField().setText("");
+        adminGUIFrame.getMunicipalityTextField().setText("");
+        adminGUIFrame.getProvinceTextField().setText("");
+        adminGUIFrame.getZipCodeTextField().setText("");
+    }
+
+    public static boolean validateInputs() {
+        if (adminGUIFrame.getFirstNameTextField().getText().isEmpty() ||
+                adminGUIFrame.getLastNameTextField().getText().isEmpty() ||
+                adminGUIFrame.getMiddleNameTextField().getText().isEmpty() ||
+                adminGUIFrame.getAgeTextField().getText().isEmpty() ||
+                adminGUIFrame.getStreetAddressTextField().getText().isEmpty() ||
+                adminGUIFrame.getMunicipalityTextField().getText().isEmpty() ||
+                adminGUIFrame.getProvinceTextField().getText().isEmpty() ||
+                adminGUIFrame.getZipCodeTextField().getText().isEmpty() ||
+                adminGUIFrame.getEmailAddressTextField().getText().isEmpty() ||
+                adminGUIFrame.getContactNumberTextField().getText().isEmpty() ||
+                adminGUIFrame.getSetUsernameTextField().getText().isEmpty() ||
+                new String(adminGUIFrame.getSetPasswordTextField().getText()).isEmpty()) {
+            JOptionPane.showMessageDialog(adminGUIFrame, "There are incomplete fields.", "Incomplete Fields", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        String password = new String(adminGUIFrame.getSetPasswordTextField().getText());
+        if (password.length() < 6 || password.length() > 12 ||
+                !password.matches(".*[A-Z].*") || // At least one capital letter
+                !password.matches(".*\\d.*") ||   // At least one digit
+                !password.matches(".*[!@#$%^&*()].*")) { // At least one special character
+            JOptionPane.showMessageDialog(adminGUIFrame, "Password must be 6-12 characters and contain at least one capital letter (A-Z), one digit(0-9), and one special character.", "Password Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        String contactNumber = adminGUIFrame.getContactNumberTextField().getText();
+        if (contactNumber.length() != 11) {
+            JOptionPane.showMessageDialog(adminGUIFrame, "Contact number must be 11 digits long.", "Contact Number Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        return true;
+    }
 }

@@ -116,7 +116,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         birthdateLabel = new javax.swing.JLabel();
         birthdateTextField = new javax.swing.JTextField();
         ageLabel = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        ageTextField = new javax.swing.JTextField();
         genderLabel = new javax.swing.JLabel();
         genderComboBox = new javax.swing.JComboBox<>();
         personWithDisabilityLabel = new javax.swing.JLabel();
@@ -1157,7 +1157,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                             .addGroup(registrationPanelLayout.createSequentialGroup()
                                 .addComponent(birthdateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(73, 73, 73)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(ageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(registrationPanelLayout.createSequentialGroup()
                                 .addComponent(birthdateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(86, 86, 86)
@@ -1254,7 +1254,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(birthdateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(provinceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(setPasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1744,8 +1744,8 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         return jScrollPane6;
     }
 
-    public JTextField getjTextField6() {
-        return jTextField6;
+    public JTextField getAgeTextField() {
+        return ageTextField;
     }
 
     public JLabel getLastNameLabel() {
@@ -2031,7 +2031,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField ageTextField;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JTextField lastNameTextField;
     private javax.swing.JLabel logoutMouseClicked;
