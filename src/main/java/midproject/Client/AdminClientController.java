@@ -1,11 +1,12 @@
 package midproject.Client;
 
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.rmi.RemoteException;
+import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
@@ -14,9 +15,10 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.google.gson.*;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.User;
-import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
 import midproject.ViewClasses.AdminGUIFrame;
 import midproject.ViewClasses.Login;
+
+import java.util.List;
 import java.util.regex.Pattern;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -85,40 +87,6 @@ public class AdminClientController {
         adminGUIFrame = new AdminGUIFrame();
         adminGUIFrame.setVisible(true);
 
-        adminGUIFrame.getLogoutMouseClicked().addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    msgserver.logout(mci, sessionID);
-                    System.exit(0);
-                } catch (RemoteException ex) {
-                    JOptionPane.showMessageDialog(adminGUIFrame, "Remote exception occurred.", "Error", JOptionPane.ERROR_MESSAGE);
-                } catch (NotLoggedInException ex) {
-                    JOptionPane.showMessageDialog(adminGUIFrame, "You are not logged in.", "Logout Failed", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
-
-
-        adminGUIFrame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                try {
-                    msgserver.logout(mci, sessionID);
-                    System.exit(0);
-                } catch (RemoteException ex) {
-                    JOptionPane.showMessageDialog(adminGUIFrame, "Remote exception occurred.", "Error", JOptionPane.ERROR_MESSAGE);
-                } catch (NotLoggedInException ex) {
-                    JOptionPane.showMessageDialog(adminGUIFrame, "You are not logged in.", "Logout Failed", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
-
-
-
-
-
-
-
         adminGUIFrame.getaUsersUnarchiveButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -142,9 +110,9 @@ public class AdminClientController {
         adminGUIFrame.getaUsersViewButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int row = adminGUIFrame.getaUsersTable().getSelectedRow();
+                int row = adminGUIFrame.getrUsersTable().getSelectedRow();
                 if (row != -1) {
-                    String userId = (String) adminGUIFrame.getaUsersTable().getValueAt(row, 0);
+                    String userId = (String) adminGUIFrame.getrUsersTable().getValueAt(row, 0);
                     try {
                         User archivedUser = msgserver.viewArchivedUserDetails(userId, "res/ArchiveFile.json");
                         if (archivedUser != null) {
@@ -186,31 +154,26 @@ public class AdminClientController {
             }
         });
 
+
         adminGUIFrame.getRegisteredUsersButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String jsonFilePath = "res/UserInformation.json";
                 try {
-                    Gson gson = new Gson();
-                    Reader reader = Files.newBufferedReader(Paths.get(jsonFilePath));
-                    JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
-
+                    ModelInterface server = (ModelInterface) Naming.lookup("//localhost:1099/msgserver");
+                    List<User> registeredUsers = server.getRegisteredUsers();
                     DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getrUsersTable().getModel();
-
                     model.setRowCount(0);
 
-                    for (JsonElement userElement : jsonArray) {
-                        JsonObject userObject = userElement.getAsJsonObject();
-                        Object[] rowData = {
-                                userObject.get("userId").getAsString(),
-                                userObject.get("lastName").getAsString(),
-                                userObject.get("firstName").getAsString(),
-                                userObject.get("userType").getAsString(),
-                                userObject.get("username").getAsString()
-                        };
-                        model.addRow(rowData);
+                    for (User user : registeredUsers) {
+                        model.addRow(new Object[]{
+                                user.getUserId(),
+                                user.getLastName(),
+                                user.getFirstName(),
+                                user.getUserType(),
+                                user.getUsername()
+                        });
                     }
-                } catch (IOException ex) {
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
