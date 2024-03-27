@@ -95,11 +95,8 @@ public class AdminClientController {
                 if (row != -1) {
                     String userId = (String) adminGUIFrame.getrUsersTable().getValueAt(row, 0);
                     try {
-                        msgserver.viewArchivedUserDetails(userId, "res/ArchiveFile.json");
-
-                        User archivedUser = UserJSONProcessor.getArchivedUser(userId, "res/ArchiveFile.json");
+                        User archivedUser = msgserver.viewArchivedUserDetails(userId, "res/ArchiveFile.json");
                         if (archivedUser != null) {
-                            // Display archived user information using JOptionPane
                             String userInfo = "User ID: " + archivedUser.getUserId() + "\n" +
                                     "First Name: " + archivedUser.getFirstName() + "\n" +
                                     "Last Name: " + archivedUser.getLastName() + "\n" +
@@ -130,8 +127,6 @@ public class AdminClientController {
                 }
             }
         });
-
-
 
 
         adminGUIFrame.getRegisteredUsersButton().addActionListener(new ActionListener() {

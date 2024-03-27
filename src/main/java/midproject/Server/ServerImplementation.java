@@ -111,7 +111,6 @@ public class ServerImplementation
 
     public User viewArchivedUserDetails(String userId, String archiveFilePath) throws RemoteException, Exception {
         User archivedUser = UserJSONProcessor.getArchivedUser(userId, archiveFilePath);
-
         if (archivedUser != null) {
             return archivedUser;
         } else {
