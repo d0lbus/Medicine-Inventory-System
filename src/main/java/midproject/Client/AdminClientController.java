@@ -128,6 +128,9 @@ public class AdminClientController {
             }
         });
 
+        adminGUIFrame.getaUsersSearchTextfield().addActionListener(new ActionListener() {
+        });
+
 
         adminGUIFrame.getRegisteredUsersButton().addActionListener(new ActionListener() {
             @Override

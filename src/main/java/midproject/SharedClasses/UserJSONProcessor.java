@@ -138,4 +138,26 @@ public class UserJSONProcessor {
         return null;
     }
 
+    public static List<User> searchArchivedUsers(String searchText, String filePath) throws Exception {
+        List<User> archivedUsers = new ArrayList<>();
+        try {
+            List<User> allUsers = readUsersFromFile(filePath);
+            for (User user : allUsers) {
+                // Check if the user is archived and matches the search text
+                if (user.isArchived() && containsSearchText(user, searchText)) {
+                    archivedUsers.add(user);
+                }
+            }
+        } catch (Exception e) {
+            throw new Exception("Error searching archived users: " + e.getMessage());
+        }
+        return archivedUsers;
+    }
+
+    private static boolean containsSearchText(User user, String searchText) {
+        // Modify this method according to your search criteria
+        // For example, you can check if the user's name contains the search text
+        return user.getFirstName().toLowerCase().contains(searchText.toLowerCase()) ||
+                user.getLastName().toLowerCase().contains(searchText.toLowerCase());
+    }
 }

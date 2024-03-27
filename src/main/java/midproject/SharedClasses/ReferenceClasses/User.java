@@ -326,4 +326,7 @@ public class User implements Serializable {
 	public String getZip() {
 		return zip;
 	}
+
+    public boolean isArchived() { return isArchived();
+    }
 }

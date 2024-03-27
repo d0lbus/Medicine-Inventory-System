@@ -117,5 +117,18 @@ public class ServerImplementation
             throw new Exception("User not found in archive.");
         }
     }
-    
+    public void searchArchivedUsers(String searchText) throws RemoteException {
+        try {
+            // Retrieve the list of archived users
+            List<User> archivedUsers = UserJSONProcessor.searchArchivedUsers(searchText, "res/ArchivedUsers.json");
+
+            for (MessageCallback callback : msgCallbacks.values()) {
+                callback.sendArchivedUsersList(archivedUsers);
+            }
+        } catch (Exception e) {
+            // Handle exceptions, if any
+            e.printStackTrace();
+            throw new RemoteException("Error searching archived user: " + e.getMessage());
+        }
+    }
 }

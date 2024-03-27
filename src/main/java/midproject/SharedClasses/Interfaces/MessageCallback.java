@@ -4,6 +4,7 @@ import midproject.SharedClasses.ReferenceClasses.User;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
 public interface MessageCallback extends Remote {
 
@@ -22,4 +23,6 @@ public interface MessageCallback extends Remote {
 	// method called by server when a user logs out from the system
 	// user logging out sent as parameter
 	public void logoutCall(User user) throws RemoteException;
+
+    public void sendArchivedUsersList(List<User> archivedUsers);
 }

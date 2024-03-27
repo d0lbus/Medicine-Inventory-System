@@ -160,7 +160,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Welcome Admin");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/logo.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir" + "src/Icons/logo.png"))); // NOI18N
 
         logoutMouseClicked.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         logoutMouseClicked.setForeground(new java.awt.Color(255, 255, 255));
@@ -715,7 +715,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(69, 123, 157));
         jPanel1.setForeground(new java.awt.Color(255, 187, 187));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/usersfinal.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir" + "src/Icons/usersfinal.png"))); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 30)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
@@ -757,7 +757,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(69, 123, 157));
         jPanel4.setForeground(new java.awt.Color(255, 187, 187));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/onlineusers.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir" + "src/Icons/onlineusers.png"))); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 30)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
@@ -802,7 +802,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(69, 123, 157));
         jPanel5.setForeground(new java.awt.Color(255, 187, 187));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/orders.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir" + "src/Icons/orders.png"))); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 30)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
@@ -850,7 +850,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         jPanel6.setBackground(new java.awt.Color(69, 123, 157));
         jPanel6.setForeground(new java.awt.Color(255, 187, 187));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pendingorders.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir" + "src/Icons/pendingorders.png"))); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 30)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
