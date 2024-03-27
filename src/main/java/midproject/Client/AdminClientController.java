@@ -8,6 +8,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.google.gson.*;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.User;
@@ -33,9 +35,11 @@ public class AdminClientController {
 
     public static void main(String[] args) {
         initiateLoginProcess();
+        FlatMacLightLaf.setup();
     }
 
     private static void initiateLoginProcess() {
+        FlatMacLightLaf.setup();
         loginFrame.setVisible(true);
         loginFrame.getLogInButton().addActionListener(e -> {
             try {

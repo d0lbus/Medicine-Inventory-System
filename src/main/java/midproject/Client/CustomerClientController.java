@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
@@ -28,9 +29,11 @@ public class CustomerClientController {
 
 	public static void main(String[] args) {
 		initiateLoginProcess();
+		FlatMacLightLaf.setup();
 	}
 
 	private static void initiateLoginProcess() {
+		FlatMacLightLaf.setup();
 		loginFrame.setVisible(true);
 		loginFrame.getLogInButton().addActionListener(e -> {
 			try {
