@@ -1140,7 +1140,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         userTypeLabel.setForeground(new java.awt.Color(51, 51, 51));
         userTypeLabel.setText("User Type");
 
-        userTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Client" }));
+        userTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Customer" }));
 
         javax.swing.GroupLayout registrationPanelLayout = new javax.swing.GroupLayout(registrationPanel);
         registrationPanel.setLayout(registrationPanelLayout);

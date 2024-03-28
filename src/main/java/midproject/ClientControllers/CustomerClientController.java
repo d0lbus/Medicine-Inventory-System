@@ -1,4 +1,4 @@
-package midproject.Client;
+package midproject.ClientControllers;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;

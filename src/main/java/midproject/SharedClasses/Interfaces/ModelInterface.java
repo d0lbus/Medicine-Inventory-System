@@ -28,11 +28,9 @@ public interface ModelInterface extends Remote {
 
     public User viewArchivedUserDetails(String userId, String archiveFilePath) throws RemoteException, Exception;
 
-    public List<User> getRegisteredUsers() throws RemoteException;
+    public void updateRegisteredUsersTable() throws Exception;
 
-    public void updateRegisteredUsersTable(MessageCallback msgCallback) throws Exception;
-
-    public void updateRegisterUsersCount(MessageCallback msgCallback) throws Exception;
+    public void updateRegisteredUsersCount() throws Exception;
 
     public void registerUser(User newUser) throws Exception, InvalidInputException;
 }

@@ -1,6 +1,7 @@
 package midproject.SharedClasses.Utilities;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import midproject.SharedClasses.ReferenceClasses.User;
 
 
@@ -17,7 +18,7 @@ import java.util.Objects;
 
 public class UserJSONProcessor {
 
-    private static final Gson gson = new Gson();
+    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public static User parseUserFromJson(String json) {
         return gson.fromJson(json, User.class);
@@ -36,6 +37,7 @@ public class UserJSONProcessor {
             }
 
             users.add(newUser);
+
             try (FileWriter writer = new FileWriter(filePath)) {
                 gson.toJson(users, writer);
             }

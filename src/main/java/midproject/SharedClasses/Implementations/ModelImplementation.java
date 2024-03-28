@@ -26,7 +26,6 @@ import static midproject.SharedClasses.Utilities.UserJSONProcessor.*;
 
 
 public class ModelImplementation extends UnicastRemoteObject implements ModelInterface {
-
     private Map<UserCallBackInfo, MessageCallback> msgCallbacks = new ConcurrentHashMap<>();
     private Map<String, String> sessionUserMap = new ConcurrentHashMap<>();
 
@@ -125,60 +124,10 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
 
     /**
-     * BROADCASTING METHODS
-     *
-     * */
-
-
-    public synchronized void broadcast(MessageCallback msgCallback, String msg)
-            throws RemoteException, NotLoggedInException {
-        if (!msgCallbacks.containsValue(msgCallback)) {
-            //throw new NotLoggedInException();
-        }
-        for (UserCallBackInfo userCallBackInfo : msgCallbacks.keySet()) {
-            msgCallbacks.get(userCallBackInfo.getUsername()).broadcastCall(msg);
-        }
-    }
-
-
-    /**
      *
      * DASHBOARD RELATED METHODS
      *
      * */
-
-    /**
-     *
-     * REGISTERED USERS RELATED METHODS
-     *
-     * */
-
-    /**
-     *
-     * ARCHIVED USERS RELATED METHODS
-     *
-     * */
-
-    /**
-     *
-     * REGISTER USER RELATED METHODS
-     *
-     * */
-
-    /**
-     *
-     * ORDERS RELATED METHODS
-     *
-     * */
-
-    /**
-     *
-     * PENDING ORDERS RELATED METHODS
-     *
-     * */
-
-
-
 
     public void notifyOnlineUsersChanged() {
         int onlineUsersCount = sessionUserMap.size();
@@ -196,19 +145,19 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         });
     }
 
-    public synchronized void updateRegisteredUsersTable(MessageCallback msgCallback) throws Exception {
-        String filepath = "res/UserInformation.json";
-        List<User> usersList = UserJSONProcessor.readUsersFromFile(filepath);
-        msgCallback.readUsersList(usersList);
-    }
+    /**
+     *
+     * REGISTERED USERS RELATED METHODS
+     *
+     * */
 
-    public synchronized void updateRegisterUsersCount(MessageCallback msgCallback) throws Exception {
-        String filepath = "res/UserInformation.json";
-        List<User> usersList = UserJSONProcessor.readUsersFromFile(filepath);
-        msgCallback.countUsersList(usersList);
-    }
 
-    @Override
+    /**
+     *
+     * ARCHIVED USERS RELATED METHODS
+     *
+     * */
+
     public void unarchiveSelectedUsers(String userId, String originalFilePath, String archiveFilePath) throws Exception {
 
         // Retrieve the list of archived users
@@ -245,25 +194,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
     }
 
-    public List<User> getRegisteredUsers() throws RemoteException {
-        String jsonFilePath = "res/UserInformation.json";
-        List<User> users = new ArrayList<>();
-        try {
-            Reader reader = Files.newBufferedReader(Paths.get(jsonFilePath));
-            JsonArray jsonArray = JsonParser.parseReader(reader).getAsJsonArray();
-
-            Gson gson = new Gson();
-            for (JsonElement userElement : jsonArray) {
-                User user = gson.fromJson(userElement, User.class);
-                users.add(user);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RemoteException("Error reading from JSON file: " + e.getMessage());
-        }
-        return users;
-    }
-
     /*
     public void searchArchivedUsers(String searchText) throws RemoteException {
         try {
@@ -279,6 +209,12 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             throw new RemoteException("Error searching archived user: " + e.getMessage());
         }
     }*/
+
+    /**
+     *
+     * REGISTER USER RELATED METHODS
+     *
+     * */
 
     public void registerUser(User newUser) throws RemoteException, InvalidInputException {
         // Generate unique user ID
@@ -306,4 +242,77 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         String prefix = userType.equals("Admin") ? "A" : "C";
         return prefix + (maxId + 1);
     }
+
+    /**
+     *
+     * ORDERS RELATED METHODS
+     *
+     * */
+
+    /**
+     *
+     * PENDING ORDERS RELATED METHODS
+     *
+     * */
+
+
+
+
+    /**
+     * MESSAGE RELATED METHODS
+     *
+     * */
+
+    public synchronized void broadcast(MessageCallback msgCallback, String msg)
+            throws RemoteException, NotLoggedInException {
+        if (!msgCallbacks.containsValue(msgCallback)) {
+            //throw new NotLoggedInException();
+        }
+        for (UserCallBackInfo userCallBackInfo : msgCallbacks.keySet()) {
+            msgCallbacks.get(userCallBackInfo.getUsername()).broadcastCall(msg);
+        }
+    }
+
+    /**
+     *
+     * AUTO REFRESH REALTED METHODS
+     *
+     * */
+
+    public void updateRegisteredUsersTable() throws Exception {
+        String filepath = "res/UserInformation.json";
+        List<User> usersList = UserJSONProcessor.readUsersFromFile(filepath);
+
+        msgCallbacks.entrySet().forEach(entry -> {
+            UserCallBackInfo userInfo = entry.getKey();
+            MessageCallback callback = entry.getValue();
+
+            if ("Admin".equals(userInfo.getUserType())) {
+                try {
+                    callback.readUsersList(usersList);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void updateRegisteredUsersCount() throws Exception {
+        String filepath = "res/UserInformation.json";
+        List<User> usersList = UserJSONProcessor.readUsersFromFile(filepath);
+
+        msgCallbacks.entrySet().forEach(entry -> {
+            UserCallBackInfo userInfo = entry.getKey();
+            MessageCallback callback = entry.getValue();
+
+            if ("Admin".equals(userInfo.getUserType())) {
+                try {
+                    callback.countUsersList(usersList); // Adjust callback method to accept count directly
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
 }

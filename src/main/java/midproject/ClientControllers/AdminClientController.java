@@ -1,4 +1,4 @@
-package midproject.Client;
+package midproject.ClientControllers;
 
 import java.awt.event.*;
 import java.rmi.RemoteException;
@@ -8,7 +8,6 @@ import java.rmi.registry.Registry;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import midproject.SharedClasses.Implementations.CallbackImplementation;
-import midproject.SharedClasses.Implementations.ModelImplementation;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.*;
@@ -369,8 +368,8 @@ public class AdminClientController {
     }
 
     public static void autoRefreshUserRelatedComponents() throws Exception {
-        msgserver.updateRegisteredUsersTable(mci);
-        msgserver.updateRegisterUsersCount(mci);
+        msgserver.updateRegisteredUsersTable();
+        msgserver.updateRegisteredUsersCount();
     }
 
 
