@@ -108,6 +108,20 @@ public class AdminClientController {
                 }
             }
         });
+        adminGUIFrame.getSendButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String broadcastMessage = adminGUIFrame.getSendMessageTextArea().getText();
+                try {
+                    msgserver.broadcast(mci, broadcastMessage);
+
+                } catch (RemoteException ex) {
+                    throw new RuntimeException(ex);
+                } catch (NotLoggedInException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
 
 
         adminGUIFrame.addWindowListener(new WindowAdapter() {
