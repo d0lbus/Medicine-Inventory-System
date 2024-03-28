@@ -33,8 +33,6 @@ public interface MessageCallback extends Remote {
 	public void readUsersList(List<User> users) throws RemoteException;
 
 	public void countUsersList(List<User> users) throws RemoteException;
-	public void updateRegisteredUsersTable(List<User> users) throws RemoteException;
-
 
 
 }

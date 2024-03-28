@@ -1,4 +1,4 @@
-package midproject.SharedClasses;
+package midproject.SharedClasses.Utilities;
 
 import com.google.gson.Gson;
 import midproject.SharedClasses.ReferenceClasses.User;

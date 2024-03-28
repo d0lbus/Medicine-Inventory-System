@@ -1,4 +1,4 @@
-package midproject.Server;
+package midproject.SharedClasses.Implementations;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -19,20 +19,17 @@ import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.Interfaces.MessageCallback;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.*;
-import midproject.SharedClasses.UserJSONProcessor;
-import midproject.ViewClasses.AdminGUIFrame;
+import midproject.SharedClasses.Utilities.UserJSONProcessor;
 
-import javax.swing.*;
-import static midproject.Client.AdminClientController.adminGUIFrame;
-import static midproject.SharedClasses.SessionIDGenerator.generateUniqueSessionId;
-import static midproject.SharedClasses.UserJSONProcessor.isValidCredentials;
+import static midproject.SharedClasses.Utilities.SessionIDGenerator.generateUniqueSessionId;
+import static midproject.SharedClasses.Utilities.UserJSONProcessor.isValidCredentials;
 
-public class ServerImplementation extends UnicastRemoteObject implements ModelInterface {
+public class ModelImplementation extends UnicastRemoteObject implements ModelInterface {
 
     private Map<String, MessageCallback> msgCallbacks = new ConcurrentHashMap<>();
     private Map<String, String> sessionUserMap = new ConcurrentHashMap<>();
 
-    public ServerImplementation() throws RemoteException {
+    public ModelImplementation() throws RemoteException {
     }
 
     public synchronized String login(MessageCallback msgCallback, String username, String password)

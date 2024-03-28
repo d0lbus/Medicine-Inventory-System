@@ -1,32 +1,26 @@
 package midproject.Client;
 
 import java.awt.event.*;
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import com.google.gson.*;
-import midproject.Server.ServerImplementation;
+import midproject.SharedClasses.Implementations.CallbackImplementation;
+import midproject.SharedClasses.Implementations.ModelImplementation;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.InvalidInputException;
 import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
 import midproject.SharedClasses.UserDefinedExceptions.UsernameTakenException;
-import midproject.SharedClasses.UserJSONProcessor;
+import midproject.SharedClasses.Utilities.UserJSONProcessor;
 import midproject.ViewClasses.AdminGUIFrame;
 import midproject.ViewClasses.Login;
 import java.util.List;
-import java.util.regex.Matcher;
 
 import java.util.regex.Pattern;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -92,8 +86,7 @@ public class AdminClientController {
 
         adminGUIFrame.setVisible(true);
 
-        msgserver.updateRegisteredUsersTable(mci);
-        msgserver.updateRegisterUsersCount(mci);
+        autoRefreshUserRelatedComponents();
 
         adminGUIFrame.getDashboardButton().addActionListener(new ActionListener() {
             @Override
@@ -270,9 +263,8 @@ public class AdminClientController {
                             personWithDisability, email, contactNumber, username, password, confirmPassword,
                             street, additionalAddress, city, province, zip);
 
-                    // Register the user
-                    ServerImplementation server = new ServerImplementation();
-                    server.registerUser(newUser);
+
+                    msgserver.registerUser(newUser);
 
                     // Show confirmation message
                     JOptionPane.showMessageDialog(adminGUIFrame, "Account created successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -282,7 +274,6 @@ public class AdminClientController {
 
                     // Auto refresh user-related components
                     autoRefreshUserRelatedComponents();
-
                 } catch (RemoteException ex) {
                     ex.printStackTrace();
                 } catch (InvalidInputException ex) {
@@ -314,10 +305,6 @@ public class AdminClientController {
         adminGUIFrame.getZipCodeTextField().setText("");
     }
 
-    public static void autoRefreshUserRelatedComponents() throws Exception {
-        msgserver.updateRegisteredUsersTable(mci);
-        msgserver.updateRegisterUsersCount(mci);
-    }
 
     // Method to check if username is already taken
     private static boolean isUsernameTaken(String username) throws UsernameTakenException {
@@ -337,7 +324,6 @@ public class AdminClientController {
         return false; // Username is not taken
     }
 
-
     public void unarchiveSelectedUsers(String userId, String originalFilePath, String archiveFilePath) {
         try {
             // Call the server's unarchiveSelectedUsers method
@@ -349,4 +335,11 @@ public class AdminClientController {
             throw new RuntimeException(e);
         }
     }
+
+    public static void autoRefreshUserRelatedComponents() throws Exception {
+        msgserver.updateRegisteredUsersTable(mci);
+        msgserver.updateRegisterUsersCount(mci);
+    }
+
+
 }

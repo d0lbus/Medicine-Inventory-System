@@ -1,4 +1,4 @@
-package midproject.SharedClasses;
+package midproject.SharedClasses.Utilities;
 
 import java.util.UUID;
 

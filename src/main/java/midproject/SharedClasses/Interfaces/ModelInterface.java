@@ -1,10 +1,7 @@
 package midproject.SharedClasses.Interfaces;
 
 import midproject.SharedClasses.ReferenceClasses.User;
-import midproject.SharedClasses.UserDefinedExceptions.AlreadyLoggedInException;
-import midproject.SharedClasses.UserDefinedExceptions.AuthenticationFailedException;
-import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
-import midproject.SharedClasses.UserDefinedExceptions.UserExistsException;
+import midproject.SharedClasses.UserDefinedExceptions.*;
 import midproject.ViewClasses.AdminGUIFrame;
 
 import java.rmi.Remote;
@@ -37,4 +34,5 @@ public interface ModelInterface extends Remote {
 
     public void updateRegisterUsersCount(MessageCallback msgCallback) throws Exception;
 
+    public void registerUser(User newUser) throws Exception, InvalidInputException;
 }

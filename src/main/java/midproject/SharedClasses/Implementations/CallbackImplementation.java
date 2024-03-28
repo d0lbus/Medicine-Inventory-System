@@ -1,4 +1,4 @@
-package midproject.Client;
+package midproject.SharedClasses.Implementations;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
@@ -22,15 +22,11 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 	public void updateOnlineUsers(int count) {
 		System.out.println("Called updateOnlineUsers with count: " + count);
 		SwingUtilities.invokeLater(() -> {
-			if (adminGUIFrame != null) {
 				System.out.println("Admin GUI frame is not null. Updating label.");
 				String sCount = String.valueOf(count);
 				adminGUIFrame.getOnlineUsersLabel().setText(sCount);
 				adminGUIFrame.getOnlineUsersLabel().revalidate();
 				adminGUIFrame.getOnlineUsersLabel().repaint();
-			} else {
-				System.err.println("Admin GUI frame is null.");
-			}
 		});
 	}
 
@@ -71,28 +67,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		});
 	}
 
-	public void updateRegisteredUsersTable(List<User> users) throws RemoteException {
-		SwingUtilities.invokeLater(() -> {
-			if (adminGUIFrame != null) {
-				DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getrUsersTable().getModel();
-				model.setRowCount(0); // Clear the existing rows
-
-				// Populate the table with the new list of users
-				for (User user : users) {
-					Object[] rowData = {
-							user.getUserId(),
-							user.getLastName(),
-							user.getFirstName(),
-							user.getUserType(),
-							user.getUsername()
-					};
-					model.addRow(rowData);
-				}
-			} else {
-				System.err.println("Admin GUI frame is null.");
-			}
-		});
-	}
 
 	public CallbackImplementation(User user, AdminGUIFrame adminGUIFrame) throws RemoteException {
 		this.user = user;
