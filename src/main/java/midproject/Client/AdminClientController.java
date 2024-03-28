@@ -17,17 +17,23 @@ import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.InvalidInputException;
 import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
+import midproject.SharedClasses.UserDefinedExceptions.UsernameTakenException;
+import midproject.SharedClasses.UserJSONProcessor;
 import midproject.ViewClasses.AdminGUIFrame;
 import midproject.ViewClasses.Login;
+import java.util.List;
+import java.util.regex.Matcher;
+
 import java.util.regex.Pattern;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 public class AdminClientController {
 
     private static Login loginFrame = new Login();
-    private static AdminGUIFrame adminGUIFrame = AdminGUIFrame.getInstance();
+    public static AdminGUIFrame adminGUIFrame = AdminGUIFrame.getInstance();
     private static User user = new User();
     private static Registry registry;
     private static ModelInterface msgserver;
@@ -217,30 +223,120 @@ public class AdminClientController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    String userType = adminGUIFrame.getUserTypeComboBox().getSelectedItem().toString();
+                    String firstName = adminGUIFrame.getFirstNameTextField().getText();
+                    String lastName = adminGUIFrame.getLastNameTextField().getText();
+                    String middleName = adminGUIFrame.getMiddleNameTextField().getText();
+                    String birthdate = adminGUIFrame.getBirthdateTextField().getText();
+                    String age = adminGUIFrame.getAgeTextField().getText();
+                    String gender = adminGUIFrame.getGenderComboBox().getSelectedItem().toString();
+                    String personWithDisability = adminGUIFrame.getPersonWithDisabilityCheckBox().isSelected() ? "Yes" : "No";
+                    String email = adminGUIFrame.getEmailAddressTextField().getText();
+                    String contactNumber = adminGUIFrame.getContactNumberTextField().getText();
+                    String username = adminGUIFrame.getSetUsernameTextField().getText();
+                    String password = new String(adminGUIFrame.getSetPasswordTextField().getText());
+                    String confirmPassword = new String(adminGUIFrame.getConfirmPasswordTextField().getText());
+                    String street = adminGUIFrame.getStreetAddressTextField().getText();
+                    String additionalAddress = adminGUIFrame.getAptSuiteOptionalTextField().getText();
+                    String city = adminGUIFrame.getMunicipalityTextField().getText();
+                    String province = adminGUIFrame.getProvinceTextField().getText();
+                    String zip = adminGUIFrame.getZipCodeTextField().getText();
+
+                    // Perform input validation
+                    if (firstName.isEmpty() || lastName.isEmpty() || birthdate.isEmpty() || age.isEmpty() ||
+                            gender.isEmpty() || email.isEmpty() || contactNumber.isEmpty() || username.isEmpty() || password.isEmpty() ||
+                            street.isEmpty() || city.isEmpty() || province.isEmpty() || zip.isEmpty()) {
+                        throw new InvalidInputException("Please fill in all required fields.");
+                    }
+
+                    // Validate contact number format
+                    if (!Pattern.matches("\\d{11}", contactNumber)) {
+                        throw new InvalidInputException("Invalid contact number format. Please enter a 11-digit number.");
+                    }
+
+                    // Check if password and confirm password match
+                    if (!password.equals(confirmPassword)) {
+                        throw new InvalidInputException("Passwords do not match. Please re-enter.");
+                    }
+
+                    // Check if username is already taken
+                    if (isUsernameTaken(username)) {
+                        throw new InvalidInputException("Username is already taken. Please choose another username.");
+                    }
+
+
+                    // Create a User object
+                    User newUser = new User(null, userType, firstName, lastName, middleName, birthdate, age, gender,
+                            personWithDisability, email, contactNumber, username, password, confirmPassword,
+                            street, additionalAddress, city, province, zip);
+
+                    // Register the user
                     ServerImplementation server = new ServerImplementation();
-                    server.registerUser(adminGUIFrame);
+                    server.registerUser(newUser);
+
+                    // Show confirmation message
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Account created successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                    // Reset text fields
+                    resetTextFields(adminGUIFrame);
+
+                    // Auto refresh user-related components
+                    autoRefreshUserRelatedComponents();
+
                 } catch (RemoteException ex) {
                     ex.printStackTrace();
                 } catch (InvalidInputException ex) {
                     JOptionPane.showMessageDialog(adminGUIFrame, ex.getMessage(), "Invalid Input", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
-        adminGUIFrame.getSendButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String broadcastMessage = adminGUIFrame.getSendMessageTextArea().getText();
-                try {
-                    msgserver.broadcast(mci, broadcastMessage);
-
-                } catch (RemoteException ex) {
-                    throw new RuntimeException(ex);
-                } catch (NotLoggedInException ex) {
+                } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
             }
         });
     }
+
+    private static void resetTextFields(AdminGUIFrame adminGUIFrame) {
+        adminGUIFrame.getFirstNameTextField().setText("");
+        adminGUIFrame.getLastNameTextField().setText("");
+        adminGUIFrame.getMiddleNameTextField().setText("");
+        adminGUIFrame.getBirthdateTextField().setText("");
+        adminGUIFrame.getAgeTextField().setText("");
+        adminGUIFrame.getGenderComboBox().setSelectedIndex(0);
+        adminGUIFrame.getPersonWithDisabilityCheckBox().setSelected(false);
+        adminGUIFrame.getEmailAddressTextField().setText("");
+        adminGUIFrame.getContactNumberTextField().setText("");
+        adminGUIFrame.getSetUsernameTextField().setText("");
+        adminGUIFrame.getSetPasswordTextField().setText("");
+        adminGUIFrame.getConfirmPasswordTextField().setText("");
+        adminGUIFrame.getStreetAddressTextField().setText("");
+        adminGUIFrame.getAptSuiteOptionalTextField().setText("");
+        adminGUIFrame.getMunicipalityTextField().setText("");
+        adminGUIFrame.getProvinceTextField().setText("");
+        adminGUIFrame.getZipCodeTextField().setText("");
+    }
+
+    public static void autoRefreshUserRelatedComponents() throws Exception {
+        msgserver.updateRegisteredUsersTable(mci);
+        msgserver.updateRegisterUsersCount(mci);
+    }
+
+    // Method to check if username is already taken
+    private static boolean isUsernameTaken(String username) throws UsernameTakenException {
+        try {
+            // Read existing user data from file or database
+            List<User> existingUsers = UserJSONProcessor.readUsersFromFile("res/UserInformation.json");
+
+            // Iterate through existing users to check if username is taken
+            for (User user : existingUsers) {
+                if (user.getUsername().equals(username)) {
+                    throw new UsernameTakenException("Username is already taken. Please choose another one.");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false; // Username is not taken
+    }
+
 
     public void unarchiveSelectedUsers(String userId, String originalFilePath, String archiveFilePath) {
         try {
