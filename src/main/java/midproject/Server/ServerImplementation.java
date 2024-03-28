@@ -23,11 +23,12 @@ import midproject.SharedClasses.UserJSONProcessor;
 import midproject.ViewClasses.AdminGUIFrame;
 
 import javax.swing.*;
-
+import static midproject.Client.AdminClientController.adminGUIFrame;
 import static midproject.SharedClasses.SessionIDGenerator.generateUniqueSessionId;
 import static midproject.SharedClasses.UserJSONProcessor.isValidCredentials;
 
 public class ServerImplementation extends UnicastRemoteObject implements ModelInterface {
+
     private Map<String, MessageCallback> msgCallbacks = new ConcurrentHashMap<>();
     private Map<String, String> sessionUserMap = new ConcurrentHashMap<>();
 
@@ -64,13 +65,13 @@ public class ServerImplementation extends UnicastRemoteObject implements ModelIn
     public void notifyOnlineUsersChanged() {
         int onlineUsersCount = sessionUserMap.size();
         System.out.println("Updating online users count...");
-                msgCallbacks.values().forEach(callback -> {
-                    try {
-                        callback.updateOnlineUsers(onlineUsersCount);
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
-                    }
-                });
+        msgCallbacks.values().forEach(callback -> {
+            try {
+                callback.updateOnlineUsers(onlineUsersCount);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     // broadcast method implementation
@@ -189,61 +190,18 @@ public class ServerImplementation extends UnicastRemoteObject implements ModelIn
             throw new RemoteException("Error searching archived user: " + e.getMessage());
         }
     }*/
-    public void registerUser(AdminGUIFrame adminGUIFrame) throws RemoteException, InvalidInputException {
-        String userType = adminGUIFrame.getUserTypeComboBox().getSelectedItem().toString();
-        String firstName = adminGUIFrame.getFirstNameTextField().getText();
-        String lastName = adminGUIFrame.getLastNameTextField().getText();
-        String middleName = adminGUIFrame.getMiddleNameTextField().getText();
-        String birthdate = adminGUIFrame.getBirthdateTextField().getText();
-        String age = adminGUIFrame.getAgeTextField().getText();
-        String gender = adminGUIFrame.getGenderComboBox().getSelectedItem().toString();
-        String personWithDisability = adminGUIFrame.getPersonWithDisabilityCheckBox().isSelected() ? "Yes" : "No";
-        String email = adminGUIFrame.getEmailAddressTextField().getText();
-        String contactNumber = adminGUIFrame.getContactNumberTextField().getText();
-        String username = adminGUIFrame.getSetUsernameTextField().getText();
-        String password = new String(adminGUIFrame.getSetPasswordTextField().getText());
-        String confirmPassword = new String(adminGUIFrame.getConfirmPasswordTextField().getText());
-        String street = adminGUIFrame.getStreetAddressTextField().getText();
-        String additionalAddress = adminGUIFrame.getAptSuiteOptionalTextField().getText();
-        String city = adminGUIFrame.getMunicipalityTextField().getText();
-        String province = adminGUIFrame.getProvinceTextField().getText();
-        String zip = adminGUIFrame.getZipCodeTextField().getText();
-
-        // Perform input validation
-        if (firstName.isEmpty() || lastName.isEmpty() || birthdate.isEmpty() || age.isEmpty() ||
-                gender.isEmpty() || email.isEmpty() || contactNumber.isEmpty() || username.isEmpty() || password.isEmpty() ||
-                street.isEmpty() || city.isEmpty() || province.isEmpty() || zip.isEmpty()) {
-            throw new InvalidInputException("Please fill in all required fields.");
-        }
-
-        // Validate contact number format
-        if (!Pattern.matches("\\d{11}", contactNumber)) {
-            throw new InvalidInputException("Invalid contact number format. Please enter a 11-digit number.");
-        }
-
-        String userId = generateUserId(userType);
-
-        // Check if password and confirm password match
-        if (!password.equals(confirmPassword)) {
-            throw new InvalidInputException("Passwords do not match. Please re-enter.");
-        }
-
-        // Create a User object
-        User newUser = new User(userId, userType, firstName, lastName, middleName, birthdate, age, gender,
-                personWithDisability, email, contactNumber, username, password, confirmPassword,
-                street, additionalAddress, city, province, zip);
-
+    public void registerUser(User newUser) throws RemoteException, InvalidInputException {
+        // Generate unique user ID
+        String userId = generateUserId(newUser.getUserType());
+        newUser.setUserId(userId);
         // Add the user to the JSON file
         String filePath = "res/UserInformation.json";
         UserJSONProcessor.addUserToJsonFile(newUser, filePath);
 
-        // Show confirmation message
-        JOptionPane.showMessageDialog(adminGUIFrame, "Account created successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-        resetTextFields(adminGUIFrame);
     }
+
     private String generateUserId(String userType) {
         List<String> userIds = UserJSONProcessor.loadUserIdsFromJsonFile("res/UserInformation.json", "res/UserIDTracker.txt");
-
         int maxId = 0;
         Pattern pattern = Pattern.compile("[A-Z](\\d+)");
         for (String userId : userIds) {
@@ -257,23 +215,5 @@ public class ServerImplementation extends UnicastRemoteObject implements ModelIn
         }
         String prefix = userType.equals("Admin") ? "A" : "C";
         return prefix + (maxId + 1);
-    }
-    private void resetTextFields(AdminGUIFrame adminGUIFrame) {
-        adminGUIFrame.getFirstNameTextField().setText("");
-        adminGUIFrame.getLastNameTextField().setText("");
-        adminGUIFrame.getMiddleNameTextField().setText("");
-        adminGUIFrame.getBirthdateTextField().setText("");
-        adminGUIFrame.getAgeTextField().setText("");
-        adminGUIFrame.getGenderComboBox().setSelectedIndex(0);
-        adminGUIFrame.getPersonWithDisabilityCheckBox().setSelected(false);
-        adminGUIFrame.getEmailAddressTextField().setText("");
-        adminGUIFrame.getContactNumberTextField().setText("");
-        adminGUIFrame.getSetUsernameTextField().setText("");
-        adminGUIFrame.getSetPasswordTextField().setText("");
-        adminGUIFrame.getStreetAddressTextField().setText("");
-        adminGUIFrame.getAptSuiteOptionalTextField().setText("");
-        adminGUIFrame.getMunicipalityTextField().setText("");
-        adminGUIFrame.getProvinceTextField().setText("");
-        adminGUIFrame.getZipCodeTextField().setText("");
     }
 }
