@@ -19,12 +19,10 @@ public interface MessageCallback extends Remote {
 	public void loginCall(User user) throws RemoteException;
 
 	// method called by server when a message is sent by clients
-	// user/sender and message sent as parameter
-	public void broadcastCall(User user, String msg) throws RemoteException;
+	public void broadcastCall(String msg) throws RemoteException;
 
 	// method called by server when a user logs out from the system
 	// user logging out sent as parameter
-
 	public void logoutCall(User user) throws RemoteException;
     //public void sendArchivedUsersList(List<User> archivedUsers);
 

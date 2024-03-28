@@ -17,91 +17,183 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.Interfaces.MessageCallback;
-import midproject.SharedClasses.ReferenceClasses.User;
+import midproject.SharedClasses.ReferenceClasses.*;
 import midproject.SharedClasses.UserDefinedExceptions.*;
 import midproject.SharedClasses.Utilities.UserJSONProcessor;
 
 import static midproject.SharedClasses.Utilities.SessionIDGenerator.generateUniqueSessionId;
-import static midproject.SharedClasses.Utilities.UserJSONProcessor.isValidCredentials;
+import static midproject.SharedClasses.Utilities.UserJSONProcessor.*;
+
 
 public class ModelImplementation extends UnicastRemoteObject implements ModelInterface {
 
-    private Map<String, MessageCallback> msgCallbacks = new ConcurrentHashMap<>();
+    private Map<UserCallBackInfo, MessageCallback> msgCallbacks = new ConcurrentHashMap<>();
     private Map<String, String> sessionUserMap = new ConcurrentHashMap<>();
 
     public ModelImplementation() throws RemoteException {
     }
 
-    public synchronized String login(MessageCallback msgCallback, String username, String password)
+    /**
+    *
+    * LOGIN AND LOGOUT METHODS
+    *
+    * */
+
+    public synchronized String login(MessageCallback msgCallback, String username, String password, String userTypeRequest)
             throws RemoteException, UserExistsException, AlreadyLoggedInException, AuthenticationFailedException {
-        User user = msgCallback.getUser();
-        String filepath = "res/UserInformation.json";
+        try {
+            User user = msgCallback.getUser();
+            String filepath = "res/UserInformation.json";
 
-        if (!isValidCredentials(username, password, filepath)) {
-            throw new AuthenticationFailedException("Invalid username or password.");
-        }
-        if (msgCallbacks.containsValue(msgCallback)) {
-            throw new AlreadyLoggedInException("Already logged in... you cannot login using the same client...");
-        } else if (msgCallbacks.containsKey(username)) {
-            throw new UserExistsException("Username already exists, use another name...");
-        }
-
-        user.setUsername(username);
-        String sessionId = generateUniqueSessionId();
-        sessionUserMap.put(sessionId, username);
-        msgCallbacks.put(username, msgCallback);
-
-        msgCallback.loginCall(user);
-        System.out.println("> User " + username + "logged in");
-
-        notifyOnlineUsersChanged();
-        return sessionId;
-    }
-
-
-    public void notifyOnlineUsersChanged() {
-        int onlineUsersCount = sessionUserMap.size();
-        System.out.println("Updating online users count...");
-        msgCallbacks.values().forEach(callback -> {
-            try {
-                callback.updateOnlineUsers(onlineUsersCount);
-            } catch (RemoteException e) {
-                e.printStackTrace();
+            if (!isValidCredentials(username, password, filepath, userTypeRequest)) {
+                throw new AuthenticationFailedException("Invalid username or password.");
             }
-        });
+            if (msgCallbacks.containsValue(msgCallback)) {
+                throw new AlreadyLoggedInException("Already logged in... you cannot login using the same client...");
+            } else if (msgCallbacks.containsKey(username)) {
+                throw new UserExistsException("Username already exists, use another name...");
+            }
+
+            user.setUsername(username);
+            String sessionId = generateUniqueSessionId();
+            sessionUserMap.put(sessionId, username);
+
+            UserCallBackInfo userCallBackInfo = new UserCallBackInfo(username, userTypeRequest);
+            msgCallbacks.put(userCallBackInfo, msgCallback);
+
+            msgCallback.loginCall(user);
+            System.out.println("> User " + username + "logged in");
+
+            notifyOnlineUsersChanged();
+
+            return sessionId;
+
+        } catch (AuthenticationFailedException e) {
+            // Handle invalid credentials
+            System.err.println("Authentication failed: " + e.getMessage());
+            throw e;
+        } catch (AlreadyLoggedInException e) {
+            // Handle already logged in
+            System.err.println("User already logged in: " + e.getMessage());
+            throw e;
+        } catch (UserExistsException e) {
+            // Handle user already exists
+            System.err.println("Username already exists: " + e.getMessage());
+            throw e;
+        } catch (RemoteException e) {
+            // Handle RemoteException
+            System.err.println("Remote exception occurred: " + e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            // Catch-all for other exceptions
+            System.err.println("An unexpected error occurred: " + e.getMessage());
+            e.printStackTrace();
+            // Consider what to do here: rethrow, convert to a specific exception, etc.
+            throw new RemoteException("An unexpected error occurred.", e);
+        }
     }
 
-    // broadcast method implementation
-    public synchronized void broadcast(MessageCallback msgCallback, String msg)
-            throws RemoteException, NotLoggedInException {
-        // check if msgCallback/session is not in the existing callback objects
-        if (!msgCallbacks.containsValue(msgCallback)) {
-            //throw new NotLoggedInException();
-        }
-        // get user of mc/callback
-        User user = msgCallback.getUser();
-        // loop to send broadcast to all clients/callbacks
-        for (String name : msgCallbacks.keySet()) {
-            msgCallbacks.get(name).broadcastCall(user, msg);
-        }
-    }
-
-    public synchronized void logout(MessageCallback msgCallback, String sessionID) throws RemoteException, NotLoggedInException {
+    public synchronized void logout(MessageCallback msgCallback, String sessionID) throws Exception {
         String username = sessionUserMap.get(sessionID);
-        if (username == null || !msgCallbacks.containsKey(username)) {
+        String userType = getUserTypeByUsername("res/UserInformation.json", username);
+
+        UserCallBackInfo lookupKey = new UserCallBackInfo(username, userType);
+
+        boolean containsUsername = false;
+        for (UserCallBackInfo key : msgCallbacks.keySet()) {
+            if (key.getUsername().equals(username)) {
+                containsUsername = true;
+                break;
+            }
+        }
+        if (username == null || !containsUsername) {
             throw new NotLoggedInException("User not logged in or session not found.");
         }
 
         User user = msgCallback.getUser();
         user.setUsername(username);
 
-        msgCallbacks.remove(username);
+        // When removing, ensure we're using the lookupKey variable
+        msgCallbacks.remove(lookupKey);
         sessionUserMap.remove(sessionID);
 
         notifyOnlineUsersChanged();
         msgCallback.logoutCall(user);
 
         System.out.println("> User " + username + "logged out");
+    }
+
+
+    /**
+     * BROADCASTING METHODS
+     *
+     * */
+
+
+    public synchronized void broadcast(MessageCallback msgCallback, String msg)
+            throws RemoteException, NotLoggedInException {
+        if (!msgCallbacks.containsValue(msgCallback)) {
+            //throw new NotLoggedInException();
+        }
+        for (UserCallBackInfo userCallBackInfo : msgCallbacks.keySet()) {
+            msgCallbacks.get(userCallBackInfo.getUsername()).broadcastCall(msg);
+        }
+    }
+
+
+    /**
+     *
+     * DASHBOARD RELATED METHODS
+     *
+     * */
+
+    /**
+     *
+     * REGISTERED USERS RELATED METHODS
+     *
+     * */
+
+    /**
+     *
+     * ARCHIVED USERS RELATED METHODS
+     *
+     * */
+
+    /**
+     *
+     * REGISTER USER RELATED METHODS
+     *
+     * */
+
+    /**
+     *
+     * ORDERS RELATED METHODS
+     *
+     * */
+
+    /**
+     *
+     * PENDING ORDERS RELATED METHODS
+     *
+     * */
+
+
+
+
+    public void notifyOnlineUsersChanged() {
+        int onlineUsersCount = sessionUserMap.size();
+        System.out.println("Updating online users count...");
+        msgCallbacks.entrySet().forEach(entry -> {
+            UserCallBackInfo userInfo = entry.getKey();
+            MessageCallback callback = entry.getValue();
+            if ("Admin".equals(userInfo.getUserType())) {
+                try {
+                    callback.updateOnlineUsers(onlineUsersCount);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     public synchronized void updateRegisteredUsersTable(MessageCallback msgCallback) throws Exception {
@@ -187,6 +279,7 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             throw new RemoteException("Error searching archived user: " + e.getMessage());
         }
     }*/
+
     public void registerUser(User newUser) throws RemoteException, InvalidInputException {
         // Generate unique user ID
         String userId = generateUserId(newUser.getUserType());

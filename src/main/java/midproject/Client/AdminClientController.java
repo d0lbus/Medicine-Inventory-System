@@ -11,9 +11,7 @@ import midproject.SharedClasses.Implementations.CallbackImplementation;
 import midproject.SharedClasses.Implementations.ModelImplementation;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.User;
-import midproject.SharedClasses.UserDefinedExceptions.InvalidInputException;
-import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
-import midproject.SharedClasses.UserDefinedExceptions.UsernameTakenException;
+import midproject.SharedClasses.UserDefinedExceptions.*;
 import midproject.SharedClasses.Utilities.UserJSONProcessor;
 import midproject.ViewClasses.AdminGUIFrame;
 import midproject.ViewClasses.Login;
@@ -57,12 +55,13 @@ public class AdminClientController {
                 String ipAddress = loginFrame.getIpAddressTextField().getText();
                 String username = loginFrame.getUsernameTextField().getText();
                 String password = new String(loginFrame.getPasswordField().getPassword());
+                String userTypeRequest = "Admin";
 
                 registry = LocateRegistry.getRegistry(ipAddress);
                 msgserver = (ModelInterface) registry.lookup("msgserver");
 
                 mci = new CallbackImplementation(user, adminGUIFrame);
-                sessionID = msgserver.login(mci, username, password);
+                sessionID = msgserver.login(mci, username, password, userTypeRequest);
 
                 if (sessionID != null) {
                     loginFrame.dispose();
@@ -70,9 +69,14 @@ public class AdminClientController {
                 } else {
                     JOptionPane.showMessageDialog(loginFrame, "Authentication failed.");
                 }
+            } catch (AuthenticationFailedException ex) {
+                JOptionPane.showMessageDialog(loginFrame, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+            } catch (AlreadyLoggedInException ex) {
+                JOptionPane.showMessageDialog(loginFrame, "User already logged in with this client.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+            } catch (UserExistsException ex) {
+                JOptionPane.showMessageDialog(loginFrame, "Username already exists, choose a different one.", "Login Failed", JOptionPane.ERROR_MESSAGE);
             } catch (Exception ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(loginFrame, "Login error: " + ex.getMessage());
+                JOptionPane.showMessageDialog(loginFrame, "Login error: Server may be offline or invalid IP Address", "Login Failed",JOptionPane.ERROR_MESSAGE);
             }
         });
     }
@@ -88,13 +92,6 @@ public class AdminClientController {
 
         autoRefreshUserRelatedComponents();
 
-        adminGUIFrame.getDashboardButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
 
         adminGUIFrame.getLogoutMouseClicked().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -105,20 +102,8 @@ public class AdminClientController {
                     JOptionPane.showMessageDialog(adminGUIFrame, "Remote exception occurred.", "Error", JOptionPane.ERROR_MESSAGE);
                 } catch (NotLoggedInException ex) {
                     JOptionPane.showMessageDialog(adminGUIFrame, "You are not logged in.", "Logout Failed", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
-        adminGUIFrame.getSendButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String broadcastMessage = adminGUIFrame.getSendMessageTextArea().getText();
-                try {
-                    msgserver.broadcast(mci, broadcastMessage);
-
-                } catch (RemoteException ex) {
-                    throw new RuntimeException(ex);
-                } catch (NotLoggedInException ex) {
-                    throw new RuntimeException(ex);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             }
         });
@@ -134,9 +119,42 @@ public class AdminClientController {
                     JOptionPane.showMessageDialog(adminGUIFrame, "Remote exception occurred.", "Error", JOptionPane.ERROR_MESSAGE);
                 } catch (NotLoggedInException ex) {
                     JOptionPane.showMessageDialog(adminGUIFrame, "You are not logged in.", "Logout Failed", JOptionPane.ERROR_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Logout Process Failed.", "Logout Failed", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
+
+
+        adminGUIFrame.getSendButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String broadcastMessage = adminGUIFrame.getSendMessageTextArea().getText();
+                try {
+                    msgserver.broadcast(mci, broadcastMessage);
+                } catch (RemoteException ex) {
+                    throw new RuntimeException(ex);
+                } catch (NotLoggedInException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
+
+
+        adminGUIFrame.getDashboardButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    autoRefreshUserRelatedComponents();
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
+
+
 
         /*adminGUIFrame.getaUsersUnarchiveButton().addActionListener(new ActionListener() {
             @Override

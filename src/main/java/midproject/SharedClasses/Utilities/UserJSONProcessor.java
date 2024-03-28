@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class UserJSONProcessor {
 
@@ -43,14 +44,14 @@ public class UserJSONProcessor {
         }
     }
 
-    public static boolean isValidCredentials(String username, String password, String filePath) {
+    public static boolean isValidCredentials(String username, String password, String filePath, String userTypeRequest) {
         try {
             String json = new String(Files.readAllBytes(Paths.get(filePath)));
             Type userListType = new TypeToken<List<User>>(){}.getType();
             List<User> users = gson.fromJson(json, userListType);
 
             for (User user : users) {
-                if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                if (user.getUsername().equals(username) && user.getPassword().equals(password) & Objects.equals(user.getUserType(), userTypeRequest)) {
                     return true;
                 }
             }
@@ -58,6 +59,23 @@ public class UserJSONProcessor {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static String getUserTypeByUsername(String filePath, String username) throws Exception {
+        try (FileReader reader = new FileReader(filePath)) {
+            Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
+            List<User> users = gson.fromJson(reader, userListType);
+
+            for (User user : users) {
+                if (user.getUsername().equals(username)) {
+                    return user.getUserType(); // Assuming User class has a getUserType method
+                }
+            }
+            throw new Exception("User not found");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Error accessing or processing file", e);
+        }
     }
 
     public static void updateUserInJsonFile(User updatedUser, String filePath) {

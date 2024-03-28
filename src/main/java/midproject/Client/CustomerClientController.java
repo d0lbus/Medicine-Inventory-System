@@ -52,11 +52,12 @@ public class CustomerClientController {
 				String ipAddress = loginFrame.getIpAddressTextField().getText();
 				String username = loginFrame.getUsernameTextField().getText();
 				String password = new String(loginFrame.getPasswordField().getPassword());
+				String userTypeRequest = "Customer";
 
 				registry = LocateRegistry.getRegistry(ipAddress);
 				msgserver = (ModelInterface) registry.lookup("msgserver");
 				mci = new CallbackImplementation(user, clientGUIFrame);
-				sessionID = msgserver.login(mci, username, password);
+				sessionID = msgserver.login(mci, username, password, userTypeRequest);
 
 				if (sessionID != null) {
 					loginFrame.dispose();
@@ -92,9 +93,11 @@ public class CustomerClientController {
 				JOptionPane.showMessageDialog(clientGUIFrame, "Remote exception occurred.", "Error", JOptionPane.ERROR_MESSAGE);
 			} catch (NotLoggedInException ex) {
 				JOptionPane.showMessageDialog(clientGUIFrame, "You are not logged in.", "Logout Failed", JOptionPane.ERROR_MESSAGE);
-			}
+			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(clientGUIFrame, "Logout Process Failed.", "Logout Failed", JOptionPane.ERROR_MESSAGE);
+            }
 
-		});
+        });
 
 		clientGUIFrame.addWindowListener(new WindowAdapter() {
 				@Override
@@ -106,6 +109,8 @@ public class CustomerClientController {
 						JOptionPane.showMessageDialog(clientGUIFrame, "Remote exception occurred.", "Error", JOptionPane.ERROR_MESSAGE);
 					} catch (NotLoggedInException ex) {
 						JOptionPane.showMessageDialog(clientGUIFrame, "You are not logged in.", "Logout Failed", JOptionPane.ERROR_MESSAGE);
+					} catch (Exception ex) {
+						JOptionPane.showMessageDialog(clientGUIFrame, "Logout Process Failed.", "Logout Failed", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			});

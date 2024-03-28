@@ -7,6 +7,7 @@ import java.util.List;
 
 import midproject.SharedClasses.Interfaces.MessageCallback;
 import midproject.SharedClasses.ReferenceClasses.User;
+import midproject.SharedClasses.ReferenceClasses.UserCallBackInfo;
 import midproject.ViewClasses.AdminGUIFrame;
 import midproject.ViewClasses.ClientGUIFrame;
 
@@ -15,6 +16,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class CallbackImplementation extends UnicastRemoteObject implements MessageCallback, Serializable {
 	private User user;
+	private UserCallBackInfo userInfo;
+
 	private AdminGUIFrame adminGUIFrame;
 	private ClientGUIFrame clientGUIFrame;
 
@@ -86,12 +89,11 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		System.out.println(user.getUsername() + " logged in...");
 	}
 
-	public void broadcastCall(User user, String msg) throws RemoteException {
+	public void broadcastCall(String msg) throws RemoteException {
 		System.out.println("[" + user.getUsername() + "]: " + msg);
-
 		SwingUtilities.invokeLater(() -> {
 			if (clientGUIFrame != null) {
-				clientGUIFrame.getNotificationsTextArea().append("[" + user.getUsername() + "]: " + msg + "\n");
+				clientGUIFrame.getNotificationsTextArea().append("[SERVER NOTIFICATION]: " + msg + "\n");
 			} else {
 				System.err.println("Client GUI frame is null.");
 			}
