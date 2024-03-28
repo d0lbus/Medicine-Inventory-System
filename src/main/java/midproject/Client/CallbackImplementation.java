@@ -71,6 +71,29 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		});
 	}
 
+	public void updateRegisteredUsersTable(List<User> users) throws RemoteException {
+		SwingUtilities.invokeLater(() -> {
+			if (adminGUIFrame != null) {
+				DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getrUsersTable().getModel();
+				model.setRowCount(0); // Clear the existing rows
+
+				// Populate the table with the new list of users
+				for (User user : users) {
+					Object[] rowData = {
+							user.getUserId(),
+							user.getLastName(),
+							user.getFirstName(),
+							user.getUserType(),
+							user.getUsername()
+					};
+					model.addRow(rowData);
+				}
+			} else {
+				System.err.println("Admin GUI frame is null.");
+			}
+		});
+	}
+
 	public CallbackImplementation(User user, AdminGUIFrame adminGUIFrame) throws RemoteException {
 		this.user = user;
 		this.adminGUIFrame = adminGUIFrame;

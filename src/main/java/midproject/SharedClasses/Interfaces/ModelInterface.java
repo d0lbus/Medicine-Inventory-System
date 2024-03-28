@@ -7,7 +7,8 @@ import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
 import midproject.SharedClasses.UserDefinedExceptions.UserExistsException;
 import midproject.ViewClasses.AdminGUIFrame;
 
-import java.rmi.*;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
 
 public interface ModelInterface extends Remote {

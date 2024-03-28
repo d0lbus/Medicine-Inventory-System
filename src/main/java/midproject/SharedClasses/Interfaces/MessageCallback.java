@@ -3,9 +3,12 @@ package midproject.SharedClasses.Interfaces;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.ViewClasses.AdminGUIFrame;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
+
 
 public interface MessageCallback extends Remote {
 	// method to get the current user of the callback/session
@@ -30,4 +33,8 @@ public interface MessageCallback extends Remote {
 	public void readUsersList(List<User> users) throws RemoteException;
 
 	public void countUsersList(List<User> users) throws RemoteException;
+	public void updateRegisteredUsersTable(List<User> users) throws RemoteException;
+
+
+
 }
