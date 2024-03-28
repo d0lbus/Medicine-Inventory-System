@@ -114,6 +114,14 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 
 	public void broadcastCall(User user, String msg) throws RemoteException {
 		System.out.println("[" + user.getUsername() + "]: " + msg);
+
+		SwingUtilities.invokeLater(() -> {
+			if (clientGUIFrame != null) {
+				clientGUIFrame.getNotificationsTextArea().append("[" + user.getUsername() + "]: " + msg + "\n");
+			} else {
+				System.err.println("Client GUI frame is null.");
+			}
+		});
 	}
 
 	public void logoutCall(User user) throws RemoteException  {

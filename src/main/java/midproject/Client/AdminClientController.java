@@ -21,7 +21,6 @@ import midproject.ViewClasses.AdminGUIFrame;
 import midproject.ViewClasses.Login;
 import java.util.regex.Pattern;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -224,6 +223,20 @@ public class AdminClientController {
                     ex.printStackTrace();
                 } catch (InvalidInputException ex) {
                     JOptionPane.showMessageDialog(adminGUIFrame, ex.getMessage(), "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        adminGUIFrame.getSendButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String broadcastMessage = adminGUIFrame.getSendMessageTextArea().getText();
+                try {
+                    msgserver.broadcast(mci, broadcastMessage);
+
+                } catch (RemoteException ex) {
+                    throw new RuntimeException(ex);
+                } catch (NotLoggedInException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
         });

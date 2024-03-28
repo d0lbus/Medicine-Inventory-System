@@ -12,7 +12,6 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
-import midproject.ViewClasses.AdminGUIFrame;
 import midproject.ViewClasses.ClientGUIFrame;
 import midproject.ViewClasses.Login;
 import java.awt.event.MouseAdapter;
@@ -127,8 +126,6 @@ public class CustomerClientController {
 		 *  Display Profile
 		 *  Change Password
 		 * */
-
-
 	}
 }
 

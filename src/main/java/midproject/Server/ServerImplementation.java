@@ -28,7 +28,6 @@ import static midproject.SharedClasses.SessionIDGenerator.generateUniqueSessionI
 import static midproject.SharedClasses.UserJSONProcessor.isValidCredentials;
 
 public class ServerImplementation extends UnicastRemoteObject implements ModelInterface {
-
     private Map<String, MessageCallback> msgCallbacks = new ConcurrentHashMap<>();
     private Map<String, String> sessionUserMap = new ConcurrentHashMap<>();
 
