@@ -117,10 +117,10 @@ public class UserJSONProcessor {
         }
     }
 
-    public static void archiveUser(String userId, String originalFilePath, String archiveFilePath) {
+    public static void transferUserToDifferentFile(String userId, String originalFilePath, String destinationFilePath) {
         try {
             List<User> users = readUsersFromFile(originalFilePath);
-            List<User> archivedUsers = readUsersFromFile(archiveFilePath);
+            List<User> archivedUsers = readUsersFromFile(destinationFilePath);
 
             users.removeIf(user -> {
                 boolean match = user.getUserId().equals(userId);
@@ -129,7 +129,7 @@ public class UserJSONProcessor {
             });
 
             writeUsersToFile(users, originalFilePath);
-            writeUsersToFile(archivedUsers, archiveFilePath);
+            writeUsersToFile(archivedUsers, destinationFilePath);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -55,6 +55,28 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		});
 	}
 
+	public void readAUsersList(List<User> users) {
+		SwingUtilities.invokeLater(() -> {
+			if (adminGUIFrame != null) {
+				DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getaUsersTable().getModel();
+				model.setRowCount(0);
+
+				for (User user : users) {
+					Object[] rowData = {
+							user.getUserId(),
+							user.getLastName(),
+							user.getFirstName(),
+							user.getUserType(),
+							user.getUsername()
+					};
+					model.addRow(rowData);
+				}
+			} else {
+				System.err.println("Admin GUI frame is null.");
+			}
+		});
+	}
+
 	public void countUsersList(List<User> users) {
 		int count = users.size();
 		SwingUtilities.invokeLater(() -> {
@@ -123,6 +145,10 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 
 			JOptionPane.showMessageDialog(null, userDetails, "Details of " + user.getFirstName() + " " + user.getLastName(), JOptionPane.INFORMATION_MESSAGE);
 		});
+	}
+
+	public void notifyUserArchivedByAdmin(String adminUsername, String archivedUsername) throws RemoteException {
+		System.out.println(adminUsername + " archived user " + archivedUsername);
 	}
 
 }

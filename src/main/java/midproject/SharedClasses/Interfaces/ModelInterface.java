@@ -23,10 +23,14 @@ public interface ModelInterface extends Remote {
 
     public void sendAUserDetailsToAdmins(String userId, MessageCallback msgCallback) throws RemoteException;
 
+    void archiveUser(String userId, MessageCallback callback, String adminUsername) throws RemoteException;
+
     public void unarchiveSelectedUsers(String userId, String originalFilePath, String archiveFilePath)
             throws Exception;
 
     public void updateRegisteredUsersTable() throws Exception;
+
+    public void updateArchivedUsersTable() throws Exception;
 
     public void updateRegisteredUsersCount() throws Exception;
 

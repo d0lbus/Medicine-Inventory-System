@@ -148,6 +148,25 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
     }
 
+    public void archiveUser(String userId, MessageCallback callback, String adminUsername) throws RemoteException {
+        try {
+            User userToArchive = getUserById("res/UserInformation.json", userId);
+            UserJSONProcessor.transferUserToDifferentFile(userId, "res/UserInformation.json", "res/ArchivedUsers.json");
+
+            for (Map.Entry<UserCallBackInfo, MessageCallback> entry : msgCallbacks.entrySet()) {
+                UserCallBackInfo userInfo = entry.getKey();
+                MessageCallback adminCallback = entry.getValue();
+
+                if ("Admin".equals(userInfo.getUserType())) {
+                    adminCallback.notifyUserArchivedByAdmin(adminUsername, userToArchive.getUsername());
+                }
+            }
+        } catch (Exception e) {
+            throw new RemoteException("Failed to archive user: " + e.getMessage());
+        }
+    }
+
+
     /**
      *
      * ARCHIVED USERS RELATED METHODS
@@ -285,6 +304,24 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             if ("Admin".equals(userInfo.getUserType())) {
                 try {
                     callback.readRUsersList(usersList);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void updateArchivedUsersTable() throws Exception {
+        String filepath = "res/ArchivedUsers.json";
+        List<User> usersList = UserJSONProcessor.readUsersFromFile(filepath);
+
+        msgCallbacks.entrySet().forEach(entry -> {
+            UserCallBackInfo userInfo = entry.getKey();
+            MessageCallback callback = entry.getValue();
+
+            if ("Admin".equals(userInfo.getUserType())) {
+                try {
+                    callback.readAUsersList(usersList);
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }

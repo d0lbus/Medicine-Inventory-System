@@ -1,6 +1,7 @@
 package midproject.SharedClasses.Utilities;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import midproject.SharedClasses.ReferenceClasses.GenericName;
 
@@ -16,7 +17,7 @@ import java.util.Map;
 
 public class MedicineJSONProcessor {
 
-    private static final Gson gson = new Gson();
+    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public static Map<String, List<GenericName>> parseMedicineFromJson(String json) {
         Type medicineType = new TypeToken<HashMap<String, List<GenericName>>>() {}.getType();
