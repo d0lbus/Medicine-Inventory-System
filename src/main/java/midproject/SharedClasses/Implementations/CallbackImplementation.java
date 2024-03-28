@@ -33,7 +33,7 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		});
 	}
 
-	public void readUsersList(List<User> users) {
+	public void readRUsersList(List<User> users) {
 		SwingUtilities.invokeLater(() -> {
 			if (adminGUIFrame != null) {
 				DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getrUsersTable().getModel();
@@ -70,7 +70,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		});
 	}
 
-
 	public CallbackImplementation(User user, AdminGUIFrame adminGUIFrame) throws RemoteException {
 		this.user = user;
 		this.adminGUIFrame = adminGUIFrame;
@@ -103,4 +102,27 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 	public void logoutCall(User user) throws RemoteException  {
 		System.out.println(user.getUsername() + " logged out...");
 	}
+
+	public void displayUserDetails(User user) throws RemoteException {
+		SwingUtilities.invokeLater(() -> {
+			String userDetails = "<html>User ID: " + user.getUserId() + "<br>" +
+					"User Type: " + user.getUserType() + "<br>" +
+					"Name: " + user.getFirstName() + " " + (user.getMiddleName() != null ? user.getMiddleName() + " " : "") + user.getLastName() + "<br>" +
+					"Birthdate: " + user.getBirthdate() + "<br>" +
+					"Age: " + user.getAge() + "<br>" +
+					"Gender: " + user.getGender() + "<br>" +
+					"Person with Disability: " + user.getPersonWithDisability() + "<br>" +
+					"Email: " + user.getEmail() + "<br>" +
+					"Contact Number: " + user.getContactNumber() + "<br>" +
+					"Username: " + user.getUsername() + "<br>" +
+					"Street: " + user.getStreet() + "<br>" +
+					"Additional Address Details: " + user.getAdditionalAddressDetails() + "<br>" +
+					"City: " + user.getCity() + "<br>" +
+					"Province: " + user.getProvince() + "<br>" +
+					"ZIP: " + user.getZip() + "</html>";
+
+			JOptionPane.showMessageDialog(null, userDetails, "Details of " + user.getFirstName() + " " + user.getLastName(), JOptionPane.INFORMATION_MESSAGE);
+		});
+	}
+
 }

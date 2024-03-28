@@ -10,6 +10,7 @@ import java.rmi.server.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -129,21 +130,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
      *
      * */
 
-    public void notifyOnlineUsersChanged() {
-        int onlineUsersCount = sessionUserMap.size();
-        System.out.println("Updating online users count...");
-        msgCallbacks.entrySet().forEach(entry -> {
-            UserCallBackInfo userInfo = entry.getKey();
-            MessageCallback callback = entry.getValue();
-            if ("Admin".equals(userInfo.getUserType())) {
-                try {
-                    callback.updateOnlineUsers(onlineUsersCount);
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
     /**
      *
@@ -151,6 +137,16 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
      *
      * */
 
+    public void sendRUserDetailsToAdmins(String userId, MessageCallback messageCallback) {
+        try {
+        User user = getUserById("res/UserInformation.json", userId);
+            messageCallback.displayUserDetails(user);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     /**
      *
@@ -185,12 +181,14 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         UserJSONProcessor.saveUsersToFile(archivedUsers, archiveFilePath);
     }
 
-    public User viewArchivedUserDetails(String userId, String archiveFilePath) throws RemoteException, Exception {
-        User archivedUser = UserJSONProcessor.getArchivedUser(userId, archiveFilePath);
-        if (archivedUser != null) {
-            return archivedUser;
-        } else {
-            throw new Exception("User not found in archive.");
+    public void sendAUserDetailsToAdmins(String userId, MessageCallback messageCallback) {
+        try {
+            User user = getUserById("res/ArchivedUsers.json", userId);
+            messageCallback.displayUserDetails(user);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -255,9 +253,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
      *
      * */
 
-
-
-
     /**
      * MESSAGE RELATED METHODS
      *
@@ -289,7 +284,7 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
             if ("Admin".equals(userInfo.getUserType())) {
                 try {
-                    callback.readUsersList(usersList);
+                    callback.readRUsersList(usersList);
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
@@ -300,7 +295,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
     public void updateRegisteredUsersCount() throws Exception {
         String filepath = "res/UserInformation.json";
         List<User> usersList = UserJSONProcessor.readUsersFromFile(filepath);
-
         msgCallbacks.entrySet().forEach(entry -> {
             UserCallBackInfo userInfo = entry.getKey();
             MessageCallback callback = entry.getValue();
@@ -314,5 +308,28 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             }
         });
     }
+
+    /**
+     *
+     * NOTIFICATION FOR ADMINS RELATED METHODS
+     *
+     * */
+
+    public void notifyOnlineUsersChanged() {
+        int onlineUsersCount = sessionUserMap.size();
+        System.out.println("Updating online users count...");
+        msgCallbacks.entrySet().forEach(entry -> {
+            UserCallBackInfo userInfo = entry.getKey();
+            MessageCallback callback = entry.getValue();
+            if ("Admin".equals(userInfo.getUserType())) {
+                try {
+                    callback.updateOnlineUsers(onlineUsersCount);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
 
 }

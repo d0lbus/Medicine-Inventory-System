@@ -13,24 +13,24 @@ public interface ModelInterface extends Remote {
             throws RemoteException, UserExistsException,
             AlreadyLoggedInException, AuthenticationFailedException;
 
-    // method to broadcast a message to all logged in clients
-    // using msgCallback as session manager/identifier
-    public void broadcast(MessageCallback msgCallback, String msg)
-            throws RemoteException, NotLoggedInException;
-
-    // method to logout from the chat system using msgCallback as
-    // the session manager/identifier
     public void logout(MessageCallback msgCallback, String sessionID)
             throws Exception;
 
+    public void broadcast(MessageCallback msgCallback, String msg)
+            throws RemoteException, NotLoggedInException;
+
+    public void sendRUserDetailsToAdmins(String userId, MessageCallback msgCallback) throws RemoteException;
+
+    public void sendAUserDetailsToAdmins(String userId, MessageCallback msgCallback) throws RemoteException;
+
     public void unarchiveSelectedUsers(String userId, String originalFilePath, String archiveFilePath)
             throws Exception;
-
-    public User viewArchivedUserDetails(String userId, String archiveFilePath) throws RemoteException, Exception;
 
     public void updateRegisteredUsersTable() throws Exception;
 
     public void updateRegisteredUsersCount() throws Exception;
 
     public void registerUser(User newUser) throws Exception, InvalidInputException;
+
+
 }

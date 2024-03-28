@@ -63,6 +63,20 @@ public class UserJSONProcessor {
         return false;
     }
 
+
+    public static User getUserById(String filePath, String userId) throws Exception {
+        List<User> users = readUsersFromFile(filePath);
+
+        for (User user : users) {
+            if (user.getUserId().equals(userId)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+
+
     public static String getUserTypeByUsername(String filePath, String username) throws Exception {
         try (FileReader reader = new FileReader(filePath)) {
             Type userListType = new TypeToken<ArrayList<User>>() {}.getType();

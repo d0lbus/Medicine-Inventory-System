@@ -91,6 +91,7 @@ public class AdminClientController {
 
         autoRefreshUserRelatedComponents();
 
+        /** LOGOUT RELATED METHODS */
 
         adminGUIFrame.getLogoutMouseClicked().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -124,23 +125,7 @@ public class AdminClientController {
             }
         });
 
-
-        adminGUIFrame.getSendButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String broadcastMessage = adminGUIFrame.getSendMessageTextArea().getText();
-                try {
-                    msgserver.broadcast(mci, broadcastMessage);
-                } catch (RemoteException ex) {
-                    throw new RuntimeException(ex);
-                } catch (NotLoggedInException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
-
-
-
+        /** DASHBOARD RELATED METHODS */
         adminGUIFrame.getDashboardButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -152,97 +137,45 @@ public class AdminClientController {
             }
         });
 
-
-
-
-        /*adminGUIFrame.getaUsersUnarchiveButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int row = adminGUIFrame.getaUsersTable().getSelectedRow();
-                if (row != -1) {
-                    String userId = (String) adminGUIFrame.getaUsersTable().getValueAt(row, 0);
-                    try {
-                        // Pass the required arguments to the unarchiveSelectedUsers() method
-                        msgserver.unarchiveSelectedUsers(userId, "res/UserInformation.json", "res/ArchiveFile.json");
-                        JOptionPane.showMessageDialog(adminGUIFrame, "User unarchived successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                        JOptionPane.showMessageDialog(adminGUIFrame, "Error unarchiving user: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a user to unarchive.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        }); */
-
-        adminGUIFrame.getaUsersViewButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int row = adminGUIFrame.getaUsersTable().getSelectedRow();
-                if (row != -1) {
-                    String userId = (String) adminGUIFrame.getaUsersTable().getValueAt(row, 0);
-                    try {
-                        User archivedUser = msgserver.viewArchivedUserDetails(userId, "res/ArchiveFile.json");
-                        if (archivedUser != null) {
-                            String userInfo = "User ID: " + archivedUser.getUserId() + "\n" +
-                                    "First Name: " + archivedUser.getFirstName() + "\n" +
-                                    "Last Name: " + archivedUser.getLastName() + "\n" +
-                                    "Middle Name: " + archivedUser.getMiddleName() + "\n" +
-                                    "Birthdate: " + archivedUser.getBirthdate() + "\n" +
-                                    "Age: " + archivedUser.getAge() + "\n" +
-                                    "Gender: " + archivedUser.getGender() + "\n" +
-                                    "Person with Disability: " + archivedUser.getPersonWithDisability() + "\n" +
-                                    "Email: " + archivedUser.getEmail() + "\n" +
-                                    "Contact Number: " + archivedUser.getContactNumber() + "\n" +
-                                    "Username: " + archivedUser.getUsername() + "\n" +
-                                    "Password: " + archivedUser.getPassword() + "\n" +
-                                    "Street: " + archivedUser.getStreet() + "\n" +
-                                    "Additional Address Details: " + archivedUser.getAdditionalAddressDetails() + "\n" +
-                                    "City: " + archivedUser.getCity() + "\n" +
-                                    "Province: " + archivedUser.getProvince() + "\n" +
-                                    "ZIP: " + archivedUser.getZip();
-                            JOptionPane.showMessageDialog(adminGUIFrame, userInfo, "Archived User Information", JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(adminGUIFrame, "User not found in archive.", "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                        JOptionPane.showMessageDialog(adminGUIFrame, "Error retrieving archived user information: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a user from the table.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        });
-
-        adminGUIFrame.getaUsersSearchTextfield().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
-        adminGUIFrame.getrUsersSearchTextfield().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TableRowSorter<TableModel> sorter = new TableRowSorter<>(adminGUIFrame.getrUsersTable().getModel());
-                adminGUIFrame.getrUsersTable().setRowSorter(sorter);
-                String searchText = adminGUIFrame.getrUsersSearchTextfield().getText().trim().toLowerCase();
-
-                if (searchText.isEmpty()) {
-                    sorter.setRowFilter(null);
-                } else {
-                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + Pattern.quote(searchText), 1));
-                }
-            }
-        });
-
+        /** REGISTERED USERS RELATED METHODS */
         adminGUIFrame.getrUsersViewButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int selectedRow = adminGUIFrame.getrUsersTable().getSelectedRow();
+                if (selectedRow != -1) {
+                    try {
+                        String userId = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 0).toString();
+                        msgserver.sendRUserDetailsToAdmins(userId,mci);
+                    } catch (RemoteException remoteException) {
+                        remoteException.printStackTrace();
+                        JOptionPane.showMessageDialog(adminGUIFrame, "Error retrieving user details.", "Remote Exception", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a user first.", "Selection Required", JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
 
+        adminGUIFrame.getrUsersEditButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        adminGUIFrame.getrUsersArchiveButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+
+        /** ARCHIVED USERS RELATED METHODS */
+
+
+
+        /** REGISTER USER RELATED METHODS */
         adminGUIFrame.getCreateAccountButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -314,6 +247,83 @@ public class AdminClientController {
                 }
             }
         });
+
+        /** ORDERS RELATED METHODS */
+
+        /** PENDING ORDERS RELATED METHODS */
+
+        /** INVENTORY RELATED METHODS */
+
+        /** SEND MESSAGE RELATED METHODS */
+
+        adminGUIFrame.getSendButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String broadcastMessage = adminGUIFrame.getSendMessageTextArea().getText();
+                try {
+                    msgserver.broadcast(mci, broadcastMessage);
+                } catch (RemoteException ex) {
+                    throw new RuntimeException(ex);
+                } catch (NotLoggedInException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
+
+        /*adminGUIFrame.getaUsersUnarchiveButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = adminGUIFrame.getaUsersTable().getSelectedRow();
+                if (row != -1) {
+                    String userId = (String) adminGUIFrame.getaUsersTable().getValueAt(row, 0);
+                    try {
+                        // Pass the required arguments to the unarchiveSelectedUsers() method
+                        msgserver.unarchiveSelectedUsers(userId, "res/UserInformation.json", "res/ArchiveFile.json");
+                        JOptionPane.showMessageDialog(adminGUIFrame, "User unarchived successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(adminGUIFrame, "Error unarchiving user: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a user to unarchive.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }); */
+
+        adminGUIFrame.getaUsersViewButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = adminGUIFrame.getaUsersTable().getSelectedRow();
+                if (selectedRow != -1) {
+                    try {
+                        String userId = adminGUIFrame.getaUsersTable().getValueAt(selectedRow, 0).toString();
+                        msgserver.sendAUserDetailsToAdmins(userId,mci);
+                    } catch (RemoteException remoteException) {
+                        remoteException.printStackTrace();
+                        JOptionPane.showMessageDialog(adminGUIFrame, "Error retrieving user details.", "Remote Exception", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a user first.", "Selection Required", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
+        adminGUIFrame.getaUsersSearchTextfield().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+    }
+
+
+    /** AUTOREFRESH / HELPER METHODS */
+
+    public static void autoRefreshUserRelatedComponents() throws Exception {
+        msgserver.updateRegisteredUsersTable();
+        msgserver.updateRegisteredUsersCount();
     }
 
     private static void resetTextFields(AdminGUIFrame adminGUIFrame) {
@@ -366,11 +376,4 @@ public class AdminClientController {
             throw new RuntimeException(e);
         }
     }
-
-    public static void autoRefreshUserRelatedComponents() throws Exception {
-        msgserver.updateRegisteredUsersTable();
-        msgserver.updateRegisteredUsersCount();
-    }
-
-
 }
