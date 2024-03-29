@@ -1,5 +1,6 @@
 package midproject.SharedClasses.Interfaces;
 
+import midproject.SharedClasses.Implementations.CallbackImplementation;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.*;
 import midproject.ViewClasses.AdminGUIFrame;
@@ -38,4 +39,5 @@ public interface ModelInterface extends Remote {
 
     void searchUsers(String searchText, MessageCallback callback) throws RemoteException;
 
+    void unarchiveUser(String userId, CallbackImplementation mci, String username) throws Exception;
 }

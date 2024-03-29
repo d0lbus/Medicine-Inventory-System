@@ -151,6 +151,10 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		System.out.println(adminUsername + " archived user " + archivedUsername);
 	}
 
+	public void notifyUserUnarchivedByAdmin(String adminUsername, String unarchivedUsername) throws RemoteException {
+		System.out.println(adminUsername + " unarchived user " + unarchivedUsername);
+	}
+
 
 	public void sendSearchResults(List<User> results) throws RemoteException {
 		SwingUtilities.invokeLater(() -> {

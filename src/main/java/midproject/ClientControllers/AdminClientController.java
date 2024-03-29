@@ -223,25 +223,26 @@ public class AdminClientController {
             }
         });
 
-        /*adminGUIFrame.getaUsersUnarchiveButton().addActionListener(new ActionListener() {
+        adminGUIFrame.getaUsersUnarchiveButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int row = adminGUIFrame.getaUsersTable().getSelectedRow();
-                if (row != -1) {
-                    String userId = (String) adminGUIFrame.getaUsersTable().getValueAt(row, 0);
+                int selectedRow = adminGUIFrame.getrUsersTable().getSelectedRow();
+                if (selectedRow != -1) {
                     try {
-                        // Pass the required arguments to the unarchiveSelectedUsers() method
-                        msgserver.unarchiveSelectedUsers(userId, "res/UserInformation.json", "res/ArchiveFile.json");
-                        JOptionPane.showMessageDialog(adminGUIFrame, "User unarchived successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                        String userId = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 0).toString();
+                        msgserver.unarchiveUser(userId,mci, username);
+                        autoRefreshUserRelatedComponents();
+                    } catch (RemoteException remoteException) {
+                        remoteException.printStackTrace();
+                        JOptionPane.showMessageDialog(adminGUIFrame, "Error retrieving user details.", "Remote Exception", JOptionPane.ERROR_MESSAGE);
                     } catch (Exception ex) {
-                        ex.printStackTrace();
-                        JOptionPane.showMessageDialog(adminGUIFrame, "Error unarchiving user: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                        throw new RuntimeException(ex);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a user to unarchive.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a user first.", "Selection Required", JOptionPane.WARNING_MESSAGE);
                 }
             }
-        }); */
+        });
 
         adminGUIFrame.getaUsersSearchTextfield().addActionListener(new ActionListener() {
             @Override

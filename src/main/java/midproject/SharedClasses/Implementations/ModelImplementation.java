@@ -329,6 +329,24 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         });
     }
 
+    public void updateUnarchivedUsersTable() throws Exception {
+        String filepath = "res.UserInformation.json";
+        List<User> userList = UserJSONProcessor.readUsersFromFile(filepath);
+
+        msgCallbacks.entrySet().forEach( entry -> {
+            UserCallBackInfo userInfo = entry.getKey();
+            MessageCallback callback = entry.getValue();
+
+            if ("Admin".equals(userInfo.getUserType())) {
+                try {
+                    callback.readRUsersList(userList);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
     public void updateRegisteredUsersCount() throws Exception {
         String filepath = "res/UserInformation.json";
         List<User> usersList = UserJSONProcessor.readUsersFromFile(filepath);
