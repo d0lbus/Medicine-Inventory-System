@@ -151,4 +151,24 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		System.out.println(adminUsername + " archived user " + archivedUsername);
 	}
 
+
+	public void sendSearchResults(List<User> results) throws RemoteException {
+		SwingUtilities.invokeLater(() -> {
+			DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getrUsersTable().getModel();
+			model.setRowCount(0);
+
+			for (User user : results) {
+				Object[] rowData = {
+						user.getUserId(),
+						user.getFirstName(),
+						user.getLastName(),
+						user.getUserType(),
+						user.getUsername(),
+				};
+				model.addRow(rowData);
+			}
+		});
+	}
+
+
 }

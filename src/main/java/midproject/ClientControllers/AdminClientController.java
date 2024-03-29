@@ -190,6 +190,19 @@ public class AdminClientController {
             }
         });
 
+        adminGUIFrame.getrUsersSearchTextfield().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String searchText = adminGUIFrame.getrUsersSearchTextfield().getText().trim().toLowerCase();
+                try {
+                    msgserver.searchUsers(searchText, mci);
+                } catch (RemoteException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+
         /** ARCHIVED USERS RELATED METHODS */
 
         adminGUIFrame.getaUsersViewButton().addActionListener(new ActionListener() {
