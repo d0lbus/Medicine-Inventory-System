@@ -14,6 +14,8 @@ import midproject.SharedClasses.UserDefinedExceptions.*;
 import midproject.SharedClasses.Utilities.UserJSONProcessor;
 import midproject.ViewClasses.AdminGUIFrame;
 import midproject.ViewClasses.Login;
+
+import java.util.Date;
 import java.util.List;
 
 import java.util.regex.Pattern;
@@ -261,7 +263,7 @@ public class AdminClientController {
                     String firstName = adminGUIFrame.getFirstNameTextField().getText();
                     String lastName = adminGUIFrame.getLastNameTextField().getText();
                     String middleName = adminGUIFrame.getMiddleNameTextField().getText();
-                    String birthdate = adminGUIFrame.getBirthdateTextField().getText();
+                    String birthdate = String.valueOf(adminGUIFrame.getBirthdate().getDate());
                     String age = adminGUIFrame.getAgeTextField().getText();
                     String gender = adminGUIFrame.getGenderComboBox().getSelectedItem().toString();
                     String personWithDisability = adminGUIFrame.getPersonWithDisabilityCheckBox().isSelected() ? "Yes" : "No";
@@ -293,11 +295,10 @@ public class AdminClientController {
                         throw new InvalidInputException("Passwords do not match. Please re-enter.");
                     }
 
-                    // Check if username is already taken
-                    if (isUsernameTaken(username)) {
-                        throw new InvalidInputException("Username is already taken. Please choose another username.");
+                    // Check if username already exists
+                    if (isUsernameAlreadyExists(username)) {
+                        throw new UsernameAlreadyExistsException("Username already exists, please choose a different one.");
                     }
-
 
                     // Create a User object
                     User newUser = new User(null, userType, firstName, lastName, middleName, birthdate, age, gender,
@@ -323,6 +324,8 @@ public class AdminClientController {
                     ex.printStackTrace();
                 } catch (InvalidInputException ex) {
                     JOptionPane.showMessageDialog(adminGUIFrame, ex.getMessage(), "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                } catch (UsernameAlreadyExistsException ex) {
+                    JOptionPane.showMessageDialog(adminGUIFrame, ex.getMessage(), "Username Already Exists", JOptionPane.ERROR_MESSAGE);
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
@@ -385,25 +388,26 @@ public class AdminClientController {
         adminGUIFrame.getMunicipalityTextField().setText("");
         adminGUIFrame.getProvinceTextField().setText("");
         adminGUIFrame.getZipCodeTextField().setText("");
+        adminGUIFrame.getBirthdateCalendar().setDate(new Date());
     }
 
 
-    // Method to check if username is already taken
-    private static boolean isUsernameTaken(String username) throws UsernameTakenException {
+    // Method to check if username already exists
+    private static boolean isUsernameAlreadyExists(String username) {
         try {
-            // Read existing user data from file or database
-            List<User> existingUsers = UserJSONProcessor.readUsersFromFile("res/UserInformation.json");
+            // Retrieve all users from file or database
+            List<User> users = UserJSONProcessor.readUsersFromFile("res/UserInformation.json");
 
-            // Iterate through existing users to check if username is taken
-            for (User user : existingUsers) {
-                if (user.getUsername().equals(username)) {
-                    throw new UsernameTakenException("Username is already taken. Please choose another one.");
+            // Check if any user has the same username
+            for (User existingUser : users) {
+                if (existingUser.getUsername().equals(username)) {
+                    return true; // Username already exists
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return false; // Username is not taken
+        return false; // Username does not exist
     }
 
 }
