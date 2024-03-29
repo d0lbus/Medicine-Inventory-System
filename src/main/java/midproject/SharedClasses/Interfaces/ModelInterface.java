@@ -36,5 +36,6 @@ public interface ModelInterface extends Remote {
 
     public void registerUser(User newUser) throws Exception, InvalidInputException;
 
+    void searchUsers(String searchText, MessageCallback callback) throws RemoteException;
 
 }
