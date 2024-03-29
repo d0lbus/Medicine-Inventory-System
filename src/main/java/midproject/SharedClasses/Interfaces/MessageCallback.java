@@ -39,4 +39,5 @@ public interface MessageCallback extends Remote {
 	public void sendSearchResults(List<User> users) throws RemoteException;
 
 
+    void notifyUserUnarchivedByAdmin(String adminUsername, String username) throws Exception;
 }

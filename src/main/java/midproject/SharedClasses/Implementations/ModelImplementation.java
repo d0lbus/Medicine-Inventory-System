@@ -191,31 +191,23 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
      *
      * */
 
-    public void unarchiveSelectedUsers(String userId, String originalFilePath, String archiveFilePath) throws Exception {
+    public void unarchiveSelectedUsers(String userId, MessageCallback callback, String adminUsername) throws Exception {
 
-        // Retrieve the list of archived users
-        List<User> archivedUsers = UserJSONProcessor.readUsersFromFile(archiveFilePath);
+        try {
+            User userToUnarchive = getUserById("res/ArchivedUsers.json", userId);
+            UserJSONProcessor.transferUserToDifferentFile(userId, "res/UserInformation.json", "res/UserInformation.json");
 
-        // Find the user with the specified ID
-        User userToUnarchive = null;
-        for (User user : archivedUsers) {
-            if (user.getUserId().equals(userId)) {
-                userToUnarchive = user;
-                break;
+            for (Map.Entry<UserCallBackInfo, MessageCallback> entry : msgCallbacks.entrySet()) {
+                UserCallBackInfo userInfo = entry.getKey();
+                MessageCallback adminCallback = entry.getValue();
+
+                if ("Admin".equals(userInfo.getUserType())) {
+                    adminCallback.notifyUserUnarchivedByAdmin(adminUsername, userToUnarchive.getUsername());
+                }
             }
+        } catch (Exception e) {
+            throw new RemoteException("Failed to unarchive user: " + e.getMessage());
         }
-
-        // If user is not found in archive, throw exception
-        if (userToUnarchive == null) {
-            throw new Exception("User not found in archive");
-        }
-
-        // Add the user to the original file
-        UserJSONProcessor.addUserToJsonFile(userToUnarchive, originalFilePath);
-
-        // Remove the user from the archive file
-        archivedUsers.remove(userToUnarchive);
-        UserJSONProcessor.saveUsersToFile(archivedUsers, archiveFilePath);
     }
 
     public void sendAUserDetailsToAdmins(String userId, MessageCallback messageCallback) {
