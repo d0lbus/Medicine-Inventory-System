@@ -3,11 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package midproject.ViewClasses;
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 /**
  *
@@ -23,7 +29,41 @@ public class AdminGUIFrame extends javax.swing.JFrame {
      */
     public AdminGUIFrame() {
         initComponents();
+        birthdateCalendar.setDateFormatString("dd/MM/yyyy");
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) birthdateCalendar.getDateEditor().getUiComponent();
+        editor.setEditable(false);
+        ageTextField.setEditable(false);
+
+        birthdateCalendar.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                birthdateCalendarPropertyChange(evt);
+            }
+        });
+        updateAge();
     }
+    private void birthdateCalendarPropertyChange(java.beans.PropertyChangeEvent evt) {
+        if ("date".equals(evt.getPropertyName())) {
+            updateAge();
+        }
+    }
+
+    private void updateAge() {
+        if (birthdateCalendar.getDate() != null) {
+
+            LocalDate birthDate = birthdateCalendar.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate currentDate = LocalDate.now();
+
+            if (birthDate.isAfter(currentDate)) {
+                JOptionPane.showMessageDialog(this, "Invalid Birthdate.", "Error", JOptionPane.ERROR_MESSAGE);
+                birthdateCalendar.setDate(null);
+                ageTextField.setText("");
+            } else {
+                long age = ChronoUnit.YEARS.between(birthDate, currentDate);
+                ageTextField.setText(String.valueOf(age));
+            }
+        }
+    }
+    
 
     public static AdminGUIFrame getInstance() {
         if (instance == null) {
@@ -158,6 +198,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         sendButton = new javax.swing.JButton();
         comboBox = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
+        birthdateCalendar = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quantum Drugstore");
@@ -1163,7 +1204,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(personWithDisabilityCheckBox))
                             .addGroup(registrationPanelLayout.createSequentialGroup()
-                                .addComponent(birthdateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(birthdateCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(73, 73, 73)
                                 .addComponent(ageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(registrationPanelLayout.createSequentialGroup()
@@ -1261,7 +1302,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                     .addComponent(setPasswordLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(birthdateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(birthdateCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(provinceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(setPasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1558,6 +1599,14 @@ public class AdminGUIFrame extends javax.swing.JFrame {
 
     public JTextField getBirthdateTextField() {
         return birthdateTextField;
+    }
+
+    public JDateChooser getBirthdateCalendar() {
+        return birthdateCalendar;
+    }
+
+    public void setBirthdateCalendar(JDateChooser birthdateCalendar) {
+        this.birthdateCalendar = birthdateCalendar;
     }
 
     public JComboBox<String> getComboBox() {
@@ -1976,6 +2025,10 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         return zipCodeTextField;
     }
 
+    public Date getBirthdate(){
+        return birthdateCalendar.getDate();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aUsersEditButton;
     private javax.swing.JLabel aUsersSearchLabel;
@@ -2095,5 +2148,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JLabel userTypeLabel;
     private javax.swing.JLabel zipCodeLabel;
     private javax.swing.JTextField zipCodeTextField;
+    private com.toedter.calendar.JDateChooser birthdateCalendar;
     // End of variables declaration//GEN-END:variables
 }
