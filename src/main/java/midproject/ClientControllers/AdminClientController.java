@@ -93,6 +93,7 @@ public class AdminClientController {
         adminGUIFrame.setVisible(true);
 
         autoRefreshUserRelatedComponents();
+        autoRefreshMedicineRelatedComponents();
 
         /** LOGOUT RELATED METHODS */
         adminGUIFrame.getLogoutMouseClicked().addMouseListener(new MouseAdapter() {
@@ -226,10 +227,10 @@ public class AdminClientController {
         adminGUIFrame.getaUsersUnarchiveButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int selectedRow = adminGUIFrame.getrUsersTable().getSelectedRow();
+                int selectedRow = adminGUIFrame.getaUsersTable().getSelectedRow();
                 if (selectedRow != -1) {
                     try {
-                        String userId = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 0).toString();
+                        String userId = adminGUIFrame.getaUsersTable().getValueAt(selectedRow, 0).toString();
                         msgserver.unarchiveUser(userId, mci, username);
                         autoRefreshUserRelatedComponents();
                     } catch (RemoteException remoteException) {
@@ -341,7 +342,7 @@ public class AdminClientController {
             public void actionPerformed(ActionEvent e) {
                 String broadcastMessage = adminGUIFrame.getSendMessageTextArea().getText();
                 try {
-                    msgserver.broadcast(mci, broadcastMessage);
+                    msgserver.broadcast(broadcastMessage);
                 } catch (RemoteException ex) {
                     throw new RuntimeException(ex);
                 } catch (NotLoggedInException ex) {
@@ -360,6 +361,10 @@ public class AdminClientController {
         msgserver.updateRegisteredUsersTable();
         msgserver.updateRegisteredUsersCount();
         msgserver.updateArchivedUsersTable();
+    }
+
+    public static void autoRefreshMedicineRelatedComponents() throws Exception{
+
     }
 
     private static void resetTextFields(AdminGUIFrame adminGUIFrame) {

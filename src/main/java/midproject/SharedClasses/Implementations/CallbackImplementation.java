@@ -111,7 +111,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 	}
 
 	public void broadcastCall(String msg) throws RemoteException {
-		System.out.println("[" + user.getUsername() + "]: " + msg);
 		SwingUtilities.invokeLater(() -> {
 			if (clientGUIFrame != null) {
 				clientGUIFrame.getNotificationsTextArea().append("[SERVER NOTIFICATION]: " + msg + "\n");

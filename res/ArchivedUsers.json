@@ -1,26 +1,5 @@
 [
   {
-    "userId": "C3",
-    "userType": "Customer",
-    "firstName": "FN",
-    "lastName": "AN",
-    "middleName": "MN",
-    "birthdate": "01/01/2001",
-    "age": "20",
-    "gender": "Male",
-    "personWithDisability": "No",
-    "email": "an@yahoo.com",
-    "contactNumber": "09983593754",
-    "username": "SampleClient",
-    "password": "Sample123",
-    "confirmPassword": "Sample123",
-    "street": "Street",
-    "additionalAddressDetails": "",
-    "city": "City",
-    "province": "Province",
-    "zip": "2432"
-  },
-  {
     "userId": "A2",
     "userType": "Admin",
     "firstName": "Jan Dolby",
