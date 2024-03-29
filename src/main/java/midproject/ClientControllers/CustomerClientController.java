@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import midproject.SharedClasses.Implementations.CallbackImplementation;
@@ -34,8 +35,10 @@ public class CustomerClientController {
 	public static void main(String[] args) {
 		try {
 			UIManager.setLookAndFeel(new FlatLightLaf());
+			FlatLightLaf.updateUI();
 		} catch (Exception ex) {
 			System.err.println("Failed to initialize FlatLaf");
+			ex.printStackTrace();
 		}
 
 		SwingUtilities.invokeLater(() -> {

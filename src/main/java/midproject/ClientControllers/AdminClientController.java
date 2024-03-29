@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import midproject.SharedClasses.Implementations.CallbackImplementation;
@@ -20,8 +21,6 @@ import java.util.List;
 
 import java.util.regex.Pattern;
 import javax.swing.*;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 public class AdminClientController {
 
@@ -39,8 +38,10 @@ public class AdminClientController {
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
+            FlatLightLaf.updateUI();
         } catch (Exception ex) {
             System.err.println("Failed to initialize FlatLaf");
+            ex.printStackTrace();
         }
 
         SwingUtilities.invokeLater(() -> {
@@ -86,12 +87,6 @@ public class AdminClientController {
     }
 
     private static void showClientGUI() throws Exception {
-        try {
-            UIManager.setLookAndFeel(new FlatLightLaf());
-        } catch (Exception ex) {
-            System.err.println("Failed to initialize FlatLaf for AdminGUIFrame");
-        }
-
         adminGUIFrame.setVisible(true);
 
         autoRefreshUserRelatedComponents();
