@@ -185,13 +185,14 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
     }
 
+
     /**
      *
      * ARCHIVED USERS RELATED METHODS
      *
      * */
 
-    public void unarchiveSelectedUsers(String userId, MessageCallback callback, String adminUsername) throws Exception {
+    public void unarchiveUser(String userId, MessageCallback callback, String adminUsername) throws Exception {
 
         try {
             User userToUnarchive = getUserById("res/ArchivedUsers.json", userId);

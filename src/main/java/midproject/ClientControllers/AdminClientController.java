@@ -230,7 +230,7 @@ public class AdminClientController {
                 if (selectedRow != -1) {
                     try {
                         String userId = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 0).toString();
-                        msgserver.unarchiveUser(userId,mci, username);
+                        msgserver.unarchiveUser(userId, mci, username);
                         autoRefreshUserRelatedComponents();
                     } catch (RemoteException remoteException) {
                         remoteException.printStackTrace();
@@ -401,15 +401,4 @@ public class AdminClientController {
         return false; // Username is not taken
     }
 
-    public void unarchiveSelectedUsers(String userId, String originalFilePath, String archiveFilePath) {
-        try {
-            // Call the server's unarchiveSelectedUsers method
-            msgserver.unarchiveSelectedUsers(userId, originalFilePath, archiveFilePath);
-        } catch (RemoteException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error unarchiving user: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

@@ -26,9 +26,6 @@ public interface ModelInterface extends Remote {
 
     void archiveUser(String userId, MessageCallback callback, String adminUsername) throws RemoteException;
 
-    public void unarchiveSelectedUsers(String userId, String originalFilePath, String archiveFilePath)
-            throws Exception;
-
     public void updateRegisteredUsersTable() throws Exception;
 
     public void updateArchivedUsersTable() throws Exception;
@@ -39,5 +36,5 @@ public interface ModelInterface extends Remote {
 
     void searchUsers(String searchText, MessageCallback callback) throws RemoteException;
 
-    void unarchiveUser(String userId, CallbackImplementation mci, String username) throws Exception;
+    void unarchiveUser(String userId, MessageCallback callback, String username) throws Exception;
 }
