@@ -3,109 +3,88 @@ package midproject.SharedClasses.Utilities;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import midproject.SharedClasses.ReferenceClasses.GenericName;
+import midproject.SharedClasses.ReferenceClasses.Medicine;
 
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MedicineJSONProcessor {
-
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public static Map<String, List<GenericName>> parseMedicineFromJson(String json) {
-        Type medicineType = new TypeToken<HashMap<String, List<GenericName>>>() {}.getType();
-        return gson.fromJson(json, medicineType);
-    }
-
-    public static String medicineToJson(Map<String, List<GenericName>> medicine) {
-        return gson.toJson(medicine);
-    }
-
-    public static void addMedicineToJsonFile(GenericName newMedicine, String filePath, String category) {
-        try (FileReader reader = new FileReader(filePath)) {
-            Type medicineType = new TypeToken<HashMap<String, List<GenericName>>>() {}.getType();
-            Map<String, List<GenericName>> medicines = gson.fromJson(reader, medicineType);
-            if (medicines == null) {
-                medicines = new HashMap<>();
-            }
-
-            List<GenericName> categoryMedicines = medicines.getOrDefault(category, new ArrayList<>());
-            categoryMedicines.add(newMedicine);
-            medicines.put(category, categoryMedicines);
-
-            try (FileWriter writer = new FileWriter(filePath)) {
-                gson.toJson(medicines, writer);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static List<Medicine> readMedicinesFromFile(String filePath) throws IOException {
+        try (Reader reader = Files.newBufferedReader(Paths.get(filePath))) {
+            Type listType = new TypeToken<ArrayList<Medicine>>() {}.getType();
+            return gson.fromJson(reader, listType);
         }
     }
 
-    public static void editMedicineInJsonFile(GenericName updatedMedicine, String filePath, String category) {
-        try (FileReader reader = new FileReader(filePath)) {
-            Type medicineType = new TypeToken<HashMap<String, List<GenericName>>>() {}.getType();
-            Map<String, List<GenericName>> medicines = gson.fromJson(reader, medicineType);
-            if (medicines == null) {
-
-                return;
-            }
-
-            List<GenericName> categoryMedicines = medicines.get(category);
-            if (categoryMedicines != null) {
-                for (int i = 0; i < categoryMedicines.size(); i++) {
-                    if (categoryMedicines.get(i).equals(updatedMedicine)) {
-                        categoryMedicines.set(i, updatedMedicine);
-                        break;
-                    }
-                }
-            }
-
-            try (FileWriter writer = new FileWriter(filePath)) {
-                gson.toJson(medicines, writer);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void archiveMedicine(String genericName, String originalFilePath, String archiveFilePath) {
-        try {
-            Map<String, List<GenericName>> medicines = readMedicinesFromFile(originalFilePath);
-            Map<String, List<GenericName>> archivedMedicines = readMedicinesFromFile(archiveFilePath);
-
-            List<GenericName> toArchive = medicines.getOrDefault("Painkillers", new ArrayList<>());
-            toArchive.removeIf(gName -> {
-                boolean match = gName.get_gname().equals(genericName);
-                if (match) {
-                    archivedMedicines.computeIfAbsent("Painkillers", k -> new ArrayList<>()).add(gName);
-                }
-                return match;
-            });
-
-            writeMedicinesToFile(medicines, originalFilePath);
-            writeMedicinesToFile(archivedMedicines, archiveFilePath);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static Map<String, List<GenericName>> readMedicinesFromFile(String filePath) throws Exception {
-        String json = new String(Files.readAllBytes(Paths.get(filePath)));
-        Type medicineType = new TypeToken<HashMap<String, List<GenericName>>>(){}.getType();
-        Map<String, List<GenericName>> medicines = gson.fromJson(json, medicineType);
-        return medicines != null ? medicines : new HashMap<>();
-    }
-
-    private static void writeMedicinesToFile(Map<String, List<GenericName>> medicines, String filePath) throws Exception {
-        try (FileWriter writer = new FileWriter(filePath)) {
+    public static void writeMedicinesToFile(List<Medicine> medicines, String filePath) throws IOException {
+        try (Writer writer = Files.newBufferedWriter(Paths.get(filePath))) {
             gson.toJson(medicines, writer);
         }
+    }
+
+    public static void addMedicineToFile(Medicine medicine, String filePath) throws IOException {
+        List<Medicine> medicines = readMedicinesFromFile(filePath);
+        medicines.add(medicine);
+        writeMedicinesToFile(medicines, filePath);
+    }
+
+    // Example method: Find by category
+    public static List<Medicine> findMedicinesByCategory(String category, String filePath) throws IOException {
+        List<Medicine> allMedicines = readMedicinesFromFile(filePath);
+        List<Medicine> filteredMedicines = new ArrayList<>();
+        for (Medicine medicine : allMedicines) {
+            if (medicine.getCategory().equalsIgnoreCase(category)) {
+                filteredMedicines.add(medicine);
+            }
+        }
+        return filteredMedicines;
+    }
+
+    // Example method: Update a medicine
+    // This is a simple approach and might need to be adapted based on how you identify unique medicines.
+    public static void updateMedicine(Medicine updatedMedicine, String filePath) throws IOException {
+        List<Medicine> medicines = readMedicinesFromFile(filePath);
+        for (int i = 0; i < medicines.size(); i++) {
+            Medicine medicine = medicines.get(i);
+            if (medicine.getBrandName().equals(updatedMedicine.getBrandName()) &&
+                    medicine.getGenericName().equals(updatedMedicine.getGenericName())) {
+                medicines.set(i, updatedMedicine);
+                break;
+            }
+        }
+        writeMedicinesToFile(medicines, filePath);
+    }
+
+    public static void transferMedicine(String brandName, String fromFilePath, String toFilePath) throws IOException {
+        // Load medicines from both files
+        List<Medicine> fromMedicines = readMedicinesFromFile(fromFilePath);
+        List<Medicine> toMedicines = readMedicinesFromFile(toFilePath);
+
+        // Find and remove the medicine from the source list, then add it to the destination list
+        Medicine toTransfer = null;
+        for (Medicine medicine : fromMedicines) {
+            if (medicine.getBrandName().equalsIgnoreCase(brandName)) {
+                toTransfer = medicine;
+                break;
+            }
+        }
+
+        if (toTransfer != null) {
+            fromMedicines.remove(toTransfer); // Remove from source
+            toMedicines.add(toTransfer); // Add to destination
+        } else {
+            System.err.println("Medicine with brand name " + brandName + " not found.");
+            return;
+        }
+
+        // Save the updated lists back to their files
+        writeMedicinesToFile(fromMedicines, fromFilePath);
+        writeMedicinesToFile(toMedicines, toFilePath);
     }
 }
