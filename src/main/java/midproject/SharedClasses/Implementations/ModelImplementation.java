@@ -195,7 +195,7 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
         try {
             User userToUnarchive = getUserById("res/ArchivedUsers.json", userId);
-            UserJSONProcessor.transferUserToDifferentFile(userId, "res/UserInformation.json", "res/UserInformation.json");
+            UserJSONProcessor.transferUserToDifferentFile(userId, "res/ArchivedUsers.json", "res/UserInformation.json");
 
             for (Map.Entry<UserCallBackInfo, MessageCallback> entry : msgCallbacks.entrySet()) {
                 UserCallBackInfo userInfo = entry.getKey();
