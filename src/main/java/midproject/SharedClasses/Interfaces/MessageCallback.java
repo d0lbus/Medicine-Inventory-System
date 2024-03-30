@@ -1,5 +1,6 @@
 package midproject.SharedClasses.Interfaces;
 
+import midproject.SharedClasses.ReferenceClasses.Medicine;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.ViewClasses.AdminGUIFrame;
 
@@ -31,11 +32,15 @@ public interface MessageCallback extends Remote {
 	public void readRUsersList(List<User> users) throws RemoteException;
 	public void readAUsersList(List<User> users) throws RemoteException;
 
+	public void readMedicineList(List<Medicine> medicine) throws RemoteException;
+
 	public void countUsersList(List<User> users) throws RemoteException;
 
 	public void displayUserDetails(User user) throws RemoteException;
 
 	void notifyUserArchivedByAdmin(String adminUsername, String archivedUsername) throws RemoteException;
+
+	void notifyMedicineArchivedByAdmin(String adminUsername, String archivedMedicineCategory, String archivedMedicineGN, String archivedMedicineBN) throws RemoteException;
 	public void sendSearchResults(List<User> users) throws RemoteException;
 
 

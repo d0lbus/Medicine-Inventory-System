@@ -20,6 +20,7 @@ import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.Interfaces.MessageCallback;
 import midproject.SharedClasses.ReferenceClasses.*;
 import midproject.SharedClasses.UserDefinedExceptions.*;
+import midproject.SharedClasses.Utilities.MedicineJSONProcessor;
 import midproject.SharedClasses.Utilities.UserJSONProcessor;
 
 import static midproject.SharedClasses.Utilities.SessionIDGenerator.generateUniqueSessionId;
@@ -284,6 +285,27 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
      * */
 
     /**
+     *
+     *
+     * INVENTORY RELATED METHODS
+     *
+     * */
+
+    public void deleteMedicine(Medicine medicine, MessageCallback callback, String adminUsername) throws Exception{
+        MedicineJSONProcessor.removeSpecificMedicine(medicine, "res/Medicine.json");
+
+        for (Map.Entry<UserCallBackInfo, MessageCallback> entry : msgCallbacks.entrySet()) {
+            UserCallBackInfo userInfo = entry.getKey();
+            MessageCallback adminCallback = entry.getValue();
+
+            if ("Admin".equals(userInfo.getUserType())) {
+                adminCallback.notifyMedicineArchivedByAdmin(adminUsername, medicine.getCategory(), medicine.getGenericName(), medicine.getBrandName());
+            }
+        }
+    }
+
+
+    /**
      * MESSAGE RELATED METHODS
      *
      * */
@@ -338,6 +360,22 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             if ("Admin".equals(userInfo.getUserType())) {
                 try {
                     callback.readAUsersList(usersList);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void updateInventoryTable() throws Exception{
+        String filepath = "res/Medicine.json";
+        List<Medicine> medicineList = MedicineJSONProcessor.readMedicinesFromFile(filepath);
+        msgCallbacks.entrySet().forEach(entry -> {
+            UserCallBackInfo userInfo = entry.getKey();
+            MessageCallback callback = entry.getValue();
+            if ("Admin".equals(userInfo.getUserType())) {
+                try {
+                    callback.readMedicineList(medicineList);
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }

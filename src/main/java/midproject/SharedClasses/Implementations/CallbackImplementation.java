@@ -6,6 +6,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 import midproject.SharedClasses.Interfaces.MessageCallback;
+import midproject.SharedClasses.ReferenceClasses.Medicine;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.ReferenceClasses.UserCallBackInfo;
 import midproject.ViewClasses.AdminGUIFrame;
@@ -92,6 +93,28 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		});
 	}
 
+	public void readMedicineList(List<Medicine> medicineList) {
+		SwingUtilities.invokeLater(() -> {
+			if (adminGUIFrame != null) {
+				DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getiTable().getModel();
+				model.setRowCount(0);
+				for (Medicine medicine : medicineList) {
+					Object[] rowData = {
+							medicine.getCategory(),
+							medicine.getGenericName(),
+							medicine.getBrandName(),
+							medicine.getForm(),
+							medicine.getQuantity(),
+							medicine.getPrice()
+					};
+					model.addRow(rowData);
+				}
+			} else {
+				System.err.println("Admin GUI frame is null.");
+			}
+		});
+	}
+
 	public CallbackImplementation(User user, AdminGUIFrame adminGUIFrame) throws RemoteException {
 		this.user = user;
 		this.adminGUIFrame = adminGUIFrame;
@@ -153,6 +176,11 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 	public void notifyUserUnarchivedByAdmin(String adminUsername, String unarchivedUsername) throws RemoteException {
 		System.out.println(adminUsername + " unarchived user " + unarchivedUsername);
 	}
+
+	public void notifyMedicineArchivedByAdmin(String adminUsername, String category, String genericName, String brandName) throws RemoteException{
+		System.out.println(adminUsername + " archived the medicine " + genericName + " with a brand name " + brandName + " under the category " + category);
+	}
+
 
 
 	public void sendSearchResults(List<User> results) throws RemoteException {

@@ -10,6 +10,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import midproject.SharedClasses.Implementations.CallbackImplementation;
 import midproject.SharedClasses.Interfaces.ModelInterface;
+import midproject.SharedClasses.ReferenceClasses.Medicine;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.*;
 import midproject.SharedClasses.Utilities.UserJSONProcessor;
@@ -333,6 +334,49 @@ public class AdminClientController {
 
         /** INVENTORY RELATED METHODS */
 
+        adminGUIFrame.getiAddButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        adminGUIFrame.getiEditButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        adminGUIFrame.getiDeleteButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = adminGUIFrame.getiTable().getSelectedRow();
+                if (selectedRow != -1) {
+                    try {
+                        Medicine medicineToDelete = new Medicine();
+                        medicineToDelete.setCategory(adminGUIFrame.getiTable().getValueAt(selectedRow, 0).toString());
+                        medicineToDelete.setGenericName(adminGUIFrame.getiTable().getValueAt(selectedRow, 1).toString());
+                        medicineToDelete.setBrandName(adminGUIFrame.getiTable().getValueAt(selectedRow, 2).toString());
+                        medicineToDelete.setForm(adminGUIFrame.getiTable().getValueAt(selectedRow, 3).toString());
+                        medicineToDelete.setQuantity((Integer) adminGUIFrame.getiTable().getValueAt(selectedRow, 4));
+                        medicineToDelete.setPrice((Double) adminGUIFrame.getiTable().getValueAt(selectedRow, 5));
+
+                        msgserver.deleteMedicine(medicineToDelete, mci, username);
+                        autoRefreshMedicineRelatedComponents();
+
+                    } catch (RemoteException remoteException) {
+                        remoteException.printStackTrace();
+                        JOptionPane.showMessageDialog(adminGUIFrame, "Error retrieving user details.", "Remote Exception", JOptionPane.ERROR_MESSAGE);
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a user first.", "Selection Required", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
         /** SEND MESSAGE RELATED METHODS */
 
         adminGUIFrame.getSendButton().addActionListener(new ActionListener() {
@@ -352,7 +396,6 @@ public class AdminClientController {
 
     }
 
-
     /** AUTOREFRESH / HELPER METHODS */
 
     public static void autoRefreshUserRelatedComponents() throws Exception {
@@ -362,7 +405,7 @@ public class AdminClientController {
     }
 
     public static void autoRefreshMedicineRelatedComponents() throws Exception{
-
+        msgserver.updateInventoryTable();
     }
 
     private static void resetTextFields(AdminGUIFrame adminGUIFrame) {
@@ -385,7 +428,6 @@ public class AdminClientController {
         adminGUIFrame.getZipCodeTextField().setText("");
         adminGUIFrame.getBirthdateCalendar().setDate(new Date());
     }
-
 
     // Method to check if username already exists
     private static boolean isUsernameAlreadyExists(String username) {

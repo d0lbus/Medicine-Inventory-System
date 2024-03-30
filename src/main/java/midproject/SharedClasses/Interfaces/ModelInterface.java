@@ -1,6 +1,7 @@
 package midproject.SharedClasses.Interfaces;
 
 import midproject.SharedClasses.Implementations.CallbackImplementation;
+import midproject.SharedClasses.ReferenceClasses.Medicine;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.*;
 import midproject.ViewClasses.AdminGUIFrame;
@@ -31,6 +32,10 @@ public interface ModelInterface extends Remote {
     public void updateArchivedUsersTable() throws Exception;
 
     public void updateRegisteredUsersCount() throws Exception;
+
+    public void updateInventoryTable() throws Exception;
+
+    public void deleteMedicine(Medicine medicine, MessageCallback callback, String adminUsername) throws Exception;
 
     public void registerUser(User newUser) throws Exception, InvalidInputException;
 

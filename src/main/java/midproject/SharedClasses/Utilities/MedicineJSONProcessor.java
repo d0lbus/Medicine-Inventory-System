@@ -2,8 +2,10 @@ package midproject.SharedClasses.Utilities;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import midproject.SharedClasses.ReferenceClasses.Medicine;
+import midproject.SharedClasses.ReferenceClasses.User;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -16,9 +18,14 @@ public class MedicineJSONProcessor {
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public static List<Medicine> readMedicinesFromFile(String filePath) throws IOException {
-        try (Reader reader = Files.newBufferedReader(Paths.get(filePath))) {
-            Type listType = new TypeToken<ArrayList<Medicine>>() {}.getType();
-            return gson.fromJson(reader, listType);
+        try {
+            String json = new String(Files.readAllBytes(Paths.get(filePath)));
+            Type medicineListType = new TypeToken<List<Medicine>>(){}.getType();
+            List<Medicine> medicine = gson.fromJson(json, medicineListType);
+            return medicine != null ? medicine : new ArrayList<>();
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+            throw new IOException("Failed to deserialize the JSON content.", e);
         }
     }
 
@@ -61,30 +68,18 @@ public class MedicineJSONProcessor {
         writeMedicinesToFile(medicines, filePath);
     }
 
-    public static void transferMedicine(String brandName, String fromFilePath, String toFilePath) throws IOException {
-        // Load medicines from both files
-        List<Medicine> fromMedicines = readMedicinesFromFile(fromFilePath);
-        List<Medicine> toMedicines = readMedicinesFromFile(toFilePath);
+    public static void removeSpecificMedicine(Medicine targetMedicine, String filePath) throws IOException {
+        List<Medicine> medicines = readMedicinesFromFile(filePath);
 
-        // Find and remove the medicine from the source list, then add it to the destination list
-        Medicine toTransfer = null;
-        for (Medicine medicine : fromMedicines) {
-            if (medicine.getBrandName().equalsIgnoreCase(brandName)) {
-                toTransfer = medicine;
-                break;
-            }
-        }
+        medicines.removeIf(medicine ->
+                medicine.getCategory().equals(targetMedicine.getCategory()) &&
+                        medicine.getGenericName().equals(targetMedicine.getGenericName()) &&
+                        medicine.getBrandName().equals(targetMedicine.getBrandName()) &&
+                        medicine.getForm().equals(targetMedicine.getForm()) &&
+                        medicine.getQuantity() == targetMedicine.getQuantity() &&
+                        medicine.getPrice() == targetMedicine.getPrice()
+        );
 
-        if (toTransfer != null) {
-            fromMedicines.remove(toTransfer); // Remove from source
-            toMedicines.add(toTransfer); // Add to destination
-        } else {
-            System.err.println("Medicine with brand name " + brandName + " not found.");
-            return;
-        }
-
-        // Save the updated lists back to their files
-        writeMedicinesToFile(fromMedicines, fromFilePath);
-        writeMedicinesToFile(toMedicines, toFilePath);
+        writeMedicinesToFile(medicines, filePath);
     }
 }
