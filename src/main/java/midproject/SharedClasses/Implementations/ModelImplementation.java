@@ -125,12 +125,13 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
     }
 
 
+    /**ADMIN SIDE**/
+
     /**
      *
      * DASHBOARD RELATED METHODS
      *
      * */
-
 
     /**
      *
@@ -185,7 +186,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             throw new RemoteException("Error while searching users", e);
         }
     }
-
 
     /**
      *
@@ -308,7 +308,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
     }
 
-
     public void deleteMedicine(Medicine medicine, MessageCallback callback, String adminUsername) throws Exception{
         MedicineJSONProcessor.removeSpecificMedicine(medicine, "res/Medicine.json");
 
@@ -421,7 +420,7 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         msgCallbacks.entrySet().forEach(entry -> {
             UserCallBackInfo userInfo = entry.getKey();
             MessageCallback callback = entry.getValue();
-            if ("Admin".equals(userInfo.getUserType())) {
+            if ("Admin".equals(userInfo.getUserType()) || "Customer".equals(userInfo.getUserType())) {
                 try {
                     callback.readMedicineList(medicineList);
                 } catch (RemoteException e) {
@@ -491,4 +490,10 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             });
         }
     }
+
+
+
+    /**CUSTOMER SIDE**/
+
+
 }

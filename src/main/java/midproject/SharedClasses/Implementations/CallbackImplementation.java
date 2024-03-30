@@ -130,23 +130,44 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 
 	public void readMedicineList(List<Medicine> medicineList) {
 		SwingUtilities.invokeLater(() -> {
-			if (adminGUIFrame != null) {
-				DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getiTable().getModel();
-				model.setRowCount(0);
-				for (Medicine medicine : medicineList) {
-					Object[] rowData = {
-							medicine.getMedicineID(),
-							medicine.getCategory(),
-							medicine.getGenericName(),
-							medicine.getBrandName(),
-							medicine.getForm(),
-							medicine.getQuantity(),
-							medicine.getPrice()
-					};
-					model.addRow(rowData);
+			// Check if either Admin GUI or Client GUI frame is not null
+			if (adminGUIFrame != null || clientGUIFrame != null) {
+				// Update Admin GUI frame table if not null
+				if (adminGUIFrame != null) {
+					DefaultTableModel adminModel = (DefaultTableModel) adminGUIFrame.getiTable().getModel();
+					adminModel.setRowCount(0);
+					for (Medicine medicine : medicineList) {
+						Object[] adminRowData = {
+								medicine.getMedicineID(),
+								medicine.getCategory(),
+								medicine.getGenericName(),
+								medicine.getBrandName(),
+								medicine.getForm(),
+								medicine.getQuantity(),
+								medicine.getPrice()
+						};
+						adminModel.addRow(adminRowData);
+					}
+				}
+
+				// Update Client GUI frame table if not null
+				if (clientGUIFrame != null) {
+					DefaultTableModel clientModel = (DefaultTableModel) clientGUIFrame.getCategoryTable().getModel();
+					clientModel.setRowCount(0);
+					for (Medicine medicine : medicineList) {
+						Object[] clientRowData = {
+								medicine.getCategory(),
+								medicine.getGenericName(),
+								medicine.getBrandName(),
+								medicine.getForm(),
+								medicine.getPrice(),
+								medicine.getQuantity()
+						};
+						clientModel.addRow(clientRowData);
+					}
 				}
 			} else {
-				System.err.println("Admin GUI frame is null.");
+				System.err.println("Both Admin GUI and Client GUI frames are null.");
 			}
 		});
 	}

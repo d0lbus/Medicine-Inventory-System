@@ -29,6 +29,8 @@ public class CustomerClientController {
 	private static Registry registry;
 	private static ModelInterface msgserver;
 	private static CallbackImplementation mci;
+
+	private static String username;
 	private static String sessionID;
 
 
@@ -53,7 +55,7 @@ public class CustomerClientController {
 		loginFrame.getLogInButton().addActionListener(e -> {
 			try {
 				String ipAddress = loginFrame.getIpAddressTextField().getText();
-				String username = loginFrame.getUsernameTextField().getText();
+				username = loginFrame.getUsernameTextField().getText();
 				String password = new String(loginFrame.getPasswordField().getPassword());
 				String userTypeRequest = "Customer";
 
@@ -82,6 +84,14 @@ public class CustomerClientController {
 			}
 
 			clientGUIFrame.setVisible(true);
+
+			try{
+				msgserver.updateInventoryTable();
+			}
+			catch (Exception e){
+				e.printStackTrace();
+			}
+
 		/**
 		 * 	PROFILE RELATED FUNCTIONS
 		 *  Logout
@@ -120,7 +130,7 @@ public class CustomerClientController {
 
 		clientGUIFrame.getProfileLabel().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-
+				//msgserver.getUserDetails(username, mci);
 			}
 		});
 
@@ -131,9 +141,10 @@ public class CustomerClientController {
 		/**
 		 * 	SHOPPING FOR MEDICINE RELATED FUNCTIONS
 		 *
-		 *  Display Profile
-		 *  Change Password
+		 *
 		 * */
+
+
 	}
 }
 
