@@ -304,6 +304,25 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
     }
 
+    public void searchMedicine(String searchText, MessageCallback callback) throws RemoteException {
+        try {
+            List<Medicine> allMedicine = MedicineJSONProcessor.readMedicinesFromFile("res/Medicine.json");
+
+            List<Medicine> searchResults = allMedicine.stream()
+                    .filter(medicine ->
+                            medicine.getCategory().toLowerCase().contains(searchText.toLowerCase()) ||
+                                    medicine.getBrandName().toLowerCase().contains(searchText.toLowerCase()) ||
+                                    medicine.getGenericName().toLowerCase().contains(searchText.toLowerCase()) ||
+                                    medicine.getForm().toLowerCase().contains(searchText.toLowerCase()) ||
+                                    String.valueOf(medicine.getQuantity()).contains(searchText) ||
+                                    String.valueOf(medicine.getPrice()).contains(searchText)
+                    )
+                    .collect(Collectors.toList());
+            callback.sendMedicineSearchResults(searchResults);
+        } catch (Exception e) {
+            throw new RemoteException("Error while searching users", e);
+        }
+    }
 
     /**
      * MESSAGE RELATED METHODS

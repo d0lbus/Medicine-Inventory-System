@@ -37,6 +37,8 @@ public interface ModelInterface extends Remote {
 
     public void deleteMedicine(Medicine medicine, MessageCallback callback, String adminUsername) throws Exception;
 
+    public void searchMedicine(String searchText, MessageCallback callback) throws RemoteException;
+
     public void registerUser(User newUser) throws Exception, InvalidInputException;
 
     void searchUsers(String searchText, MessageCallback callback) throws RemoteException;

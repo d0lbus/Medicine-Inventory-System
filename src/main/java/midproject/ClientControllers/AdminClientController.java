@@ -15,6 +15,7 @@ import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.*;
 import midproject.SharedClasses.Utilities.UserJSONProcessor;
 import midproject.ViewClasses.AdminGUIFrame;
+import midproject.ViewClasses.EditMedicineFrame;
 import midproject.ViewClasses.Login;
 
 import java.util.Date;
@@ -22,11 +23,13 @@ import java.util.List;
 
 import java.util.regex.Pattern;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class AdminClientController {
 
     private static Login loginFrame = new Login();
     public static AdminGUIFrame adminGUIFrame = AdminGUIFrame.getInstance();
+    static EditMedicineFrame editMedicineFrame = new EditMedicineFrame();
     private static User user = new User();
     private static Registry registry;
     private static ModelInterface msgserver;
@@ -251,6 +254,7 @@ public class AdminClientController {
         });
 
         /** REGISTER USER RELATED METHODS */
+
         adminGUIFrame.getCreateAccountButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -334,6 +338,18 @@ public class AdminClientController {
 
         /** INVENTORY RELATED METHODS */
 
+        adminGUIFrame.getiSearchTextfield().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String searchText = adminGUIFrame.getiSearchTextfield().getText().trim().toLowerCase();
+                try {
+                    msgserver.searchMedicine(searchText, mci);
+                } catch (RemoteException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
         adminGUIFrame.getiAddButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -341,12 +357,37 @@ public class AdminClientController {
             }
         });
 
-        adminGUIFrame.getiEditButton().addActionListener(new ActionListener() {
+        /* adminGUIFrame.getiEditButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int selectedRow = adminGUIFrame.getiTable().getSelectedRow();
+                if (selectedRow >= 0) {
+                    DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getiTable().getModel();
+                    Medicine selectedMedicine = extractMedicineFromRow(model, selectedRow);
+                    setMedicineData(selectedMedicine);
+                    editMedicineFrame.setVisible(true);
+                    editMedicineFrame.getEditButton().addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            Medicine editedMedicine = editMedicineFrame.getEditedMedicineData();
 
+                            // Send the edited data back to the server
+                            try {
+                                // Assuming you have a method in your RMI server to handle medicine update
+                                msgserver.updateMedicine(editedMedicine, mci);
+                                JOptionPane.showMessageDialog(editMedicineFrame, "Medicine updated successfully.");
+                                editMedicineFrame.dispose();
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                                JOptionPane.showMessageDialog(editMedicineFrame, "Error updating medicine: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                    });
+                } else {
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a medicine to edit.", "No Selection", JOptionPane.WARNING_MESSAGE);
+                }
             }
-        });
+        }); */
 
         adminGUIFrame.getiDeleteButton().addActionListener(new ActionListener() {
             @Override
@@ -392,19 +433,17 @@ public class AdminClientController {
                 }
             }
         });
-
-
     }
 
     /** AUTOREFRESH / HELPER METHODS */
 
-    public static void autoRefreshUserRelatedComponents() throws Exception {
+    private static void autoRefreshUserRelatedComponents() throws Exception {
         msgserver.updateRegisteredUsersTable();
         msgserver.updateRegisteredUsersCount();
         msgserver.updateArchivedUsersTable();
     }
 
-    public static void autoRefreshMedicineRelatedComponents() throws Exception{
+    private static void autoRefreshMedicineRelatedComponents() throws Exception{
         msgserver.updateInventoryTable();
     }
 
@@ -447,4 +486,33 @@ public class AdminClientController {
         return false; // Username does not exist
     }
 
+    // Helper method to extract Medicine object from table row
+    private static Medicine extractMedicineFromRow(DefaultTableModel model, int selectedRow) {
+        Medicine medicine = new Medicine();
+        medicine.setCategory(model.getValueAt(selectedRow, 0).toString());
+        medicine.setGenericName(model.getValueAt(selectedRow, 1).toString());
+        medicine.setBrandName(model.getValueAt(selectedRow, 2).toString());
+        medicine.setForm(model.getValueAt(selectedRow, 3).toString());
+        medicine.setQuantity(Integer.parseInt(model.getValueAt(selectedRow, 4).toString()));
+        medicine.setPrice(Double.parseDouble(model.getValueAt(selectedRow, 5).toString()));
+        return medicine;
+    }
+
+    public static void setMedicineData(Medicine medicine) {
+        editMedicineFrame.getCategoryTextField().setText(medicine.getCategory());
+        editMedicineFrame.getGenericNameTextField().setText(medicine.getGenericName());
+        editMedicineFrame.getBrandNameTextField().setText(medicine.getBrandName());
+        editMedicineFrame.getFormTextField().setText(medicine.getForm());
+        editMedicineFrame.getQuantityTextField().setText(String.valueOf(medicine.getQuantity()));
+        editMedicineFrame.getAmmountTextField().setText(String.format("%.2f", medicine.getPrice()));
+    }
+
+    public static void getEditedMedicineData(Medicine medicine) {
+        editMedicineFrame.getCategoryTextField().setText(medicine.getCategory());
+        editMedicineFrame.getGenericNameTextField().setText(medicine.getGenericName());
+        editMedicineFrame.getBrandNameTextField().setText(medicine.getBrandName());
+        editMedicineFrame.getFormTextField().setText(medicine.getForm());
+        editMedicineFrame.getQuantityTextField().setText(String.valueOf(medicine.getQuantity()));
+        editMedicineFrame.getAmmountTextField().setText(String.format("%.2f", medicine.getPrice()));
+    }
 }

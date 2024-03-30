@@ -22,11 +22,37 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 	private AdminGUIFrame adminGUIFrame;
 	private ClientGUIFrame clientGUIFrame;
 
+	public CallbackImplementation(User user, AdminGUIFrame adminGUIFrame) throws RemoteException {
+		this.user = user;
+		this.adminGUIFrame = adminGUIFrame;
+	}
+
+	public CallbackImplementation(User user, ClientGUIFrame clientGUIFrame) throws RemoteException {
+		this.user = user;
+		this.clientGUIFrame = clientGUIFrame;
+	}
+
+	public void loginCall(User user) throws RemoteException {
+		System.out.println(user.getUsername() + " logged in...");
+	}
+
+	public void broadcastCall(String msg) throws RemoteException {
+		SwingUtilities.invokeLater(() -> {
+			if (clientGUIFrame != null) {
+				clientGUIFrame.getNotificationsTextArea().append("[SERVER NOTIFICATION]: " + msg + "\n");
+			} else {
+				System.err.println("Client GUI frame is null.");
+			}
+		});
+	}
+
+	public void logoutCall(User user) throws RemoteException  {
+		System.out.println(user.getUsername() + " logged out...");
+	}
+
 
 	public void updateOnlineUsers(int count) {
-		System.out.println("Called updateOnlineUsers with count: " + count);
 		SwingUtilities.invokeLater(() -> {
-				System.out.println("Admin GUI frame is not null. Updating label.");
 				String sCount = String.valueOf(count);
 				adminGUIFrame.getOnlineUsersLabel().setText(sCount);
 				adminGUIFrame.getOnlineUsersLabel().revalidate();
@@ -115,36 +141,8 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		});
 	}
 
-	public CallbackImplementation(User user, AdminGUIFrame adminGUIFrame) throws RemoteException {
-		this.user = user;
-		this.adminGUIFrame = adminGUIFrame;
-	}
-
-	public CallbackImplementation(User user, ClientGUIFrame clientGUIFrame) throws RemoteException {
-		this.user = user;
-		this.clientGUIFrame = clientGUIFrame;
-	}
-
 	public User getUser() throws RemoteException {
 		return user;
-	}
-
-	public void loginCall(User user) throws RemoteException {
-		System.out.println(user.getUsername() + " logged in...");
-	}
-
-	public void broadcastCall(String msg) throws RemoteException {
-		SwingUtilities.invokeLater(() -> {
-			if (clientGUIFrame != null) {
-				clientGUIFrame.getNotificationsTextArea().append("[SERVER NOTIFICATION]: " + msg + "\n");
-			} else {
-				System.err.println("Client GUI frame is null.");
-			}
-		});
-	}
-
-	public void logoutCall(User user) throws RemoteException  {
-		System.out.println(user.getUsername() + " logged out...");
 	}
 
 	public void displayUserDetails(User user) throws RemoteException {
@@ -181,8 +179,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		System.out.println(adminUsername + " archived the medicine " + genericName + " with a brand name " + brandName + " under the category " + category);
 	}
 
-
-
 	public void sendSearchResults(List<User> results) throws RemoteException {
 		SwingUtilities.invokeLater(() -> {
 			DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getrUsersTable().getModel();
@@ -201,5 +197,23 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		});
 	}
 
+	public void sendMedicineSearchResults(List<Medicine> results) throws RemoteException {
+		SwingUtilities.invokeLater(() -> {
+			DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getiTable().getModel();
+			model.setRowCount(0);
+
+			for (Medicine medicine : results) {
+				Object[] rowData = {
+						medicine.getCategory(),
+						medicine.getGenericName(),
+						medicine.getBrandName(),
+						medicine.getForm(),
+						medicine.getQuantity(),
+						medicine.getPrice()
+				};
+				model.addRow(rowData);
+			}
+		});
+	}
 
 }

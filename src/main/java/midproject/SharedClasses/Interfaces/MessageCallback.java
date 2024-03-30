@@ -43,6 +43,7 @@ public interface MessageCallback extends Remote {
 	void notifyMedicineArchivedByAdmin(String adminUsername, String archivedMedicineCategory, String archivedMedicineGN, String archivedMedicineBN) throws RemoteException;
 	public void sendSearchResults(List<User> users) throws RemoteException;
 
+	public void sendMedicineSearchResults(List<Medicine> users) throws RemoteException;
 
     void notifyUserUnarchivedByAdmin(String adminUsername, String username) throws Exception;
 }
