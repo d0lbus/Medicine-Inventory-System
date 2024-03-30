@@ -492,8 +492,12 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
     }
 
 
-
     /**CUSTOMER SIDE**/
+
+    public void getUserDetails(String username, MessageCallback msgCallback) throws Exception {
+        User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
+        msgCallback.displayProfileDetails(user);
+    }
 
 
 }

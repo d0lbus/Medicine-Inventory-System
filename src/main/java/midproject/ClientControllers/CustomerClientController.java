@@ -130,8 +130,12 @@ public class CustomerClientController {
 
 		clientGUIFrame.getProfileLabel().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				//msgserver.getUserDetails(username, mci);
-			}
+				try {
+					msgserver.getUserDetails(username, mci);
+				}  catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
 		});
 
 		clientGUIFrame.getSaveButton().addActionListener(e ->{

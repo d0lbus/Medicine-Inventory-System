@@ -59,7 +59,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		System.out.println(user.getUsername() + " logged out...");
 	}
 
-
 	public void updateOnlineUsers(int count) {
 		SwingUtilities.invokeLater(() -> {
 				String sCount = String.valueOf(count);
@@ -274,6 +273,13 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 				model.addRow(rowData);
 			}
 		});
+	}
+
+
+	/**CUSTOMER SIDE*/
+
+	public void displayProfileDetails(User user) throws RemoteException{
+
 	}
 
 }

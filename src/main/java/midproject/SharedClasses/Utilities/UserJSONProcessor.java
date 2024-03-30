@@ -66,7 +66,6 @@ public class UserJSONProcessor {
 
     public static User getUserById(String filePath, String userId) throws Exception {
         List<User> users = readUsersFromFile(filePath);
-
         for (User user : users) {
             if (user.getUserId().equals(userId)) {
                 return user;
@@ -75,6 +74,15 @@ public class UserJSONProcessor {
         return null;
     }
 
+    public static User getUserByUsername(String filePath, String username) throws Exception {
+        List<User> users = readUsersFromFile(filePath);
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        return null;
+    }
 
 
     public static String getUserTypeByUsername(String filePath, String username) throws Exception {

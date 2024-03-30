@@ -33,6 +33,8 @@ public interface MessageCallback extends Remote {
 
 	void displayUserDetails(User user) throws RemoteException;
 
+	void displayProfileDetails(User user) throws RemoteException;
+
 	void notifyUserRegisteredByAdmin(String adminUsername, User user) throws RemoteException;
 
 	void notifyUserArchivedByAdmin(String adminUsername, String archivedUsername) throws RemoteException;
