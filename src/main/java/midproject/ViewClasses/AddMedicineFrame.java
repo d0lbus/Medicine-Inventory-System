@@ -4,6 +4,8 @@
  */
 package midproject.ViewClasses;
 
+import javax.swing.*;
+
 /**
  *
  * @author Cian Talosig
@@ -54,7 +56,7 @@ public class AddMedicineFrame extends javax.swing.JFrame {
         quantityLabel.setText("Quantity:");
 
         amountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        amountLabel.setText("Amount:");
+        amountLabel.setText("Price:");
 
         addMedicineLabel.setText("ADD MEDICINE");
 
@@ -173,6 +175,119 @@ public class AddMedicineFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addMedicineButton;
+
+    public JButton getAddMedicineButton() {
+        return addMedicineButton;
+    }
+
+    public void setAddMedicineButton(JButton addMedicineButton) {
+        this.addMedicineButton = addMedicineButton;
+    }
+
+    public JLabel getAddMedicineLabel() {
+        return addMedicineLabel;
+    }
+
+    public void setAddMedicineLabel(JLabel addMedicineLabel) {
+        this.addMedicineLabel = addMedicineLabel;
+    }
+
+    public JTextField getAmmountTextField() {
+        return ammountTextField;
+    }
+
+    public void setAmmountTextField(JTextField ammountTextField) {
+        this.ammountTextField = ammountTextField;
+    }
+
+    public JLabel getAmountLabel() {
+        return amountLabel;
+    }
+
+    public void setAmountLabel(JLabel amountLabel) {
+        this.amountLabel = amountLabel;
+    }
+
+    public JLabel getBrandNameLabel() {
+        return brandNameLabel;
+    }
+
+    public void setBrandNameLabel(JLabel brandNameLabel) {
+        this.brandNameLabel = brandNameLabel;
+    }
+
+    public JTextField getBrandNameTextField() {
+        return brandNameTextField;
+    }
+
+    public void setBrandNameTextField(JTextField brandNameTextField) {
+        this.brandNameTextField = brandNameTextField;
+    }
+
+    public JLabel getCategoryLabel() {
+        return categoryLabel;
+    }
+
+    public void setCategoryLabel(JLabel categoryLabel) {
+        this.categoryLabel = categoryLabel;
+    }
+
+    public JTextField getCategoryTextField() {
+        return categoryTextField;
+    }
+
+    public void setCategoryTextField(JTextField categoryTextField) {
+        this.categoryTextField = categoryTextField;
+    }
+
+    public JLabel getFormLabel() {
+        return formLabel;
+    }
+
+    public void setFormLabel(JLabel formLabel) {
+        this.formLabel = formLabel;
+    }
+
+    public JTextField getFormTextField() {
+        return formTextField;
+    }
+
+    public void setFormTextField(JTextField formTextField) {
+        this.formTextField = formTextField;
+    }
+
+    public JLabel getGenericNameLabel() {
+        return genericNameLabel;
+    }
+
+    public void setGenericNameLabel(JLabel genericNameLabel) {
+        this.genericNameLabel = genericNameLabel;
+    }
+
+    public JTextField getGenericNameTextField() {
+        return genericNameTextField;
+    }
+
+    public void setGenericNameTextField(JTextField genericNameTextField) {
+        this.genericNameTextField = genericNameTextField;
+    }
+
+    public JLabel getQuantityLabel() {
+        return quantityLabel;
+    }
+
+    public void setQuantityLabel(JLabel quantityLabel) {
+        this.quantityLabel = quantityLabel;
+    }
+
+    public JTextField getQuantityTextField() {
+        return quantityTextField;
+    }
+
+    public void setQuantityTextField(JTextField quantityTextField) {
+        this.quantityTextField = quantityTextField;
+    }
+
     private javax.swing.JLabel addMedicineLabel;
     private javax.swing.JTextField ammountTextField;
     private javax.swing.JLabel amountLabel;

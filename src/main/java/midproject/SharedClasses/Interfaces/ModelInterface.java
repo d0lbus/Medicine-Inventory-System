@@ -36,13 +36,15 @@ public interface ModelInterface extends Remote {
 
     public void updateInventoryTable() throws Exception;
 
+    public void addMedicine(Medicine medicine, MessageCallback callback, String adminUsername) throws Exception;
+
     public void deleteMedicine(Medicine medicine, MessageCallback callback, String adminUsername) throws Exception;
 
     public void searchMedicine(String searchText, MessageCallback callback) throws RemoteException;
 
     public void updateMedicine(Medicine editedMedicine, Medicine originalMedicine, MessageCallback callback, String adminUsername) throws Exception;
 
-    public void registerUser(User newUser) throws Exception, InvalidInputException;
+    public void registerUser(User newUser, String adminUsername) throws Exception, InvalidInputException;
 
     void searchUsers(String searchText, MessageCallback callback) throws RemoteException;
 

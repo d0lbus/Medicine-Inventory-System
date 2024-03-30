@@ -245,13 +245,19 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
      *
      * */
 
-    public void registerUser(User newUser) throws RemoteException, InvalidInputException {
-        // Generate unique user ID
+    public void registerUser(User newUser, String adminUsername) throws RemoteException, InvalidInputException {
         String userId = generateUserId(newUser.getUserType());
         newUser.setUserId(userId);
-        // Add the user to the JSON file
         String filePath = "res/UserInformation.json";
         UserJSONProcessor.addUserToJsonFile(newUser, filePath);
+
+        for (Map.Entry<UserCallBackInfo, MessageCallback> entry : msgCallbacks.entrySet()) {
+            UserCallBackInfo userInfo = entry.getKey();
+            MessageCallback adminCallback = entry.getValue();
+            if ("Admin".equals(userInfo.getUserType())) {
+                adminCallback.notifyUserRegisteredByAdmin(adminUsername, newUser);
+            }
+        }
 
     }
 
@@ -290,6 +296,18 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
      * INVENTORY RELATED METHODS
      *
      * */
+
+    public void addMedicine(Medicine medicine, MessageCallback callback, String adminUsername) throws Exception{
+        MedicineJSONProcessor.addMedicineToFile(medicine, "res/Medicine.json");
+        for (Map.Entry<UserCallBackInfo, MessageCallback> entry : msgCallbacks.entrySet()) {
+            UserCallBackInfo userInfo = entry.getKey();
+            MessageCallback adminCallback = entry.getValue();
+            if ("Admin".equals(userInfo.getUserType())) {
+                adminCallback.notifyMedicineAddedByAdmin(adminUsername, medicine);
+            }
+        }
+    }
+
 
     public void deleteMedicine(Medicine medicine, MessageCallback callback, String adminUsername) throws Exception{
         MedicineJSONProcessor.removeSpecificMedicine(medicine, "res/Medicine.json");

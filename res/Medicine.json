@@ -1,12 +1,12 @@
 [
   {
     "MedicineID": "M1",
-    "Category": "Painkiller",
-    "GenericName": "Acetaminophen",
-    "BrandName": "Panadol",
+    "Category": "Painkillers",
+    "GenericName": "Citalopram",
+    "BrandName": "Celexas",
     "Form": "Tablet",
-    "Quantity": 50,
-    "Price": 3.0
+    "Quantity": 5,
+    "Price": 10.0
   },
   {
     "MedicineID": "M2",
@@ -14,7 +14,7 @@
     "GenericName": "Acetaminophen",
     "BrandName": "Mapap",
     "Form": "Chewable Tablet",
-    "Quantity": 35,
+    "Quantity": 50,
     "Price": 6.0
   },
   {
@@ -93,10 +93,10 @@
     "MedicineID": "M11",
     "Category": "Antidepressants",
     "GenericName": "Citalopram",
-    "BrandName": "Celexa",
+    "BrandName": "Celexas",
     "Form": "Tablet",
-    "Quantity": 0,
-    "Price": 0.0
+    "Quantity": 50,
+    "Price": 10.0
   },
   {
     "MedicineID": "M12",
@@ -141,6 +141,15 @@
     "BrandName": "Valtrex",
     "Form": "Tablet",
     "Quantity": 0,
-    "Price": 0.0
+    "Price": 10.0
+  },
+  {
+    "MedicineID": "M17",
+    "Category": "Vitamins",
+    "GenericName": "Vitaminer",
+    "BrandName": "Ultra Vitanims",
+    "Form": "Tablet",
+    "Quantity": 50,
+    "Price": 3.0
   }
 ]

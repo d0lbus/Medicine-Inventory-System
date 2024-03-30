@@ -17,6 +17,8 @@ import java.util.List;
 public class MedicineJSONProcessor {
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
+    private static final String ID_TRACKER_FILE_PATH = "res/medicineIDTracker.txt";
+
     public static List<Medicine> readMedicinesFromFile(String filePath) throws IOException {
         try {
             String json = new String(Files.readAllBytes(Paths.get(filePath)));
@@ -47,6 +49,7 @@ public class MedicineJSONProcessor {
     }
 
     public static void addMedicineToFile(Medicine medicine, String filePath) throws IOException {
+        medicine.setMedicineID(generateNextMedicineId());
         List<Medicine> medicines = readMedicinesFromFile(filePath);
         medicines.add(medicine);
         writeMedicinesToFile(medicines, filePath);
@@ -89,5 +92,37 @@ public class MedicineJSONProcessor {
         );
 
         writeMedicinesToFile(medicines, filePath);
+    }
+
+    // Generates the next medicine ID with synchronized for thread safety
+    public static synchronized String generateNextMedicineId() {
+        int lastIdNumber = readLastIdNumber();
+        int nextIdNumber = lastIdNumber + 1;
+        updateIdTrackerFile(nextIdNumber);
+        return "M" + nextIdNumber;
+    }
+
+    // Reads the last ID number from the tracker file, also synchronized
+    private static synchronized int readLastIdNumber() {
+        try {
+            File file = new File(ID_TRACKER_FILE_PATH);
+            if (!file.exists()) {
+                return 0; // Start from 0 because we'll increment before using
+            }
+            String content = new String(Files.readAllBytes(Paths.get(ID_TRACKER_FILE_PATH)));
+            return Integer.parseInt(content.trim());
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+            return 0; // Default to 0 in case of error
+        }
+    }
+
+    // Updates the tracker file with the new last used ID number, also synchronized
+    private static synchronized void updateIdTrackerFile(int newLastIdNumber) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(ID_TRACKER_FILE_PATH))) {
+            writer.write(Integer.toString(newLastIdNumber));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -33,7 +33,13 @@ public interface MessageCallback extends Remote {
 
 	void displayUserDetails(User user) throws RemoteException;
 
+	void notifyUserRegisteredByAdmin(String adminUsername, User user) throws RemoteException;
+
 	void notifyUserArchivedByAdmin(String adminUsername, String archivedUsername) throws RemoteException;
+
+	void notifyUserUnarchivedByAdmin(String adminUsername, String username) throws Exception;
+
+	void notifyMedicineAddedByAdmin(String adminUsername, Medicine medicine) throws RemoteException;
 
 	void notifyMedicineArchivedByAdmin(String adminUsername, Medicine medicine) throws RemoteException;
 
@@ -43,5 +49,5 @@ public interface MessageCallback extends Remote {
 
 	void sendMedicineSearchResults(List<Medicine> users) throws RemoteException;
 
-    void notifyUserUnarchivedByAdmin(String adminUsername, String username) throws Exception;
+
 }

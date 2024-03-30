@@ -150,7 +150,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			}
 		});
 	}
-
 	public User getUser() throws RemoteException {
 		return user;
 	}
@@ -176,13 +175,32 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			JOptionPane.showMessageDialog(null, userDetails, "Details of " + user.getFirstName() + " " + user.getLastName(), JOptionPane.INFORMATION_MESSAGE);
 		});
 	}
+	public void notifyUserRegisteredByAdmin(String adminUsername, User user) throws RemoteException{
+		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " registered user "
+				+ "\nID: " + user.getUserId()
+				+ "\nUser Type: " + user.getUserType()
+				+ "\nUsername: " + user.getUsername()
+				+ "\nFirst Name: " + user.getFirstName()
+				+ "\nLast Name: " + user.getLastName());
 
+	}
 	public void notifyUserArchivedByAdmin(String adminUsername, String archivedUsername) throws RemoteException {
 		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " archived user " + archivedUsername);
 	}
 
 	public void notifyUserUnarchivedByAdmin(String adminUsername, String unarchivedUsername) throws RemoteException {
 		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " unarchived user " + unarchivedUsername);
+	}
+
+	public void notifyMedicineAddedByAdmin(String adminUsername, Medicine medicine) throws RemoteException{
+		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " added a new medicine: "
+				+ "\nMedicine ID" + medicine.getMedicineID()
+				+ "\nCategory: " + medicine.getCategory()
+				+ "\nGeneric Name: " + medicine.getGenericName()
+				+ "\nBrand Name: " + medicine.getBrandName()
+				+ "\nForm: " + medicine.getForm()
+				+ "\nQuantity: " + medicine.getQuantity()
+				+ "\nPrice: " + medicine.getPrice());
 	}
 
 	public void notifyMedicineArchivedByAdmin(String adminUsername, Medicine medicine) throws RemoteException{
