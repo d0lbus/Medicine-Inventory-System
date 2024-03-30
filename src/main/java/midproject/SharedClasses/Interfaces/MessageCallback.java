@@ -12,19 +12,14 @@ import java.util.List;
 
 
 public interface MessageCallback extends Remote {
-	// method to get the current user of the callback/session
 	public User getUser() throws RemoteException;
 
-	// method called by server when other clients log in
-	// user data is sent as parameter
 	public void loginCall(User user) throws RemoteException;
 
-	// method called by server when a message is sent by clients
 	public void broadcastCall(String msg) throws RemoteException;
 
-	// method called by server when a user logs out from the system
-	// user logging out sent as parameter
 	public void logoutCall(User user) throws RemoteException;
+
     //public void sendArchivedUsersList(List<User> archivedUsers);
 
 	public void updateOnlineUsers(int count) throws RemoteException;
@@ -34,16 +29,19 @@ public interface MessageCallback extends Remote {
 
 	public void readMedicineList(List<Medicine> medicine) throws RemoteException;
 
-	public void countUsersList(List<User> users) throws RemoteException;
+    void countUsersList(List<User> users) throws RemoteException;
 
-	public void displayUserDetails(User user) throws RemoteException;
+	void displayUserDetails(User user) throws RemoteException;
 
 	void notifyUserArchivedByAdmin(String adminUsername, String archivedUsername) throws RemoteException;
 
-	void notifyMedicineArchivedByAdmin(String adminUsername, String archivedMedicineCategory, String archivedMedicineGN, String archivedMedicineBN) throws RemoteException;
-	public void sendSearchResults(List<User> users) throws RemoteException;
+	void notifyMedicineArchivedByAdmin(String adminUsername, Medicine medicine) throws RemoteException;
 
-	public void sendMedicineSearchResults(List<Medicine> users) throws RemoteException;
+	void notifyMedicineUpdatedByAdmin(String adminUsername, Medicine editedMedicine, Medicine originalMedicine) throws RemoteException;
+
+	void sendSearchResults(List<User> users) throws RemoteException;
+
+	void sendMedicineSearchResults(List<Medicine> users) throws RemoteException;
 
     void notifyUserUnarchivedByAdmin(String adminUsername, String username) throws Exception;
 }

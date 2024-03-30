@@ -3,6 +3,8 @@ package midproject.SharedClasses.Implementations;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import midproject.SharedClasses.Interfaces.MessageCallback;
@@ -21,6 +23,13 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 
 	private AdminGUIFrame adminGUIFrame;
 	private ClientGUIFrame clientGUIFrame;
+
+	// Get the current date and time
+	LocalDateTime now = LocalDateTime.now();
+
+	// Format the date and time
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	String formattedDateTime = now.format(formatter);
 
 	public CallbackImplementation(User user, AdminGUIFrame adminGUIFrame) throws RemoteException {
 		this.user = user;
@@ -126,6 +135,7 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 				model.setRowCount(0);
 				for (Medicine medicine : medicineList) {
 					Object[] rowData = {
+							medicine.getMedicineID(),
 							medicine.getCategory(),
 							medicine.getGenericName(),
 							medicine.getBrandName(),
@@ -168,15 +178,25 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 	}
 
 	public void notifyUserArchivedByAdmin(String adminUsername, String archivedUsername) throws RemoteException {
-		System.out.println(adminUsername + " archived user " + archivedUsername);
+		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " archived user " + archivedUsername);
 	}
 
 	public void notifyUserUnarchivedByAdmin(String adminUsername, String unarchivedUsername) throws RemoteException {
-		System.out.println(adminUsername + " unarchived user " + unarchivedUsername);
+		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " unarchived user " + unarchivedUsername);
 	}
 
-	public void notifyMedicineArchivedByAdmin(String adminUsername, String category, String genericName, String brandName) throws RemoteException{
-		System.out.println(adminUsername + " archived the medicine " + genericName + " with a brand name " + brandName + " under the category " + category);
+	public void notifyMedicineArchivedByAdmin(String adminUsername, Medicine medicine) throws RemoteException{
+		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " archived the medicine " + medicine.getGenericName() + " with a brand name " + medicine.getBrandName() + " under the category " + medicine.getCategory());
+	}
+
+	public void notifyMedicineUpdatedByAdmin(String adminUsername, Medicine editedMedicine, Medicine originalMedicine) throws RemoteException{
+		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " edited the medicine entry. Changes made: "
+				+ "\nCategory: from '" + originalMedicine.getCategory() + "' to '" + editedMedicine.getCategory() + "'"
+				+ "\nGeneric Name: from '" + originalMedicine.getGenericName() + "' to '" + editedMedicine.getGenericName() + "'"
+				+ "\nBrand Name: from '" + originalMedicine.getBrandName() + "' to '" + editedMedicine.getBrandName() + "'"
+				+ "\nForm: from '" + originalMedicine.getForm() + "' to '" + editedMedicine.getForm() + "'"
+				+ "\nQuantity: from '" + originalMedicine.getQuantity() + "' to '" + editedMedicine.getQuantity() + "'"
+				+ "\nPrice: from " + originalMedicine.getPrice() + " to " + editedMedicine.getPrice());
 	}
 
 	public void sendSearchResults(List<User> results) throws RemoteException {
@@ -204,6 +224,7 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 
 			for (Medicine medicine : results) {
 				Object[] rowData = {
+						medicine.getMedicineID(),
 						medicine.getCategory(),
 						medicine.getGenericName(),
 						medicine.getBrandName(),

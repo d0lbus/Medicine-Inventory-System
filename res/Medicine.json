@@ -1,13 +1,15 @@
 [
   {
-    "Category": "Painkillers",
+    "MedicineID": "M1",
+    "Category": "Painkiller",
     "GenericName": "Acetaminophen",
     "BrandName": "Panadol",
     "Form": "Tablet",
-    "Quantity": 40,
+    "Quantity": 50,
     "Price": 3.0
   },
   {
+    "MedicineID": "M2",
     "Category": "Painkillers",
     "GenericName": "Acetaminophen",
     "BrandName": "Mapap",
@@ -16,6 +18,7 @@
     "Price": 6.0
   },
   {
+    "MedicineID": "M3",
     "Category": "Painkillers",
     "GenericName": "Acetaminophen",
     "BrandName": "Feverall",
@@ -24,6 +27,7 @@
     "Price": 10.0
   },
   {
+    "MedicineID": "M4",
     "Category": "Painkillers",
     "GenericName": "Acetaminophen",
     "BrandName": "Actamin",
@@ -32,6 +36,7 @@
     "Price": 6.0
   },
   {
+    "MedicineID": "M5",
     "Category": "Painkillers",
     "GenericName": "Acetaminophen",
     "BrandName": "Tempra",
@@ -40,6 +45,7 @@
     "Price": 149.75
   },
   {
+    "MedicineID": "M6",
     "Category": "Antibiotics",
     "GenericName": "Amoxicillin",
     "BrandName": "Suneferous",
@@ -48,6 +54,7 @@
     "Price": 0.0
   },
   {
+    "MedicineID": "M7",
     "Category": "Antibiotics",
     "GenericName": "Ciprofloxacin",
     "BrandName": "Blubuferus",
@@ -56,6 +63,7 @@
     "Price": 0.0
   },
   {
+    "MedicineID": "M8",
     "Category": "Antibiotics",
     "GenericName": "Azithromycin",
     "BrandName": "Aritama",
@@ -64,6 +72,7 @@
     "Price": 0.0
   },
   {
+    "MedicineID": "M9",
     "Category": "Antidepressants",
     "GenericName": "Sertraline",
     "BrandName": "Zoloft",
@@ -72,6 +81,7 @@
     "Price": 0.0
   },
   {
+    "MedicineID": "M10",
     "Category": "Antidepressants",
     "GenericName": "Fluoxetine",
     "BrandName": "Prozac",
@@ -80,6 +90,7 @@
     "Price": 0.0
   },
   {
+    "MedicineID": "M11",
     "Category": "Antidepressants",
     "GenericName": "Citalopram",
     "BrandName": "Celexa",
@@ -88,6 +99,7 @@
     "Price": 0.0
   },
   {
+    "MedicineID": "M12",
     "Category": "Antifungals",
     "GenericName": "Fluconazole",
     "BrandName": "Diflucan",
@@ -96,6 +108,7 @@
     "Price": 0.0
   },
   {
+    "MedicineID": "M13",
     "Category": "Antifungals",
     "GenericName": "Ketoconazole",
     "BrandName": "Nizoral",
@@ -104,6 +117,7 @@
     "Price": 0.0
   },
   {
+    "MedicineID": "M14",
     "Category": "Antifungals",
     "GenericName": "Clotrimazole",
     "BrandName": "Lotrimin",
@@ -112,6 +126,7 @@
     "Price": 0.0
   },
   {
+    "MedicineID": "M15",
     "Category": "Antivirals",
     "GenericName": "Oseltamivir",
     "BrandName": "Tamiflu",
@@ -120,6 +135,7 @@
     "Price": 0.0
   },
   {
+    "MedicineID": "M16",
     "Category": "Antivirals",
     "GenericName": "Valacyclovir",
     "BrandName": "Valtrex",

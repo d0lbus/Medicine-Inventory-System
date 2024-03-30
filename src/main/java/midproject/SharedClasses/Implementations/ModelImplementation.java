@@ -299,7 +299,7 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             MessageCallback adminCallback = entry.getValue();
 
             if ("Admin".equals(userInfo.getUserType())) {
-                adminCallback.notifyMedicineArchivedByAdmin(adminUsername, medicine.getCategory(), medicine.getGenericName(), medicine.getBrandName());
+                adminCallback.notifyMedicineArchivedByAdmin(adminUsername, medicine);
             }
         }
     }
@@ -321,6 +321,17 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             callback.sendMedicineSearchResults(searchResults);
         } catch (Exception e) {
             throw new RemoteException("Error while searching users", e);
+        }
+    }
+
+    public void updateMedicine(Medicine editedMedicine, Medicine originalMedicine, MessageCallback callback, String adminUsername) throws Exception {
+        MedicineJSONProcessor.updateMedicine(editedMedicine, "res/Medicine.json");
+        for (Map.Entry<UserCallBackInfo, MessageCallback> entry : msgCallbacks.entrySet()) {
+            UserCallBackInfo userInfo = entry.getKey();
+            MessageCallback adminCallback = entry.getValue();
+            if ("Admin".equals(userInfo.getUserType())) {
+                adminCallback.notifyMedicineUpdatedByAdmin(adminUsername, editedMedicine, originalMedicine);
+            }
         }
     }
 
@@ -446,18 +457,20 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
     public void notifyOnlineUsersChanged() {
         int onlineUsersCount = sessionUserMap.size();
         System.out.println("Updating online users count...");
-        msgCallbacks.entrySet().forEach(entry -> {
-            UserCallBackInfo userInfo = entry.getKey();
-            MessageCallback callback = entry.getValue();
-            if ("Admin".equals(userInfo.getUserType())) {
-                try {
-                    callback.updateOnlineUsers(onlineUsersCount);
-                } catch (RemoteException e) {
-                    e.printStackTrace();
+        if (onlineUsersCount == 0) {
+            System.out.println("No users are online.");
+        } else {
+            msgCallbacks.entrySet().forEach(entry -> {
+                UserCallBackInfo userInfo = entry.getKey();
+                MessageCallback callback = entry.getValue();
+                if ("Admin".equals(userInfo.getUserType())) {
+                    try {
+                        callback.updateOnlineUsers(onlineUsersCount);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        });
+            });
+        }
     }
-
-
 }

@@ -4,6 +4,9 @@ package midproject.SharedClasses.ReferenceClasses;
 import java.io.Serializable;
 
 public class Medicine implements Serializable {
+
+
+    private String MedicineID;
     private String Category;
     private String GenericName;
     private String BrandName;
@@ -14,13 +17,22 @@ public class Medicine implements Serializable {
     public Medicine() {
     }
 
-    public Medicine(String category, String genericName, String brandName, String form, int quantity, double price) {
+    public Medicine(String MedicineID, String category, String genericName, String brandName, String form, int quantity, double price) {
+        this.MedicineID = MedicineID;
         this.Category = category;
         this.GenericName = genericName;
         this.BrandName = brandName;
         this.Form = form;
         this.Quantity = quantity;
         this.Price = price;
+    }
+
+    public String getMedicineID() {
+        return MedicineID;
+    }
+
+    public void setMedicineID(String medicineID) {
+        MedicineID = medicineID;
     }
 
     public String getCategory() {
@@ -69,6 +81,18 @@ public class Medicine implements Serializable {
 
     public void setPrice(double price) {
         Price = price;
+    }
+
+    public String toString() {
+        return "Medicine{" +
+                "medicineID='" + MedicineID + '\'' +
+                "category='" + Category + '\'' +
+                ", genericName='" + GenericName + '\'' +
+                ", brandName='" + BrandName + '\'' +
+                ", form='" + Form + '\'' +
+                ", quantity=" + Quantity +
+                ", price=" + Price +
+                '}';
     }
 }
 

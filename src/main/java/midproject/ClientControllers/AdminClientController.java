@@ -91,6 +91,7 @@ public class AdminClientController {
     }
 
     private static void showClientGUI() throws Exception {
+        adminGUIFrame.setLocationRelativeTo(null);
         adminGUIFrame.setVisible(true);
 
         autoRefreshUserRelatedComponents();
@@ -357,24 +358,25 @@ public class AdminClientController {
             }
         });
 
-        /* adminGUIFrame.getiEditButton().addActionListener(new ActionListener() {
+        adminGUIFrame.getiEditButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = adminGUIFrame.getiTable().getSelectedRow();
                 if (selectedRow >= 0) {
                     DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getiTable().getModel();
                     Medicine selectedMedicine = extractMedicineFromRow(model, selectedRow);
+                    String selectedMedicineID = selectedMedicine.getMedicineID();
                     setMedicineData(selectedMedicine);
+                    editMedicineFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    editMedicineFrame.setLocationRelativeTo(null);
                     editMedicineFrame.setVisible(true);
                     editMedicineFrame.getEditButton().addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            Medicine editedMedicine = editMedicineFrame.getEditedMedicineData();
-
-                            // Send the edited data back to the server
+                            Medicine editedMedicine = getEditedMedicineData(selectedMedicineID);
                             try {
-                                // Assuming you have a method in your RMI server to handle medicine update
-                                msgserver.updateMedicine(editedMedicine, mci);
+                                msgserver.updateMedicine(editedMedicine, selectedMedicine, mci, username);
+                                autoRefreshMedicineRelatedComponents();
                                 JOptionPane.showMessageDialog(editMedicineFrame, "Medicine updated successfully.");
                                 editMedicineFrame.dispose();
                             } catch (Exception ex) {
@@ -387,7 +389,7 @@ public class AdminClientController {
                     JOptionPane.showMessageDialog(adminGUIFrame, "Please select a medicine to edit.", "No Selection", JOptionPane.WARNING_MESSAGE);
                 }
             }
-        }); */
+        });
 
         adminGUIFrame.getiDeleteButton().addActionListener(new ActionListener() {
             @Override
@@ -396,12 +398,13 @@ public class AdminClientController {
                 if (selectedRow != -1) {
                     try {
                         Medicine medicineToDelete = new Medicine();
-                        medicineToDelete.setCategory(adminGUIFrame.getiTable().getValueAt(selectedRow, 0).toString());
-                        medicineToDelete.setGenericName(adminGUIFrame.getiTable().getValueAt(selectedRow, 1).toString());
-                        medicineToDelete.setBrandName(adminGUIFrame.getiTable().getValueAt(selectedRow, 2).toString());
-                        medicineToDelete.setForm(adminGUIFrame.getiTable().getValueAt(selectedRow, 3).toString());
-                        medicineToDelete.setQuantity((Integer) adminGUIFrame.getiTable().getValueAt(selectedRow, 4));
-                        medicineToDelete.setPrice((Double) adminGUIFrame.getiTable().getValueAt(selectedRow, 5));
+                        medicineToDelete.setMedicineID(adminGUIFrame.getiTable().getValueAt(selectedRow, 0).toString());
+                        medicineToDelete.setCategory(adminGUIFrame.getiTable().getValueAt(selectedRow, 1).toString());
+                        medicineToDelete.setGenericName(adminGUIFrame.getiTable().getValueAt(selectedRow, 2).toString());
+                        medicineToDelete.setBrandName(adminGUIFrame.getiTable().getValueAt(selectedRow, 3).toString());
+                        medicineToDelete.setForm(adminGUIFrame.getiTable().getValueAt(selectedRow, 4).toString());
+                        medicineToDelete.setQuantity((Integer) adminGUIFrame.getiTable().getValueAt(selectedRow, 5));
+                        medicineToDelete.setPrice((Double) adminGUIFrame.getiTable().getValueAt(selectedRow, 6));
 
                         msgserver.deleteMedicine(medicineToDelete, mci, username);
                         autoRefreshMedicineRelatedComponents();
@@ -489,12 +492,13 @@ public class AdminClientController {
     // Helper method to extract Medicine object from table row
     private static Medicine extractMedicineFromRow(DefaultTableModel model, int selectedRow) {
         Medicine medicine = new Medicine();
-        medicine.setCategory(model.getValueAt(selectedRow, 0).toString());
-        medicine.setGenericName(model.getValueAt(selectedRow, 1).toString());
-        medicine.setBrandName(model.getValueAt(selectedRow, 2).toString());
-        medicine.setForm(model.getValueAt(selectedRow, 3).toString());
-        medicine.setQuantity(Integer.parseInt(model.getValueAt(selectedRow, 4).toString()));
-        medicine.setPrice(Double.parseDouble(model.getValueAt(selectedRow, 5).toString()));
+        medicine.setMedicineID(model.getValueAt(selectedRow, 0).toString());
+        medicine.setCategory(model.getValueAt(selectedRow, 1).toString());
+        medicine.setGenericName(model.getValueAt(selectedRow, 2).toString());
+        medicine.setBrandName(model.getValueAt(selectedRow, 3).toString());
+        medicine.setForm(model.getValueAt(selectedRow, 4).toString());
+        medicine.setQuantity(Integer.parseInt(model.getValueAt(selectedRow, 5).toString()));
+        medicine.setPrice(Double.parseDouble(model.getValueAt(selectedRow, 6).toString()));
         return medicine;
     }
 
@@ -507,12 +511,16 @@ public class AdminClientController {
         editMedicineFrame.getAmmountTextField().setText(String.format("%.2f", medicine.getPrice()));
     }
 
-    public static void getEditedMedicineData(Medicine medicine) {
-        editMedicineFrame.getCategoryTextField().setText(medicine.getCategory());
-        editMedicineFrame.getGenericNameTextField().setText(medicine.getGenericName());
-        editMedicineFrame.getBrandNameTextField().setText(medicine.getBrandName());
-        editMedicineFrame.getFormTextField().setText(medicine.getForm());
-        editMedicineFrame.getQuantityTextField().setText(String.valueOf(medicine.getQuantity()));
-        editMedicineFrame.getAmmountTextField().setText(String.format("%.2f", medicine.getPrice()));
+    public static Medicine getEditedMedicineData(String medicineID) {
+        Medicine medicine = new Medicine();
+        medicine.setMedicineID(medicineID);
+        medicine.setCategory(editMedicineFrame.getCategoryTextField().getText());
+        medicine.setGenericName(editMedicineFrame.getGenericNameTextField().getText());
+        medicine.setBrandName(editMedicineFrame.getBrandNameTextField().getText());
+        medicine.setForm(editMedicineFrame.getFormTextField().getText());
+        medicine.setQuantity(Integer.parseInt(editMedicineFrame.getQuantityTextField().getText()));
+        medicine.setPrice(Double.parseDouble(editMedicineFrame.getAmmountTextField().getText()));
+
+        return medicine;
     }
 }

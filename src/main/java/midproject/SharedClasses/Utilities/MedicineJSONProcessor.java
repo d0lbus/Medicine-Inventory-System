@@ -29,6 +29,17 @@ public class MedicineJSONProcessor {
         }
     }
 
+    public static Medicine getMedicineById(String filePath, String medicineId) throws Exception {
+        List<Medicine> medicineList = readMedicinesFromFile(filePath);
+
+        for (Medicine medicine : medicineList) {
+            if (medicine.getMedicineID().equals(medicineId)) {
+                return medicine;
+            }
+        }
+        return null;
+    }
+
     public static void writeMedicinesToFile(List<Medicine> medicines, String filePath) throws IOException {
         try (Writer writer = Files.newBufferedWriter(Paths.get(filePath))) {
             gson.toJson(medicines, writer);
@@ -53,25 +64,22 @@ public class MedicineJSONProcessor {
         return filteredMedicines;
     }
 
-    // Example method: Update a medicine
-    // This is a simple approach and might need to be adapted based on how you identify unique medicines.
     public static void updateMedicine(Medicine updatedMedicine, String filePath) throws IOException {
         List<Medicine> medicines = readMedicinesFromFile(filePath);
         for (int i = 0; i < medicines.size(); i++) {
             Medicine medicine = medicines.get(i);
-            if (medicine.getBrandName().equals(updatedMedicine.getBrandName()) &&
-                    medicine.getGenericName().equals(updatedMedicine.getGenericName())) {
+            if (medicine.getMedicineID().equals(updatedMedicine.getMedicineID())) {
                 medicines.set(i, updatedMedicine);
                 break;
             }
         }
         writeMedicinesToFile(medicines, filePath);
     }
-
     public static void removeSpecificMedicine(Medicine targetMedicine, String filePath) throws IOException {
         List<Medicine> medicines = readMedicinesFromFile(filePath);
 
         medicines.removeIf(medicine ->
+                medicine.getMedicineID().equals(targetMedicine.getMedicineID()) &&
                 medicine.getCategory().equals(targetMedicine.getCategory()) &&
                         medicine.getGenericName().equals(targetMedicine.getGenericName()) &&
                         medicine.getBrandName().equals(targetMedicine.getBrandName()) &&
