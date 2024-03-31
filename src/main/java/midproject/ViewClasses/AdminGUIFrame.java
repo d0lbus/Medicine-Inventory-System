@@ -401,7 +401,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(rUsersTable);
 
-        rUsersArchiveButton.setBackground(new java.awt.Color(120, 0, 0));
+        rUsersArchiveButton.setBackground(new java.awt.Color(239,121,138));
         rUsersArchiveButton.setText("Archive");
         rUsersArchiveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -409,7 +409,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        rUsersViewButton.setBackground(new java.awt.Color(56, 102, 65));
+        rUsersViewButton.setBackground(new java.awt.Color(163,177,138));
         rUsersViewButton.setText("View User");
         rUsersViewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -417,7 +417,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        rUsersEditButton.setBackground(new java.awt.Color(18, 69, 89));
+        rUsersEditButton.setBackground(new java.awt.Color(162,210,255));
         rUsersEditButton.setText("Edit User");
         rUsersEditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -514,7 +514,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(aUsersTable);
 
-        aUsersUnarchiveButton.setBackground(new java.awt.Color(120, 0, 0));
+        aUsersUnarchiveButton.setBackground(new java.awt.Color(239,121,138));
         aUsersUnarchiveButton.setText("Unarchive");
         aUsersUnarchiveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -522,7 +522,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        aUsersViewButton.setBackground(new java.awt.Color(56, 102, 65));
+        aUsersViewButton.setBackground(new java.awt.Color(163,177,138));
         aUsersViewButton.setText("View User");
         aUsersViewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -530,7 +530,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        aUsersEditButton.setBackground(new java.awt.Color(18, 69, 89));
+        aUsersEditButton.setBackground(new java.awt.Color(162,210,255));
         aUsersEditButton.setText("Edit User");
         aUsersEditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -619,7 +619,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(pTable);
 
-        pViewButton.setBackground(new java.awt.Color(56, 102, 65));
+        pViewButton.setBackground(new java.awt.Color(163,177,138));
         pViewButton.setText("View Orders");
 
         pendingOrderLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -701,7 +701,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(oTable);
 
-        oViewButton.setBackground(new java.awt.Color(56, 102, 65));
+        oViewButton.setBackground(new java.awt.Color(163,177,138));
         oViewButton.setText("View Orders");
 
         orderLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -989,7 +989,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(iTable);
 
-        iAddButton.setBackground(new java.awt.Color(56, 102, 65));
+        iAddButton.setBackground(new java.awt.Color(163,177,138));
         iAddButton.setText("Add");
         iAddButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1002,7 +1002,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         inventoryLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         inventoryLabel.setText("Inventory");
 
-        iEditButton.setBackground(new java.awt.Color(18, 69, 89));
+        iEditButton.setBackground(new java.awt.Color(162,210,255));
         iEditButton.setText("Edit");
         iEditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1010,7 +1010,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        iDeleteButton.setBackground(new java.awt.Color(120, 0, 0));
+        iDeleteButton.setBackground(new java.awt.Color(239,121,138));
         iDeleteButton.setText("Delete");
         iDeleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
