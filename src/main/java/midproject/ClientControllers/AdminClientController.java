@@ -250,7 +250,12 @@ public class AdminClientController {
         adminGUIFrame.getaUsersSearchTextfield().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                String searchText = adminGUIFrame.getaUsersSearchTextfield().getText().trim().toLowerCase();
+                try {
+                    msgserver.searchUsers(searchText, mci);
+                } catch (RemoteException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 
