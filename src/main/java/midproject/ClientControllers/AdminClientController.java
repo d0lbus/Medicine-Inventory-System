@@ -245,7 +245,11 @@ public class AdminClientController {
                         throw new RuntimeException(ex);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a user first.", "Selection Required", JOptionPane.WARNING_MESSAGE);
+                    try {
+                        throw new SelectionRequiredUnarchiveUserException("Please select a user first.");
+                    } catch (SelectionRequiredUnarchiveUserException exception) {
+                        JOptionPane.showMessageDialog(adminGUIFrame, exception.getMessage(), "Selection Required", JOptionPane.WARNING_MESSAGE);
+                    }
                 }
             }
         });
