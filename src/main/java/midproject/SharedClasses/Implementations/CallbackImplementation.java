@@ -155,6 +155,7 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 					clientModel.setRowCount(0);
 					for (Medicine medicine : medicineList) {
 						Object[] clientRowData = {
+								medicine.getMedicineID(),
 								medicine.getCategory(),
 								medicine.getGenericName(),
 								medicine.getBrandName(),
