@@ -5,7 +5,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import midproject.SharedClasses.Implementations.CallbackImplementation;
@@ -222,8 +221,8 @@ public class AdminClientController {
                     }
                 } else {
                     try {
-                        throw new SelectionRequiredViewArchivedUsersException("Please select a user first.");
-                    } catch (SelectionRequiredViewArchivedUsersException exception) {
+                        throw new SelectionRequiredViewArchivedUserException("Please select a user first.");
+                    } catch (SelectionRequiredViewArchivedUserException exception) {
                         JOptionPane.showMessageDialog(adminGUIFrame, exception.getMessage(), "Selection Required", JOptionPane.WARNING_MESSAGE);
                     }
                 }
