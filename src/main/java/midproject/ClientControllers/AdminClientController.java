@@ -221,7 +221,11 @@ public class AdminClientController {
                         JOptionPane.showMessageDialog(adminGUIFrame, "Error retrieving user details.", "Remote Exception", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a user first.", "Selection Required", JOptionPane.WARNING_MESSAGE);
+                    try {
+                        throw new SelectionRequiredViewArchivedUsersException("Please select a user first.");
+                    } catch (SelectionRequiredViewArchivedUsersException exception) {
+                        JOptionPane.showMessageDialog(adminGUIFrame, exception.getMessage(), "Selection Required", JOptionPane.WARNING_MESSAGE);
+                    }
                 }
             }
         });
