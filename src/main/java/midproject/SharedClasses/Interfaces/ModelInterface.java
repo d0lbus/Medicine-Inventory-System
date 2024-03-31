@@ -50,6 +50,8 @@ public interface ModelInterface extends Remote {
 
     void unarchiveUser(String userId, MessageCallback callback, String username) throws Exception;
 
+    void searchArchivedUsers(String searchText, MessageCallback callback) throws RemoteException;
+
 
     /**CUSTOMER SIDE**/
     public void getUserDetails(String username, MessageCallback msgCallback) throws Exception;

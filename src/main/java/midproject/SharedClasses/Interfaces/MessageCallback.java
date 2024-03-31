@@ -51,5 +51,7 @@ public interface MessageCallback extends Remote {
 
 	void sendMedicineSearchResults(List<Medicine> users) throws RemoteException;
 
+	void sendArchivedUserSearchResults(List<User> searchResults) throws RemoteException;
+
 
 }

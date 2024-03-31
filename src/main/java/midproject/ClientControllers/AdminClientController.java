@@ -252,7 +252,7 @@ public class AdminClientController {
             public void actionPerformed(ActionEvent e) {
                 String searchText = adminGUIFrame.getaUsersSearchTextfield().getText().trim().toLowerCase();
                 try {
-                    msgserver.searchUsers(searchText, mci);
+                    msgserver.searchArchivedUsers(searchText, mci);
                 } catch (RemoteException ex) {
                     ex.printStackTrace();
                 }

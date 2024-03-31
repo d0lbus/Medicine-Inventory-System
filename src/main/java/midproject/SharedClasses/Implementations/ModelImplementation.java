@@ -223,21 +223,25 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
     }
 
-    /*
-    public void searchArchivedUsers(String searchText) throws RemoteException {
-        try {
-            // Retrieve the list of archived users
-            List<User> archivedUsers = UserJSONProcessor.searchArchivedUsers(searchText, "res/ArchivedUsers.json");
 
-            for (MessageCallback callback : msgCallbacks.values()) {
-                callback.sendArchivedUsersList(archivedUsers);
-            }
+    public void searchArchivedUsers(String searchText, MessageCallback callback) throws RemoteException {
+        try {
+            List<User> allUsers = readUsersFromFile("res/ArchivedUsers.json");
+
+            List<User> searchResults = allUsers.stream()
+                    .filter(user ->
+                            user.getUserType().toLowerCase().contains(searchText.toLowerCase()) ||
+                                    user.getUserId().toLowerCase().contains(searchText.toLowerCase()) ||
+                                    user.getUsername().toLowerCase().contains(searchText.toLowerCase()) ||
+                                    user.getFirstName().toLowerCase().contains(searchText.toLowerCase()) ||
+                                    user.getLastName().toLowerCase().contains(searchText.toLowerCase())
+                    )
+                    .collect(Collectors.toList());
+            callback.sendArchivedUserSearchResults(searchResults);
         } catch (Exception e) {
-            // Handle exceptions, if any
-            e.printStackTrace();
-            throw new RemoteException("Error searching archived user: " + e.getMessage());
+            throw new RemoteException("Error while searching users", e);
         }
-    }*/
+    }
 
     /**
      *
