@@ -234,7 +234,7 @@ public class CustomerClientController {
 				}
 			});
 
-			/*clientGUIFrame.getRemoveButton().addActionListener(e -> {
+			clientGUIFrame.getRemoveButton().addActionListener(e -> {
 				int[] selectedRows = clientGUIFrame.getCategoryTable1().getSelectedRows();
 				if (selectedRows.length > 0) {
 					for (int i = selectedRows.length - 1; i >= 0; i--) {
@@ -252,7 +252,7 @@ public class CustomerClientController {
 				} else {
 					JOptionPane.showMessageDialog(clientGUIFrame, "Please select at least one item to remove.", "No Items Selected", JOptionPane.WARNING_MESSAGE);
 				}
-			}); */
+			});
 
 	}
 }
