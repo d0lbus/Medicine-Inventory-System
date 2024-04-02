@@ -634,4 +634,27 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
     }
 
+    public synchronized void removeMedicineInCart(String medicineId, MessageCallback clientCallback, String username) throws RemoteException {
+        try {
+
+            Map<String, UserCart> userCarts = CartJSONProcessor.readUserCartsFromFile();
+
+            User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
+            String userId = user.getUserId();
+
+            // Retrieve the current cart for the user
+            UserCart userCart = userCarts.get(userId);
+
+            // Remove the medicine from the cart
+            userCart.removeItem(medicineId); // Assuming UserCart class has this method implemented
+
+            // Save the updated cart
+            CartJSONProcessor.writeUserCartsToFile(userCarts);
+
+            clientCallback.updateCart(userCart);
+        } catch (Exception e) {
+            throw new RemoteException("Error removing medicine from cart: " + e.getMessage(), e);
+        }
+    }
+
 }

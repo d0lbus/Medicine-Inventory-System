@@ -242,8 +242,8 @@ public class CustomerClientController {
 						String medicineId = (String) clientGUIFrame.getCategoryTable1().getValueAt(rowIndex, 0);
 
 						try {
-							//msgserver.removeMedicineFromCart(medicineId, mci, username);
-						} catch (RemoteException e) {
+							msgserver.removeMedicineInCart(medicineId, mci, username);
+						} catch (RemoteException exc) {
 							JOptionPane.showMessageDialog(clientGUIFrame, "Failed to remove item from cart: " + exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						}
 					}
