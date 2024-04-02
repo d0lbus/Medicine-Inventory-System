@@ -15,6 +15,7 @@ import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
 import midproject.ViewClasses.ClientGUIFrame;
+import midproject.ViewClasses.QuantityFrame;
 import midproject.ViewClasses.Login;
 import java.awt.event.MouseAdapter;
 
@@ -147,8 +148,50 @@ public class CustomerClientController {
 		 *
 		 *
 		 * */
+			clientGUIFrame.getSearchTextfield().addActionListener(e ->{
+				String searchText = clientGUIFrame.getSearchTextfield().getText().trim().toLowerCase();
+				try {
+					msgserver.searchMedicine(searchText, mci);
+				} catch (RemoteException ex) {
+					ex.printStackTrace();
+				}
+			});
+			clientGUIFrame.getAddToCartButton().addActionListener(e ->{
+				int selectedRow = clientGUIFrame.getCategoryTable().getSelectedRow();
+				if (selectedRow >= 0) {
+					String medicineId = clientGUIFrame.getCategoryTable().getValueAt(selectedRow, 0).toString();
 
+				QuantityFrame quantityFrame = new QuantityFrame();
+				quantityFrame.setLocationRelativeTo(clientGUIFrame);
+				quantityFrame.setVisible(true);
+				quantityFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+				quantityFrame.getProceedButton().addActionListener(ex -> {
+					int quantity = quantityFrame.getSelectedQuantity();
+					if(quantity > 0) {
+						try {
+							msgserver.addMedicineToCart(medicineId, quantity, mci, username);
+							JOptionPane.showMessageDialog(clientGUIFrame, "Item added to cart successfully", "Add To Cart Successful",JOptionPane.INFORMATION_MESSAGE);
+							quantityFrame.dispose();
+						} catch (RemoteException exc) {
+							throw new RuntimeException(exc);
+						}
+					}
+				});
+				} else {
+					JOptionPane.showMessageDialog(clientGUIFrame, "No item selected", "Add To Cart Failed",JOptionPane.ERROR_MESSAGE);
+				}
+			});
+
+			clientGUIFrame.getCartLabel().addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					try {
+						msgserver.getCartDetails(username, mci);
+					}  catch (Exception ex) {
+						throw new RuntimeException(ex);
+					}
+				}
+			});
 	}
 }
 

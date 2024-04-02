@@ -2,6 +2,7 @@ package midproject.SharedClasses.Interfaces;
 
 import midproject.SharedClasses.ReferenceClasses.Medicine;
 import midproject.SharedClasses.ReferenceClasses.User;
+import midproject.SharedClasses.ReferenceClasses.UserCart;
 import midproject.ViewClasses.AdminGUIFrame;
 
 import javax.swing.*;
@@ -9,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
+import java.util.Map;
 
 
 public interface MessageCallback extends Remote {
@@ -52,6 +54,9 @@ public interface MessageCallback extends Remote {
 	void sendMedicineSearchResults(List<Medicine> users) throws RemoteException;
 
 	void sendArchivedUserSearchResults(List<User> searchResults) throws RemoteException;
+
+	/**CUSTOMER SIDE**/
+	void updateCart(UserCart userCart) throws RemoteException;
 
 
 }

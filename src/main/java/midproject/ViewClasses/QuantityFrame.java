@@ -126,6 +126,33 @@ public class QuantityFrame extends javax.swing.JFrame {
         });
     }
 
+    public void setCancelButton(JButton cancelButton) {
+        this.cancelButton = cancelButton;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public void setProceedButton(JButton proceedButton) {
+        this.proceedButton = proceedButton;
+    }
+
+    public JSpinner getQuantitySpinner() {
+        return quantitySpinner;
+    }
+
+    public void setQuantitySpinner(JSpinner quantitySpinner) {
+        this.quantitySpinner = quantitySpinner;
+    }
+
+    public int getSelectedQuantity() {
+        return (int) quantitySpinner.getValue();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel1;

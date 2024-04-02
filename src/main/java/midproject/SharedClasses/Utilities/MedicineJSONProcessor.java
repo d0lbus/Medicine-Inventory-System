@@ -4,8 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import midproject.SharedClasses.ReferenceClasses.Medicine;
-import midproject.SharedClasses.ReferenceClasses.User;
+import midproject.SharedClasses.ReferenceClasses.*;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -13,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class MedicineJSONProcessor {
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -42,6 +42,16 @@ public class MedicineJSONProcessor {
         return null;
     }
 
+    public static double getPriceById(String filePath, String medicineId) throws IOException {
+        List<Medicine> medicineList = readMedicinesFromFile(filePath);
+
+        for (Medicine medicine : medicineList) {
+            if (medicine.getMedicineID().equals(medicineId)) {
+                return medicine.getPrice();
+            }
+        }
+        throw new IOException("Medicine with ID " + medicineId + " not found.");
+    }
     public static void writeMedicinesToFile(List<Medicine> medicines, String filePath) throws IOException {
         try (Writer writer = Files.newBufferedWriter(Paths.get(filePath))) {
             gson.toJson(medicines, writer);

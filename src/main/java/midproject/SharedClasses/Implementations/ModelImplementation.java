@@ -22,6 +22,7 @@ import midproject.SharedClasses.ReferenceClasses.*;
 import midproject.SharedClasses.UserDefinedExceptions.*;
 import midproject.SharedClasses.Utilities.MedicineJSONProcessor;
 import midproject.SharedClasses.Utilities.UserJSONProcessor;
+import midproject.SharedClasses.Utilities.CartJSONProcessor;
 
 import static midproject.SharedClasses.Utilities.SessionIDGenerator.generateUniqueSessionId;
 import static midproject.SharedClasses.Utilities.UserJSONProcessor.*;
@@ -223,7 +224,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
     }
 
-
     public void searchArchivedUsers(String searchText, MessageCallback callback) throws RemoteException {
         try {
             List<User> allUsers = readUsersFromFile("res/ArchivedUsers.json");
@@ -347,13 +347,64 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
     public void updateMedicine(Medicine editedMedicine, Medicine originalMedicine, MessageCallback callback, String adminUsername) throws Exception {
         MedicineJSONProcessor.updateMedicine(editedMedicine, "res/Medicine.json");
+
         for (Map.Entry<UserCallBackInfo, MessageCallback> entry : msgCallbacks.entrySet()) {
             UserCallBackInfo userInfo = entry.getKey();
             MessageCallback adminCallback = entry.getValue();
-            if ("Admin".equals(userInfo.getUserType())) {
+            if ("Admin".equals(userInfo.getUserType()) || "Customer".equals(userInfo.getUserType()) ) {
                 adminCallback.notifyMedicineUpdatedByAdmin(adminUsername, editedMedicine, originalMedicine);
             }
         }
+
+        Map<String, UserCart> allUserCarts = CartJSONProcessor.readUserCartsFromFile();
+        boolean cartUpdated = false;
+
+        for (Map.Entry<String, UserCart> entry : allUserCarts.entrySet()) {
+            String userId = entry.getKey();
+            UserCart cart = entry.getValue();
+
+            if (cart.getItems().containsKey(editedMedicine.getMedicineID())) {
+                // Update the cart with the new medicine details
+                cart.addOrUpdateItem(editedMedicine.getMedicineID(), cart.getItems().get(editedMedicine.getMedicineID()));
+                cartUpdated = true;
+
+            }
+        }
+
+        if (cartUpdated) {
+            CartJSONProcessor.writeUserCartsToFile(allUserCarts);
+        }
+
+        for (Map.Entry<UserCallBackInfo, MessageCallback> entry : msgCallbacks.entrySet()) {
+            UserCallBackInfo userInfo = entry.getKey();
+            MessageCallback customerCallback = entry.getValue();
+
+            // Check if the user type is Customer
+            if ("Customer".equals(userInfo.getUserType())) {
+                try {
+                    // Get the userId based on the username
+                    String userId = "";
+                    try {
+                        User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", userInfo.getUsername());
+                        if (user != null) {
+                            userId = user.getUserId();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    // Fetch the updated cart for this user using the userId
+                    UserCart updatedCart = allUserCarts.get(userId);
+                    if (updatedCart != null && !updatedCart.getItems().isEmpty()) {
+                        // If there's an updated cart, and it's not empty, notify the customer
+                        customerCallback.updateCart(updatedCart);
+                    }
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 
     /**
@@ -501,6 +552,46 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
     public void getUserDetails(String username, MessageCallback msgCallback) throws Exception {
         User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
         msgCallback.displayProfileDetails(user);
+    }
+
+    public void getCartDetails(String username, MessageCallback clientCallback) throws RemoteException{
+        try {
+            User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
+            String userID = user.getUserId();
+            Map<String, UserCart> userCarts = CartJSONProcessor.readUserCartsFromFile();
+            UserCart userCart = userCarts.getOrDefault(userID, new UserCart(userID));
+            userCarts.put(userID, userCart);
+            clientCallback.updateCart(userCart);
+        } catch (Exception e){
+
+        }
+    }
+    public synchronized void addMedicineToCart(String medicineId, int quantity, MessageCallback clientCallback, String username) throws RemoteException {
+        try {
+            // Retrieve user by username to get the userID
+            User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
+            String userID = user.getUserId();
+
+            // Retrieve all user carts
+            Map<String, UserCart> userCarts = CartJSONProcessor.readUserCartsFromFile();
+
+            // Get the user's cart from the map, create a new one if it doesn't exist
+            UserCart userCart = userCarts.getOrDefault(userID, new UserCart(userID));
+
+            // Add the medicine to the cart
+            userCart.addOrUpdateItem(medicineId, quantity);
+
+            // Put the updated cart back in the map
+            userCarts.put(userID, userCart);
+
+            // Save the updated map of all user carts back to the file
+            CartJSONProcessor.writeUserCartsToFile(userCarts);
+
+            clientCallback.updateCart(userCart);
+        } catch (Exception e) {
+            // Handle exceptions
+            throw new RemoteException("Error adding medicine to cart: " + e.getMessage(), e);
+        }
     }
 
 

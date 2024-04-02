@@ -6,16 +6,21 @@ import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 import midproject.SharedClasses.Interfaces.MessageCallback;
 import midproject.SharedClasses.ReferenceClasses.Medicine;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.ReferenceClasses.UserCallBackInfo;
+import midproject.SharedClasses.ReferenceClasses.UserCart;
+import midproject.SharedClasses.Utilities.MedicineJSONProcessor;
 import midproject.ViewClasses.AdminGUIFrame;
 import midproject.ViewClasses.ClientGUIFrame;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import static midproject.SharedClasses.Utilities.MedicineJSONProcessor.getMedicineById;
 
 public class CallbackImplementation extends UnicastRemoteObject implements MessageCallback, Serializable {
 	private User user;
@@ -129,7 +134,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 
 	public void readMedicineList(List<Medicine> medicineList) {
 		SwingUtilities.invokeLater(() -> {
-			// Check if either Admin GUI or Client GUI frame is not null
 			if (adminGUIFrame != null || clientGUIFrame != null) {
 				// Update Admin GUI frame table if not null
 				if (adminGUIFrame != null) {
@@ -149,7 +153,7 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 					}
 				}
 
-				// Update Client GUI frame table if not null
+
 				if (clientGUIFrame != null) {
 					DefaultTableModel clientModel = (DefaultTableModel) clientGUIFrame.getCategoryTable().getModel();
 					clientModel.setRowCount(0);
@@ -174,7 +178,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 	public User getUser() throws RemoteException {
 		return user;
 	}
-
 	public void displayUserDetails(User user) throws RemoteException {
 		SwingUtilities.invokeLater(() -> {
 			String userDetails = "<html>User ID: " + user.getUserId() + "<br>" +
@@ -208,11 +211,9 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 	public void notifyUserArchivedByAdmin(String adminUsername, String archivedUsername) throws RemoteException {
 		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " archived user " + archivedUsername);
 	}
-
 	public void notifyUserUnarchivedByAdmin(String adminUsername, String unarchivedUsername) throws RemoteException {
 		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " unarchived user " + unarchivedUsername);
 	}
-
 	public void notifyMedicineAddedByAdmin(String adminUsername, Medicine medicine) throws RemoteException{
 		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " added a new medicine: "
 				+ "\nMedicine ID" + medicine.getMedicineID()
@@ -223,11 +224,9 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 				+ "\nQuantity: " + medicine.getQuantity()
 				+ "\nPrice: " + medicine.getPrice());
 	}
-
 	public void notifyMedicineArchivedByAdmin(String adminUsername, Medicine medicine) throws RemoteException{
 		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " archived the medicine " + medicine.getGenericName() + " with a brand name " + medicine.getBrandName() + " under the category " + medicine.getCategory());
 	}
-
 	public void notifyMedicineUpdatedByAdmin(String adminUsername, Medicine editedMedicine, Medicine originalMedicine) throws RemoteException{
 		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " edited the medicine entry. Changes made: "
 				+ "\nCategory: from '" + originalMedicine.getCategory() + "' to '" + editedMedicine.getCategory() + "'"
@@ -237,7 +236,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 				+ "\nQuantity: from '" + originalMedicine.getQuantity() + "' to '" + editedMedicine.getQuantity() + "'"
 				+ "\nPrice: from " + originalMedicine.getPrice() + " to " + editedMedicine.getPrice());
 	}
-
 	public void sendSearchResults(List<User> results) throws RemoteException {
 		SwingUtilities.invokeLater(() -> {
 			DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getrUsersTable().getModel();
@@ -255,32 +253,53 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			}
 		});
 	}
-
 	public void sendMedicineSearchResults(List<Medicine> results) throws RemoteException {
 		SwingUtilities.invokeLater(() -> {
-			DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getiTable().getModel();
-			model.setRowCount(0);
+			if (adminGUIFrame != null || clientGUIFrame != null) {
+				if (adminGUIFrame != null) {
+				DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getiTable().getModel();
+				model.setRowCount(0);
 
-			for (Medicine medicine : results) {
-				Object[] rowData = {
-						medicine.getMedicineID(),
-						medicine.getCategory(),
-						medicine.getGenericName(),
-						medicine.getBrandName(),
-						medicine.getForm(),
-						medicine.getQuantity(),
-						medicine.getPrice()
-				};
-				model.addRow(rowData);
+				for (Medicine medicine : results) {
+					Object[] rowData = {
+							medicine.getMedicineID(),
+							medicine.getCategory(),
+							medicine.getGenericName(),
+							medicine.getBrandName(),
+							medicine.getForm(),
+							medicine.getQuantity(),
+							medicine.getPrice()
+					};
+					model.addRow(rowData);
+				}
+
+				}
+				if (clientGUIFrame != null) {
+				DefaultTableModel clientModel = (DefaultTableModel) clientGUIFrame.getCategoryTable().getModel();
+				clientModel.setRowCount(0);
+
+				for (Medicine medicine : results) {
+					Object[] rowData = {
+							medicine.getMedicineID(),
+							medicine.getCategory(),
+							medicine.getGenericName(),
+							medicine.getBrandName(),
+							medicine.getForm(),
+							medicine.getQuantity(),
+							medicine.getPrice()
+					};
+					clientModel.addRow(rowData);
+				}
+				}
 			}
+
 		});
 	}
-
 	@Override
 	public void sendArchivedUserSearchResults(List<User> searchResults) throws RemoteException {
 		SwingUtilities.invokeLater(() -> {
 			DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getaUsersTable().getModel();
-			model.setRowCount(0); // Clear existing rows
+			model.setRowCount(0);
 
 			for (User user : searchResults) {
 				Object[] rowData = {
@@ -295,11 +314,28 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		});
 	}
 
-
 	/**CUSTOMER SIDE*/
 
 	public void displayProfileDetails(User user) throws RemoteException{
 		clientGUIFrame.getNameOnlyLabel().setText(user.getFirstName() + " " + user.getLastName());
 	}
+	public void updateCart(UserCart userCart) throws RemoteException {
+		SwingUtilities.invokeLater(() -> {
+			DefaultTableModel model = (DefaultTableModel) clientGUIFrame.getCategoryTable1().getModel();
+			model.setRowCount(0);
+			userCart.getItems().forEach((medicineId, quantity) -> {
+				try {
+					Medicine medicine = MedicineJSONProcessor.getMedicineById("res/Medicine.json", medicineId);
+					if(medicine != null) {
+						model.addRow(new Object[]{medicine.getMedicineID(), medicine.getCategory(), medicine.getGenericName(),
+								medicine.getBrandName(), medicine.getForm(), quantity * medicine.getPrice(), quantity, medicine.getQuantity()});
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			});
+		});
+	}
+
 
 }
