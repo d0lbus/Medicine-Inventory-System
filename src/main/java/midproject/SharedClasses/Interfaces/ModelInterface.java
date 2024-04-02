@@ -55,7 +55,7 @@ public interface ModelInterface extends Remote {
 
     /**CUSTOMER SIDE**/
     void getUserDetails(String username, MessageCallback msgCallback) throws Exception;
-
     void getCartDetails(String username, MessageCallback clientCallback) throws RemoteException;
     void addMedicineToCart(String medicineId, int quantity, MessageCallback clientCallback, String username) throws RemoteException;
+    void updateMedicineQuantityInCart(String medicineId, int newQuantity, MessageCallback clientCallback, String username) throws RemoteException;
 }

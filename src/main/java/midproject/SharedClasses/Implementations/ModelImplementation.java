@@ -46,13 +46,21 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         try {
             User user = msgCallback.getUser();
             String filepath = "res/UserInformation.json";
+            boolean containsUsername = false;
+
+            for (UserCallBackInfo key : msgCallbacks.keySet()) {
+                if (key.getUsername().equals(username)) {
+                    containsUsername = true;
+                    break;
+                }
+            }
 
             if (!isValidCredentials(username, password, filepath, userTypeRequest)) {
                 throw new AuthenticationFailedException("Invalid username or password.");
             }
             if (msgCallbacks.containsValue(msgCallback)) {
                 throw new AlreadyLoggedInException("Already logged in... you cannot login using the same client...");
-            } else if (msgCallbacks.containsKey(username)) {
+            } else if (containsUsername) {
                 throw new UserExistsException("Username already exists, use another name...");
             }
 
@@ -594,5 +602,36 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
     }
 
+    public synchronized void updateMedicineQuantityInCart(String medicineId, int newQuantity, MessageCallback clientCallback, String username) throws RemoteException {
+        try {
+            Map<String, UserCart> userCarts = CartJSONProcessor.readUserCartsFromFile();
+
+            User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
+            String userId = user.getUserId();
+
+            if (userId == null || !userCarts.containsKey(userId)) {
+                throw new RemoteException("Cart for user not found.");
+            }
+
+            // Retrieve the user's cart.
+            UserCart userCart = userCarts.get(userId);
+
+            if (userCart == null) {
+                throw new RemoteException("Cart not initialized correctly.");
+            }
+
+            // Update the quantity of the specified medicine in the cart.
+            userCart.updateMedicineQuantity(medicineId, newQuantity);
+
+            // Save the updated cart back to the file.
+            CartJSONProcessor.writeUserCartsToFile(userCarts);
+
+            // Notify the user's client about the cart update.
+            clientCallback.updateCart(userCart);
+
+        } catch (Exception e) {
+            throw new RemoteException("Error updating medicine quantity in cart: " + e.getMessage(), e);
+        }
+    }
 
 }

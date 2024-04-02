@@ -1,5 +1,7 @@
 package midproject.SharedClasses.ReferenceClasses;
 
+import java.util.Objects;
+
 public class UserCallBackInfo {
     private String username;
     private String userType;
@@ -25,5 +27,19 @@ public class UserCallBackInfo {
 
     public void setUserType(String userType) {
         this.userType = userType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserCallBackInfo that = (UserCallBackInfo) o;
+        return Objects.equals(username, that.username) &&
+                Objects.equals(userType, that.userType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, userType);
     }
 }

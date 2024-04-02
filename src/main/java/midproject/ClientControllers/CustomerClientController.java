@@ -156,32 +156,6 @@ public class CustomerClientController {
 					ex.printStackTrace();
 				}
 			});
-			clientGUIFrame.getAddToCartButton().addActionListener(e ->{
-				int selectedRow = clientGUIFrame.getCategoryTable().getSelectedRow();
-				if (selectedRow >= 0) {
-					String medicineId = clientGUIFrame.getCategoryTable().getValueAt(selectedRow, 0).toString();
-
-				QuantityFrame quantityFrame = new QuantityFrame();
-				quantityFrame.setLocationRelativeTo(clientGUIFrame);
-				quantityFrame.setVisible(true);
-				quantityFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-				quantityFrame.getProceedButton().addActionListener(ex -> {
-					int quantity = quantityFrame.getSelectedQuantity();
-					if(quantity > 0) {
-						try {
-							msgserver.addMedicineToCart(medicineId, quantity, mci, username);
-							JOptionPane.showMessageDialog(clientGUIFrame, "Item added to cart successfully", "Add To Cart Successful",JOptionPane.INFORMATION_MESSAGE);
-							quantityFrame.dispose();
-						} catch (RemoteException exc) {
-							throw new RuntimeException(exc);
-						}
-					}
-				});
-				} else {
-					JOptionPane.showMessageDialog(clientGUIFrame, "No item selected", "Add To Cart Failed",JOptionPane.ERROR_MESSAGE);
-				}
-			});
 
 			clientGUIFrame.getCartLabel().addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
@@ -192,6 +166,94 @@ public class CustomerClientController {
 					}
 				}
 			});
+
+			clientGUIFrame.getSearchTextfield1().addActionListener(e ->{
+				String searchText = clientGUIFrame.getSearchTextfield1().getText().trim().toLowerCase();
+				try {
+					msgserver.searchMedicine(searchText, mci);
+				} catch (RemoteException ex) {
+					ex.printStackTrace();
+				}
+			});
+
+			clientGUIFrame.getAddToCartButton().addActionListener(e ->{
+				int selectedRow = clientGUIFrame.getCategoryTable().getSelectedRow();
+				if (selectedRow >= 0) {
+					String medicineId = clientGUIFrame.getCategoryTable().getValueAt(selectedRow, 0).toString();
+
+					QuantityFrame quantityFrame = new QuantityFrame();
+					quantityFrame.setLocationRelativeTo(clientGUIFrame);
+					quantityFrame.setVisible(true);
+					quantityFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+					quantityFrame.getProceedButton().addActionListener(ex -> {
+						int quantity = quantityFrame.getSelectedQuantity();
+						if(quantity > 0) {
+							try {
+								msgserver.addMedicineToCart(medicineId, quantity, mci, username);
+								JOptionPane.showMessageDialog(clientGUIFrame, "Item added to cart successfully", "Add To Cart Successful",JOptionPane.INFORMATION_MESSAGE);
+								quantityFrame.dispose();
+							} catch (RemoteException exc) {
+								throw new RuntimeException(exc);
+							}
+						}
+					});
+				} else {
+					JOptionPane.showMessageDialog(clientGUIFrame, "No item selected", "Add To Cart Failed",JOptionPane.ERROR_MESSAGE);
+				}
+			});
+
+			clientGUIFrame.getEditOrderButton1().addActionListener(e -> {
+				int[] selectedRows = clientGUIFrame.getCategoryTable1().getSelectedRows();
+				if (selectedRows.length == 1) {
+					int selectedRow = selectedRows[0];
+					String medicineId = clientGUIFrame.getCategoryTable1().getValueAt(selectedRow, 0).toString();
+					QuantityFrame quantityFrame = new QuantityFrame();
+					quantityFrame.setLocationRelativeTo(clientGUIFrame);
+					quantityFrame.setVisible(true);
+					quantityFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+					quantityFrame.getProceedButton().addActionListener(ex -> {
+						int newQuantity = quantityFrame.getSelectedQuantity();
+						if (newQuantity > 0) {
+							try {
+								msgserver.updateMedicineQuantityInCart(medicineId, newQuantity, mci, username);
+								JOptionPane.showMessageDialog(quantityFrame, "Quantity updated successfully.");
+								quantityFrame.dispose();
+							} catch (RemoteException exc) {
+								JOptionPane.showMessageDialog(quantityFrame, "Failed to update quantity: " + exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+							}
+						} else {
+							JOptionPane.showMessageDialog(quantityFrame, "Please select a valid quantity.", "Invalid Quantity", JOptionPane.WARNING_MESSAGE);
+						}
+					});
+				} else if (selectedRows.length > 1) {
+					JOptionPane.showMessageDialog(clientGUIFrame, "Please select only one row to edit.", "Multiple Rows Selected", JOptionPane.ERROR_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(clientGUIFrame, "Please select a row to edit.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
+				}
+			});
+
+			/*clientGUIFrame.getRemoveButton().addActionListener(e -> {
+				int[] selectedRows = clientGUIFrame.getCategoryTable1().getSelectedRows();
+				if (selectedRows.length > 0) {
+					for (int i = selectedRows.length - 1; i >= 0; i--) {
+						int rowIndex = selectedRows[i];
+						String medicineId = (String) clientGUIFrame.getCategoryTable1().getValueAt(rowIndex, 0);
+
+						try {
+							//msgserver.removeMedicineFromCart(medicineId, mci, username);
+						} catch (RemoteException e) {
+							JOptionPane.showMessageDialog(clientGUIFrame, "Failed to remove item from cart: " + exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+					JOptionPane.showMessageDialog(clientGUIFrame, "Selected items removed from cart successfully.", "Items Removed", JOptionPane.INFORMATION_MESSAGE);
+
+				} else {
+					JOptionPane.showMessageDialog(clientGUIFrame, "Please select at least one item to remove.", "No Items Selected", JOptionPane.WARNING_MESSAGE);
+				}
+			}); */
+
 	}
 }
 
