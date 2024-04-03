@@ -55,6 +55,8 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="383" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="serverLogsMouseClicked" min="-2" pref="140" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   <Component id="menuMouseClicked" min="-2" pref="82" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="logoutMouseClicked" min="-2" pref="102" max="-2" attributes="0"/>
@@ -72,6 +74,7 @@
                               <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="logoutMouseClicked" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                               <Component id="menuMouseClicked" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                              <Component id="serverLogsMouseClicked" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       </Group>
@@ -129,6 +132,20 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuMouseClickedMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="serverLogsMouseClicked">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="SERVER LOGS"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="serverLogsMouseClickedMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
@@ -467,7 +484,6 @@
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="aUsersUnarchiveButton" alignment="0" max="32767" attributes="0"/>
                                   <Component id="aUsersViewButton" alignment="0" pref="95" max="32767" attributes="0"/>
-                                  <Component id="aUsersEditButton" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace pref="35" max="32767" attributes="0"/>
                           </Group>
@@ -489,9 +505,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="aUsersViewButton" min="-2" pref="36" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="aUsersEditButton" min="-2" pref="36" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                               <Component id="aUsersUnarchiveButton" min="-2" pref="36" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane2" min="-2" pref="448" max="-2" attributes="0"/>
@@ -557,17 +571,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aUsersViewButtonActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="aUsersEditButton">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="59" green="45" red="12" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Edit User"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aUsersEditButtonActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="archivedUsersLabel">

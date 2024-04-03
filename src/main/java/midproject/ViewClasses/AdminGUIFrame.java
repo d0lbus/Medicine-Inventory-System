@@ -52,6 +52,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         logoutMouseClicked = new javax.swing.JLabel();
         menuMouseClicked = new javax.swing.JLabel();
+        serverLogsMouseClicked = new javax.swing.JLabel();
         containerPanel = new javax.swing.JPanel();
         homepagePanel = new javax.swing.JPanel();
         dashboardButton = new javax.swing.JButton();
@@ -78,7 +79,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         aUsersTable = new javax.swing.JTable();
         aUsersUnarchiveButton = new javax.swing.JButton();
         aUsersViewButton = new javax.swing.JButton();
-        aUsersEditButton = new javax.swing.JButton();
         archivedUsersLabel = new javax.swing.JLabel();
         pendingOrdersPanel = new javax.swing.JPanel();
         pSearchLabel = new javax.swing.JLabel();
@@ -195,6 +195,15 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
+        serverLogsMouseClicked.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        serverLogsMouseClicked.setForeground(new java.awt.Color(255, 255, 255));
+        serverLogsMouseClicked.setText("SERVER LOGS");
+        serverLogsMouseClicked.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                serverLogsMouseClickedMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
         headerPanelLayout.setHorizontalGroup(
@@ -205,6 +214,8 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(serverLogsMouseClicked, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addComponent(menuMouseClicked, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(logoutMouseClicked, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,7 +230,8 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                         .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(logoutMouseClicked, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(menuMouseClicked, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(menuMouseClicked, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(serverLogsMouseClicked, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(38, 38, 38))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerPanelLayout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -501,14 +513,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        aUsersEditButton.setBackground(new java.awt.Color(18, 69, 89));
-        aUsersEditButton.setText("Edit User");
-        aUsersEditButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aUsersEditButtonActionPerformed(evt);
-            }
-        });
-
         archivedUsersLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         archivedUsersLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         archivedUsersLabel.setText("Archived Users");
@@ -530,8 +534,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addGroup(archivedUsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(aUsersUnarchiveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(aUsersViewButton, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                            .addComponent(aUsersEditButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(aUsersViewButton, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
                         .addContainerGap(35, Short.MAX_VALUE))))
             .addComponent(archivedUsersLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -547,9 +550,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 .addGroup(archivedUsersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(archivedUsersPanelLayout.createSequentialGroup()
                         .addComponent(aUsersViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(aUsersEditButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(26, 26, 26)
                         .addComponent(aUsersUnarchiveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -1464,10 +1465,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_aUsersViewButtonActionPerformed
 
-    private void aUsersEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aUsersEditButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_aUsersEditButtonActionPerformed
-
     private void iSearchTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iSearchTextfieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_iSearchTextfieldActionPerformed
@@ -1492,6 +1489,10 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ageTextFieldActionPerformed
 
+    private void serverLogsMouseClickedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_serverLogsMouseClickedMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_serverLogsMouseClickedMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1502,10 +1503,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 new AdminGUIFrame().setVisible(true);
             }
         });
-    }
-
-    public JButton getaUsersEditButton() {
-        return aUsersEditButton;
     }
 
     public JLabel getaUsersSearchLabel() {
@@ -1985,7 +1982,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton aUsersEditButton;
     private javax.swing.JLabel aUsersSearchLabel;
     private javax.swing.JTextField aUsersSearchTextfield;
     private javax.swing.JTable aUsersTable;
@@ -2091,6 +2087,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JButton sendMessageButton;
     private javax.swing.JPanel sendMessagePanel;
     private javax.swing.JTextArea sendMessageTextArea;
+    private javax.swing.JLabel serverLogsMouseClicked;
     private javax.swing.JLabel setPasswordLabel;
     private javax.swing.JTextField setPasswordTextField;
     private javax.swing.JLabel setUsernameLabel;
