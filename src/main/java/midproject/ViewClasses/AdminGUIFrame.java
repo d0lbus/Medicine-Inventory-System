@@ -155,6 +155,8 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         setPasswordTextField = new javax.swing.JTextField();
         confirmPasswordLabel = new javax.swing.JLabel();
         confirmPasswordTextField = new javax.swing.JTextField();
+        passwordField = new javax.swing.JPasswordField();
+        confirmPasswordField = new javax.swing.JPasswordField();
         createAccountButton = new javax.swing.JButton();
         userTypeLabel = new javax.swing.JLabel();
         userTypeComboBox = new javax.swing.JComboBox<>();
@@ -1200,9 +1202,9 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                             .addComponent(setUsernameLabel)
                             .addComponent(setUsernameTextField)
                             .addComponent(setPasswordLabel)
-                            .addComponent(setPasswordTextField)
+                            .addComponent(passwordField)
                             .addComponent(confirmPasswordLabel)
-                            .addComponent(confirmPasswordTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))))
+                            .addComponent(confirmPasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))))
                 .addContainerGap(42, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registrationPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1261,7 +1263,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(provinceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(setPasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(birthdateCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(registrationPanelLayout.createSequentialGroup()
@@ -1280,7 +1282,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                     .addComponent(personWithDisabilityLabel)
                     .addComponent(personWithDisabilityCheckBox)
                     .addComponent(zipCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(confirmPasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(confirmPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(createAccountButton)
                 .addGap(38, 38, 38))
@@ -1937,6 +1939,14 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         return setPasswordTextField;
     }
 
+    public JPasswordField getPasswordField() {
+        return passwordField;
+    }
+
+    public JPasswordField getConfirmPasswordField() {
+        return confirmPasswordField;
+    }
+
     public JLabel getSetUsernameLabel() {
         return setUsernameLabel;
     }
@@ -2090,6 +2100,8 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JLabel serverLogsMouseClicked;
     private javax.swing.JLabel setPasswordLabel;
     private javax.swing.JTextField setPasswordTextField;
+    private javax.swing.JPasswordField passwordField;
+    private javax.swing.JPasswordField confirmPasswordField;
     private javax.swing.JLabel setUsernameLabel;
     private javax.swing.JTextField setUsernameTextField;
     private javax.swing.JLabel streetAddressLabel;
