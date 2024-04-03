@@ -167,6 +167,9 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         sendButton = new javax.swing.JButton();
         comboBox = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
+        serverLogsPanel = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        serverLogsTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quantum Drugstore");
@@ -1342,6 +1345,31 @@ public class AdminGUIFrame extends javax.swing.JFrame {
 
         containerPanel.add(sendMessagePanel, "card10");
 
+        serverLogsPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        serverLogsTextArea.setColumns(20);
+        serverLogsTextArea.setRows(5);
+        jScrollPane7.setViewportView(serverLogsTextArea);
+
+        javax.swing.GroupLayout serverLogsPanelLayout = new javax.swing.GroupLayout(serverLogsPanel);
+        serverLogsPanel.setLayout(serverLogsPanelLayout);
+        serverLogsPanelLayout.setHorizontalGroup(
+            serverLogsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(serverLogsPanelLayout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 902, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+        serverLogsPanelLayout.setVerticalGroup(
+            serverLogsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, serverLogsPanelLayout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
+        );
+
+        containerPanel.add(serverLogsPanel, "card10");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1492,7 +1520,10 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_ageTextFieldActionPerformed
 
     private void serverLogsMouseClickedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_serverLogsMouseClickedMouseClicked
-        // TODO add your handling code here:
+        containerPanel.removeAll();
+        containerPanel.add(serverLogsPanel);
+        containerPanel.repaint();
+        containerPanel.revalidate();
     }//GEN-LAST:event_serverLogsMouseClickedMouseClicked
 
     /**
@@ -2054,6 +2085,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JTextField lastNameTextField;
     private javax.swing.JLabel logoutMouseClicked;
@@ -2098,6 +2130,8 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JPanel sendMessagePanel;
     private javax.swing.JTextArea sendMessageTextArea;
     private javax.swing.JLabel serverLogsMouseClicked;
+    private javax.swing.JPanel serverLogsPanel;
+    private javax.swing.JTextArea serverLogsTextArea;
     private javax.swing.JLabel setPasswordLabel;
     private javax.swing.JTextField setPasswordTextField;
     private javax.swing.JPasswordField passwordField;
