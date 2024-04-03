@@ -202,8 +202,7 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
      *
      * */
 
-    public void unarchiveUser(String userId, MessageCallback callback, String adminUsername) throws Exception {
-
+    public void unarchiveUser(String userId, MessageCallback callback, String adminUsername) throws UserUnarchiveException {
         try {
             User userToUnarchive = getUserById("res/ArchivedUsers.json", userId);
             UserJSONProcessor.transferUserToDifferentFile(userId, "res/ArchivedUsers.json", "res/UserInformation.json");
@@ -217,7 +216,7 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
                 }
             }
         } catch (Exception e) {
-            throw new RemoteException("Failed to unarchive user: " + e.getMessage());
+            throw new UserUnarchiveException("Failed to unarchive user: " + e.getMessage());
         }
     }
 
