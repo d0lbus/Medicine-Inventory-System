@@ -1,12 +1,15 @@
 package midproject.ClientControllers;
 
 import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.toedter.calendar.JDateChooser;
 import midproject.SharedClasses.Implementations.CallbackImplementation;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.Medicine;
@@ -18,6 +21,7 @@ import midproject.ViewClasses.AdminGUIFrame;
 import midproject.ViewClasses.EditMedicineFrame;
 import midproject.ViewClasses.Login;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -84,7 +88,7 @@ public class AdminClientController {
             } catch (UserExistsException ex) {
                 JOptionPane.showMessageDialog(loginFrame, "Username already exists, choose a different one.", "Login Failed", JOptionPane.ERROR_MESSAGE);
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(loginFrame, "Login error: Server may be offline or invalid IP Address", "Login Failed",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(loginFrame, "Login error: Server may be offline or invalid IP Address", "Login Failed", JOptionPane.ERROR_MESSAGE);
             }
         });
     }
@@ -149,7 +153,7 @@ public class AdminClientController {
                 if (selectedRow != -1) {
                     try {
                         String userId = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 0).toString();
-                        msgserver.sendRUserDetailsToAdmins(userId,mci);
+                        msgserver.sendRUserDetailsToAdmins(userId, mci);
                     } catch (RemoteException remoteException) {
                         remoteException.printStackTrace();
                         JOptionPane.showMessageDialog(adminGUIFrame, "Error retrieving user details.", "Remote Exception", JOptionPane.ERROR_MESSAGE);
@@ -178,7 +182,7 @@ public class AdminClientController {
                 if (selectedRow != -1) {
                     try {
                         String userId = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 0).toString();
-                        msgserver.archiveUser(userId,mci, username);
+                        msgserver.archiveUser(userId, mci, username);
                         autoRefreshUserRelatedComponents();
                     } catch (RemoteException remoteException) {
                         remoteException.printStackTrace();
@@ -214,7 +218,7 @@ public class AdminClientController {
                 if (selectedRow != -1) {
                     try {
                         String userId = adminGUIFrame.getaUsersTable().getValueAt(selectedRow, 0).toString();
-                        msgserver.sendAUserDetailsToAdmins(userId,mci);
+                        msgserver.sendAUserDetailsToAdmins(userId, mci);
                     } catch (RemoteException remoteException) {
                         remoteException.printStackTrace();
                         JOptionPane.showMessageDialog(adminGUIFrame, "Error retrieving user details.", "Remote Exception", JOptionPane.ERROR_MESSAGE);
@@ -499,7 +503,36 @@ public class AdminClientController {
                 }
             }
         });
+
+        adminGUIFrame.getBirthdateCalendar().addPropertyChangeListener("date", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if ("date".equals(evt.getPropertyName())) {
+                    // Get the selected date from the JDateChooser
+                    Date selectedDate = (Date) evt.getNewValue();
+
+                    // Calculate age based on the selected date
+                    int age = calculateAge(selectedDate);
+
+                    // Update the ageTextField
+                    adminGUIFrame.getAgeTextField().setText(String.valueOf(age));
+                }
+            }
+        });
     }
+
+    private static int calculateAge(Date birthdate) {
+        Calendar birthdateCal = Calendar.getInstance();
+        birthdateCal.setTime(birthdate);
+        Calendar now = Calendar.getInstance();
+
+        int age = now.get(Calendar.YEAR) - birthdateCal.get(Calendar.YEAR);
+        if (now.get(Calendar.DAY_OF_YEAR) < birthdateCal.get(Calendar.DAY_OF_YEAR)) {
+            age--;
+        }
+        return age;
+    }
+
 
     /** AUTOREFRESH / HELPER METHODS */
 
@@ -517,7 +550,6 @@ public class AdminClientController {
         adminGUIFrame.getFirstNameTextField().setText("");
         adminGUIFrame.getLastNameTextField().setText("");
         adminGUIFrame.getMiddleNameTextField().setText("");
-        adminGUIFrame.getBirthdateTextField().setText("");
         adminGUIFrame.getAgeTextField().setText("");
         adminGUIFrame.getGenderComboBox().setSelectedIndex(0);
         adminGUIFrame.getPersonWithDisabilityCheckBox().setSelected(false);

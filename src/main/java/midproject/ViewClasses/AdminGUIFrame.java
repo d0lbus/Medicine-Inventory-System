@@ -29,41 +29,8 @@ public class AdminGUIFrame extends javax.swing.JFrame {
      */
     public AdminGUIFrame() {
         initComponents();
-        birthdateCalendar.setDateFormatString("dd/MM/yyyy");
-        JTextFieldDateEditor editor = (JTextFieldDateEditor) birthdateCalendar.getDateEditor().getUiComponent();
-        editor.setEditable(false);
-        ageTextField.setEditable(false);
-
-        birthdateCalendar.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                birthdateCalendarPropertyChange(evt);
             }
-        });
-        updateAge();
-    }
-    private void birthdateCalendarPropertyChange(java.beans.PropertyChangeEvent evt) {
-        if ("date".equals(evt.getPropertyName())) {
-            updateAge();
-        }
-    }
 
-    private void updateAge() {
-        if (birthdateCalendar.getDate() != null) {
-
-            LocalDate birthDate = birthdateCalendar.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            LocalDate currentDate = LocalDate.now();
-
-            if (birthDate.isAfter(currentDate)) {
-                JOptionPane.showMessageDialog(this, "Invalid Birthdate.", "Error", JOptionPane.ERROR_MESSAGE);
-                birthdateCalendar.setDate(null);
-                ageTextField.setText("");
-            } else {
-                long age = ChronoUnit.YEARS.between(birthDate, currentDate);
-                ageTextField.setText(String.valueOf(age));
-            }
-        }
-    }
-    
 
     public static AdminGUIFrame getInstance() {
         if (instance == null) {
@@ -162,7 +129,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         middleNameLabel = new javax.swing.JLabel();
         middleNameTextField = new javax.swing.JTextField();
         birthdateLabel = new javax.swing.JLabel();
-        birthdateTextField = new javax.swing.JTextField();
         ageLabel = new javax.swing.JLabel();
         ageTextField = new javax.swing.JTextField();
         genderLabel = new javax.swing.JLabel();
@@ -192,13 +158,13 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         createAccountButton = new javax.swing.JButton();
         userTypeLabel = new javax.swing.JLabel();
         userTypeComboBox = new javax.swing.JComboBox<>();
+        birthdateCalendar = new com.toedter.calendar.JDateChooser();
         sendMessagePanel = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         sendMessageTextArea = new javax.swing.JTextArea();
         sendButton = new javax.swing.JButton();
         comboBox = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
-        birthdateCalendar = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quantum Drugstore");
@@ -209,7 +175,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Welcome Admin");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir" + "src/Icons/logo.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/logo.png"))); // NOI18N
 
         logoutMouseClicked.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         logoutMouseClicked.setForeground(new java.awt.Color(255, 255, 255));
@@ -374,7 +340,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         registeredUsersPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         rUsersSearchLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        rUsersSearchLabel.setForeground(new java.awt.Color(0, 0, 0));
         rUsersSearchLabel.setText("Search User");
 
         rUsersSearchTextfield.addActionListener(new java.awt.event.ActionListener() {
@@ -385,7 +350,15 @@ public class AdminGUIFrame extends javax.swing.JFrame {
 
         rUsersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
                 "User ID", "Last Name", "First Name", "User Type", "Username"
@@ -401,7 +374,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(rUsersTable);
 
-        rUsersArchiveButton.setBackground(new java.awt.Color(239,121,138));
+        rUsersArchiveButton.setBackground(new java.awt.Color(120, 0, 0));
         rUsersArchiveButton.setText("Archive");
         rUsersArchiveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -409,7 +382,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        rUsersViewButton.setBackground(new java.awt.Color(163,177,138));
+        rUsersViewButton.setBackground(new java.awt.Color(56, 102, 65));
         rUsersViewButton.setText("View User");
         rUsersViewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -417,7 +390,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        rUsersEditButton.setBackground(new java.awt.Color(162,210,255));
+        rUsersEditButton.setBackground(new java.awt.Color(18, 69, 89));
         rUsersEditButton.setText("Edit User");
         rUsersEditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -426,7 +399,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
 
         registeredUsersLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        registeredUsersLabel.setForeground(new java.awt.Color(0, 0, 0));
         registeredUsersLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         registeredUsersLabel.setText("Registered Users");
 
@@ -479,7 +451,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         archivedUsersPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         aUsersSearchLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        aUsersSearchLabel.setForeground(new java.awt.Color(0, 0, 0));
         aUsersSearchLabel.setText("Search User");
 
         aUsersSearchTextfield.addActionListener(new java.awt.event.ActionListener() {
@@ -514,7 +485,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(aUsersTable);
 
-        aUsersUnarchiveButton.setBackground(new java.awt.Color(239,121,138));
+        aUsersUnarchiveButton.setBackground(new java.awt.Color(120, 0, 0));
         aUsersUnarchiveButton.setText("Unarchive");
         aUsersUnarchiveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -522,7 +493,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        aUsersViewButton.setBackground(new java.awt.Color(163,177,138));
+        aUsersViewButton.setBackground(new java.awt.Color(56, 102, 65));
         aUsersViewButton.setText("View User");
         aUsersViewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -530,7 +501,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        aUsersEditButton.setBackground(new java.awt.Color(162,210,255));
+        aUsersEditButton.setBackground(new java.awt.Color(18, 69, 89));
         aUsersEditButton.setText("Edit User");
         aUsersEditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -539,7 +510,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
 
         archivedUsersLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        archivedUsersLabel.setForeground(new java.awt.Color(0, 0, 0));
         archivedUsersLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         archivedUsersLabel.setText("Archived Users");
 
@@ -619,7 +589,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(pTable);
 
-        pViewButton.setBackground(new java.awt.Color(163,177,138));
+        pViewButton.setBackground(new java.awt.Color(56, 102, 65));
         pViewButton.setText("View Orders");
 
         pendingOrderLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -672,7 +642,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         ordersPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         oSearchLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        oSearchLabel.setForeground(new java.awt.Color(0, 0, 0));
         oSearchLabel.setText("Search Order ID ");
 
         oTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -701,11 +670,10 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(oTable);
 
-        oViewButton.setBackground(new java.awt.Color(163,177,138));
+        oViewButton.setBackground(new java.awt.Color(56, 102, 65));
         oViewButton.setText("View Orders");
 
         orderLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        orderLabel.setForeground(new java.awt.Color(0, 0, 0));
         orderLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         orderLabel.setText("Orders");
 
@@ -756,15 +724,13 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(69, 123, 157));
         jPanel1.setForeground(new java.awt.Color(255, 187, 187));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir" + "src/Icons/usersfinal.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/usersfinal.png"))); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 30)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("TOTAL USERS");
 
         totalUsersLabel.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 100)); // NOI18N
-        totalUsersLabel.setForeground(new java.awt.Color(0, 0, 0));
         totalUsersLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         totalUsersLabel.setText("0");
 
@@ -798,15 +764,13 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(69, 123, 157));
         jPanel4.setForeground(new java.awt.Color(255, 187, 187));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir" + "src/Icons/onlineusers.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/onlineusers.png"))); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 30)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("ONLINE USERS");
 
         onlineUsersLabel.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 100)); // NOI18N
-        onlineUsersLabel.setForeground(new java.awt.Color(0, 0, 0));
         onlineUsersLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         onlineUsersLabel.setText("0");
 
@@ -843,15 +807,13 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(69, 123, 157));
         jPanel5.setForeground(new java.awt.Color(255, 187, 187));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir" + "src/Icons/orders.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/orders.png"))); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 30)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("TOTAL ORDERS");
 
         totalOrdersLabel.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 100)); // NOI18N
-        totalOrdersLabel.setForeground(new java.awt.Color(0, 0, 0));
         totalOrdersLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         totalOrdersLabel.setText("0");
 
@@ -880,7 +842,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel10)
-                .addContainerGap(290, Short.MAX_VALUE))
+                .addContainerGap(395, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                     .addContainerGap(303, Short.MAX_VALUE)
@@ -891,15 +853,13 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         jPanel6.setBackground(new java.awt.Color(69, 123, 157));
         jPanel6.setForeground(new java.awt.Color(255, 187, 187));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(System.getProperty("user.dir" + "src/Icons/pendingorders.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pendingorders.png"))); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 30)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("PENDING ORDERS");
 
         pendingOrdersLabel.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 100)); // NOI18N
-        pendingOrdersLabel.setForeground(new java.awt.Color(0, 0, 0));
         pendingOrdersLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         pendingOrdersLabel.setText("0");
 
@@ -960,7 +920,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         containerPanel.add(dashboardPanel, "ordersPanel");
 
         inventoryPanel.setBackground(new java.awt.Color(255, 255, 255));
-        inventoryPanel.setForeground(new java.awt.Color(0, 0, 0));
 
         iSearchLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         iSearchLabel.setForeground(new java.awt.Color(60, 63, 65));
@@ -974,13 +933,22 @@ public class AdminGUIFrame extends javax.swing.JFrame {
 
         iTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Medicine ID","Category", "Generic Name", "Brand Name", "Form", "Quantity", "Price(₱)"
+                "Category", "Generic Name", "Brand Name", "Form", "Quantity", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -989,7 +957,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(iTable);
 
-        iAddButton.setBackground(new java.awt.Color(163,177,138));
+        iAddButton.setBackground(new java.awt.Color(56, 102, 65));
         iAddButton.setText("Add");
         iAddButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -998,11 +966,10 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
 
         inventoryLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        inventoryLabel.setForeground(new java.awt.Color(0, 0, 0));
         inventoryLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         inventoryLabel.setText("Inventory");
 
-        iEditButton.setBackground(new java.awt.Color(162,210,255));
+        iEditButton.setBackground(new java.awt.Color(18, 69, 89));
         iEditButton.setText("Edit");
         iEditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1010,7 +977,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        iDeleteButton.setBackground(new java.awt.Color(239,121,138));
+        iDeleteButton.setBackground(new java.awt.Color(120, 0, 0));
         iDeleteButton.setText("Delete");
         iDeleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1100,6 +1067,12 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         ageLabel.setForeground(new java.awt.Color(51, 51, 51));
         ageLabel.setText("Age");
 
+        ageTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ageTextFieldActionPerformed(evt);
+            }
+        });
+
         genderLabel.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         genderLabel.setForeground(new java.awt.Color(51, 51, 51));
         genderLabel.setText("Gender");
@@ -1164,7 +1137,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         userTypeLabel.setForeground(new java.awt.Color(51, 51, 51));
         userTypeLabel.setText("User Type");
 
-        userTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Customer" }));
+        userTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Client" }));
 
         javax.swing.GroupLayout registrationPanelLayout = new javax.swing.GroupLayout(registrationPanel);
         registrationPanel.setLayout(registrationPanelLayout);
@@ -1187,8 +1160,8 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(personWithDisabilityCheckBox))
                             .addGroup(registrationPanelLayout.createSequentialGroup()
-                                .addComponent(birthdateCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(73, 73, 73)
+                                .addComponent(birthdateCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(68, 68, 68)
                                 .addComponent(ageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(registrationPanelLayout.createSequentialGroup()
                                 .addComponent(birthdateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1285,10 +1258,10 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                     .addComponent(setPasswordLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(birthdateCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(provinceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(setPasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(setPasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(birthdateCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(registrationPanelLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
@@ -1330,7 +1303,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Select user");
 
         javax.swing.GroupLayout sendMessagePanelLayout = new javax.swing.GroupLayout(sendMessagePanel);
@@ -1516,6 +1488,10 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_sendButtonActionPerformed
 
+    private void ageTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ageTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ageTextFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1578,10 +1554,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
 
     public JLabel getBirthdateLabel() {
         return birthdateLabel;
-    }
-
-    public JTextField getBirthdateTextField() {
-        return birthdateTextField;
     }
 
     public JDateChooser getBirthdateCalendar() {
@@ -2020,13 +1992,14 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JButton aUsersUnarchiveButton;
     private javax.swing.JButton aUsersViewButton;
     private javax.swing.JLabel ageLabel;
+    private javax.swing.JTextField ageTextField;
     private javax.swing.JLabel aptSuiteOptionalLabel;
     private javax.swing.JTextField aptSuiteOptionalTextField;
     private javax.swing.JButton archivedUsersButton;
     private javax.swing.JLabel archivedUsersLabel;
     private javax.swing.JPanel archivedUsersPanel;
+    private com.toedter.calendar.JDateChooser birthdateCalendar;
     private javax.swing.JLabel birthdateLabel;
-    private javax.swing.JTextField birthdateTextField;
     private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JLabel confirmPasswordLabel;
     private javax.swing.JTextField confirmPasswordTextField;
@@ -2075,7 +2048,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTextField ageTextField;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JTextField lastNameTextField;
     private javax.swing.JLabel logoutMouseClicked;
@@ -2131,6 +2103,5 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JLabel userTypeLabel;
     private javax.swing.JLabel zipCodeLabel;
     private javax.swing.JTextField zipCodeTextField;
-    private com.toedter.calendar.JDateChooser birthdateCalendar;
     // End of variables declaration//GEN-END:variables
 }
