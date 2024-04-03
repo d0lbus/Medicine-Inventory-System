@@ -137,6 +137,12 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         notificationsPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         notificationsTextArea = new javax.swing.JTextArea();
+        sendMessagePanel = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        sendMessageTextArea = new javax.swing.JTextArea();
+        sendButton = new javax.swing.JButton();
+        comboBox = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quantum Drugstore");
@@ -382,13 +388,28 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
         categoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Medicine ID", "Category", "Generic Name", "Brand Name", "Form", "Price", "Stock"
+                "Category", "Generic Name", "Brand Name", "Form", "Price", "Stock"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -481,14 +502,28 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
         categoryTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Medicine ID", "Category", "Generic Name", "Brand Name", "Form", "Total Price", "Chosen Quantity", "Remaining Stock"
+                "Category", "Generic Name", "Brand Name", "Form", "Price", "Chosen Quantity", "Remaining Stock"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1179,6 +1214,62 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
         containerPanel.add(notificationsPanel, "card10");
 
+        sendMessagePanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        sendMessageTextArea.setColumns(20);
+        sendMessageTextArea.setRows(5);
+        jScrollPane6.setViewportView(sendMessageTextArea);
+
+        sendButton.setText("Send");
+        sendButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendButtonActionPerformed(evt);
+            }
+        });
+
+        comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel11.setText("Select user");
+
+        javax.swing.GroupLayout sendMessagePanelLayout = new javax.swing.GroupLayout(sendMessagePanel);
+        sendMessagePanel.setLayout(sendMessagePanelLayout);
+        sendMessagePanelLayout.setHorizontalGroup(
+            sendMessagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sendMessagePanelLayout.createSequentialGroup()
+                .addContainerGap(300, Short.MAX_VALUE)
+                .addGroup(sendMessagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(sendMessagePanelLayout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(sendMessagePanelLayout.createSequentialGroup()
+                        .addGap(298, 298, 298)
+                        .addComponent(sendButton)))
+                .addGap(281, 281, 281))
+        );
+        sendMessagePanelLayout.setVerticalGroup(
+            sendMessagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sendMessagePanelLayout.createSequentialGroup()
+                .addContainerGap(131, Short.MAX_VALUE)
+                .addGroup(sendMessagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(sendButton)
+                .addGap(106, 106, 106))
+        );
+
+        containerPanel.add(sendMessagePanel, "card11");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1260,6 +1351,10 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_orderHistoryLabelMouseClicked
 
     private void helpLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpLabelMouseClicked
+        containerPanel.removeAll();
+        containerPanel.add(sendMessagePanel);
+        containerPanel.repaint();
+        containerPanel.revalidate();
     }//GEN-LAST:event_helpLabelMouseClicked
 
     private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutButtonActionPerformed
@@ -1357,6 +1452,14 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         containerPanel.repaint();
         containerPanel.revalidate();
     }//GEN-LAST:event_proceedButtonActionPerformed
+
+    private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sendButtonActionPerformed
+
+    private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxActionPerformed
 
     public static void main(String args[]) {
         FlatMacLightLaf.setup();
@@ -2203,6 +2306,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JTable categoryTable1;
     private javax.swing.JButton checkOutButton;
     private javax.swing.JPanel choosePanel;
+    private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JPasswordField confirmPasswordField;
     private javax.swing.JLabel confirmPasswordLabel;
     private javax.swing.JPanel containerPanel;
@@ -2220,6 +2324,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JLabel iconLabel;
     private javax.swing.JLabel instructionsLabel1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
@@ -2227,6 +2332,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane18;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextArea jTextArea1;
@@ -2275,6 +2381,9 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JTextField searchTextfield;
     private javax.swing.JTextField searchTextfield1;
     private javax.swing.JInternalFrame selectQuantity;
+    private javax.swing.JButton sendButton;
+    private javax.swing.JPanel sendMessagePanel;
+    private javax.swing.JTextArea sendMessageTextArea;
     private javax.swing.JLabel settingLabel;
     private javax.swing.JLabel storeLabel;
     private javax.swing.JButton submitButton;
