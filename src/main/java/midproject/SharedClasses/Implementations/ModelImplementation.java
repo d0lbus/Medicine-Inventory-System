@@ -575,9 +575,10 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
     /**CUSTOMER SIDE**/
 
-    public void getUserDetails(String username, MessageCallback msgCallback) throws Exception {
+    public User getUserDetails(String username, MessageCallback msgCallback) throws Exception {
         User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
         msgCallback.displayProfileDetails(user);
+        return user;
     }
 
     public void getCartDetails(String username, MessageCallback clientCallback) throws RemoteException{
@@ -673,6 +674,18 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         } catch (Exception e) {
             throw new RemoteException("Error removing medicine from cart: " + e.getMessage(), e);
         }
+    }
+
+    public synchronized int retrieveMedicineStock(String medicineId) throws RemoteException{
+        int medicineStock = 0;
+        Medicine medicine = new Medicine();
+        try {
+            medicine = MedicineJSONProcessor.getMedicineById("res/Medicine.json", medicineId);
+        } catch (Exception e){
+
+        }
+        medicineStock = medicine.getQuantity();
+        return medicineStock;
     }
 
 }

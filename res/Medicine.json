@@ -151,5 +151,14 @@
     "Form": "Tablet",
     "Quantity": 50,
     "Price": 3.0
+  },
+  {
+    "MedicineID": "M18",
+    "Category": "Vitamins",
+    "GenericName": "Vitamina",
+    "BrandName": "VitaminAX",
+    "Form": "Tablet",
+    "Quantity": 50,
+    "Price": 3.0
   }
 ]

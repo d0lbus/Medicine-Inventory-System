@@ -318,6 +318,7 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 
 	public void displayProfileDetails(User user) throws RemoteException{
 		clientGUIFrame.getNameOnlyLabel().setText(user.getFirstName() + " " + user.getLastName());
+
 	}
 	public void updateCart(UserCart userCart) throws RemoteException {
 		SwingUtilities.invokeLater(() -> {

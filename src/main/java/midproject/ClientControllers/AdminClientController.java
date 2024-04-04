@@ -403,12 +403,6 @@ public class AdminClientController {
         /** ORDERS RELATED METHODS */
 
 
-
-
-
-
-
-
         /** PENDING ORDERS RELATED METHODS */
 
         /** INVENTORY RELATED METHODS */
@@ -469,7 +463,7 @@ public class AdminClientController {
                     editMedicineFrame.setVisible(true);
 
                     Medicine selectedMedicine = new Medicine();
-                    selectedMedicine.setMedicineID(model.getValueAt(selectedRow, 0).toString());
+                    selectedMedicine.setMedicineID(model.getValueAt(selectedRow,0).toString());
                     selectedMedicine.setCategory(model.getValueAt(selectedRow, 1).toString());
                     selectedMedicine.setGenericName(model.getValueAt(selectedRow, 2).toString());
                     selectedMedicine.setBrandName(model.getValueAt(selectedRow, 3).toString());

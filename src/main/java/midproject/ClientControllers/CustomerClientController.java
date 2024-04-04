@@ -3,6 +3,10 @@ package midproject.ClientControllers;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -12,14 +16,18 @@ import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import midproject.SharedClasses.Implementations.CallbackImplementation;
 import midproject.SharedClasses.Interfaces.ModelInterface;
+import midproject.SharedClasses.ReferenceClasses.OrderItem;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
 import midproject.ViewClasses.ClientGUIFrame;
 import midproject.ViewClasses.QuantityFrame;
 import midproject.ViewClasses.Login;
 import java.awt.event.MouseAdapter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 public class CustomerClientController {
@@ -33,6 +41,16 @@ public class CustomerClientController {
 
 	private static String username;
 	private static String sessionID;
+
+	private static boolean isModeOfDeliverySelected = false;
+
+	private static boolean isImageUploaded = false;
+
+	private static List<OrderItem> orderItems = new ArrayList<OrderItem>();
+
+	private static File selectedFile;
+	private static String modeOfDelivery = "";
+	private static String modeOfPayment = "";
 
 
 	public static void main(String[] args) {
@@ -161,6 +179,7 @@ public class CustomerClientController {
 				public void mouseClicked(MouseEvent e) {
 					try {
 						msgserver.getCartDetails(username, mci);
+						orderItems.clear();
 					}  catch (Exception ex) {
 						throw new RuntimeException(ex);
 					}
@@ -254,6 +273,244 @@ public class CustomerClientController {
 				}
 			});
 
+			clientGUIFrame.getSubmitButton().addActionListener(e ->{
+				boolean isValid = true;
+				StringBuilder invalidMedicines = new StringBuilder();
+
+				for (int selectedRow : clientGUIFrame.getCategoryTable1().getSelectedRows()) {
+					String medicineId = (String) clientGUIFrame.getCategoryTable1().getValueAt(selectedRow, 0);
+					int selectedQuantity = (Integer) clientGUIFrame.getCategoryTable1().getValueAt(selectedRow, 6);
+
+					try {
+						int currentStock = (Integer) clientGUIFrame.getCategoryTable1().getValueAt(selectedRow, 7);
+						if (selectedQuantity > currentStock) {
+							isValid = false;
+							invalidMedicines.append("\n").append((String) clientGUIFrame.getCategoryTable1().getValueAt(selectedRow, 3));
+						}
+					} catch (Exception ex) {
+						ex.printStackTrace();
+						JOptionPane.showMessageDialog(clientGUIFrame, "Error checking stock for medicine: " + medicineId, "Stock Check Error", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+				}
+
+				if (!isValid) {
+					JOptionPane.showMessageDialog(clientGUIFrame, "Selected quantity exceeds available stock for: " + invalidMedicines.toString(), "Quantity Error", JOptionPane.WARNING_MESSAGE);
+				} else {
+					try {
+						orderItems = getOrderItemsFromSelectedRows();
+					} catch (Exception ex){
+						ex.printStackTrace();
+					}
+					if (orderItems.isEmpty()){
+						JOptionPane.showMessageDialog(clientGUIFrame, "No items selected. Please select an item first.", "No Items Selected", JOptionPane.WARNING_MESSAGE);
+					} else {
+						isModeOfDeliverySelected = false;
+						isImageUploaded = false;
+						JPanel containerPanel = clientGUIFrame.getContainerPanel();
+						JPanel modeOfDeliveryPanel = clientGUIFrame.getModeOfDeliveryPanel();
+						containerPanel.removeAll();
+						containerPanel.add(modeOfDeliveryPanel);
+						containerPanel.repaint();
+						containerPanel.revalidate();
+					}
+				}
+			});
+
+			clientGUIFrame.getPickUpButton().addActionListener(e -> {
+				modeOfDelivery = "Pick-up";
+				modeOfPayment = "On-site";
+				clientGUIFrame.getPickUpTextArea().setText("You may pay your order on our physical store.");
+				isModeOfDeliverySelected = true;
+			});
+
+			clientGUIFrame.getDeliveryButton().addActionListener(e -> {
+				modeOfDelivery = "Delivery";
+				modeOfPayment = "Cash on Delivery";
+				clientGUIFrame.getPickUpTextArea().setText("You may pay your order once delivered");
+				isModeOfDeliverySelected = true;
+			});
+
+			clientGUIFrame.getNextButtonModeOfDelivery().addActionListener(e -> {
+				if (isModeOfDeliverySelected) {
+					try {
+						StringBuilder orderDetails = new StringBuilder();
+						User user = msgserver.getUserDetails(username, mci);
+						double total = 0;
+						double discountAmount = 0;
+
+						String pwdDiscount = "";
+
+						for (OrderItem item : orderItems) {
+							String itemDetails = String.format("Medicine ID: %s\nGeneric Name: %s\nBrand Name: %s\nForm: %s\nQuantity: %d\nPrice: ₱%.2f\n\n",
+									item.getMedicineId(), item.getGenericName(), item.getBrandName(), item.getForm(),
+									item.getQuantity(), item.getPrice());
+							orderDetails.append(itemDetails);
+							if ("yes".equals(user.getPersonWithDisability())) {
+								pwdDiscount = "20%";
+								discountAmount = total * 0.2;
+								total -= discountAmount;
+							} else {
+								total += item.getPrice() * item.getQuantity();
+								pwdDiscount = "0%";
+							}
+
+						}
+
+						orderDetails.append(String.format("PWD Discount: %s\n", pwdDiscount));
+						orderDetails.append(String.format("Discount Amount: ₱%.2f\n", discountAmount));
+						orderDetails.append(String.format("Total after Discount: ₱%.2f\n", total));
+
+
+						clientGUIFrame.getYourOrderTextArea().setText
+								("Name: " + user.getFirstName() + " " + user.getLastName()
+										+ "\nAddress: " + user.getStreet() + " " + user.getAdditionalAddressDetails() + " " +
+										user.getCity() + ", " + user.getProvince() + " " + user.getZip()
+										+ "\n"
+										+ "Mode of Delivery: " + modeOfDelivery + "\n"
+										+ "Mode of Payment: " + modeOfPayment + "\n\n"
+										+ orderDetails.toString()
+
+								);
+					} catch (Exception ex) {
+						throw new RuntimeException(ex);
+					}
+
+					JPanel containerPanel = clientGUIFrame.getContainerPanel();
+					JPanel yourOrderPanel = clientGUIFrame.getYourOrderPanel();
+
+					containerPanel.removeAll();
+					containerPanel.add(yourOrderPanel);
+					containerPanel.repaint();
+					containerPanel.revalidate();
+				} else {
+					JOptionPane.showMessageDialog(clientGUIFrame, "Please select a mode of delivery before proceeding.", "Mode of Delivery Required", JOptionPane.WARNING_MESSAGE);
+				}
+			});
+
+			clientGUIFrame.getUploadPrescriptionButton().addActionListener(e -> {
+				JFileChooser fileChooser = new JFileChooser();
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("JPEG, PNG, and PDF files", "jpg", "jpeg", "png", "pdf");
+				fileChooser.setFileFilter(filter);
+				fileChooser.setAcceptAllFileFilterUsed(false);
+
+				int result = fileChooser.showOpenDialog(clientGUIFrame);
+				if (result == JFileChooser.APPROVE_OPTION) {
+					selectedFile = fileChooser.getSelectedFile();
+					long fileSizeInBytes = selectedFile.length();
+					long fileSizeInMB = fileSizeInBytes / (1024 * 1024);
+
+					if (fileSizeInMB > 25) {
+						JOptionPane.showMessageDialog(clientGUIFrame, "The file is too large. Please select a file less than 25 MB.", "File Too Large", JOptionPane.ERROR_MESSAGE);
+					} else {
+							isImageUploaded = true;
+							JOptionPane.showMessageDialog(clientGUIFrame, "File uploaded successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+			});
+
+			clientGUIFrame.getCheckOutButton().addActionListener(e -> {
+				if (isImageUploaded) {
+					/**REPRINT ORDER DETAILS**/
+
+					try {
+					StringBuilder orderDetails = new StringBuilder();
+					User user = msgserver.getUserDetails(username, mci);
+					double total = 0;
+					double discountAmount = 0;
+
+					String pwdDiscount = "";
+					for (OrderItem item : orderItems) {
+						String itemDetails = String.format("Medicine ID: %s\nGeneric Name: %s\nBrand Name: %s\nForm: %s\nQuantity: %d\nPrice: ₱%.2f\n\n",
+								item.getMedicineId(), item.getGenericName(), item.getBrandName(), item.getForm(),
+								item.getQuantity(), item.getPrice());
+						orderDetails.append(itemDetails);
+						if ("yes".equals(user.getPersonWithDisability())) {
+							pwdDiscount = "20%";
+							discountAmount = total * 0.2;
+							total -= discountAmount;
+						} else {
+							total += item.getPrice() * item.getQuantity();
+							pwdDiscount = "0%";
+						}
+
+					}
+
+					orderDetails.append(String.format("PWD Discount: %s\n", pwdDiscount));
+					orderDetails.append(String.format("Discount Amount: ₱%.2f\n", discountAmount));
+					orderDetails.append(String.format("Total after Discount: ₱%.2f\n", total));
+
+					clientGUIFrame.getPlacedOrderTextArea().setText
+							("Name: " + user.getFirstName() + " " + user.getLastName()
+									+ "\nAddress: " + user.getStreet() + " " + user.getAdditionalAddressDetails() + " " +
+									user.getCity() + ", " + user.getProvince() + " " + user.getZip()
+									+ "\n"
+									+ "Mode of Delivery: " + modeOfDelivery + "\n"
+									+ "Mode of Payment: " + modeOfPayment + "\n\n"
+									+ orderDetails.toString()
+							);
+				} catch (Exception ex) {
+					throw new RuntimeException(ex);
+				}
+
+					byte[] fileContent = new byte[(int) selectedFile.length()];
+					try (FileInputStream fileInputStream = new FileInputStream(selectedFile)) {
+						int bytesRead = fileInputStream.read(fileContent);
+						if (bytesRead != fileContent.length) {
+							throw new IOException("File not completely read.");
+						}
+					} catch (FileNotFoundException ex) {
+						System.err.println("File not found: " + ex.getMessage());
+					} catch (IOException exc) {
+						System.err.println("Error reading the file: " + exc.getMessage());
+					}
+
+
+					JPanel containerPanel = clientGUIFrame.getContainerPanel();
+					JPanel placedOrderPanel = clientGUIFrame.getPlacedOrderPanel();
+
+					containerPanel.removeAll();
+					containerPanel.add(placedOrderPanel);
+					containerPanel.repaint();
+					containerPanel.revalidate();
+				} else {
+					JOptionPane.showMessageDialog(clientGUIFrame, "Please upload a prescription before checking out.", "Image Required", JOptionPane.WARNING_MESSAGE);
+				}
+			});
+
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/**HELPER METHODS**/
+
+	private static List<OrderItem> getOrderItemsFromSelectedRows() {
+		List<OrderItem> orderItems = new ArrayList<>();
+		for (int selectedRow : clientGUIFrame.getCategoryTable1().getSelectedRows()) {
+			String medicineId = (String) clientGUIFrame.getCategoryTable1().getValueAt(selectedRow, 0);
+			String genericName = (String) clientGUIFrame.getCategoryTable1().getValueAt(selectedRow, 2);
+			String brandName = (String) clientGUIFrame.getCategoryTable1().getValueAt(selectedRow, 3);
+			String form = (String) clientGUIFrame.getCategoryTable1().getValueAt(selectedRow, 4);
+			int quantity = (Integer) clientGUIFrame.getCategoryTable1().getValueAt(selectedRow, 6);
+			double price = (Double) clientGUIFrame.getCategoryTable1().getValueAt(selectedRow, 5);
+			orderItems.add(new OrderItem(medicineId, genericName, brandName, form, quantity, price));
+		}
+		return orderItems;
 	}
 }
 
