@@ -6,6 +6,8 @@ package midproject.ViewClasses;
 
 import midproject.SharedClasses.ReferenceClasses.User;
 
+import javax.swing.*;
+
 /**
  *
  * @author Cian Talosig
@@ -37,8 +39,8 @@ public class EditUserFrame extends javax.swing.JFrame {
         setPasswordField.setEnabled(false);
         userTypeComboBox.setEnabled(false);
         userTypeComboBox.setEditable(false);
-        confirmPasswordField.setEditable(false);
-        confirmPasswordField.setEnabled(false);
+        //confirmPasswordField.setEditable(false);
+        //confirmPasswordField.setEnabled(false);
 
     }
 
@@ -87,16 +89,17 @@ public class EditUserFrame extends javax.swing.JFrame {
         ageLabel = new javax.swing.JLabel();
         genderLabel = new javax.swing.JLabel();
         pwdLabel = new javax.swing.JLabel();
-        confirmPasswordLabel = new javax.swing.JLabel();
+        //confirmPasswordLabel = new javax.swing.JLabel();
         firstNameTextField = new javax.swing.JTextField();
         setPasswordField = new javax.swing.JPasswordField();
-        confirmPasswordField = new javax.swing.JPasswordField();
+        //confirmPasswordField = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        genderComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        userTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        genderComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
+
+        userTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Customer" }));
 
         userTypeLabel.setText("USER TYPE");
 
@@ -138,7 +141,7 @@ public class EditUserFrame extends javax.swing.JFrame {
 
         pwdLabel.setText("Person with Disability");
 
-        confirmPasswordLabel.setText("Confirm Password");
+        //confirmPasswordLabel.setText("Confirm Password");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -203,13 +206,13 @@ public class EditUserFrame extends javax.swing.JFrame {
                             .addComponent(emailAddressLabel)
                             .addComponent(contactNumberLabel)
                             .addComponent(setUsernameLabel)
-                            .addComponent(confirmPasswordLabel)
+                            //.addComponent(confirmPasswordLabel)
                             .addComponent(emailAddressTextField)
                             .addComponent(contactNumberTextField)
                             .addComponent(setUsernameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                             .addComponent(setPasswordLabel)
-                            .addComponent(setPasswordField)
-                            .addComponent(confirmPasswordField)))
+                            .addComponent(setPasswordField)))
+                            //.addComponent(confirmPasswordField)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(387, 387, 387)
                         .addComponent(editAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -274,14 +277,14 @@ public class EditUserFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(genderLabel)
                     .addComponent(postcodeLabel)
-                    .addComponent(confirmPasswordLabel)
+                    //.addComponent(confirmPasswordLabel)
                     .addComponent(genderComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pwdLabel)
                     .addComponent(jCheckBox1)
-                    .addComponent(postalCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(confirmPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(postalCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    //.addComponent(confirmPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(editAccountButton)
                 .addContainerGap(69, Short.MAX_VALUE))
@@ -332,8 +335,8 @@ public class EditUserFrame extends javax.swing.JFrame {
     private javax.swing.JTextField birthdateTextFiled;
     private javax.swing.JLabel cityMunicipalityLabel;
     private javax.swing.JTextField cityMunicipalityTextField;
-    private javax.swing.JPasswordField confirmPasswordField;
-    private javax.swing.JLabel confirmPasswordLabel;
+    //private javax.swing.JPasswordField confirmPasswordField;
+    //private javax.swing.JLabel confirmPasswordLabel;
     private javax.swing.JLabel contactNumberLabel;
     private javax.swing.JTextField contactNumberTextField;
     private javax.swing.JButton editAccountButton;

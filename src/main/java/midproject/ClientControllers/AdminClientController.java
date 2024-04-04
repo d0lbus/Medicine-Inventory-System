@@ -216,12 +216,28 @@ public class AdminClientController {
                 int selectedRow = adminGUIFrame.getrUsersTable().getSelectedRow();
                 if (selectedRow != -1) {
                     String userId = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 0).toString();
-                    String lastName = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 1).toString();
+                    String userType = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 1).toString();
                     String firstName = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 2).toString();
-                    String userType = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 3).toString();
+                    String lastName = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 3).toString();
+                    /**
+                    String middleName = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 4).toString();
+                    String birthdate = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 5).toString();
+                    String age = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 6).toString();
+                    String gender = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 7).toString();
+                    String personWithDisability = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 8).toString();
+                    String email = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 9).toString();
+                    String contactNumber = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 10).toString();
+                    */
                     String username = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 4).toString();
-
-
+                    /**
+                    String password = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 12).toString();
+                    String confirmPassword = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 13).toString();
+                    String street = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 14).toString();
+                    String additionalAddressDetails = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 15).toString();
+                    String city = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 16).toString();
+                    String province = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 17).toString();
+                    String zip = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 18).toString();
+                     */
 
                     User selectedUser = new User(userId, lastName, firstName, userType, username, user.getMiddleName(),
                             user.getBirthdate(), user.getAge(), user.getGender(), user.getPersonWithDisability(),
