@@ -1328,7 +1328,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
     private void nextButtonModeOfPaymennextButtonModeOfDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonModeOfPaymennextButtonModeOfDeliveryActionPerformed
         containerPanel.removeAll();
-        containerPanel.add(modeOfPaymentPanel);
+        containerPanel.add(yourOrderPanel);
         containerPanel.repaint();
         containerPanel.revalidate();
     }//GEN-LAST:event_nextButtonModeOfPaymennextButtonModeOfDeliveryActionPerformed
