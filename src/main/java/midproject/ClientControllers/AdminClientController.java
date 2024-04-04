@@ -202,7 +202,9 @@ public class AdminClientController {
                 String searchText = adminGUIFrame.getrUsersSearchTextfield().getText().trim().toLowerCase();
                 try {
                     msgserver.searchUsers(searchText, mci);
-                } catch (RemoteException ex) {
+                } catch (NoUserFoundException ex) {
+                    JOptionPane.showMessageDialog(adminGUIFrame, ex.getMessage(), "No User Found", JOptionPane.ERROR_MESSAGE);
+                }  catch (RemoteException ex) {
                     ex.printStackTrace();
                 }
             }
@@ -264,6 +266,8 @@ public class AdminClientController {
                 String searchText = adminGUIFrame.getaUsersSearchTextfield().getText().trim().toLowerCase();
                 try {
                     msgserver.searchArchivedUsers(searchText, mci);
+                } catch (NoUserFoundException ex) {
+                    JOptionPane.showMessageDialog(adminGUIFrame, ex.getMessage(), "No User Found", JOptionPane.ERROR_MESSAGE);
                 } catch (RemoteException ex) {
                     ex.printStackTrace();
                 }

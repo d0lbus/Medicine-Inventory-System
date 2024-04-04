@@ -177,7 +177,7 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
     }
 
-    public void searchUsers(String searchText, MessageCallback callback) throws RemoteException {
+    public void searchUsers(String searchText, MessageCallback callback) throws RemoteException, NoUserFoundException {
         try {
             List<User> allUsers = readUsersFromFile("res/UserInformation.json");
 
@@ -190,7 +190,14 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
                             user.getLastName().toLowerCase().contains(searchText.toLowerCase())
                     )
                     .collect(Collectors.toList());
+
+            if (searchResults.isEmpty()) {
+                throw new NoUserFoundException("No user '" + searchText + "' found");
+            }
+
             callback.sendSearchResults(searchResults);
+        } catch (NoUserFoundException e) {
+            throw e;
         } catch (Exception e) {
             throw new RemoteException("Error while searching users", e);
         }
@@ -231,7 +238,7 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
     }
 
-    public void searchArchivedUsers(String searchText, MessageCallback callback) throws RemoteException {
+    public void searchArchivedUsers(String searchText, MessageCallback callback) throws RemoteException, NoUserFoundException {
         try {
             List<User> allUsers = readUsersFromFile("res/ArchivedUsers.json");
 
@@ -244,7 +251,14 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
                                     user.getLastName().toLowerCase().contains(searchText.toLowerCase())
                     )
                     .collect(Collectors.toList());
-            callback.sendArchivedUserSearchResults(searchResults);
+
+            if (searchResults.isEmpty()) {
+                throw new NoUserFoundException("No user '" + searchText + "' found");
+            }
+
+            callback.sendSearchResults(searchResults);
+        } catch (NoUserFoundException e) {
+            throw e;
         } catch (Exception e) {
             throw new RemoteException("Error while searching users", e);
         }

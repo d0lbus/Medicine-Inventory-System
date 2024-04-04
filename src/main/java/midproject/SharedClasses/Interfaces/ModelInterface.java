@@ -46,11 +46,11 @@ public interface ModelInterface extends Remote {
 
     public void registerUser(User newUser, String adminUsername) throws Exception, InvalidInputException;
 
-    void searchUsers(String searchText, MessageCallback callback) throws RemoteException;
+    void searchUsers(String searchText, MessageCallback callback) throws RemoteException, NoUserFoundException;
 
     void unarchiveUser(String userId, MessageCallback callback, String username) throws Exception;
 
-    void searchArchivedUsers(String searchText, MessageCallback callback) throws RemoteException;
+    void searchArchivedUsers(String searchText, MessageCallback callback) throws RemoteException, NoUserFoundException;
 
 
     /**CUSTOMER SIDE**/
