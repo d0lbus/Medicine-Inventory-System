@@ -4,6 +4,8 @@
  */
 package midproject.ViewClasses;
 
+import midproject.SharedClasses.ReferenceClasses.User;
+
 /**
  *
  * @author Cian Talosig
@@ -16,6 +18,31 @@ public class EditUserFrame extends javax.swing.JFrame {
     public EditUserFrame() {
         initComponents();
     }
+
+    private User userToEdit;
+
+    public EditUserFrame (User user) {
+        initComponents();;
+        userToEdit = user;
+        populateFields();
+    }
+
+    private void populateFields() {
+        firstNameTextField.setText(userToEdit.getFirstName());
+        lastNameTextField.setText(userToEdit.getLastName());
+
+        setUsernameTextField.setEditable(false);
+        setUsernameTextField.setEnabled(false);
+        setPasswordField.setEditable(false);
+        setPasswordField.setEnabled(false);
+        userTypeComboBox.setEnabled(false);
+        userTypeComboBox.setEditable(false);
+        confirmPasswordField.setEditable(false);
+        confirmPasswordField.setEnabled(false);
+
+    }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.

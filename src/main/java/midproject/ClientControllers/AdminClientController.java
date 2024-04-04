@@ -15,10 +15,7 @@ import midproject.SharedClasses.ReferenceClasses.Medicine;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.*;
 import midproject.SharedClasses.Utilities.UserJSONProcessor;
-import midproject.ViewClasses.AddMedicineFrame;
-import midproject.ViewClasses.AdminGUIFrame;
-import midproject.ViewClasses.EditMedicineFrame;
-import midproject.ViewClasses.Login;
+import midproject.ViewClasses.*;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -212,6 +209,37 @@ public class AdminClientController {
                 }
             }
         });
+
+        adminGUIFrame.getrUsersEditButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = adminGUIFrame.getrUsersTable().getSelectedRow();
+                if (selectedRow != -1) {
+                    String userId = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 0).toString();
+                    String lastName = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 1).toString();
+                    String firstName = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 2).toString();
+                    String userType = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 3).toString();
+                    String username = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 4).toString();
+
+
+
+                    User selectedUser = new User(userId, lastName, firstName, userType, username, user.getMiddleName(),
+                            user.getBirthdate(), user.getAge(), user.getGender(), user.getPersonWithDisability(),
+                            user.getEmail(), user.getContactNumber(), user.getPassword(), user.getConfirmPassword(),
+                            user.getStreet(), user.getAdditionalAddressDetails(), user.getCity(), user.getProvince(),
+                            user.getZip());
+
+                    EditUserFrame editUserFrame = new EditUserFrame(selectedUser);
+                    editUserFrame.setVisible(true);
+
+
+                } else {
+
+                }
+            }
+        });
+
+
 
 
         /** ARCHIVED USERS RELATED METHODS */

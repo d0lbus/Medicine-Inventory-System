@@ -53,6 +53,7 @@ public interface ModelInterface extends Remote {
     void searchArchivedUsers(String searchText, MessageCallback callback) throws RemoteException, NoUserFoundException;
 
 
+
     /**CUSTOMER SIDE**/
     void getUserDetails(String username, MessageCallback msgCallback) throws Exception;
     void getCartDetails(String username, MessageCallback clientCallback) throws RemoteException;
