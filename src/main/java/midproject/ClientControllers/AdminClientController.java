@@ -9,7 +9,6 @@ import java.rmi.registry.Registry;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import com.toedter.calendar.JDateChooser;
 import midproject.SharedClasses.Implementations.CallbackImplementation;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.Medicine;
@@ -159,7 +158,11 @@ public class AdminClientController {
                         JOptionPane.showMessageDialog(adminGUIFrame, "Error retrieving user details.", "Remote Exception", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a user first.", "Selection Required", JOptionPane.WARNING_MESSAGE);
+                    try {
+                        throw new SelectionRequiredViewUserException("Please select a user first.");
+                    } catch (SelectionRequiredViewUserException exception) {
+                        JOptionPane.showMessageDialog(adminGUIFrame, exception.getMessage(), "Selection Required", JOptionPane.WARNING_MESSAGE);
+                    }
                 }
             }
         });
@@ -227,8 +230,8 @@ public class AdminClientController {
                     }
                 } else {
                     try {
-                        throw new SelectionRequiredViewArchivedUserException("Please select a user first.");
-                    } catch (SelectionRequiredViewArchivedUserException exception) {
+                        throw new SelectionRequiredViewUserException("Please select a user first.");
+                    } catch (SelectionRequiredViewUserException exception) {
                         JOptionPane.showMessageDialog(adminGUIFrame, exception.getMessage(), "Selection Required", JOptionPane.WARNING_MESSAGE);
                     }
                 }
