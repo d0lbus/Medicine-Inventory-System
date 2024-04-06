@@ -34,6 +34,7 @@ public class AcceptRejectFrame extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jTextPane1.setEditable(false);
         jScrollPane1.setViewportView(jTextPane1);
 
         acceptButton.setBackground(new java.awt.Color(207, 225, 185));
