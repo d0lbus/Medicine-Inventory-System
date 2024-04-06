@@ -5,20 +5,21 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
 import midproject.SharedClasses.Interfaces.MessageCallback;
-import midproject.SharedClasses.ReferenceClasses.Medicine;
-import midproject.SharedClasses.ReferenceClasses.User;
-import midproject.SharedClasses.ReferenceClasses.UserCallBackInfo;
-import midproject.SharedClasses.ReferenceClasses.UserCart;
+import midproject.SharedClasses.ReferenceClasses.*;
 import midproject.SharedClasses.Utilities.MedicineJSONProcessor;
 import midproject.ViewClasses.AdminGUIFrame;
 import midproject.ViewClasses.ClientGUIFrame;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import static midproject.SharedClasses.Utilities.MedicineJSONProcessor.getMedicineById;
 
@@ -338,5 +339,68 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		});
 	}
 
+	public void notifyOrderProcessed(String orderId, User user, List<OrderItem> orderItems, byte[] imageBytes, String modeOfDelivery, String modeOfPayment) throws RemoteException{
+		SwingUtilities.invokeLater(() -> {
+			try {
+				StringBuilder orderDetails = new StringBuilder();
+				double total = 0;
+				double discountAmount = 0;
 
+				String pwdDiscount = "";
+				for (OrderItem item : orderItems) {
+					String itemDetails = String.format("Medicine ID: %s\nGeneric Name: %s\nBrand Name: %s\nForm: %s\nQuantity: %d\nPrice: ₱%.2f\n\n",
+							item.getMedicineId(), item.getGenericName(), item.getBrandName(), item.getForm(),
+							item.getQuantity(), item.getPrice());
+					orderDetails.append(itemDetails);
+					if ("yes".equals(user.getPersonWithDisability())) {
+						pwdDiscount = "20%";
+						discountAmount = total * 0.2;
+						total -= discountAmount;
+					} else {
+						total += item.getPrice() * item.getQuantity();
+						pwdDiscount = "0%";
+					}
+
+				}
+
+				orderDetails.append(String.format("PWD Discount: %s\n", pwdDiscount));
+				orderDetails.append(String.format("Discount Amount: ₱%.2f\n", discountAmount));
+				orderDetails.append(String.format("Total after Discount: ₱%.2f\n", total));
+
+				ImageIcon imageIcon = new ImageIcon(imageBytes);
+
+				StyledDocument doc = (StyledDocument) clientGUIFrame.getOrderPlacedTextpane().getDocument();
+				doc.insertString(doc.getLength(), buildOrderDetailsString(user, orderId, orderDetails, modeOfDelivery, modeOfPayment), null);
+
+
+				Style style = doc.addStyle("ImageStyle", null);
+				StyleConstants.setIcon(style, imageIcon);
+				doc.insertString(doc.getLength(), "ignored text", style);
+
+				JPanel containerPanel = clientGUIFrame.getContainerPanel();
+				JPanel placedOrderPanel = clientGUIFrame.getPlacedOrderPanel();
+
+				containerPanel.removeAll();
+				containerPanel.add(placedOrderPanel);
+				containerPanel.repaint();
+				containerPanel.revalidate();
+
+			} catch (Exception ex) {
+				throw new RuntimeException(ex);
+			}
+		});
+	}
+
+
+	private static String buildOrderDetailsString(User user, String orderID, StringBuilder orderDetails, String modeOfDelivery, String modeOfPayment) {
+		StringBuilder details = new StringBuilder();
+		details.append("John Doe's Official Receipt("+orderID+")"+"\n\n");
+		details.append("Name: ").append(user.getFirstName()).append(" ").append(user.getLastName()).append("\n");
+		details.append("Address: ").append(user.getStreet()).append(" ").append(user.getAdditionalAddressDetails()).append(" ");
+		details.append(user.getCity()).append(", ").append(user.getProvince()).append(" ").append(user.getZip()).append("\n");
+		details.append("Mode of Delivery: ").append(modeOfDelivery).append("\n");
+		details.append("Mode of Payment: ").append(modeOfPayment).append("\n\n");
+		details.append(orderDetails);
+		return details.toString();
+	}
 }

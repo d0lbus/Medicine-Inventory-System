@@ -2,6 +2,7 @@ package midproject.SharedClasses.Interfaces;
 
 import midproject.SharedClasses.Implementations.CallbackImplementation;
 import midproject.SharedClasses.ReferenceClasses.Medicine;
+import midproject.SharedClasses.ReferenceClasses.OrderItem;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.*;
 import midproject.ViewClasses.AdminGUIFrame;
@@ -61,4 +62,5 @@ public interface ModelInterface extends Remote {
     void updateMedicineQuantityInCart(String medicineId, int newQuantity, MessageCallback clientCallback, String username) throws RemoteException;
     void removeMedicineInCart(String medicineId, MessageCallback clientCallback, String username) throws RemoteException;
     int retrieveMedicineStock(String medicineId) throws RemoteException;
+    void processOrder(User user, List<OrderItem> orderItems, String base64Image, String modeOfDelivery, String modeOfPayment, MessageCallback clientCallback) throws RemoteException;
 }

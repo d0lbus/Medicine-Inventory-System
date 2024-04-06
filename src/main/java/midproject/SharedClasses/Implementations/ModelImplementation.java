@@ -21,6 +21,7 @@ import midproject.SharedClasses.Interfaces.MessageCallback;
 import midproject.SharedClasses.ReferenceClasses.*;
 import midproject.SharedClasses.UserDefinedExceptions.*;
 import midproject.SharedClasses.Utilities.MedicineJSONProcessor;
+import midproject.SharedClasses.Utilities.OrderJSONProcessor;
 import midproject.SharedClasses.Utilities.UserJSONProcessor;
 import midproject.SharedClasses.Utilities.CartJSONProcessor;
 
@@ -657,7 +658,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         try {
 
             Map<String, UserCart> userCarts = CartJSONProcessor.readUserCartsFromFile();
-
             User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
             String userId = user.getUserId();
 
@@ -669,8 +669,8 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
             // Save the updated cart
             CartJSONProcessor.writeUserCartsToFile(userCarts);
-
             clientCallback.updateCart(userCart);
+
         } catch (Exception e) {
             throw new RemoteException("Error removing medicine from cart: " + e.getMessage(), e);
         }
@@ -686,6 +686,50 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
         medicineStock = medicine.getQuantity();
         return medicineStock;
+    }
+
+    public void processOrder(User user, List<OrderItem> orderItems, String base64Image, String modeOfDelivery, String modeOfPayment, MessageCallback clientCallback) throws RemoteException {
+        try {
+        for (OrderItem item : orderItems) {
+            Medicine medicine = MedicineJSONProcessor.getMedicineById("res/Medicine.json", item.getMedicineId());
+            if (medicine.getQuantity() < item.getQuantity()) {
+                throw new RemoteException("Not enough stock for medicine: " + item.getMedicineId());
+            }
+        }
+
+        String orderId = OrderJSONProcessor.generateOrderId();
+
+        String status = "Pending";
+
+        byte[] imageBytes = Base64.getDecoder().decode(base64Image);
+
+        Order order = new Order(orderId, user.getUserId(), orderItems, status, modeOfDelivery, modeOfPayment, base64Image);
+        OrderJSONProcessor.writeOrderToFile(order);
+
+        String userId = user.getUserId();
+        Map<String, UserCart> userCarts = CartJSONProcessor.readUserCartsFromFile();
+        UserCart userCart = userCarts.get(userId);
+
+        for (OrderItem item : orderItems) {
+            Medicine medicine = MedicineJSONProcessor.getMedicineById("res/Medicine.json", item.getMedicineId());
+            assert medicine != null;
+            int newStock = medicine.getQuantity() - item.getQuantity();
+            medicine.setQuantity(newStock);
+            MedicineJSONProcessor.updateMedicine(medicine, "res/Medicine.json");
+            userCart.removeItem(item.getMedicineId());
+        }
+
+        CartJSONProcessor.writeUserCartsToFile(userCarts);
+        clientCallback.updateCart(userCart);
+        clientCallback.notifyOrderProcessed(orderId, user, orderItems, imageBytes, modeOfDelivery, modeOfPayment);
+        updateInventoryTable();
+
+        } catch (RemoteException ex){
+            ex.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 }

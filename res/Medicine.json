@@ -5,7 +5,7 @@
     "GenericName": "Citalopram",
     "BrandName": "Celexar",
     "Form": "Tablet",
-    "Quantity": 5,
+    "Quantity": 0,
     "Price": 10.0
   },
   {
@@ -14,7 +14,7 @@
     "GenericName": "Acetaminophen",
     "BrandName": "Mapap",
     "Form": "Chewable Tablet",
-    "Quantity": 50,
+    "Quantity": 30,
     "Price": 6.0
   },
   {

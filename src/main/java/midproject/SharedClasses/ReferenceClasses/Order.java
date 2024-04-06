@@ -13,9 +13,9 @@ public class Order implements Serializable {
     private String status;
     private String modeOfDelivery;
     private String paymentMethod;
-    private byte[] image;
+    private String image;
 
-    public Order(String orderId, String userId, List<OrderItem> items, String status, String modeOfDelivery, String paymentMethod, byte[] image) {
+    public Order(String orderId, String userId, List<OrderItem> items, String status, String modeOfDelivery, String paymentMethod, String image) {
         this.orderId = orderId;
         this.userId = userId;
         this.items = items;
@@ -74,11 +74,11 @@ public class Order implements Serializable {
         this.paymentMethod = paymentMethod;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
     // Constructor, getters, and setters omitted for brevity

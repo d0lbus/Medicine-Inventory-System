@@ -1,6 +1,7 @@
 package midproject.SharedClasses.Interfaces;
 
 import midproject.SharedClasses.ReferenceClasses.Medicine;
+import midproject.SharedClasses.ReferenceClasses.OrderItem;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.ReferenceClasses.UserCart;
 import midproject.ViewClasses.AdminGUIFrame;
@@ -58,5 +59,6 @@ public interface MessageCallback extends Remote {
 	/**CUSTOMER SIDE**/
 	void updateCart(UserCart userCart) throws RemoteException;
 
+	void notifyOrderProcessed(String orderId, User user, List<OrderItem> orderItems, byte[] imageBytes, String modeOfDelivery, String modeOfPayment) throws RemoteException;
 
 }

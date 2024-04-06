@@ -24,7 +24,6 @@ public class CartJSONProcessor {
             Type typeOfUserCarts = new TypeToken<Map<String, UserCart>>(){}.getType();
             return gson.fromJson(reader, typeOfUserCarts);
         } catch (FileNotFoundException e) {
-            // Handle case where the UserCarts.json does not exist
             return new HashMap<>();
         } catch (IOException e) {
             e.printStackTrace();
