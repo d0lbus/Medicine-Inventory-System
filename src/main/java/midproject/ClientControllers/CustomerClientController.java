@@ -440,7 +440,7 @@ public class CustomerClientController {
 					orderDetails.append(String.format("Discount Amount: ₱%.2f\n", discountAmount));
 					orderDetails.append(String.format("Total after Discount: ₱%.2f\n", total));
 
-					clientGUIFrame.getPlacedOrderTextArea().setText
+					clientGUIFrame.getOrderPlacedTextpane().setText
 							("Name: " + user.getFirstName() + " " + user.getLastName()
 									+ "\nAddress: " + user.getStreet() + " " + user.getAdditionalAddressDetails() + " " +
 									user.getCity() + ", " + user.getProvince() + " " + user.getZip()

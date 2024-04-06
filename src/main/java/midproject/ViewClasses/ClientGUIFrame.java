@@ -1538,6 +1538,38 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         this.confirmPasswordLabel = confirmPasswordLabel;
     }
 
+    public JComboBox<String> getComboBox() {
+        return comboBox;
+    }
+
+    public JLabel getjLabel11() {
+        return jLabel11;
+    }
+
+    public JScrollPane getjScrollPane4() {
+        return jScrollPane4;
+    }
+
+    public JScrollPane getjScrollPane6() {
+        return jScrollPane6;
+    }
+
+    public JTextPane getOrderPlacedTextpane() {
+        return orderPlacedTextpane;
+    }
+
+    public JButton getSendButton() {
+        return sendButton;
+    }
+
+    public JPanel getSendMessagePanel() {
+        return sendMessagePanel;
+    }
+
+    public JTextArea getSendMessageTextArea() {
+        return sendMessageTextArea;
+    }
+
     public JPanel getContainerPanel() {
         return containerPanel;
     }
