@@ -18,7 +18,6 @@ public class EditMedicineFrame extends javax.swing.JFrame {
      * Creates new form EditMedicineFrame
      */
     public EditMedicineFrame() {
-        setTitle("Edit Medicine");
         initComponents();
     }
 
@@ -46,7 +45,10 @@ public class EditMedicineFrame extends javax.swing.JFrame {
         formTextField = new javax.swing.JTextField();
         editMedicineLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        setTitle("Edit Medicine");
+        setLocationRelativeTo(null);
 
         genericNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         genericNameLabel.setText("Generic Name:");

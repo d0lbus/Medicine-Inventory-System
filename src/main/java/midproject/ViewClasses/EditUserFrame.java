@@ -110,6 +110,8 @@ public class EditUserFrame extends javax.swing.JFrame {
         //confirmPasswordField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Edit User");
+        setLocationRelativeTo(null);
 
 
         genderComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));

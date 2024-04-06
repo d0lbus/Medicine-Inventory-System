@@ -18,7 +18,6 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        setLocationRelativeTo(null);
     }
 
     /**
@@ -44,6 +43,8 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quantum Drugstore");
+        setResizable(false);
+        setLocationRelativeTo(null);
 
         jPanel1.setBackground(new java.awt.Color(44, 125, 160));
 

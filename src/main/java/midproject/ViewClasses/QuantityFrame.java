@@ -50,7 +50,9 @@ public class QuantityFrame extends javax.swing.JFrame {
         proceedButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Quantity");
+        setTitle("Quantity Drugstore");
+        setResizable(false);
+        setLocationRelativeTo(null);
 
         quantitySpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50, 1));
 

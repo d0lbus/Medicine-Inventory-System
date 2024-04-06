@@ -172,7 +172,9 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         serverLogsTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         setTitle("Quantum Drugstore");
+        setLocationRelativeTo(null);
 
         headerPanel.setBackground(new java.awt.Color(69, 123, 157));
 

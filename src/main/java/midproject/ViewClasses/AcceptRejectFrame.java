@@ -30,7 +30,9 @@ public class AcceptRejectFrame extends javax.swing.JFrame {
         acceptButton = new javax.swing.JButton();
         rejectButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        setTitle("Quantum Drugstore");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
