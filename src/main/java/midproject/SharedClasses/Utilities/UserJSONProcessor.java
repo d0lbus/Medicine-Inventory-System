@@ -255,4 +255,23 @@ public class UserJSONProcessor {
             e.printStackTrace();
         }
     }
+
+    public static User fetchUserInformationFromDataSource(String userId, String filePath) {
+        try (FileReader reader = new FileReader(filePath)) {
+            // Parse JSON file into a list of User objects
+            Gson gson = new Gson();
+            Type userListType = new TypeToken<List<User>>(){}.getType();
+            List<User> users = gson.fromJson(reader, userListType);
+
+            // Find the user with the given userId
+            for (User user : users) {
+                if (user.getUserId().equals(userId)) {
+                    return user;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null; // User not found
+    }
 }

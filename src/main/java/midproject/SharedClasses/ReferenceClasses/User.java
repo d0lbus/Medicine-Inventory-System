@@ -115,7 +115,7 @@ public class User implements Serializable {
 						   String firstName, String lastName,
 						   String middleName, String birthdate,
 						   String age, String gender,
-						   String personWithDisability,
+						   boolean personWithDisability,
 						   String email, String contactNumber,
 						   String username, String password, String confirmPassword,
 						   String street, String additionalAddressDetails,
@@ -128,7 +128,7 @@ public class User implements Serializable {
 		this.birthdate = birthdate;
 		this.age = age;
 		this.gender = gender;
-		this.personWithDisability = personWithDisability;
+		this.personWithDisability = String.valueOf(personWithDisability);
 		this.email = email;
 		this.contactNumber = contactNumber;
 		this.username = username;
@@ -237,8 +237,8 @@ public class User implements Serializable {
 	 *
 	 * @return A string indicating whether the user has a disability.
 	 */
-	public String getPersonWithDisability() {
-		return personWithDisability;
+	public boolean getPersonWithDisability() {
+		return Boolean.parseBoolean(personWithDisability);
 	}
 
 	/**
