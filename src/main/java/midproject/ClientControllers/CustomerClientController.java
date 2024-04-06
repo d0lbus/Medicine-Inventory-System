@@ -24,10 +24,16 @@ import midproject.ViewClasses.QuantityFrame;
 import midproject.ViewClasses.Login;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+import javax.swing.text.html.HTMLEditorKit;
 
 
 public class CustomerClientController {
@@ -52,6 +58,7 @@ public class CustomerClientController {
 	private static String modeOfDelivery = "";
 	private static String modeOfPayment = "";
 
+	private static String base64Image = "";
 
 	public static void main(String[] args) {
 		try {
@@ -390,21 +397,37 @@ public class CustomerClientController {
 
 			clientGUIFrame.getUploadPrescriptionButton().addActionListener(e -> {
 				JFileChooser fileChooser = new JFileChooser();
-				FileNameExtensionFilter filter = new FileNameExtensionFilter("JPEG, PNG, and PDF files", "jpg", "jpeg", "png", "pdf");
+				FileNameExtensionFilter filter = new FileNameExtensionFilter(
+						"JPEG, PNG, and PDF files", "jpg", "jpeg", "png", "pdf");
 				fileChooser.setFileFilter(filter);
 				fileChooser.setAcceptAllFileFilterUsed(false);
 
 				int result = fileChooser.showOpenDialog(clientGUIFrame);
 				if (result == JFileChooser.APPROVE_OPTION) {
-					selectedFile = fileChooser.getSelectedFile();
+					File selectedFile = fileChooser.getSelectedFile();
 					long fileSizeInBytes = selectedFile.length();
-					long fileSizeInMB = fileSizeInBytes / (1024 * 1024);
 
-					if (fileSizeInMB > 25) {
+					if (fileSizeInBytes > 25 * 1024 * 1024) { // 25 MB limit
 						JOptionPane.showMessageDialog(clientGUIFrame, "The file is too large. Please select a file less than 25 MB.", "File Too Large", JOptionPane.ERROR_MESSAGE);
 					} else {
+						try (FileInputStream fileInputStream = new FileInputStream(selectedFile)) {
+							byte[] fileContent = new byte[(int) selectedFile.length()];
+							int offset = 0;
+							int numRead;
+							while (offset < fileContent.length
+									&& (numRead = fileInputStream.read(fileContent, offset, fileContent.length - offset)) >= 0) {
+								offset += numRead;
+							}
+							if (offset < fileContent.length) {
+								throw new IOException("Could not completely read file " + selectedFile.getName());
+							}
+							base64Image = Base64.getEncoder().encodeToString(fileContent);
 							isImageUploaded = true;
 							JOptionPane.showMessageDialog(clientGUIFrame, "File uploaded successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+							clientGUIFrame.getCheckOutButton().setEnabled(true);
+						} catch (IOException ex) {
+							JOptionPane.showMessageDialog(clientGUIFrame, "Error reading the file: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						}
 					}
 				}
 			});
@@ -412,7 +435,6 @@ public class CustomerClientController {
 			clientGUIFrame.getCheckOutButton().addActionListener(e -> {
 				if (isImageUploaded) {
 					/**REPRINT ORDER DETAILS**/
-
 					try {
 					StringBuilder orderDetails = new StringBuilder();
 					User user = msgserver.getUserDetails(username, mci);
@@ -436,36 +458,6 @@ public class CustomerClientController {
 
 					}
 
-					orderDetails.append(String.format("PWD Discount: %s\n", pwdDiscount));
-					orderDetails.append(String.format("Discount Amount: ₱%.2f\n", discountAmount));
-					orderDetails.append(String.format("Total after Discount: ₱%.2f\n", total));
-
-					clientGUIFrame.getOrderPlacedTextpane().setText
-							(		 user.getFirstName() + " " + user.getLastName() + "'s " + "Official Receipt" + "\n\n" +
-									"Name: " + user.getFirstName() + " " + user.getLastName()
-									+ "\nAddress: " + user.getStreet() + " " + user.getAdditionalAddressDetails() + " " +
-									user.getCity() + ", " + user.getProvince() + " " + user.getZip()
-									+ "\n"
-									+ "Mode of Delivery: " + modeOfDelivery + "\n"
-									+ "Mode of Payment: " + modeOfPayment + "\n\n"
-									+ orderDetails.toString()
-							);
-				} catch (Exception ex) {
-					throw new RuntimeException(ex);
-				}
-
-					byte[] fileContent = new byte[(int) selectedFile.length()];
-					try (FileInputStream fileInputStream = new FileInputStream(selectedFile)) {
-						int bytesRead = fileInputStream.read(fileContent);
-						if (bytesRead != fileContent.length) {
-							throw new IOException("File not completely read.");
-						}
-					} catch (FileNotFoundException ex) {
-						System.err.println("File not found: " + ex.getMessage());
-					} catch (IOException exc) {
-						System.err.println("Error reading the file: " + exc.getMessage());
-					}
-
 
 					JPanel containerPanel = clientGUIFrame.getContainerPanel();
 					JPanel placedOrderPanel = clientGUIFrame.getPlacedOrderPanel();
@@ -474,28 +466,16 @@ public class CustomerClientController {
 					containerPanel.add(placedOrderPanel);
 					containerPanel.repaint();
 					containerPanel.revalidate();
+
+					} catch (Exception ex) {
+						throw new RuntimeException(ex);
+					}
 				} else {
 					JOptionPane.showMessageDialog(clientGUIFrame, "Please upload a prescription before checking out.", "Image Required", JOptionPane.WARNING_MESSAGE);
 				}
 			});
 
 		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	/**HELPER METHODS**/
@@ -513,5 +493,8 @@ public class CustomerClientController {
 		}
 		return orderItems;
 	}
+
+
 }
+
 
