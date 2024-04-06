@@ -32,6 +32,20 @@ public class EditUserFrame extends javax.swing.JFrame {
     private void populateFields() {
         firstNameTextField.setText(userToEdit.getFirstName());
         lastNameTextField.setText(userToEdit.getLastName());
+        middleNameTextField.setText(userToEdit.getMiddleName());
+        birthdateTextFiled.setText(userToEdit.getBirthdate());
+        ageTextField.setText(userToEdit.getAge());
+        genderComboBox.setSelectedItem(userToEdit.getGender());
+        jCheckBox1.setSelected(userToEdit.getPersonWithDisability());
+        emailAddressTextField.setText(userToEdit.getEmail());
+        contactNumberTextField.setText(userToEdit.getContactNumber());
+        streetAddressTextField.setText(userToEdit.getStreet());
+        optionalDetailsTextField.setText(userToEdit.getAdditionalAddressDetails());
+        cityMunicipalityTextField.setText(userToEdit.getCity());
+        provinceTextField.setText(userToEdit.getProvince());
+        postalCodeTextField.setText(userToEdit.getZip());
+        setUsernameTextField.setText(userToEdit.getUsername());
+        userTypeComboBox.setSelectedItem(userToEdit.getUserType());
 
         setUsernameTextField.setEditable(false);
         setUsernameTextField.setEnabled(false);
@@ -105,7 +119,7 @@ public class EditUserFrame extends javax.swing.JFrame {
 
         streetAddressLabel.setText("Street Address");
 
-        optionalDetailsLabel.setText("Apt, Suite etc (optional)");
+        optionalDetailsLabel.setText("Additional Address Details (Apt, Suite etc (optional))");
 
         cityMunicipalityLabel.setText("City / Municipality");
 
@@ -121,9 +135,9 @@ public class EditUserFrame extends javax.swing.JFrame {
 
         contactNumberLabel.setText("Contact Number");
 
-        setUsernameLabel.setText("Set Username");
+        setUsernameLabel.setText("Username");
 
-        setPasswordLabel.setText("Set Password (6-12 characters)");
+        setPasswordLabel.setText("Password");
 
         editAccountLabel.setText("EDIT ACCOUNT");
 

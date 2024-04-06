@@ -25,6 +25,8 @@ import java.util.regex.Pattern;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import static midproject.SharedClasses.Utilities.UserJSONProcessor.fetchUserInformationFromDataSource;
+
 public class AdminClientController {
 
     private static Login loginFrame = new Login();
@@ -156,8 +158,8 @@ public class AdminClientController {
                     }
                 } else {
                     try {
-                        throw new SelectionRequiredViewUserException("Please select a user first.");
-                    } catch (SelectionRequiredViewUserException exception) {
+                        throw new SelectionRequiredUserException("Please select a user first.");
+                    } catch (SelectionRequiredUserException exception) {
                         JOptionPane.showMessageDialog(adminGUIFrame, exception.getMessage(), "Selection Required", JOptionPane.WARNING_MESSAGE);
                     }
                 }
@@ -216,46 +218,26 @@ public class AdminClientController {
                 int selectedRow = adminGUIFrame.getrUsersTable().getSelectedRow();
                 if (selectedRow != -1) {
                     String userId = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 0).toString();
-                    String userType = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 1).toString();
-                    String firstName = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 2).toString();
-                    String lastName = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 3).toString();
-                    /**
-                    String middleName = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 4).toString();
-                    String birthdate = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 5).toString();
-                    String age = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 6).toString();
-                    String gender = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 7).toString();
-                    String personWithDisability = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 8).toString();
-                    String email = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 9).toString();
-                    String contactNumber = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 10).toString();
-                    */
-                    String username = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 4).toString();
-                    /**
-                    String password = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 12).toString();
-                    String confirmPassword = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 13).toString();
-                    String street = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 14).toString();
-                    String additionalAddressDetails = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 15).toString();
-                    String city = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 16).toString();
-                    String province = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 17).toString();
-                    String zip = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 18).toString();
-                     */
 
-                    User selectedUser = new User(userId, lastName, firstName, userType, username, user.getMiddleName(),
-                            user.getBirthdate(), user.getAge(), user.getGender(), user.getPersonWithDisability(),
-                            user.getEmail(), user.getContactNumber(), user.getPassword(), user.getConfirmPassword(),
-                            user.getStreet(), user.getAdditionalAddressDetails(), user.getCity(), user.getProvince(),
-                            user.getZip());
+                    User selectedUser = fetchUserInformationFromDataSource(userId, "res/UserInformation.json");
 
-                    EditUserFrame editUserFrame = new EditUserFrame(selectedUser);
-                    editUserFrame.setVisible(true);
+                    if (selectedUser != null) {
+                        EditUserFrame editUserFrame = new EditUserFrame(selectedUser);
+                        editUserFrame.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(adminGUIFrame, "Failed to retrieve user information.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
 
 
                 } else {
-
+                    try {
+                        throw new SelectionRequiredUserException("Please select a user first.");
+                    } catch (SelectionRequiredUserException exception) {
+                        JOptionPane.showMessageDialog(adminGUIFrame, exception.getMessage(), "Selection Required", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         });
-
-
 
 
         /** ARCHIVED USERS RELATED METHODS */
@@ -274,9 +256,9 @@ public class AdminClientController {
                     }
                 } else {
                     try {
-                        throw new SelectionRequiredViewUserException("Please select a user first.");
-                    } catch (SelectionRequiredViewUserException exception) {
-                        JOptionPane.showMessageDialog(adminGUIFrame, exception.getMessage(), "Selection Required", JOptionPane.WARNING_MESSAGE);
+                        throw new SelectionRequiredUserException("Please select a user first.");
+                    } catch (SelectionRequiredUserException exception) {
+                        JOptionPane.showMessageDialog(adminGUIFrame, exception.getMessage(), "Selection Required", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -299,8 +281,8 @@ public class AdminClientController {
                     }
                 } else {
                     try {
-                        throw new SelectionRequiredUnarchiveUserException("Please select a user first.");
-                    } catch (SelectionRequiredUnarchiveUserException exception) {
+                        throw new SelectionRequiredUserException("Please select a user first.");
+                    } catch (SelectionRequiredUserException exception) {
                         JOptionPane.showMessageDialog(adminGUIFrame, exception.getMessage(), "Selection Required", JOptionPane.WARNING_MESSAGE);
                     }
                 }
@@ -334,7 +316,7 @@ public class AdminClientController {
                     String birthdate = String.valueOf(adminGUIFrame.getBirthdate().getDate());
                     String age = adminGUIFrame.getAgeTextField().getText();
                     String gender = adminGUIFrame.getGenderComboBox().getSelectedItem().toString();
-                    String personWithDisability = adminGUIFrame.getPersonWithDisabilityCheckBox().isSelected() ? "Yes" : "No";
+                    boolean personWithDisability = Boolean.parseBoolean(adminGUIFrame.getPersonWithDisabilityCheckBox().isSelected() ? "Yes" : "No");
                     String email = adminGUIFrame.getEmailAddressTextField().getText();
                     String contactNumber = adminGUIFrame.getContactNumberTextField().getText();
                     String username = adminGUIFrame.getSetUsernameTextField().getText();
