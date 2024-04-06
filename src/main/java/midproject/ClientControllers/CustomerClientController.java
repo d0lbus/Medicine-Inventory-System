@@ -320,14 +320,14 @@ public class CustomerClientController {
 			clientGUIFrame.getPickUpButton().addActionListener(e -> {
 				modeOfDelivery = "Pick-up";
 				modeOfPayment = "On-site";
-				clientGUIFrame.getPickUpTextArea().setText("You may pay your order on our physical store.");
+				clientGUIFrame.getPickUpTextPane().setText("You may pay your order on our physical store.");
 				isModeOfDeliverySelected = true;
 			});
 
 			clientGUIFrame.getDeliveryButton().addActionListener(e -> {
 				modeOfDelivery = "Delivery";
 				modeOfPayment = "Cash on Delivery";
-				clientGUIFrame.getPickUpTextArea().setText("You may pay your order once delivered");
+				clientGUIFrame.getPickUpTextPane().setText("You may pay your order once delivered");
 				isModeOfDeliverySelected = true;
 			});
 
@@ -362,7 +362,7 @@ public class CustomerClientController {
 						orderDetails.append(String.format("Total after Discount: ₱%.2f\n", total));
 
 
-						clientGUIFrame.getYourOrderTextArea().setText
+						clientGUIFrame.getYourOrderTextPane().setText
 								("Name: " + user.getFirstName() + " " + user.getLastName()
 										+ "\nAddress: " + user.getStreet() + " " + user.getAdditionalAddressDetails() + " " +
 										user.getCity() + ", " + user.getProvince() + " " + user.getZip()
@@ -441,7 +441,8 @@ public class CustomerClientController {
 					orderDetails.append(String.format("Total after Discount: ₱%.2f\n", total));
 
 					clientGUIFrame.getOrderPlacedTextpane().setText
-							("Name: " + user.getFirstName() + " " + user.getLastName()
+							(		 user.getFirstName() + " " + user.getLastName() + "'s " + "Official Receipt" + "\n\n" +
+									"Name: " + user.getFirstName() + " " + user.getLastName()
 									+ "\nAddress: " + user.getStreet() + " " + user.getAdditionalAddressDetails() + " " +
 									user.getCity() + ", " + user.getProvince() + " " + user.getZip()
 									+ "\n"
