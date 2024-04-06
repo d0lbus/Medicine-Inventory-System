@@ -458,6 +458,19 @@ public class CustomerClientController {
 
 					}
 
+					orderDetails.append(String.format("PWD Discount: %s\n", pwdDiscount));
+					orderDetails.append(String.format("Discount Amount: ₱%.2f\n", discountAmount));
+					orderDetails.append(String.format("Total after Discount: ₱%.2f\n", total));
+
+					byte[] imageBytes = Base64.getDecoder().decode(base64Image);
+					ImageIcon imageIcon = new ImageIcon(imageBytes);
+
+					StyledDocument doc = (StyledDocument) clientGUIFrame.getOrderPlacedTextpane().getDocument();
+					doc.insertString(doc.getLength(), buildOrderDetailsString(user, orderDetails, modeOfDelivery, modeOfPayment), null);
+
+					Style style = doc.addStyle("ImageStyle", null);
+					StyleConstants.setIcon(style, imageIcon);
+					doc.insertString(doc.getLength(), "ignored text", style);
 
 					JPanel containerPanel = clientGUIFrame.getContainerPanel();
 					JPanel placedOrderPanel = clientGUIFrame.getPlacedOrderPanel();
@@ -492,6 +505,22 @@ public class CustomerClientController {
 			orderItems.add(new OrderItem(medicineId, genericName, brandName, form, quantity, price));
 		}
 		return orderItems;
+	}
+
+	private static String buildOrderDetailsString(User user, StringBuilder orderDetails, String modeOfDelivery, String modeOfPayment) {
+		// Start with the user's name and address
+		StringBuilder details = new StringBuilder();
+		details.append("John Doe's Official Receipt\n\n");
+		details.append("Name: ").append(user.getFirstName()).append(" ").append(user.getLastName()).append("\n");
+		details.append("Address: ").append(user.getStreet()).append(" ").append(user.getAdditionalAddressDetails()).append(" ");
+		details.append(user.getCity()).append(", ").append(user.getProvince()).append(" ").append(user.getZip()).append("\n");
+		details.append("Mode of Delivery: ").append(modeOfDelivery).append("\n");
+		details.append("Mode of Payment: ").append(modeOfPayment).append("\n\n");
+
+		// Append the order details
+		details.append(orderDetails);
+
+		return details.toString();
 	}
 
 
