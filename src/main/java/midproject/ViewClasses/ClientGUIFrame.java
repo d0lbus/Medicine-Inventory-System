@@ -21,6 +21,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
     public ClientGUIFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     public static ClientGUIFrame getInstance() {
@@ -141,7 +142,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quantum Drugstore");
         setResizable(false);
-        setLocationRelativeTo(null);
 
         setBackground(new java.awt.Color(255, 255, 255));
 
