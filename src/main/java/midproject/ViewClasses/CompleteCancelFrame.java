@@ -7,6 +7,8 @@ package midproject.ViewClasses;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
+import javax.swing.*;
+
 /**
  *
  * @author Freskkie
@@ -102,6 +104,46 @@ public class CompleteCancelFrame extends javax.swing.JFrame {
                 new CompleteCancelFrame().setVisible(true);
             }
         });
+    }
+
+    public JTextPane getAcceptCancelTextpane() {
+        return acceptCancelTextpane;
+    }
+
+    public void setAcceptCancelTextpane(JTextPane acceptCancelTextpane) {
+        this.acceptCancelTextpane = acceptCancelTextpane;
+    }
+
+    public JButton getCancelButton() {
+        return cancelButton;
+    }
+
+    public void setCancelButton(JButton cancelButton) {
+        this.cancelButton = cancelButton;
+    }
+
+    public JButton getCompleteButton() {
+        return completeButton;
+    }
+
+    public void setCompleteButton(JButton completeButton) {
+        this.completeButton = completeButton;
+    }
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    public void setjPanel1(JPanel jPanel1) {
+        this.jPanel1 = jPanel1;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

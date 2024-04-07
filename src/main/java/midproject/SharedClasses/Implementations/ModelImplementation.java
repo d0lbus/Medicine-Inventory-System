@@ -724,7 +724,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
                 throw new RemoteException("Not enough stock for medicine: " + item.getMedicineId());
             }
         }
-
         String orderId = OrderJSONProcessor.generateOrderId();
 
         String status = "Pending";
@@ -752,14 +751,15 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         CartJSONProcessor.writeUserCartsToFile(userCarts);
         clientCallback.updateCart(userCart);
         clientCallback.notifyOrderProcessed(orderId, user, orderItems, imageBytes, modeOfDelivery, modeOfPayment);
+
         updateInventoryTable();
+        updateOrdersTable();
 
         } catch (RemoteException ex){
             ex.printStackTrace();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
     private static double getTotal(User user, List<OrderItem> orderItems) {
         double total = 0;
