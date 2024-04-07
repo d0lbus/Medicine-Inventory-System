@@ -18,6 +18,7 @@ import midproject.SharedClasses.Implementations.CallbackImplementation;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.OrderItem;
 import midproject.SharedClasses.ReferenceClasses.User;
+import midproject.SharedClasses.UserDefinedExceptions.MedicineOutOfStockException;
 import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
 import midproject.ViewClasses.ClientGUIFrame;
 import midproject.ViewClasses.QuantityFrame;
@@ -221,8 +222,11 @@ public class CustomerClientController {
 								quantityFrame.dispose();
 							} catch (RemoteException exc) {
 								throw new RuntimeException(exc);
-							}
-						}
+							} catch (MedicineOutOfStockException exception) {
+								JOptionPane.showMessageDialog(clientGUIFrame, "Medicine is currently out of stock", "Out Of Stock", JOptionPane.ERROR_MESSAGE);
+                                throw new RuntimeException(exception);
+                            }
+                        }
 					});
 				} else {
 					JOptionPane.showMessageDialog(clientGUIFrame, "No item selected", "Add To Cart Failed",JOptionPane.ERROR_MESSAGE);
