@@ -20,6 +20,7 @@ public class EditUserFrame extends javax.swing.JFrame {
      */
     public EditUserFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     private User userToEdit;
@@ -111,7 +112,7 @@ public class EditUserFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Edit User");
-        setLocationRelativeTo(null);
+        setResizable(false);
 
 
         genderComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));

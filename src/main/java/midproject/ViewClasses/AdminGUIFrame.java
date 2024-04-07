@@ -29,7 +29,8 @@ public class AdminGUIFrame extends javax.swing.JFrame {
      */
     public AdminGUIFrame() {
         initComponents();
-            }
+        setLocationRelativeTo(null);
+    }
 
 
     public static AdminGUIFrame getInstance() {
@@ -174,7 +175,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setTitle("Quantum Drugstore");
-        setLocationRelativeTo(null);
 
         headerPanel.setBackground(new java.awt.Color(69, 123, 157));
 

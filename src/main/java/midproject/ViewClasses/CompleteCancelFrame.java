@@ -1,17 +1,22 @@
 package midproject.ViewClasses;
 
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
 /**
  *
  * @author Freskkie
  */
-public class AcceptRejectFrame extends javax.swing.JFrame {
+public class CompleteCancelFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form AcceptRejectFrame
+     * Creates new form AcceptCancelFrame
      */
-    public AcceptRejectFrame() {
+    public CompleteCancelFrame() {
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -27,24 +32,24 @@ public class AcceptRejectFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
-        acceptButton = new javax.swing.JButton();
-        rejectButton = new javax.swing.JButton();
+        acceptCancelTextpane = new javax.swing.JTextPane();
+        completeButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setResizable(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quantum Drugstore");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTextPane1.setEditable(false);
-        jScrollPane1.setViewportView(jTextPane1);
+        acceptCancelTextpane.setEditable(false);
+        jScrollPane1.setViewportView(acceptCancelTextpane);
 
-        acceptButton.setBackground(new java.awt.Color(207, 225, 185));
-        acceptButton.setText("Accept");
+        completeButton.setBackground(new java.awt.Color(207, 225, 185));
+        completeButton.setText("Complete");
 
-        rejectButton.setBackground(new java.awt.Color(255, 187, 187));
-        rejectButton.setText("Reject");
+        cancelButton.setBackground(new java.awt.Color(255, 187, 187));
+        cancelButton.setText("Cancel");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -56,9 +61,9 @@ public class AcceptRejectFrame extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(acceptButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
-                .addComponent(rejectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(completeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
@@ -68,9 +73,9 @@ public class AcceptRejectFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(acceptButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rejectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(completeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -94,16 +99,16 @@ public class AcceptRejectFrame extends javax.swing.JFrame {
         FlatMacLightLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AcceptRejectFrame().setVisible(true);
+                new CompleteCancelFrame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton acceptButton;
+    private javax.swing.JTextPane acceptCancelTextpane;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JButton completeButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JButton rejectButton;
     // End of variables declaration//GEN-END:variables
 }

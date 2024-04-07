@@ -19,6 +19,7 @@ public class EditMedicineFrame extends javax.swing.JFrame {
      */
     public EditMedicineFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -48,7 +49,6 @@ public class EditMedicineFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         setTitle("Edit Medicine");
-        setLocationRelativeTo(null);
 
         genericNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         genericNameLabel.setText("Generic Name:");

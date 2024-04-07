@@ -33,6 +33,7 @@ public class QuantityFrame extends javax.swing.JFrame {
      */
     public QuantityFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -52,7 +53,6 @@ public class QuantityFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quantity Drugstore");
         setResizable(false);
-        setLocationRelativeTo(null);
 
         quantitySpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50, 1));
 
