@@ -279,9 +279,21 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 
 	public void notifyUserUpdatedByAdmin(String adminUsername, User editedUser, User originalUser) throws RemoteException {
 		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " edited the user entry. Changes made: "
-				+ "\nUsername: from '" + originalUser.getUsername() + "' to '" + editedUser.getUsername() + "'"
-				+ "\nUserType: from '" + originalUser.getUserType() + "' to '" + editedUser.getUserType() + "'"
-				+ "\nOther fields...");
+				+ "\nFirst Name: from '" + originalUser.getFirstName() + "' to '" + editedUser.getFirstName() + "'"
+				+ "\nLast Name: from '" + originalUser.getLastName() + "' to '" + editedUser.getLastName() + "'"
+				+ "\nMiddle Name: from '" + originalUser.getMiddleName() + "' to '" + editedUser.getMiddleName() + "'"
+				+ "\nBirthdate: from '" + originalUser.getBirthdate() + "' to '" + editedUser.getBirthdate() + "'"
+				+ "\nAge: from '" + originalUser.getAge() + "' to '" + editedUser.getAge() + "'"
+				+ "\nGender: from '" + originalUser.getGender() + "' to '" + editedUser.getGender() + "'"
+				+ "\nStreet Address: from '" + originalUser.getStreet() + "' to '" + editedUser.getStreet() + "'"
+				+ "\nAdditional Address Details: from '" + originalUser.getAdditionalAddressDetails() + "' to '"
+				+ editedUser.getAdditionalAddressDetails() + "'"
+				+ "\nCity: from '" + originalUser.getCity() + "' to '" + editedUser.getCity() + "'"
+				+ "\nProvince: from '" + originalUser.getProvince() + "' to '" + editedUser.getProvince() + "'"
+				+ "\nZip: from '" + originalUser.getZip() + "' to '" + editedUser.getZip() + "'"
+				+ "\nEmail: from '" + originalUser.getEmail() + "' to '" + editedUser.getEmail() + "'"
+				+ "\nContact Number: from '" + originalUser.getContactNumber() + "' to '" + editedUser.getContactNumber() + "'"
+		);
 	}
 
 
