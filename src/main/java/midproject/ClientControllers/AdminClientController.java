@@ -321,8 +321,8 @@ public class AdminClientController {
                     String email = adminGUIFrame.getEmailAddressTextField().getText();
                     String contactNumber = adminGUIFrame.getContactNumberTextField().getText();
                     String username = adminGUIFrame.getSetUsernameTextField().getText();
-                    String password = new String(adminGUIFrame.getSetPasswordTextField().getText());
-                    String confirmPassword = new String(adminGUIFrame.getConfirmPasswordTextField().getText());
+                    String password = new String(adminGUIFrame.getPasswordField().getText());
+                    String confirmPassword = new String(adminGUIFrame.getConfirmPasswordField().getText());
                     String street = adminGUIFrame.getStreetAddressTextField().getText();
                     String additionalAddress = adminGUIFrame.getAptSuiteOptionalTextField().getText();
                     String city = adminGUIFrame.getMunicipalityTextField().getText();
@@ -332,8 +332,8 @@ public class AdminClientController {
                     // Perform input validation
                     if (firstName.isEmpty() || lastName.isEmpty() || birthdate.isEmpty() || age.isEmpty() ||
                             gender.isEmpty() || email.isEmpty() || contactNumber.isEmpty() || username.isEmpty() || password.isEmpty() ||
-                            street.isEmpty() || city.isEmpty() || province.isEmpty() || zip.isEmpty()) {
-                        throw new InvalidInputException("Please fill in all required fields.");
+                            street.isEmpty() || city.isEmpty() || province.isEmpty() || zip.isEmpty() || confirmPassword.isEmpty()) {
+                        throw new MissingFieldException("Please fill in empty fields.");
                     }
 
                     // Validate contact number format
@@ -375,6 +375,8 @@ public class AdminClientController {
                     ex.printStackTrace();
                 } catch (InvalidInputException ex) {
                     JOptionPane.showMessageDialog(adminGUIFrame, ex.getMessage(), "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                } catch (MissingFieldException ex) {
+                    JOptionPane.showMessageDialog(adminGUIFrame, ex.getMessage(), "Missing Field", JOptionPane.ERROR_MESSAGE);
                 } catch (UsernameAlreadyExistsException ex) {
                     JOptionPane.showMessageDialog(adminGUIFrame, ex.getMessage(), "Username Already Exists", JOptionPane.ERROR_MESSAGE);
                 } catch (Exception ex) {
