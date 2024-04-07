@@ -15,7 +15,9 @@ public class Order implements Serializable {
     private String paymentMethod;
     private String image;
 
-    public Order(String orderId, String userId, List<OrderItem> items, String status, String modeOfDelivery, String paymentMethod, String image) {
+    private Double total;
+
+    public Order(String orderId, String userId, List<OrderItem> items, String status, String modeOfDelivery, String paymentMethod, String image,  Double total) {
         this.orderId = orderId;
         this.userId = userId;
         this.items = items;
@@ -23,6 +25,7 @@ public class Order implements Serializable {
         this.modeOfDelivery = modeOfDelivery;
         this.paymentMethod = paymentMethod;
         this.image = image;
+        this.total = total;
     }
 
 
@@ -81,5 +84,12 @@ public class Order implements Serializable {
     public String getImage() {
         return image;
     }
-    // Constructor, getters, and setters omitted for brevity
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
+    }
 }

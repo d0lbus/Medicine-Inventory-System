@@ -665,7 +665,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Order ID", "User ID", "Last Name", "First Name", "Status", "Total"
+                "Order ID", "User ID", "Mode of Delivery", "Mode of Payment", "Status", "Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {

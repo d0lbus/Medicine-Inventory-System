@@ -18,7 +18,7 @@ public interface ModelInterface extends Remote {
             AlreadyLoggedInException, AuthenticationFailedException;
 
     public void logout(MessageCallback msgCallback, String sessionID)
-            throws Exception;
+            throws Exception, UserExistsException;
 
     public void broadcast(String msg)
             throws RemoteException, NotLoggedInException;
@@ -36,6 +36,10 @@ public interface ModelInterface extends Remote {
     public void updateRegisteredUsersCount() throws Exception;
 
     public void updateInventoryTable() throws Exception;
+
+    public void updateOrdersTable() throws Exception;
+
+    public void updatePendingOrdersTable() throws Exception;
 
     public void addMedicine(Medicine medicine, MessageCallback callback, String adminUsername) throws Exception;
 
