@@ -60,7 +60,7 @@ public interface ModelInterface extends Remote {
 
     void searchArchivedUsers(String searchText, MessageCallback callback) throws RemoteException, NoUserFoundException;
 
-
+    public void updateUser(User editedUser, User originalUser, MessageCallback callback, String adminUsername) throws Exception;
 
     /**CUSTOMER SIDE**/
     User getUserDetailsbyId(String userID) throws Exception;

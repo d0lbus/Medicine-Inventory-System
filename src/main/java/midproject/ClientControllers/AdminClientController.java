@@ -223,6 +223,54 @@ public class AdminClientController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = adminGUIFrame.getrUsersTable().getSelectedRow();
+                if (selectedRow >= 0) {
+                    DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getrUsersTable().getModel();
+
+                    User selectedUserT = new User();
+                    selectedUserT.setLastName(model.getValueAt(selectedRow, 1).toString());
+                    selectedUserT.setFirstName(model.getValueAt(selectedRow, 2).toString());
+                    selectedUserT.setUserType(model.getValueAt(selectedRow, 3).toString());
+                    selectedUserT.setUsername(model.getValueAt(selectedRow, 4).toString());
+
+                    String userId = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 0).toString();
+                    User selectedUser = fetchUserInformationFromDataSource(userId, "res/UserInformation.json");
+
+                    EditUserFrame editUserFrame = new EditUserFrame(selectedUser);
+                    editUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    editUserFrame.setLocationRelativeTo(null);
+                    editUserFrame.setVisible(true);
+
+                    editUserFrame.getEditAccountButton().addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            // Get the edited user details from the editUserFrame
+                            User editedUser = editUserFrame.getEditedUser();
+
+                            try {
+                                // Call the method in msgserver to update user details
+                                msgserver.updateUser(editedUser, selectedUser, mci, username);
+                                // Refresh any necessary components
+                                autoRefreshUserRelatedComponents();
+                                JOptionPane.showMessageDialog(editUserFrame, "User updated successfully.");
+                                editUserFrame.dispose();
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                                JOptionPane.showMessageDialog(editUserFrame, "Error updating user: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                    });
+                } else {
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a user to edit.", "No Selection", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
+
+        /**
+        adminGUIFrame.getrUsersEditButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = adminGUIFrame.getrUsersTable().getSelectedRow();
                 if (selectedRow != -1) {
                     String userId = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 0).toString();
                     User selectedUser = fetchUserInformationFromDataSource(userId, "res/UserInformation.json");
@@ -240,7 +288,7 @@ public class AdminClientController {
                     }
                 }
             }
-        });
+        }); */
 
 
         /** ARCHIVED USERS RELATED METHODS */

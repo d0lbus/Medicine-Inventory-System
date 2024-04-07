@@ -8,6 +8,7 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import midproject.SharedClasses.ReferenceClasses.User;
 
 import javax.swing.*;
+import java.util.Objects;
 
 /**
  *
@@ -24,6 +25,7 @@ public class EditUserFrame extends javax.swing.JFrame {
     }
 
     private User userToEdit;
+    private User editedUser;
 
     public EditUserFrame (User user) {
         initComponents();;
@@ -35,10 +37,10 @@ public class EditUserFrame extends javax.swing.JFrame {
         firstNameTextField.setText(userToEdit.getFirstName());
         lastNameTextField.setText(userToEdit.getLastName());
         middleNameTextField.setText(userToEdit.getMiddleName());
-        birthdateTextFiled.setText(userToEdit.getBirthdate());
+        birthdateTextField.setText(userToEdit.getBirthdate());
         ageTextField.setText(userToEdit.getAge());
         genderComboBox.setSelectedItem(userToEdit.getGender());
-        jCheckBox1.setSelected(userToEdit.getPersonWithDisability());
+        personWithDisabilityCheckBox.setSelected(userToEdit.getPersonWithDisability());
         emailAddressTextField.setText(userToEdit.getEmail());
         contactNumberTextField.setText(userToEdit.getContactNumber());
         streetAddressTextField.setText(userToEdit.getStreet());
@@ -51,8 +53,8 @@ public class EditUserFrame extends javax.swing.JFrame {
 
         setUsernameTextField.setEditable(false);
         setUsernameTextField.setEnabled(false);
-        setPasswordField.setEditable(false);
-        setPasswordField.setEnabled(false);
+        passwordField.setEditable(false);
+        passwordField.setEnabled(false);
         userTypeComboBox.setEnabled(false);
         userTypeComboBox.setEditable(false);
         //confirmPasswordField.setEditable(false);
@@ -73,9 +75,9 @@ public class EditUserFrame extends javax.swing.JFrame {
 
         lastNameTextField = new javax.swing.JTextField();
         middleNameTextField = new javax.swing.JTextField();
-        birthdateTextFiled = new javax.swing.JTextField();
+        birthdateTextField = new javax.swing.JTextField();
         genderComboBox = new javax.swing.JComboBox<>();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        personWithDisabilityCheckBox = new javax.swing.JCheckBox();
         streetAddressTextField = new javax.swing.JTextField();
         userTypeComboBox = new javax.swing.JComboBox<>();
         optionalDetailsTextField = new javax.swing.JTextField();
@@ -89,7 +91,7 @@ public class EditUserFrame extends javax.swing.JFrame {
         cityMunicipalityLabel = new javax.swing.JLabel();
         provinceLabel = new javax.swing.JLabel();
         editAccountButton = new javax.swing.JButton();
-        postcodeLabel = new javax.swing.JLabel();
+        postalCodeLabel = new javax.swing.JLabel();
         ageTextField = new javax.swing.JTextField();
         emailAddressLabel = new javax.swing.JLabel();
         postalCodeTextField = new javax.swing.JTextField();
@@ -101,13 +103,13 @@ public class EditUserFrame extends javax.swing.JFrame {
         firstNameLabel = new javax.swing.JLabel();
         lastNameLabel = new javax.swing.JLabel();
         middleNameLabel = new javax.swing.JLabel();
-        birthDateLabel = new javax.swing.JLabel();
+        birthdateLabel = new javax.swing.JLabel();
         ageLabel = new javax.swing.JLabel();
         genderLabel = new javax.swing.JLabel();
-        pwdLabel = new javax.swing.JLabel();
+        personWithDisabilityLabel = new javax.swing.JLabel();
         //confirmPasswordLabel = new javax.swing.JLabel();
         firstNameTextField = new javax.swing.JTextField();
-        setPasswordField = new javax.swing.JPasswordField();
+        passwordField = new javax.swing.JPasswordField();
         //confirmPasswordField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -133,7 +135,7 @@ public class EditUserFrame extends javax.swing.JFrame {
         editAccountButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         editAccountButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        postcodeLabel.setText("ZIP / Postal Code");
+        postalCodeLabel.setText("ZIP / Postal Code");
 
         emailAddressLabel.setText("Email Address");
 
@@ -151,13 +153,13 @@ public class EditUserFrame extends javax.swing.JFrame {
 
         middleNameLabel.setText("Middle Name");
 
-        birthDateLabel.setText("Birthdate");
+        birthdateLabel.setText("Birthdate");
 
         ageLabel.setText("Age");
 
         genderLabel.setText("Gender");
 
-        pwdLabel.setText("Person with Disability");
+        personWithDisabilityLabel.setText("Person with Disability");
 
         //confirmPasswordLabel.setText("Confirm Password");
 
@@ -178,13 +180,13 @@ public class EditUserFrame extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(middleNameLabel)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(birthDateLabel)
+                                        .addComponent(birthdateLabel)
                                         .addGap(90, 90, 90)
                                         .addComponent(ageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(pwdLabel)
+                                        .addComponent(personWithDisabilityLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jCheckBox1)))
+                                        .addComponent(personWithDisabilityCheckBox)))
                                 .addGap(128, 128, 128)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cityMunicipalityLabel)
@@ -195,7 +197,7 @@ public class EditUserFrame extends javax.swing.JFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(firstNameLabel)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(birthdateTextFiled)
+                                            .addComponent(birthdateTextField)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(ageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(middleNameTextField)
@@ -208,7 +210,7 @@ public class EditUserFrame extends javax.swing.JFrame {
                                     .addComponent(editAccountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(74, 74, 74)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(postcodeLabel)
+                                    .addComponent(postalCodeLabel)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(userTypeLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -229,7 +231,7 @@ public class EditUserFrame extends javax.swing.JFrame {
                             .addComponent(contactNumberTextField)
                             .addComponent(setUsernameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                             .addComponent(setPasswordLabel)
-                            .addComponent(setPasswordField)))
+                            .addComponent(passwordField)))
                             //.addComponent(confirmPasswordField)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(387, 387, 387)
@@ -281,26 +283,26 @@ public class EditUserFrame extends javax.swing.JFrame {
                     .addComponent(setUsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(birthDateLabel)
+                    .addComponent(birthdateLabel)
                     .addComponent(ageLabel)
                     .addComponent(provinceLabel)
                     .addComponent(setPasswordLabel))
                 .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(birthdateTextFiled, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(birthdateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(provinceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(setPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(genderLabel)
-                    .addComponent(postcodeLabel)
+                    .addComponent(postalCodeLabel)
                     //.addComponent(confirmPasswordLabel)
                     .addComponent(genderComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pwdLabel)
-                    .addComponent(jCheckBox1)
+                    .addComponent(personWithDisabilityLabel)
+                    .addComponent(personWithDisabilityCheckBox)
                     .addComponent(postalCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     //.addComponent(confirmPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
@@ -327,8 +329,8 @@ public class EditUserFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ageLabel;
     private javax.swing.JTextField ageTextField;
-    private javax.swing.JLabel birthDateLabel;
-    private javax.swing.JTextField birthdateTextFiled;
+    private javax.swing.JLabel birthdateLabel;
+    private javax.swing.JTextField birthdateTextField;
     private javax.swing.JLabel cityMunicipalityLabel;
     private javax.swing.JTextField cityMunicipalityTextField;
     //private javax.swing.JPasswordField confirmPasswordField;
@@ -343,7 +345,7 @@ public class EditUserFrame extends javax.swing.JFrame {
     private javax.swing.JTextField firstNameTextField;
     private javax.swing.JComboBox<String> genderComboBox;
     private javax.swing.JLabel genderLabel;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox personWithDisabilityCheckBox;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JTextField lastNameTextField;
     private javax.swing.JLabel middleNameLabel;
@@ -351,11 +353,11 @@ public class EditUserFrame extends javax.swing.JFrame {
     private javax.swing.JLabel optionalDetailsLabel;
     private javax.swing.JTextField optionalDetailsTextField;
     private javax.swing.JTextField postalCodeTextField;
-    private javax.swing.JLabel postcodeLabel;
+    private javax.swing.JLabel postalCodeLabel;
     private javax.swing.JLabel provinceLabel;
     private javax.swing.JTextField provinceTextField;
-    private javax.swing.JLabel pwdLabel;
-    private javax.swing.JPasswordField setPasswordField;
+    private javax.swing.JLabel personWithDisabilityLabel;
+    private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel setPasswordLabel;
     private javax.swing.JLabel setUsernameLabel;
     private javax.swing.JTextField setUsernameTextField;
@@ -364,4 +366,341 @@ public class EditUserFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> userTypeComboBox;
     private javax.swing.JLabel userTypeLabel;
     // End of variables declaration//GEN-END:variables
+
+
+    public User getEditedUser() {
+        editedUser = new User();
+        editedUser.setFirstName(firstNameTextField.getText());
+        editedUser.setLastName(lastNameTextField.getText());
+        editedUser.setMiddleName(middleNameTextField.getText());
+        editedUser.setBirthdate(birthdateTextField.getText());
+        editedUser.setAge(String.valueOf(Integer.parseInt(ageTextField.getText())));
+        editedUser.setGender(Objects.requireNonNull(genderComboBox.getSelectedItem()).toString());
+        editedUser.setPersonWithDisability(String.valueOf(personWithDisabilityCheckBox.isSelected()));
+        editedUser.setStreet(streetAddressTextField.getText());
+        editedUser.setUserType(Objects.requireNonNull(userTypeComboBox.getSelectedItem()).toString());
+        editedUser.setEmail(emailAddressTextField.getText());
+        editedUser.setContactNumber(contactNumberTextField.getText());
+        editedUser.setAdditionalAddressDetails(optionalDetailsTextField.getText());
+        editedUser.setCity(cityMunicipalityTextField.getText());
+        editedUser.setProvince(provinceTextField.getText());
+        editedUser.setZip(postalCodeTextField.getText());
+        editedUser.setUsername(setUsernameTextField.getText());
+        // Set other user details similarly
+
+        String ageText = ageTextField.getText().trim();
+        if (!ageText.isEmpty()) {
+            try {
+                int age = Integer.parseInt(ageText);
+                editedUser.setAge(String.valueOf(age));
+            } catch (NumberFormatException e) {
+                // Handle invalid age input
+                // For example, show an error message or log the error
+            }
+        }
+
+
+
+
+
+        return editedUser;
+    }
+
+
+    public User getUserToEdit() {
+        return userToEdit;
+    }
+
+    public void setUserToEdit(User userToEdit) {
+        this.userToEdit = userToEdit;
+    }
+
+    public JTextField getLastNameTextField() {
+        return lastNameTextField;
+    }
+
+    public void setLastNameTextField(JTextField lastNameTextField) {
+        this.lastNameTextField = lastNameTextField;
+    }
+
+    public JTextField getMiddleNameTextField() {
+        return middleNameTextField;
+    }
+
+    public void setMiddleNameTextField(JTextField middleNameTextField) {
+        this.middleNameTextField = middleNameTextField;
+    }
+
+    public JTextField getBirthdateTextField() {
+        return birthdateTextField;
+    }
+
+    public void setBirthdateTextField(JTextField birthdateTextField) {
+        this.birthdateTextField = birthdateTextField;
+    }
+
+    public JComboBox<String> getGenderComboBox() {
+        return genderComboBox;
+    }
+
+    public void setGenderComboBox(JComboBox<String> genderComboBox) {
+        this.genderComboBox = genderComboBox;
+    }
+
+    public JCheckBox getPersonWithDisabilityCheckBox() {
+        return personWithDisabilityCheckBox;
+    }
+
+    public void setPersonWithDisabilityCheckBox(JCheckBox personWithDisabilityCheckBox) {
+        this.personWithDisabilityCheckBox = personWithDisabilityCheckBox;
+    }
+
+    public JTextField getStreetAddressTextField() {
+        return streetAddressTextField;
+    }
+
+    public void setStreetAddressTextField(JTextField streetAddressTextField) {
+        this.streetAddressTextField = streetAddressTextField;
+    }
+
+    public JComboBox<String> getUserTypeComboBox() {
+        return userTypeComboBox;
+    }
+
+    public void setUserTypeComboBox(JComboBox<String> userTypeComboBox) {
+        this.userTypeComboBox = userTypeComboBox;
+    }
+
+    public JTextField getOptionalDetailsTextField() {
+        return optionalDetailsTextField;
+    }
+
+    public void setOptionalDetailsTextField(JTextField optionalDetailsTextField) {
+        this.optionalDetailsTextField = optionalDetailsTextField;
+    }
+
+    public JTextField getCityMunicipalityTextField() {
+        return cityMunicipalityTextField;
+    }
+
+    public void setCityMunicipalityTextField(JTextField cityMunicipalityTextField) {
+        this.cityMunicipalityTextField = cityMunicipalityTextField;
+    }
+
+    public JTextField getProvinceTextField() {
+        return provinceTextField;
+    }
+
+    public void setProvinceTextField(JTextField provinceTextField) {
+        this.provinceTextField = provinceTextField;
+    }
+
+    public JLabel getUserTypeLabel() {
+        return userTypeLabel;
+    }
+
+    public void setUserTypeLabel(JLabel userTypeLabel) {
+        this.userTypeLabel = userTypeLabel;
+    }
+
+    public JTextField getEmailAddressTextField() {
+        return emailAddressTextField;
+    }
+
+    public void setEmailAddressTextField(JTextField emailAddressTextField) {
+        this.emailAddressTextField = emailAddressTextField;
+    }
+
+    public JLabel getStreetAddressLabel() {
+        return streetAddressLabel;
+    }
+
+    public void setStreetAddressLabel(JLabel streetAddressLabel) {
+        this.streetAddressLabel = streetAddressLabel;
+    }
+
+    public JTextField getContactNumberTextField() {
+        return contactNumberTextField;
+    }
+
+    public void setContactNumberTextField(JTextField contactNumberTextField) {
+        this.contactNumberTextField = contactNumberTextField;
+    }
+
+    public JLabel getOptionalDetailsLabel() {
+        return optionalDetailsLabel;
+    }
+
+    public void setOptionalDetailsLabel(JLabel optionalDetailsLabel) {
+        this.optionalDetailsLabel = optionalDetailsLabel;
+    }
+
+    public JLabel getCityMunicipalityLabel() {
+        return cityMunicipalityLabel;
+    }
+
+    public void setCityMunicipalityLabel(JLabel cityMunicipalityLabel) {
+        this.cityMunicipalityLabel = cityMunicipalityLabel;
+    }
+
+    public JLabel getProvinceLabel() {
+        return provinceLabel;
+    }
+
+    public void setProvinceLabel(JLabel provinceLabel) {
+        this.provinceLabel = provinceLabel;
+    }
+
+    public JButton getEditAccountButton() {
+        return editAccountButton;
+    }
+
+    public void setEditAccountButton(JButton editAccountButton) {
+        this.editAccountButton = editAccountButton;
+    }
+
+    public JLabel getPostalCodeLabel() {
+        return postalCodeLabel;
+    }
+
+    public void setPostalCodeLabel(JLabel postalCodeLabel) {
+        this.postalCodeLabel = postalCodeLabel;
+    }
+
+    public JTextField getAgeTextField() {
+        return ageTextField;
+    }
+
+    public void setAgeTextField(JTextField ageTextField) {
+        this.ageTextField = ageTextField;
+    }
+
+    public JLabel getEmailAddressLabel() {
+        return emailAddressLabel;
+    }
+
+    public void setEmailAddressLabel(JLabel emailAddressLabel) {
+        this.emailAddressLabel = emailAddressLabel;
+    }
+
+    public JTextField getPostalCodeTextField() {
+        return postalCodeTextField;
+    }
+
+    public void setPostalCodeTextField(JTextField postalCodeTextField) {
+        this.postalCodeTextField = postalCodeTextField;
+    }
+
+    public JLabel getContactNumberLabel() {
+        return contactNumberLabel;
+    }
+
+    public void setContactNumberLabel(JLabel contactNumberLabel) {
+        this.contactNumberLabel = contactNumberLabel;
+    }
+
+    public JTextField getSetUsernameTextField() {
+        return setUsernameTextField;
+    }
+
+    public void setSetUsernameTextField(JTextField setUsernameTextField) {
+        this.setUsernameTextField = setUsernameTextField;
+    }
+
+    public JLabel getSetUsernameLabel() {
+        return setUsernameLabel;
+    }
+
+    public void setSetUsernameLabel(JLabel setUsernameLabel) {
+        this.setUsernameLabel = setUsernameLabel;
+    }
+
+    public JLabel getSetPasswordLabel() {
+        return setPasswordLabel;
+    }
+
+    public void setSetPasswordLabel(JLabel setPasswordLabel) {
+        this.setPasswordLabel = setPasswordLabel;
+    }
+
+    public JLabel getEditAccountLabel() {
+        return editAccountLabel;
+    }
+
+    public void setEditAccountLabel(JLabel editAccountLabel) {
+        this.editAccountLabel = editAccountLabel;
+    }
+
+    public JLabel getFirstNameLabel() {
+        return firstNameLabel;
+    }
+
+    public void setFirstNameLabel(JLabel firstNameLabel) {
+        this.firstNameLabel = firstNameLabel;
+    }
+
+    public JLabel getLastNameLabel() {
+        return lastNameLabel;
+    }
+
+    public void setLastNameLabel(JLabel lastNameLabel) {
+        this.lastNameLabel = lastNameLabel;
+    }
+
+    public JLabel getMiddleNameLabel() {
+        return middleNameLabel;
+    }
+
+    public void setMiddleNameLabel(JLabel middleNameLabel) {
+        this.middleNameLabel = middleNameLabel;
+    }
+
+    public JLabel getBirthdateLabel() {
+        return birthdateLabel;
+    }
+
+    public void setBirthdateLabel(JLabel birthdateLabel) {
+        this.birthdateLabel = birthdateLabel;
+    }
+
+    public JLabel getAgeLabel() {
+        return ageLabel;
+    }
+
+    public void setAgeLabel(JLabel ageLabel) {
+        this.ageLabel = ageLabel;
+    }
+
+    public JLabel getGenderLabel() {
+        return genderLabel;
+    }
+
+    public void setGenderLabel(JLabel genderLabel) {
+        this.genderLabel = genderLabel;
+    }
+
+    public JLabel getPersonWithDisabilityLabel() {
+        return personWithDisabilityLabel;
+    }
+
+    public void setPersonWithDisabilityLabel(JLabel personWithDisabilityLabel) {
+        this.personWithDisabilityLabel = personWithDisabilityLabel;
+    }
+
+    public JTextField getFirstNameTextField() {
+        return firstNameTextField;
+    }
+
+    public void setFirstNameTextField(JTextField firstNameTextField) {
+        this.firstNameTextField = firstNameTextField;
+    }
+
+    public JPasswordField getPasswordField() {
+        return passwordField;
+    }
+
+    public void setPasswordField(JPasswordField passwordField) {
+        this.passwordField = passwordField;
+    }
+
 }

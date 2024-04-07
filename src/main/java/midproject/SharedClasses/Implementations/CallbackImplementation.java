@@ -276,6 +276,16 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 				+ "\nQuantity: from '" + originalMedicine.getQuantity() + "' to '" + editedMedicine.getQuantity() + "'"
 				+ "\nPrice: from " + originalMedicine.getPrice() + " to " + editedMedicine.getPrice());
 	}
+
+	public void notifyUserUpdatedByAdmin(String adminUsername, User editedUser, User originalUser) throws RemoteException {
+		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " edited the user entry. Changes made: "
+				+ "\nUsername: from '" + originalUser.getUsername() + "' to '" + editedUser.getUsername() + "'"
+				+ "\nUserType: from '" + originalUser.getUserType() + "' to '" + editedUser.getUserType() + "'"
+				+ "\nOther fields...");
+	}
+
+
+
 	public void sendSearchResults(List<User> results) throws RemoteException {
 		SwingUtilities.invokeLater(() -> {
 			DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getrUsersTable().getModel();

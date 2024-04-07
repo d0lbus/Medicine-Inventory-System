@@ -103,6 +103,22 @@ public class UserJSONProcessor {
     }
 
     public static void updateUserInJsonFile(User updatedUser, String filePath) {
+
+        try {
+            List<User> users = readUsersFromFile(filePath);
+            for (int i = 0; i < users.size(); i++) {
+                if (users.get(i).getUserId().equals(updatedUser.getUserId())) {
+                    users.set(i, updatedUser);
+                    break;
+                }
+            }
+            writeUsersToFile(users, filePath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        /**
         try (FileReader reader = new FileReader(filePath)) {
             Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
             List<User> users = gson.fromJson(reader, userListType);
@@ -122,7 +138,7 @@ public class UserJSONProcessor {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        } */
     }
 
     public static void transferUserToDifferentFile(String userId, String originalFilePath, String destinationFilePath) {
