@@ -315,6 +315,20 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             order.setStatus(newStatus);
             OrderJSONProcessor.writeOrderToFile(order);
             updateOrdersTable();
+            String userId = order.getUserId();
+            User user = getUserDetailsbyId(userId);
+            msgCallbacks.entrySet().stream()
+                    .filter(entry -> entry.getKey().getUsername().equals(user.getUsername()))
+                    .findFirst()
+                    .ifPresent(entry -> {
+                        try {
+                            entry.getValue().notifyOrderStatusChanged(orderId, newStatus);
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
+                    });
+
+
         } catch (Exception e){
         }
     }

@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import midproject.SharedClasses.Interfaces.MessageCallback;
 import midproject.SharedClasses.ReferenceClasses.*;
@@ -426,6 +427,14 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			}
 		});
 	}
+
+	public void notifyOrderStatusChanged(String orderID, String newStatus) throws RemoteException{
+		SwingUtilities.invokeLater(() -> {
+			String message = "[SERVER NOTIFICATION]["+formattedDateTime+"]Your order " + orderID + " has been "+newStatus+".\n";
+			clientGUIFrame.getNotificationsTextArea().append(message);
+		});
+	}
+
 	private static String buildOrderDetailsString(User user, String orderID, StringBuilder orderDetails, String modeOfDelivery, String modeOfPayment) {
 		StringBuilder details = new StringBuilder();
 		details.append("John Doe's Official Receipt("+orderID+")"+"\n\n");

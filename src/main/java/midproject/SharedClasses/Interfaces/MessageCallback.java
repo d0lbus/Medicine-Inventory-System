@@ -60,4 +60,6 @@ public interface MessageCallback extends Remote {
 
 	void notifyOrderProcessed(String orderId, User user, List<OrderItem> orderItems, byte[] imageBytes, String modeOfDelivery, String modeOfPayment) throws RemoteException;
 
+	void notifyOrderStatusChanged(String orderID, String newStatus) throws RemoteException;
+
 }
