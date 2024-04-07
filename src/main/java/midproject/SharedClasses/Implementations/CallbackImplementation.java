@@ -357,7 +357,20 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 	/**CUSTOMER SIDE*/
 	public void displayProfileDetails(User user) throws RemoteException{
 		clientGUIFrame.getNameOnlyLabel().setText(user.getFirstName() + " " + user.getLastName());
-
+		StringBuilder userDetails = new StringBuilder();
+		userDetails.append("Name: ").append(user.getFirstName()).append(" ").append(user.getLastName()).append("\n");
+		userDetails.append("Birthdate: ").append(user.getBirthdate()).append("\n");
+		userDetails.append("Age: ").append(user.getAge()).append("\n");
+		userDetails.append("Gender: ").append(user.getGender()).append("\n");
+		userDetails.append("Email: ").append(user.getEmail()).append("\n");
+		userDetails.append("Address: ").append(user.getStreet()).append(" ").append(user.getAdditionalAddressDetails()).append(" ");
+		userDetails.append(user.getCity()).append(", ").append(user.getProvince()).append(" ").append(user.getZip()).append("\n");
+		userDetails.append("City: ").append(user.getCity()).append("\n");
+		userDetails.append("Province: ").append(user.getProvince()).append("\n");
+		userDetails.append("Zip: ").append(user.getZip()).append("\n");
+		userDetails.append("Email: ").append(user.getEmail()).append("\n");
+		userDetails.append("Phone: ").append(user.getContactNumber()).append("\n");
+		clientGUIFrame.getPersonalInformationTextArea().setText(String.valueOf(userDetails));
 	}
 	public void updateCart(UserCart userCart) throws RemoteException {
 		SwingUtilities.invokeLater(() -> {
@@ -399,7 +412,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 					}
 
 				}
-
 				orderDetails.append(String.format("PWD Discount: %s\n", pwdDiscount));
 				orderDetails.append(String.format("Discount Amount: ₱%.2f\n", discountAmount));
 				orderDetails.append(String.format("Total after Discount: ₱%.2f\n", total));
@@ -427,14 +439,12 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			}
 		});
 	}
-
 	public void notifyOrderStatusChanged(String orderID, String newStatus) throws RemoteException{
 		SwingUtilities.invokeLater(() -> {
 			String message = "[SERVER NOTIFICATION]["+formattedDateTime+"]Your order " + orderID + " has been "+newStatus+".\n";
 			clientGUIFrame.getNotificationsTextArea().append(message);
 		});
 	}
-
 	private static String buildOrderDetailsString(User user, String orderID, StringBuilder orderDetails, String modeOfDelivery, String modeOfPayment) {
 		StringBuilder details = new StringBuilder();
 		details.append("John Doe's Official Receipt("+orderID+")"+"\n\n");

@@ -612,15 +612,11 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             });
         }
     }
-
-
     /**CUSTOMER SIDE**/
-
     public User getUserDetailsbyId(String userID) throws Exception {
         User user = UserJSONProcessor.getUserById("res/UserInformation.json", userID);;
         return user;
     }
-
     public User getUserDetails(String username, MessageCallback msgCallback) throws Exception {
         User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
         msgCallback.displayProfileDetails(user);
@@ -788,6 +784,4 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
         return total;
     }
-
-
 }
