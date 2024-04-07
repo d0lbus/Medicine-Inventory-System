@@ -121,8 +121,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 	public void readOrdersList(List<Order> orders){
 		SwingUtilities.invokeLater(() -> {
 			if (adminGUIFrame != null) {
-
-
 				DefaultTableModel pendingModel = (DefaultTableModel) adminGUIFrame.getpTable().getModel();
 				pendingModel.setRowCount(0);
 
@@ -356,7 +354,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 	}
 
 	/**CUSTOMER SIDE*/
-
 	public void displayProfileDetails(User user) throws RemoteException{
 		clientGUIFrame.getNameOnlyLabel().setText(user.getFirstName() + " " + user.getLastName());
 
@@ -378,7 +375,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			});
 		});
 	}
-
 	public void notifyOrderProcessed(String orderId, User user, List<OrderItem> orderItems, byte[] imageBytes, String modeOfDelivery, String modeOfPayment) throws RemoteException{
 		SwingUtilities.invokeLater(() -> {
 			try {

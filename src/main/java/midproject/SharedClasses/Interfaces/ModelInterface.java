@@ -2,6 +2,7 @@ package midproject.SharedClasses.Interfaces;
 
 import midproject.SharedClasses.Implementations.CallbackImplementation;
 import midproject.SharedClasses.ReferenceClasses.Medicine;
+import midproject.SharedClasses.ReferenceClasses.Order;
 import midproject.SharedClasses.ReferenceClasses.OrderItem;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.*;
@@ -39,7 +40,9 @@ public interface ModelInterface extends Remote {
 
     public void updateOrdersTable() throws Exception;
 
-    public void updatePendingOrdersTable() throws Exception;
+    public Order retrieveOrderDetails(String orderId)  throws RemoteException;
+
+    public void updateOrderStatus(String orderId, String newStatus) throws RemoteException;
 
     public void addMedicine(Medicine medicine, MessageCallback callback, String adminUsername) throws Exception;
 
@@ -60,6 +63,7 @@ public interface ModelInterface extends Remote {
 
 
     /**CUSTOMER SIDE**/
+    User getUserDetailsbyId(String userID) throws Exception;
     User getUserDetails(String username, MessageCallback msgCallback) throws Exception;
     void getCartDetails(String username, MessageCallback clientCallback) throws RemoteException;
     void addMedicineToCart(String medicineId, int quantity, MessageCallback clientCallback, String username) throws RemoteException;

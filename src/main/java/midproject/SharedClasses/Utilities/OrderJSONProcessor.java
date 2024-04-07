@@ -14,14 +14,12 @@ public class OrderJSONProcessor {
     private static final String ORDER_ID_FILE = "res/LastOrderId.txt";
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public static void writeOrderToFile(Order order) throws IOException {
+    public static void writeOrderToFile(Order updatedOrder) throws IOException {
         List<Order> orders = new ArrayList<>();
-
         File orderFile = new File(ORDER_FILE_PATH);
         if (orderFile.exists() && !orderFile.isDirectory()) {
             try (Reader reader = new FileReader(orderFile)) {
                 orders = gson.fromJson(reader, new TypeToken<List<Order>>() {}.getType());
-                // If the file doesn't exist or isn't a valid JSON, start with an empty list
                 if (orders == null) {
                     orders = new ArrayList<>();
                 }
@@ -29,9 +27,8 @@ public class OrderJSONProcessor {
                 System.err.println("Order file not found, starting with an empty list.");
             }
         }
-
-        orders.add(order);
-
+        orders.removeIf(order -> order.getOrderId().equals(updatedOrder.getOrderId()));
+        orders.add(updatedOrder);
         try (Writer writer = new FileWriter(ORDER_FILE_PATH)) {
             gson.toJson(orders, writer);
         }
@@ -53,6 +50,17 @@ public class OrderJSONProcessor {
         }
         return new ArrayList<>();
     }
+
+    public static Order readOrderById(String orderId) throws IOException {
+        List<Order> orders = readOrdersFromFile(ORDER_FILE_PATH);
+        for (Order order : orders) {
+            if (order.getOrderId().equals(orderId)) {
+                return order;
+            }
+        }
+        return null; // Order not found
+    }
+
 
     // Generates a new order ID
     public static String generateOrderId() throws IOException {

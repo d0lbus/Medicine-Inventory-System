@@ -2,6 +2,8 @@ package midproject.ViewClasses;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
+import javax.swing.*;
+
 /**
  *
  * @author Freskkie
@@ -97,6 +99,46 @@ public class AcceptRejectFrame extends javax.swing.JFrame {
                 new AcceptRejectFrame().setVisible(true);
             }
         });
+    }
+
+    public JButton getAcceptButton() {
+        return acceptButton;
+    }
+
+    public void setAcceptButton(JButton acceptButton) {
+        this.acceptButton = acceptButton;
+    }
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    public void setjPanel1(JPanel jPanel1) {
+        this.jPanel1 = jPanel1;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public JTextPane getjTextPane1() {
+        return jTextPane1;
+    }
+
+    public void setjTextPane1(JTextPane jTextPane1) {
+        this.jTextPane1 = jTextPane1;
+    }
+
+    public JButton getRejectButton() {
+        return rejectButton;
+    }
+
+    public void setRejectButton(JButton rejectButton) {
+        this.rejectButton = rejectButton;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

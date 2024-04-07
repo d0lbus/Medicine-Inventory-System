@@ -17,6 +17,10 @@ public class Order implements Serializable {
 
     private Double total;
 
+    public Order (){
+
+    }
+
     public Order(String orderId, String userId, List<OrderItem> items, String status, String modeOfDelivery, String paymentMethod, String image,  Double total) {
         this.orderId = orderId;
         this.userId = userId;

@@ -12,11 +12,14 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import midproject.SharedClasses.Implementations.CallbackImplementation;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.Medicine;
+import midproject.SharedClasses.ReferenceClasses.Order;
+import midproject.SharedClasses.ReferenceClasses.OrderItem;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.*;
 import midproject.SharedClasses.Utilities.UserJSONProcessor;
 import midproject.ViewClasses.*;
 
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +27,9 @@ import java.util.List;
 import java.util.regex.Pattern;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import static midproject.SharedClasses.Utilities.UserJSONProcessor.fetchUserInformationFromDataSource;
 
@@ -219,17 +225,13 @@ public class AdminClientController {
                 int selectedRow = adminGUIFrame.getrUsersTable().getSelectedRow();
                 if (selectedRow != -1) {
                     String userId = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 0).toString();
-
                     User selectedUser = fetchUserInformationFromDataSource(userId, "res/UserInformation.json");
-
                     if (selectedUser != null) {
                         EditUserFrame editUserFrame = new EditUserFrame(selectedUser);
                         editUserFrame.setVisible(true);
                     } else {
                         JOptionPane.showMessageDialog(adminGUIFrame, "Failed to retrieve user information.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
-
-
                 } else {
                     try {
                         throw new SelectionRequiredUserException("Please select a user first.");
@@ -389,6 +391,88 @@ public class AdminClientController {
 
 
         /** PENDING ORDERS RELATED METHODS */
+
+        adminGUIFrame.getpViewButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = adminGUIFrame.getpTable().getSelectedRow();
+                if (selectedRow >= 0) {
+                    String orderId = (String) adminGUIFrame.getpTable().getValueAt(selectedRow, 0);
+                    try {
+                        AcceptRejectFrame acceptRejectFrame = new AcceptRejectFrame();
+                        acceptRejectFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        acceptRejectFrame.setLocationRelativeTo(null);
+                        acceptRejectFrame.setVisible(true);
+                        Order chosenOrder = msgserver.retrieveOrderDetails(orderId);
+                        User user = msgserver.getUserDetailsbyId(chosenOrder.getUserId());
+
+                        StringBuilder orderDetails = new StringBuilder();
+
+                        for (OrderItem item : chosenOrder.getItems()) {
+                            String itemDetails = String.format("Medicine ID: %s\nGeneric Name: %s\nBrand Name: %s\nForm: %s\nQuantity: %d\nPrice: ₱%.2f\n\n",
+                                    item.getMedicineId(), item.getGenericName(), item.getBrandName(), item.getForm(),
+                                    item.getQuantity(), item.getPrice());
+                            orderDetails.append(itemDetails);
+                        }
+
+                        orderDetails.append(String.format("Total: ₱%.2f\n", chosenOrder.getTotal()));
+
+                        byte[] imageBytes = Base64.getDecoder().decode(chosenOrder.getImage());
+
+                        ImageIcon imageIcon = new ImageIcon(imageBytes);
+
+                        StyledDocument doc = (StyledDocument) acceptRejectFrame.getjTextPane1().getDocument();
+                        doc.insertString(doc.getLength(), buildOrderDetailsString(user, orderId, orderDetails, chosenOrder.getModeOfDelivery(), chosenOrder.getPaymentMethod()), null);
+
+
+                        Style style = doc.addStyle("ImageStyle", null);
+                        StyleConstants.setIcon(style, imageIcon);
+                        doc.insertString(doc.getLength(), "ignored text", style);
+
+                        acceptRejectFrame.getAcceptButton().addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                String status = "Accepted";
+                                try {
+                                    msgserver.updateOrderStatus(orderId,status);
+                                    JOptionPane.showMessageDialog(acceptRejectFrame, "Order Accepted Successfully");
+                                    acceptRejectFrame.setVisible(false);
+                                    autoRefreshOrderRelatedComponents();
+                                } catch (RemoteException ex) {
+                                    throw new RuntimeException(ex);
+                                } catch (Exception ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            }
+                        });
+
+                        acceptRejectFrame.getRejectButton().addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                String status = "Rejected";
+                                try {
+                                    msgserver.updateOrderStatus(orderId ,status);
+                                    JOptionPane.showMessageDialog(acceptRejectFrame, "Order Rejected Successfully");
+                                    acceptRejectFrame.setVisible(false);
+                                    autoRefreshOrderRelatedComponents();
+                                } catch (RemoteException ex) {
+                                    throw new RuntimeException(ex);
+                                } catch (Exception ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            }
+                        });
+
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(adminGUIFrame, "Failed to load order details.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select an order to view.", "No Selection", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
 
         /** INVENTORY RELATED METHODS */
 
@@ -624,4 +708,15 @@ public class AdminClientController {
         return age;
     }
 
+    private static String buildOrderDetailsString(User user, String orderID, StringBuilder orderDetails, String modeOfDelivery, String modeOfPayment) {
+        StringBuilder details = new StringBuilder();
+        details.append("John Doe's Official Receipt("+orderID+")"+"\n\n");
+        details.append("Name: ").append(user.getFirstName()).append(" ").append(user.getLastName()).append("\n");
+        details.append("Address: ").append(user.getStreet()).append(" ").append(user.getAdditionalAddressDetails()).append(" ");
+        details.append(user.getCity()).append(", ").append(user.getProvince()).append(" ").append(user.getZip()).append("\n");
+        details.append("Mode of Delivery: ").append(modeOfDelivery).append("\n");
+        details.append("Mode of Payment: ").append(modeOfPayment).append("\n\n");
+        details.append(orderDetails);
+        return details.toString();
+    }
 }

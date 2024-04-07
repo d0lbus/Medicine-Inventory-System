@@ -307,15 +307,19 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
     /**
      *
-     * ORDERS RELATED METHODS
+     * ORDERS AND PENDING ORDERS RELATED METHODS
      *
      * */
 
-    /**
-     *
-     * PENDING ORDERS RELATED METHODS
-     *
-     * */
+    public void updateOrderStatus(String orderId, String newStatus) throws RemoteException{
+        try {
+            Order order = OrderJSONProcessor.readOrderById(orderId);
+            order.setStatus(newStatus);
+            OrderJSONProcessor.writeOrderToFile(order);
+            updateOrdersTable();
+        } catch (Exception e){
+        }
+    }
 
     /**
      *
@@ -561,22 +565,14 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         });
     }
 
-    public void updatePendingOrdersTable() throws Exception {
-        String filepath = "res/UserInformation.json";
-        List<User> usersList = UserJSONProcessor.readUsersFromFile(filepath);
+    public Order retrieveOrderDetails(String orderId) throws RemoteException{
+        Order order = new Order();
+        try {
+            order = OrderJSONProcessor.readOrderById(orderId);
+        } catch (Exception e){
 
-        msgCallbacks.entrySet().forEach(entry -> {
-            UserCallBackInfo userInfo = entry.getKey();
-            MessageCallback callback = entry.getValue();
-
-            if ("Admin".equals(userInfo.getUserType())) {
-                try {
-                    callback.readRUsersList(usersList);
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        }
+        return order;
     }
 
     /**
@@ -607,6 +603,11 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
 
     /**CUSTOMER SIDE**/
+
+    public User getUserDetailsbyId(String userID) throws Exception {
+        User user = UserJSONProcessor.getUserById("res/UserInformation.json", userID);;
+        return user;
+    }
 
     public User getUserDetails(String username, MessageCallback msgCallback) throws Exception {
         User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
@@ -775,5 +776,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
         return total;
     }
+
 
 }
