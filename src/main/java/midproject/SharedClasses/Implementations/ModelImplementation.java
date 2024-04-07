@@ -59,6 +59,7 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             if (!isValidCredentials(username, password, filepath, userTypeRequest)) {
                 throw new AuthenticationFailedException("Invalid username or password.");
             }
+
             if (msgCallbacks.containsValue(msgCallback)) {
                 throw new AlreadyLoggedInException("Already logged in... you cannot login using the same client...");
             } else if (containsUsername) {
@@ -104,7 +105,7 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
     }
 
-    public synchronized void logout(MessageCallback msgCallback, String sessionID) throws Exception {
+    public synchronized void logout(MessageCallback msgCallback, String sessionID) throws Exception{
         String username = sessionUserMap.get(sessionID);
         String userType = getUserTypeByUsername("res/UserInformation.json", username);
 
@@ -133,7 +134,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
         System.out.println("> User " + username + "logged out");
     }
-
 
     /**ADMIN SIDE**/
 
@@ -203,10 +203,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             throw new RemoteException("Error while searching users", e);
         }
     }
-
-
-
-
 
 
     /**
@@ -547,6 +543,42 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         });
     }
 
+    public void updateOrdersTable() throws Exception {
+        String filepath = "res/Orders.json";
+        List<Order> orderList = OrderJSONProcessor.readOrdersFromFile(filepath);
+
+        msgCallbacks.entrySet().forEach(entry -> {
+            UserCallBackInfo userInfo = entry.getKey();
+            MessageCallback callback = entry.getValue();
+
+            if ("Admin".equals(userInfo.getUserType())) {
+                try {
+                    callback.readOrdersList(orderList);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void updatePendingOrdersTable() throws Exception {
+        String filepath = "res/UserInformation.json";
+        List<User> usersList = UserJSONProcessor.readUsersFromFile(filepath);
+
+        msgCallbacks.entrySet().forEach(entry -> {
+            UserCallBackInfo userInfo = entry.getKey();
+            MessageCallback callback = entry.getValue();
+
+            if ("Admin".equals(userInfo.getUserType())) {
+                try {
+                    callback.readRUsersList(usersList);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
     /**
      *
      * NOTIFICATION FOR ADMINS RELATED METHODS
@@ -581,7 +613,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         msgCallback.displayProfileDetails(user);
         return user;
     }
-
     public void getCartDetails(String username, MessageCallback clientCallback) throws RemoteException{
         try {
             User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
@@ -621,7 +652,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             throw new RemoteException("Error adding medicine to cart: " + e.getMessage(), e);
         }
     }
-
     public synchronized void updateMedicineQuantityInCart(String medicineId, int newQuantity, MessageCallback clientCallback, String username) throws RemoteException {
         try {
             Map<String, UserCart> userCarts = CartJSONProcessor.readUserCartsFromFile();
@@ -653,7 +683,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             throw new RemoteException("Error updating medicine quantity in cart: " + e.getMessage(), e);
         }
     }
-
     public synchronized void removeMedicineInCart(String medicineId, MessageCallback clientCallback, String username) throws RemoteException {
         try {
 
@@ -675,7 +704,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             throw new RemoteException("Error removing medicine from cart: " + e.getMessage(), e);
         }
     }
-
     public synchronized int retrieveMedicineStock(String medicineId) throws RemoteException{
         int medicineStock = 0;
         Medicine medicine = new Medicine();
@@ -687,7 +715,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         medicineStock = medicine.getQuantity();
         return medicineStock;
     }
-
     public void processOrder(User user, List<OrderItem> orderItems, String base64Image, String modeOfDelivery, String modeOfPayment, MessageCallback clientCallback) throws RemoteException {
         try {
         for (OrderItem item : orderItems) {
@@ -703,7 +730,9 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
         byte[] imageBytes = Base64.getDecoder().decode(base64Image);
 
-        Order order = new Order(orderId, user.getUserId(), orderItems, status, modeOfDelivery, modeOfPayment, base64Image);
+        double total = getTotal(user, orderItems);
+
+        Order order = new Order(orderId, user.getUserId(), orderItems, status, modeOfDelivery, modeOfPayment, base64Image, total);
         OrderJSONProcessor.writeOrderToFile(order);
 
         String userId = user.getUserId();
@@ -730,6 +759,21 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             throw new RuntimeException(e);
         }
 
+    }
+    private static double getTotal(User user, List<OrderItem> orderItems) {
+        double total = 0;
+        double discountAmount = 0;
+
+        for (OrderItem item : orderItems) {
+            if ("yes".equals(user.getPersonWithDisability())) {
+                discountAmount = total * 0.2;
+                total -= discountAmount;
+            } else {
+                total += item.getPrice() * item.getQuantity();
+            }
+
+        }
+        return total;
     }
 
 }

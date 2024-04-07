@@ -97,6 +97,7 @@ public class AdminClientController {
 
         autoRefreshUserRelatedComponents();
         autoRefreshMedicineRelatedComponents();
+        autoRefreshOrderRelatedComponents();
 
         /** LOGOUT RELATED METHODS */
         adminGUIFrame.getLogoutMouseClicked().addMouseListener(new MouseAdapter() {
@@ -555,19 +556,6 @@ public class AdminClientController {
         });
     }
 
-    private static int calculateAge(Date birthdate) {
-        Calendar birthdateCal = Calendar.getInstance();
-        birthdateCal.setTime(birthdate);
-        Calendar now = Calendar.getInstance();
-
-        int age = now.get(Calendar.YEAR) - birthdateCal.get(Calendar.YEAR);
-        if (now.get(Calendar.DAY_OF_YEAR) < birthdateCal.get(Calendar.DAY_OF_YEAR)) {
-            age--;
-        }
-        return age;
-    }
-
-
     /** AUTOREFRESH / HELPER METHODS */
 
     private static void autoRefreshUserRelatedComponents() throws Exception {
@@ -578,6 +566,10 @@ public class AdminClientController {
 
     private static void autoRefreshMedicineRelatedComponents() throws Exception{
         msgserver.updateInventoryTable();
+    }
+
+    private static void autoRefreshOrderRelatedComponents() throws Exception{
+        msgserver.updateOrdersTable();
     }
 
     private static void resetTextFields(AdminGUIFrame adminGUIFrame) {
@@ -616,6 +608,18 @@ public class AdminClientController {
             e.printStackTrace();
         }
         return false; // Username does not exist
+    }
+
+    private static int calculateAge(Date birthdate) {
+        Calendar birthdateCal = Calendar.getInstance();
+        birthdateCal.setTime(birthdate);
+        Calendar now = Calendar.getInstance();
+
+        int age = now.get(Calendar.YEAR) - birthdateCal.get(Calendar.YEAR);
+        if (now.get(Calendar.DAY_OF_YEAR) < birthdateCal.get(Calendar.DAY_OF_YEAR)) {
+            age--;
+        }
+        return age;
     }
 
 }

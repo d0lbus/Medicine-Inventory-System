@@ -118,6 +118,46 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		});
 	}
 
+	public void readOrdersList(List<Order> orders){
+		SwingUtilities.invokeLater(() -> {
+			if (adminGUIFrame != null) {
+
+
+				DefaultTableModel pendingModel = (DefaultTableModel) adminGUIFrame.getpTable().getModel();
+				pendingModel.setRowCount(0);
+
+				DefaultTableModel otherStatusModel = (DefaultTableModel) adminGUIFrame.getoTable().getModel();
+				otherStatusModel.setRowCount(0);
+
+				for (Order order : orders) {
+					if ("Pending".equals(order.getStatus())) {
+						Object[] rowData = {
+								order.getOrderId(),
+								order.getUserId(),
+								order.getModeOfDelivery(),
+								order.getPaymentMethod(),
+								order.getStatus(),
+								order.getTotal()
+						};
+						pendingModel.addRow(rowData);
+					} else {
+						Object[] rowData = {
+								order.getOrderId(),
+								order.getUserId(),
+								order.getModeOfDelivery(),
+								order.getPaymentMethod(),
+								order.getStatus(),
+								order.getTotal()
+						};
+						otherStatusModel.addRow(rowData);
+					}
+				}
+			} else {
+				System.err.println("Admin GUI frame is null.");
+			}
+		});
+	}
+
 	public void countUsersList(List<User> users) {
 		int count = users.size();
 		SwingUtilities.invokeLater(() -> {
@@ -390,8 +430,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			}
 		});
 	}
-
-
 	private static String buildOrderDetailsString(User user, String orderID, StringBuilder orderDetails, String modeOfDelivery, String modeOfPayment) {
 		StringBuilder details = new StringBuilder();
 		details.append("John Doe's Official Receipt("+orderID+")"+"\n\n");

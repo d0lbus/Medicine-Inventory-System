@@ -37,8 +37,8 @@ public class OrderJSONProcessor {
         }
     }
 
-    public static List<Order> readOrdersFromFile() throws IOException {
-        File orderFile = new File(ORDER_FILE_PATH);
+    public static List<Order> readOrdersFromFile(String filepath) throws IOException {
+        File orderFile = new File(filepath);
         if (orderFile.exists() && !orderFile.isDirectory()) {
             try (Reader reader = new FileReader(orderFile)) {
                 // Return the list of orders read from the file

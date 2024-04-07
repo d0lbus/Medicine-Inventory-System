@@ -1,9 +1,6 @@
 package midproject.SharedClasses.Interfaces;
 
-import midproject.SharedClasses.ReferenceClasses.Medicine;
-import midproject.SharedClasses.ReferenceClasses.OrderItem;
-import midproject.SharedClasses.ReferenceClasses.User;
-import midproject.SharedClasses.ReferenceClasses.UserCart;
+import midproject.SharedClasses.ReferenceClasses.*;
 import midproject.ViewClasses.AdminGUIFrame;
 
 import javax.swing.*;
@@ -29,6 +26,8 @@ public interface MessageCallback extends Remote {
 
 	public void readRUsersList(List<User> users) throws RemoteException;
 	public void readAUsersList(List<User> users) throws RemoteException;
+
+	public void readOrdersList(List<Order> orders) throws RemoteException;
 
 	public void readMedicineList(List<Medicine> medicine) throws RemoteException;
 
