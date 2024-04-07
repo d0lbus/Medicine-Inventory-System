@@ -439,10 +439,17 @@ public class CustomerClientController {
 			clientGUIFrame.getCheckOutButton().addActionListener(e -> {
 				if (isImageUploaded) {
 					try {
-					User user = msgserver.getUserDetails(username,mci);
-					msgserver.processOrder(user, orderItems, base64Image, modeOfDelivery, modeOfPayment, mci);
+						User user = msgserver.getUserDetails(username, mci);
+						msgserver.processOrder(user, orderItems, base64Image, modeOfDelivery, modeOfPayment, mci);
+						JOptionPane.showMessageDialog(clientGUIFrame, "Order has been placed successfully.", "Order Placed", JOptionPane.INFORMATION_MESSAGE);
+					} catch (MedicineOutOfStockException ex) {
+						JOptionPane.showMessageDialog(clientGUIFrame, ex.getMessage(), "Stock Insufficient", JOptionPane.WARNING_MESSAGE);
+					} catch (RemoteException ex) {
+						JOptionPane.showMessageDialog(clientGUIFrame, "Failed to place the order due to server error.", "Server Error", JOptionPane.ERROR_MESSAGE);
+						ex.printStackTrace();
 					} catch (Exception ex) {
-						throw new RuntimeException(ex);
+						JOptionPane.showMessageDialog(clientGUIFrame, "An unexpected error occurred.", "Error", JOptionPane.ERROR_MESSAGE);
+						ex.printStackTrace();
 					}
 				} else {
 					JOptionPane.showMessageDialog(clientGUIFrame, "Please upload a prescription before checking out.", "Image Required", JOptionPane.WARNING_MESSAGE);

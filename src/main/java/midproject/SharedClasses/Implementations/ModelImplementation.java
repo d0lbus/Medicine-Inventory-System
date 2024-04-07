@@ -55,11 +55,9 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
                     break;
                 }
             }
-
             if (!isValidCredentials(username, password, filepath, userTypeRequest)) {
                 throw new AuthenticationFailedException("Invalid username or password.");
             }
-
             if (msgCallbacks.containsValue(msgCallback)) {
                 throw new AlreadyLoggedInException("Already logged in... you cannot login using the same client...");
             } else if (containsUsername) {
@@ -716,12 +714,12 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         medicineStock = medicine.getQuantity();
         return medicineStock;
     }
-    public void processOrder(User user, List<OrderItem> orderItems, String base64Image, String modeOfDelivery, String modeOfPayment, MessageCallback clientCallback) throws RemoteException {
+    public void processOrder(User user, List<OrderItem> orderItems, String base64Image, String modeOfDelivery, String modeOfPayment, MessageCallback clientCallback) throws RemoteException, MedicineOutOfStockException {
         try {
         for (OrderItem item : orderItems) {
             Medicine medicine = MedicineJSONProcessor.getMedicineById("res/Medicine.json", item.getMedicineId());
             if (medicine.getQuantity() < item.getQuantity()) {
-                throw new RemoteException("Not enough stock for medicine: " + item.getMedicineId());
+                throw new MedicineOutOfStockException("Not enough stock for medicine: " + item.getMedicineId());
             }
         }
         String orderId = OrderJSONProcessor.generateOrderId();
