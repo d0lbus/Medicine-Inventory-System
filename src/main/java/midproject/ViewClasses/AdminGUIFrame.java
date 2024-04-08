@@ -1146,14 +1146,14 @@ public class AdminGUIFrame extends javax.swing.JFrame {
 
         userTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Customer" }));
 
-        jPasswordField.setText("jPasswordField1");
+        jPasswordField.setText("");
         jPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordFieldActionPerformed(evt);
             }
         });
 
-        jConfirmPasswordField.setText("jPasswordField1");
+        jConfirmPasswordField.setText("");
         jConfirmPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jConfirmPasswordFieldActionPerformed(evt);
