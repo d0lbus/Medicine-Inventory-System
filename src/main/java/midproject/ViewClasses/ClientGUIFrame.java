@@ -77,25 +77,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         backButtonModeOfDelivery = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         pickUpTextPane = new javax.swing.JTextPane();
-        modeOfPaymentPanel = new javax.swing.JPanel();
-        modeOfDeliveryLabel1 = new javax.swing.JLabel();
-        gcashIcon = new javax.swing.JLabel();
-        mayaIcon = new javax.swing.JLabel();
-        visaIcon = new javax.swing.JLabel();
-        mastercardIcon = new javax.swing.JLabel();
-        cashOnDeliveryLabel = new javax.swing.JLabel();
-        nameEwalletTextfield = new javax.swing.JTextField();
-        phoneNumberLabel = new javax.swing.JLabel();
-        nameEwalletLabel = new javax.swing.JLabel();
-        phoneNumberTextfield = new javax.swing.JTextField();
-        nameCardLabel = new javax.swing.JLabel();
-        nameCardTextfield = new javax.swing.JTextField();
-        cardNumberLabel = new javax.swing.JLabel();
-        cardNumberTextfield = new javax.swing.JTextField();
-        CVVLabel = new javax.swing.JLabel();
-        CVVTextfield = new javax.swing.JTextField();
-        backButtonModeOfPayment = new javax.swing.JButton();
-        nextButtonModeOfPayment = new javax.swing.JButton();
         yourOrderPanel = new javax.swing.JPanel();
         yourOrderLabel = new javax.swing.JLabel();
         checkOutButton = new javax.swing.JButton();
@@ -139,13 +120,14 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         sendMessageTextArea = new javax.swing.JTextArea();
         sendButton = new javax.swing.JButton();
-        comboBox = new javax.swing.JComboBox<>();
-        jLabel11 = new javax.swing.JLabel();
+        orderHistoryPanel = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        orderHistoryTable = new javax.swing.JTable();
+        viewOrderHistoryButton = new javax.swing.JButton();
+        yourOrderHistoryLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quantum Drugstore");
-        setResizable(false);
-
         setBackground(new java.awt.Color(255, 255, 255));
 
         headerPanel.setBackground(new java.awt.Color(44, 125, 160));
@@ -381,10 +363,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         categoryPanel.setLayout(categoryPanelLayout);
         categoryPanelLayout.setHorizontalGroup(
             categoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, categoryPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(addToCartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(548, 548, 548))
             .addGroup(categoryPanelLayout.createSequentialGroup()
                 .addGap(156, 156, 156)
                 .addGroup(categoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -394,8 +372,13 @@ public class ClientGUIFrame extends javax.swing.JFrame {
                 .addContainerGap(159, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, categoryPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(goToCartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGroup(categoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, categoryPanelLayout.createSequentialGroup()
+                        .addComponent(goToCartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, categoryPanelLayout.createSequentialGroup()
+                        .addComponent(addToCartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(548, 548, 548))))
             .addGroup(categoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(categoryPanelLayout.createSequentialGroup()
                     .addGap(460, 460, 460)
@@ -646,152 +629,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         );
 
         containerPanel.add(modeOfDeliveryPanel, "modeOfDeliveryPanel");
-
-        modeOfPaymentPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        modeOfDeliveryLabel1.setFont(new java.awt.Font("Sitka Heading", 1, 36)); // NOI18N
-        modeOfDeliveryLabel1.setForeground(new java.awt.Color(33, 37, 41));
-        modeOfDeliveryLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        modeOfDeliveryLabel1.setText("Mode of Payment");
-
-        gcashIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/gcash.png"))); // NOI18N
-
-        mayaIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/maya.png"))); // NOI18N
-
-        visaIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/visa.png"))); // NOI18N
-
-        mastercardIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/mastercard.png"))); // NOI18N
-
-        cashOnDeliveryLabel.setFont(new java.awt.Font("Sitka Display", 0, 24)); // NOI18N
-        cashOnDeliveryLabel.setForeground(new java.awt.Color(60, 63, 65));
-        cashOnDeliveryLabel.setText("Cash On Delivery");
-        cashOnDeliveryLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cashOnDeliveryLabelMouseClicked(evt);
-            }
-        });
-
-        phoneNumberLabel.setFont(new java.awt.Font("Sitka Display", 0, 18)); // NOI18N
-        phoneNumberLabel.setForeground(new java.awt.Color(60, 63, 65));
-        phoneNumberLabel.setText("Phone Number");
-
-        nameEwalletLabel.setFont(new java.awt.Font("Sitka Display", 0, 18)); // NOI18N
-        nameEwalletLabel.setForeground(new java.awt.Color(60, 63, 65));
-        nameEwalletLabel.setText("Name");
-
-        nameCardLabel.setFont(new java.awt.Font("Sitka Display", 0, 18)); // NOI18N
-        nameCardLabel.setForeground(new java.awt.Color(60, 63, 65));
-        nameCardLabel.setText("Name");
-
-        cardNumberLabel.setFont(new java.awt.Font("Sitka Display", 0, 18)); // NOI18N
-        cardNumberLabel.setForeground(new java.awt.Color(60, 63, 65));
-        cardNumberLabel.setText("Card Number");
-
-        CVVLabel.setFont(new java.awt.Font("Sitka Display", 0, 18)); // NOI18N
-        CVVLabel.setForeground(new java.awt.Color(60, 63, 65));
-        CVVLabel.setText("CVV");
-
-        backButtonModeOfPayment.setText("Back");
-        backButtonModeOfPayment.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonModeOfPaymentActionPerformed(evt);
-            }
-        });
-
-        nextButtonModeOfPayment.setText("Next");
-        nextButtonModeOfPayment.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nextButtonModeOfPaymentActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout modeOfPaymentPanelLayout = new javax.swing.GroupLayout(modeOfPaymentPanel);
-        modeOfPaymentPanel.setLayout(modeOfPaymentPanelLayout);
-        modeOfPaymentPanelLayout.setHorizontalGroup(
-            modeOfPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modeOfPaymentPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(modeOfDeliveryLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1264, Short.MAX_VALUE)
-                .addGap(14, 14, 14))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modeOfPaymentPanelLayout.createSequentialGroup()
-                .addGroup(modeOfPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(modeOfPaymentPanelLayout.createSequentialGroup()
-                        .addGap(146, 146, 146)
-                        .addComponent(gcashIcon)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(mayaIcon)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cashOnDeliveryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(171, 171, 171))
-                    .addGroup(modeOfPaymentPanelLayout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addGroup(modeOfPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(phoneNumberTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nameEwalletLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nameEwalletTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(phoneNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(modeOfPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CVVTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nameCardLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(modeOfPaymentPanelLayout.createSequentialGroup()
-                        .addComponent(visaIcon)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(mastercardIcon))
-                    .addComponent(nameCardTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cardNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cardNumberTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CVVLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(110, 110, 110))
-            .addGroup(modeOfPaymentPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(backButtonModeOfPayment)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(nextButtonModeOfPayment)
-                .addGap(24, 24, 24))
-        );
-        modeOfPaymentPanelLayout.setVerticalGroup(
-            modeOfPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modeOfPaymentPanelLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(modeOfDeliveryLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(modeOfPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(gcashIcon)
-                    .addGroup(modeOfPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(mayaIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(mastercardIcon))
-                    .addGroup(modeOfPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(cashOnDeliveryLabel)
-                        .addComponent(visaIcon)))
-                .addGap(44, 44, 44)
-                .addGroup(modeOfPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameEwalletLabel)
-                    .addComponent(nameCardLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(modeOfPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameEwalletTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nameCardTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(modeOfPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(phoneNumberLabel)
-                    .addComponent(cardNumberLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(modeOfPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(phoneNumberTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cardNumberTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addComponent(CVVLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CVVTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
-                .addGroup(modeOfPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(backButtonModeOfPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nextButtonModeOfPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        containerPanel.add(modeOfPaymentPanel, "card11");
 
         yourOrderPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1126,6 +963,8 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
         containerPanel.add(profilePanel, "profilePanel");
 
+        notificationsPanel.setBackground(new java.awt.Color(255, 255, 255));
+
         notificationsTextArea.setEditable(false);
         notificationsTextArea.setColumns(20);
         notificationsTextArea.setRows(5);
@@ -1163,50 +1002,107 @@ public class ClientGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
-        comboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxActionPerformed(evt);
-            }
-        });
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(60, 63, 65));
-        jLabel11.setText("Select user");
-
         javax.swing.GroupLayout sendMessagePanelLayout = new javax.swing.GroupLayout(sendMessagePanel);
         sendMessagePanel.setLayout(sendMessagePanelLayout);
         sendMessagePanelLayout.setHorizontalGroup(
             sendMessagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sendMessagePanelLayout.createSequentialGroup()
-                .addContainerGap(300, Short.MAX_VALUE)
+            .addGroup(sendMessagePanelLayout.createSequentialGroup()
                 .addGroup(sendMessagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(sendMessagePanelLayout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(281, 281, 281))
-            .addGroup(sendMessagePanelLayout.createSequentialGroup()
-                .addGap(600, 600, 600)
-                .addComponent(sendButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(593, 593, 593)
+                        .addComponent(sendButton))
+                    .addGroup(sendMessagePanelLayout.createSequentialGroup()
+                        .addGap(291, 291, 291)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(290, Short.MAX_VALUE))
         );
         sendMessagePanelLayout.setVerticalGroup(
             sendMessagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sendMessagePanelLayout.createSequentialGroup()
-                .addContainerGap(132, Short.MAX_VALUE)
-                .addGroup(sendMessagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addGap(18, 18, 18)
+                .addContainerGap(135, Short.MAX_VALUE)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
                 .addComponent(sendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109))
+                .addGap(137, 137, 137))
         );
 
         containerPanel.add(sendMessagePanel, "card11");
+
+        orderHistoryPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        orderHistoryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Medicine ID", "Category", "Generic Name", "Brand Name", "Form", "Total"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        orderHistoryTable.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jScrollPane8.setViewportView(orderHistoryTable);
+
+        viewOrderHistoryButton.setText("View Order");
+        viewOrderHistoryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewOrderHistoryButtonActionPerformed(evt);
+            }
+        });
+
+        yourOrderHistoryLabel.setFont(new java.awt.Font("Sitka Heading", 1, 36)); // NOI18N
+        yourOrderHistoryLabel.setForeground(new java.awt.Color(33, 37, 41));
+        yourOrderHistoryLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        yourOrderHistoryLabel.setText("Order History");
+
+        javax.swing.GroupLayout orderHistoryPanelLayout = new javax.swing.GroupLayout(orderHistoryPanel);
+        orderHistoryPanel.setLayout(orderHistoryPanelLayout);
+        orderHistoryPanelLayout.setHorizontalGroup(
+            orderHistoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(orderHistoryPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 969, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(viewOrderHistoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
+            .addGroup(orderHistoryPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(yourOrderHistoryLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1272, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        orderHistoryPanelLayout.setVerticalGroup(
+            orderHistoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(orderHistoryPanelLayout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addComponent(yourOrderHistoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(orderHistoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewOrderHistoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(117, Short.MAX_VALUE))
+        );
+
+        containerPanel.add(orderHistoryPanel, "card11");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1274,6 +1170,10 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_checkOutButtonActionPerformed
 
     private void orderHistoryLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderHistoryLabelMouseClicked
+        containerPanel.removeAll();
+        containerPanel.add(orderHistoryPanel);
+        containerPanel.repaint();
+        containerPanel.revalidate();
     }//GEN-LAST:event_orderHistoryLabelMouseClicked
 
     private void helpLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpLabelMouseClicked
@@ -1289,21 +1189,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
     }//GEN-LAST:event_saveButtonActionPerformed
-
-    private void cashOnDeliveryLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cashOnDeliveryLabelMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cashOnDeliveryLabelMouseClicked
-
-    private void backButtonModeOfPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonModeOfPaymentActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_backButtonModeOfPaymentActionPerformed
-
-    private void nextButtonModeOfPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonModeOfPaymentActionPerformed
-        containerPanel.removeAll();
-        containerPanel.add(yourOrderPanel);
-        containerPanel.repaint();
-        containerPanel.revalidate();
-    }//GEN-LAST:event_nextButtonModeOfPaymentActionPerformed
 
     private void searchTextfield1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextfield1KeyPressed
         // TODO add your handling code here:
@@ -1383,10 +1268,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_sendButtonActionPerformed
 
-    private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxActionPerformed
-
     private void goToCartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToCartButtonActionPerformed
         containerPanel.removeAll();
         containerPanel.add(yourCartMainPanel);
@@ -1401,6 +1282,10 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         containerPanel.revalidate();
     }//GEN-LAST:event_backYourOrderButtonActionPerformed
 
+    private void viewOrderHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewOrderHistoryButtonActionPerformed
+
+    }//GEN-LAST:event_viewOrderHistoryButtonActionPerformed
+
     public static void main(String args[]) {
         FlatMacLightLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1408,22 +1293,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
                 new ClientGUIFrame().setVisible(true);
             }
         });
-    }
-
-    public JLabel getCVVLabel() {
-        return CVVLabel;
-    }
-
-    public void setCVVLabel(JLabel CVVLabel) {
-        this.CVVLabel = CVVLabel;
-    }
-
-    public JTextField getCVVTextfield() {
-        return CVVTextfield;
-    }
-
-    public void setCVVTextfield(JTextField CVVTextfield) {
-        this.CVVTextfield = CVVTextfield;
     }
 
     public JButton getAddToCartButton() {
@@ -1440,14 +1309,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
     public void setBackButtonModeOfDelivery(JButton backButtonModeOfDelivery) {
         this.backButtonModeOfDelivery = backButtonModeOfDelivery;
-    }
-
-    public JButton getBackButtonModeOfPayment() {
-        return backButtonModeOfPayment;
-    }
-
-    public void setBackButtonModeOfPayment(JButton backButtonModeOfPayment) {
-        this.backButtonModeOfPayment = backButtonModeOfPayment;
     }
 
     public JButton getBackYourCartButton() {
@@ -1474,21 +1335,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         this.cancelButton = cancelButton;
     }
 
-    public JLabel getCardNumberLabel() {
-        return cardNumberLabel;
-    }
-
-    public void setCardNumberLabel(JLabel cardNumberLabel) {
-        this.cardNumberLabel = cardNumberLabel;
-    }
-
-    public JTextField getCardNumberTextfield() {
-        return cardNumberTextfield;
-    }
-
-    public void setCardNumberTextfield(JTextField cardNumberTextfield) {
-        this.cardNumberTextfield = cardNumberTextfield;
-    }
 
     public JLabel getCartIcon() {
         return cartIcon;
@@ -1504,14 +1350,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
     public void setCartLabel(JLabel cartLabel) {
         this.cartLabel = cartLabel;
-    }
-
-    public JLabel getCashOnDeliveryLabel() {
-        return cashOnDeliveryLabel;
-    }
-
-    public void setCashOnDeliveryLabel(JLabel cashOnDeliveryLabel) {
-        this.cashOnDeliveryLabel = cashOnDeliveryLabel;
     }
 
     public JPanel getCategoryPanel() {
@@ -1560,14 +1398,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
     public void setConfirmPasswordLabel(JLabel confirmPasswordLabel) {
         this.confirmPasswordLabel = confirmPasswordLabel;
-    }
-
-    public JComboBox<String> getComboBox() {
-        return comboBox;
-    }
-
-    public JLabel getjLabel11() {
-        return jLabel11;
     }
 
     public JScrollPane getjScrollPane4() {
@@ -1657,15 +1487,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     public void setFooterPanel(JPanel footerPanel) {
         this.footerPanel = footerPanel;
     }
-
-    public JLabel getGcashIcon() {
-        return gcashIcon;
-    }
-
-    public void setGcashIcon(JLabel gcashIcon) {
-        this.gcashIcon = gcashIcon;
-    }
-
     public JPanel getHeaderPanel() {
         return headerPanel;
     }
@@ -1763,21 +1584,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         this.logOutButton = logOutButton;
     }
 
-    public JLabel getMastercardIcon() {
-        return mastercardIcon;
-    }
-
-    public void setMastercardIcon(JLabel mastercardIcon) {
-        this.mastercardIcon = mastercardIcon;
-    }
-
-    public JLabel getMayaIcon() {
-        return mayaIcon;
-    }
-
-    public void setMayaIcon(JLabel mayaIcon) {
-        this.mayaIcon = mayaIcon;
-    }
 
     public JLabel getModeOfDeliveryLabel() {
         return modeOfDeliveryLabel;
@@ -1787,13 +1593,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         this.modeOfDeliveryLabel = modeOfDeliveryLabel;
     }
 
-    public JLabel getModeOfDeliveryLabel1() {
-        return modeOfDeliveryLabel1;
-    }
 
-    public void setModeOfDeliveryLabel1(JLabel modeOfDeliveryLabel1) {
-        this.modeOfDeliveryLabel1 = modeOfDeliveryLabel1;
-    }
 
     public JPanel getModeOfDeliveryPanel() {
         return modeOfDeliveryPanel;
@@ -1801,46 +1601,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
     public void setModeOfDeliveryPanel(JPanel modeOfDeliveryPanel) {
         this.modeOfDeliveryPanel = modeOfDeliveryPanel;
-    }
-
-    public JPanel getModeOfPaymentPanel() {
-        return modeOfPaymentPanel;
-    }
-
-    public void setModeOfPaymentPanel(JPanel modeOfPaymentPanel) {
-        this.modeOfPaymentPanel = modeOfPaymentPanel;
-    }
-
-    public JLabel getNameCardLabel() {
-        return nameCardLabel;
-    }
-
-    public void setNameCardLabel(JLabel nameCardLabel) {
-        this.nameCardLabel = nameCardLabel;
-    }
-
-    public JTextField getNameCardTextfield() {
-        return nameCardTextfield;
-    }
-
-    public void setNameCardTextfield(JTextField nameCardTextfield) {
-        this.nameCardTextfield = nameCardTextfield;
-    }
-
-    public JLabel getNameEwalletLabel() {
-        return nameEwalletLabel;
-    }
-
-    public void setNameEwalletLabel(JLabel nameEwalletLabel) {
-        this.nameEwalletLabel = nameEwalletLabel;
-    }
-
-    public JTextField getNameEwalletTextfield() {
-        return nameEwalletTextfield;
-    }
-
-    public void setNameEwalletTextfield(JTextField nameEwalletTextfield) {
-        this.nameEwalletTextfield = nameEwalletTextfield;
     }
 
     public JLabel getNameOnlyLabel() {
@@ -1873,14 +1633,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
     public void setNextButtonModeOfDelivery(JButton nextButtonModeOfDelivery) {
         this.nextButtonModeOfDelivery = nextButtonModeOfDelivery;
-    }
-
-    public JButton getNextButtonModeOfPayment() {
-        return nextButtonModeOfPayment;
-    }
-
-    public void setNextButtonModeOfPayment(JButton nextButtonModeOfPayment) {
-        this.nextButtonModeOfPayment = nextButtonModeOfPayment;
     }
 
     public JLabel getNotificationsLabel() {
@@ -1937,22 +1689,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
     public void setPersonalInformationTextArea(JTextArea personalInformationTextArea) {
         this.personalInformationTextArea = personalInformationTextArea;
-    }
-
-    public JLabel getPhoneNumberLabel() {
-        return phoneNumberLabel;
-    }
-
-    public void setPhoneNumberLabel(JLabel phoneNumberLabel) {
-        this.phoneNumberLabel = phoneNumberLabel;
-    }
-
-    public JTextField getPhoneNumberTextfield() {
-        return phoneNumberTextfield;
-    }
-
-    public void setPhoneNumberTextfield(JTextField phoneNumberTextfield) {
-        this.phoneNumberTextfield = phoneNumberTextfield;
     }
 
     public JButton getPickUpButton() {
@@ -2145,25 +1881,18 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel CVVLabel;
-    private javax.swing.JTextField CVVTextfield;
     private javax.swing.JButton addToCartButton;
     private javax.swing.JButton backButtonModeOfDelivery;
-    private javax.swing.JButton backButtonModeOfPayment;
     private javax.swing.JButton backYourCartButton;
     private javax.swing.JButton backYourOrderButton;
     private javax.swing.JSeparator buttonSeparator;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JLabel cardNumberLabel;
-    private javax.swing.JTextField cardNumberTextfield;
     private javax.swing.JLabel cartIcon;
     private javax.swing.JLabel cartLabel;
-    private javax.swing.JLabel cashOnDeliveryLabel;
     private javax.swing.JPanel categoryPanel;
     private javax.swing.JTable categoryTable;
     private javax.swing.JTable categoryTable1;
     private javax.swing.JButton checkOutButton;
-    private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JPasswordField confirmPasswordField;
     private javax.swing.JLabel confirmPasswordLabel;
     private javax.swing.JPanel containerPanel;
@@ -2174,13 +1903,11 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JLabel envelopeIcon;
     private javax.swing.JLabel footerLabel;
     private javax.swing.JPanel footerPanel;
-    private javax.swing.JLabel gcashIcon;
     private javax.swing.JButton goToCartButton;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel helpLabel;
     private javax.swing.JLabel iconLabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane18;
@@ -2190,34 +1917,26 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton logOutButton;
-    private javax.swing.JLabel mastercardIcon;
-    private javax.swing.JLabel mayaIcon;
     private javax.swing.JLabel modeOfDeliveryLabel;
-    private javax.swing.JLabel modeOfDeliveryLabel1;
     private javax.swing.JPanel modeOfDeliveryPanel;
-    private javax.swing.JPanel modeOfPaymentPanel;
-    private javax.swing.JLabel nameCardLabel;
-    private javax.swing.JTextField nameCardTextfield;
-    private javax.swing.JLabel nameEwalletLabel;
-    private javax.swing.JTextField nameEwalletTextfield;
     private javax.swing.JLabel nameOnlyLabel;
     private javax.swing.JPasswordField newPasswordField;
     private javax.swing.JLabel newPasswordLabel;
     private javax.swing.JButton nextButtonModeOfDelivery;
-    private javax.swing.JButton nextButtonModeOfPayment;
     private javax.swing.JLabel notificationsLabel;
     private javax.swing.JPanel notificationsPanel;
     private javax.swing.JTextArea notificationsTextArea;
     private javax.swing.JLabel orderHistoryLabel;
+    private javax.swing.JPanel orderHistoryPanel;
+    private javax.swing.JTable orderHistoryTable;
     private javax.swing.JTextPane orderPlacedTextpane;
     private javax.swing.JPanel partOftheProfilePanel;
     private javax.swing.JLabel personalInformationLabel;
     private javax.swing.JTextArea personalInformationTextArea;
-    private javax.swing.JLabel phoneNumberLabel;
-    private javax.swing.JTextField phoneNumberTextfield;
     private javax.swing.JButton pickUpButton;
     private javax.swing.JTextPane pickUpTextPane;
     private javax.swing.JLabel placedOrderLabel;
@@ -2243,9 +1962,10 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JButton submitButton;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JButton uploadPrescriptionButton;
-    private javax.swing.JLabel visaIcon;
+    private javax.swing.JButton viewOrderHistoryButton;
     private javax.swing.JLabel yourCartLabel;
     private javax.swing.JPanel yourCartMainPanel;
+    private javax.swing.JLabel yourOrderHistoryLabel;
     private javax.swing.JLabel yourOrderLabel;
     private javax.swing.JPanel yourOrderPanel;
     private javax.swing.JTextPane yourOrderTextPane;
