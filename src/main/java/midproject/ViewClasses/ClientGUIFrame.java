@@ -119,6 +119,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         sendMessageTextArea = new javax.swing.JTextArea();
         sendButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         orderHistoryPanel = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         orderHistoryTable = new javax.swing.JTable();
@@ -988,28 +989,35 @@ public class ClientGUIFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Sitka Heading", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(33, 37, 41));
+        jLabel2.setText("Send your inquiries/suggestions/comments about our drugstore");
+
         javax.swing.GroupLayout sendMessagePanelLayout = new javax.swing.GroupLayout(sendMessagePanel);
         sendMessagePanel.setLayout(sendMessagePanelLayout);
         sendMessagePanelLayout.setHorizontalGroup(
             sendMessagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sendMessagePanelLayout.createSequentialGroup()
+                .addGap(291, 291, 291)
                 .addGroup(sendMessagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(sendMessagePanelLayout.createSequentialGroup()
-                        .addGap(593, 593, 593)
-                        .addComponent(sendButton))
-                    .addGroup(sendMessagePanelLayout.createSequentialGroup()
-                        .addGap(291, 291, 291)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(290, Short.MAX_VALUE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 861, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(132, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sendMessagePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(sendButton)
+                .addGap(600, 600, 600))
         );
         sendMessagePanelLayout.setVerticalGroup(
             sendMessagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sendMessagePanelLayout.createSequentialGroup()
-                .addContainerGap(135, Short.MAX_VALUE)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addContainerGap(86, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addComponent(sendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(137, 137, 137))
+                .addGap(67, 67, 67))
         );
 
         containerPanel.add(sendMessagePanel, "card11");
@@ -1878,6 +1886,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JLabel helpLabel;
     private javax.swing.JLabel iconLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane18;
