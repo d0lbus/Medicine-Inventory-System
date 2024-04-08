@@ -396,6 +396,11 @@ public class AdminClientController {
                         throw new InvalidInputException("Passwords do not match. Please re-enter.");
                     }
 
+                    // Validate email format
+                    if (!Pattern.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{3,}", email)) {
+                        throw new InvalidInputException("Invalid email format.");
+                    }
+
                     // Check if username already exists
                     if (isUsernameAlreadyExists(username)) {
                         throw new UsernameAlreadyExistsException("Username already exists, please choose a different one.");
