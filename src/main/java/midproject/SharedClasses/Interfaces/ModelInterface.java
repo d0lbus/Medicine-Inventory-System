@@ -62,12 +62,13 @@ public interface ModelInterface extends Remote {
     public void updateUser(User editedUser, User originalUser, MessageCallback callback, String adminUsername) throws Exception;
 
     /**CUSTOMER SIDE**/
-    User getUserDetailsbyId(String userID) throws Exception;
-    User getUserDetails(String username, MessageCallback msgCallback) throws Exception;
-    void getCartDetails(String username, MessageCallback clientCallback) throws RemoteException;
+    User getUserDetailsbyId(String userID) throws Exception, UserNotFoundException;
+    User getUserDetails(String username, MessageCallback msgCallback) throws Exception, UserNotFoundException;
+    void getCartDetails(String username, MessageCallback clientCallback) throws RemoteException, CartDetailsFetchFailedException;
     void addMedicineToCart(String medicineId, int quantity, MessageCallback clientCallback, String username) throws RemoteException, MedicineOutOfStockException;
-    void updateMedicineQuantityInCart(String medicineId, int newQuantity, MessageCallback clientCallback, String username) throws RemoteException;
-    void removeMedicineInCart(String medicineId, MessageCallback clientCallback, String username) throws RemoteException;
+    void updateMedicineQuantityInCart(String medicineId, int newQuantity, MessageCallback clientCallback, String username) throws RemoteException, MedicineQuantityUpdateFailedException;
+    void removeMedicineInCart(String medicineId, MessageCallback clientCallback, String username) throws RemoteException, MedicineRemovalFailedException;
     int retrieveMedicineStock(String medicineId) throws RemoteException;
     void processOrder(User user, List<OrderItem> orderItems, String base64Image, String modeOfDelivery, String modeOfPayment, MessageCallback clientCallback) throws RemoteException, MedicineOutOfStockException;
+    boolean changeUserPassword(String username, String oldPassword, String newPassword, MessageCallback clientCallback) throws RemoteException, PasswordChangeFailedException;
 }

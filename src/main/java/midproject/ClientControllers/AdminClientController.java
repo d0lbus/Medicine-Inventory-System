@@ -396,6 +396,11 @@ public class AdminClientController {
                         throw new InvalidInputException("Passwords do not match. Please re-enter.");
                     }
 
+                    // Validate email format
+                    if (!Pattern.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{3,}", email)) {
+                        throw new InvalidInputException("Invalid email format.");
+                    }
+
                     // Check if username already exists
                     if (isUsernameAlreadyExists(username)) {
                         throw new UsernameAlreadyExistsException("Username already exists, please choose a different one.");
@@ -799,8 +804,8 @@ public class AdminClientController {
         adminGUIFrame.getEmailAddressTextField().setText("");
         adminGUIFrame.getContactNumberTextField().setText("");
         adminGUIFrame.getSetUsernameTextField().setText("");
-        adminGUIFrame.getSetPasswordTextField().setText("");
-        adminGUIFrame.getConfirmPasswordTextField().setText("");
+        adminGUIFrame.getPasswordField().setText("");
+        adminGUIFrame.getConfirmPasswordField().setText("");
         adminGUIFrame.getStreetAddressTextField().setText("");
         adminGUIFrame.getAptSuiteOptionalTextField().setText("");
         adminGUIFrame.getMunicipalityTextField().setText("");
@@ -832,10 +837,19 @@ public class AdminClientController {
         birthdateCal.setTime(birthdate);
         Calendar now = Calendar.getInstance();
 
+        // Check if birthdate is after today
+        if (now.before(birthdateCal)) {
+            return 0;
+        }
+
         int age = now.get(Calendar.YEAR) - birthdateCal.get(Calendar.YEAR);
-        if (now.get(Calendar.DAY_OF_YEAR) < birthdateCal.get(Calendar.DAY_OF_YEAR)) {
+
+        // Adjust age if birthday has not yet occurred this year
+        birthdateCal.add(Calendar.YEAR, age);
+        if (now.before(birthdateCal)) {
             age--;
         }
+
         return age;
     }
 
