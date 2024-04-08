@@ -164,7 +164,6 @@ public class User implements Serializable {
 	 *
 	 * @return The type of the user.
 	 */
-	// Getter for userType
 	public String getUserType() {
 		return this.userType;
 	}

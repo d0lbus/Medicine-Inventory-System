@@ -21,7 +21,6 @@ import javax.swing.text.StyledDocument;
 
 public class CallbackImplementation extends UnicastRemoteObject implements MessageCallback, Serializable {
 	private User user;
-	private UserCallBackInfo userInfo;
 	private AdminGUIFrame adminGUIFrame;
 	private ClientGUIFrame clientGUIFrame;
 	LocalDateTime now = LocalDateTime.now();
@@ -517,7 +516,7 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 
 				double discountRate = 0.0;
 				if ("yes".equals(user.getPersonWithDisability())) {
-					discountRate = 0.2; // Assuming the discount rate is 20% for PWD
+					discountRate = 0.2;
 					pwdDiscount = "20%";
 				} else {
 					pwdDiscount = "0%";

@@ -50,13 +50,11 @@ public class OrderJSONProcessor {
         File orderFile = new File(filepath);
         if (orderFile.exists() && !orderFile.isDirectory()) {
             try (Reader reader = new FileReader(orderFile)) {
-                // Return the list of orders read from the file
                 List<Order> orders = gson.fromJson(reader, new TypeToken<List<Order>>() {}.getType());
                 if (orders != null) {
                     return orders;
                 }
             } catch (FileNotFoundException e) {
-                // Log the error or handle it as deemed appropriate
                 System.err.println("Order file not found, returning an empty list.");
             }
         }
@@ -76,7 +74,7 @@ public class OrderJSONProcessor {
                 return order;
             }
         }
-        return null; // Order not found
+        return null;
     }
 
 
@@ -89,10 +87,9 @@ public class OrderJSONProcessor {
         int lastOrderId = getLastOrderId();
         int newOrderId = lastOrderId + 1;
         saveLastOrderId(newOrderId);
-        return String.format("ORD%05d", newOrderId); // Formats ID with prefix and leading zeros
+        return String.format("ORD%05d", newOrderId);
     }
 
-    // Retrieves the last order ID from the file
     private static int getLastOrderId() throws IOException {
         try {
             String lastIdStr = new String(Files.readAllBytes(Paths.get(ORDER_ID_FILE)));
@@ -102,7 +99,6 @@ public class OrderJSONProcessor {
         }
     }
 
-    // Saves the last used order ID to the file
     private static void saveLastOrderId(int lastOrderId) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ORDER_ID_FILE))) {
             writer.write(Integer.toString(lastOrderId));
@@ -113,12 +109,10 @@ public class OrderJSONProcessor {
         List<Order> orders = new ArrayList<>();
 
         try (FileReader reader = new FileReader("res/Orders.json")) {
-            // Read the JSON file and parse it into a list of orders
             Gson gson = new Gson();
             Type orderListType = new TypeToken<List<Order>>() {}.getType();
             List<Order> allOrders = gson.fromJson(reader, orderListType);
 
-            // Filter orders by user ID
             for (Order order : allOrders) {
                 if (order.getUserId().equals(userId)) {
                     orders.add(order);
@@ -126,7 +120,6 @@ public class OrderJSONProcessor {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle IOException
         }
 
         return orders;

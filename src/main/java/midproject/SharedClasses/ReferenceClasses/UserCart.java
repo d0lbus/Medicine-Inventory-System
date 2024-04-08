@@ -37,17 +37,14 @@ public class UserCart implements Serializable {
         this.userId = userId;
     }
 
-    // If you have other functionalities like clearing the cart, include those methods here.
     public void clearCart() {
         items.clear();
     }
 
     public void updateMedicineQuantity(String medicineId, int newQuantity) {
         if (newQuantity <= 0) {
-            // If the new quantity is zero or negative, remove the item from the cart.
             items.remove(medicineId);
         } else {
-            // Update the quantity of the medicine.
             items.put(medicineId, newQuantity);
         }
     }

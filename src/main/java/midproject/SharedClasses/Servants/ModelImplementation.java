@@ -73,26 +73,20 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             return sessionId;
 
         } catch (AuthenticationFailedException e) {
-            // Handle invalid credentials
             System.err.println("Authentication failed: " + e.getMessage());
             throw e;
         } catch (AlreadyLoggedInException e) {
-            // Handle already logged in
             System.err.println("User already logged in: " + e.getMessage());
             throw e;
         } catch (UserExistsException e) {
-            // Handle user already exists
             System.err.println("Username already exists: " + e.getMessage());
             throw e;
         } catch (RemoteException e) {
-            // Handle RemoteException
             System.err.println("Remote exception occurred: " + e.getMessage());
             throw e;
         } catch (Exception e) {
-            // Catch-all for other exceptions
             System.err.println("An unexpected error occurred: " + e.getMessage());
             e.printStackTrace();
-            // Consider what to do here: rethrow, convert to a specific exception, etc.
             throw new RemoteException("An unexpected error occurred.", e);
         }
     }
@@ -117,7 +111,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         User user = msgCallback.getUser();
         user.setUsername(username);
 
-        // When removing, ensure we're using the lookupKey variable
         msgCallbacks.remove(lookupKey);
         sessionUserMap.remove(sessionID);
 
@@ -353,7 +346,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         try {
             List<Order> allOrders = OrderJSONProcessor.readOrdersFromFile("res/Orders.json");
 
-            // Filter the orders to exclude any with "Pending" status.
             List<Order> searchResults = allOrders.stream()
                     .filter(order -> !order.getStatus().equalsIgnoreCase("Pending") &&
                             (order.getOrderId().toLowerCase().contains(searchText.toLowerCase()) ||
@@ -363,7 +355,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
                                     order.getTotal().toString().contains(searchText.toLowerCase())))
                     .collect(Collectors.toList());
 
-            // Send the filtered results back to the client
             callback.sendOrderSearchResults(searchResults);
         } catch (Exception e) {
             throw new RemoteException("Error while searching orders", e);
@@ -374,7 +365,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         try {
             List<Order> allOrders = OrderJSONProcessor.readOrdersFromFile("res/Orders.json");
 
-            // Filter the orders to include only those with "Pending" status.
             List<Order> searchResults = allOrders.stream()
                     .filter(order -> order.getStatus().equalsIgnoreCase("Pending") &&
                             (order.getOrderId().toLowerCase().contains(searchText.toLowerCase()) ||
@@ -384,7 +374,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
                                     order.getTotal().toString().contains(searchText.toLowerCase())))
                     .collect(Collectors.toList());
 
-            // Send the filtered results back to the client
             callback.sendPendingOrderSearchResults(searchResults);
         } catch (Exception e) {
             throw new RemoteException("Error while searching orders", e);
@@ -624,7 +613,7 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
             if ("Admin".equals(userInfo.getUserType())) {
                 try {
-                    callback.countUsersList(usersList); // Adjust callback method to accept count directly
+                    callback.countUsersList(usersList);
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
@@ -805,28 +794,21 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
     }
     public synchronized void addMedicineToCart(String medicineId, int quantity, MessageCallback clientCallback, String username) throws RemoteException {
         try {
-            // Retrieve user by username to get the userID
             User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
             String userID = user.getUserId();
 
-            // Retrieve all user carts
             Map<String, UserCart> userCarts = CartJSONProcessor.readUserCartsFromFile();
 
-            // Get the user's cart from the map, create a new one if it doesn't exist
             UserCart userCart = userCarts.getOrDefault(userID, new UserCart(userID));
 
-            // Add the medicine to the cart
             userCart.addOrUpdateItem(medicineId, quantity);
 
-            // Put the updated cart back in the map
             userCarts.put(userID, userCart);
 
-            // Save the updated map of all user carts back to the file
             CartJSONProcessor.writeUserCartsToFile(userCarts);
 
             clientCallback.updateCart(userCart);
         } catch (Exception e) {
-            // Handle exceptions
             throw new RemoteException("Error adding medicine to cart: " + e.getMessage(), e);
         }
     }
@@ -841,20 +823,16 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
                 throw new RemoteException("Cart for user not found.");
             }
 
-            // Retrieve the user's cart.
             UserCart userCart = userCarts.get(userId);
 
             if (userCart == null) {
                 throw new RemoteException("Cart not initialized correctly.");
             }
 
-            // Update the quantity of the specified medicine in the cart.
             userCart.updateMedicineQuantity(medicineId, newQuantity);
 
-            // Save the updated cart back to the file.
             CartJSONProcessor.writeUserCartsToFile(userCarts);
 
-            // Notify the user's client about the cart update.
             clientCallback.updateCart(userCart);
 
         } catch (Exception e) {
@@ -868,13 +846,10 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
             String userId = user.getUserId();
 
-            // Retrieve the current cart for the user
             UserCart userCart = userCarts.get(userId);
 
-            // Remove the medicine from the cart
-            userCart.removeItem(medicineId); // Assuming UserCart class has this method implemented
+            userCart.removeItem(medicineId);
 
-            // Save the updated cart
             CartJSONProcessor.writeUserCartsToFile(userCarts);
             clientCallback.updateCart(userCart);
 
@@ -975,13 +950,11 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
     private static double getTotal(User user, List<OrderItem> orderItems) {
         double total;
 
-        // Calculate total price of order items
         total = OrderItem.calculateTotalPrice(orderItems);
 
-        // Apply discount if applicable
         double discountRate = 0.0;
         if ("yes".equals(user.getPersonWithDisability())) {
-            discountRate = 0.2; // Assuming the discount rate is 20% for PWD
+            discountRate = 0.2;
             double discountAmount = total * discountRate;
             total -= discountAmount;
         }

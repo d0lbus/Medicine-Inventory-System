@@ -112,7 +112,7 @@ public class UserJSONProcessor {
 
             for (User user : users) {
                 if (user.getUsername().equals(username)) {
-                    return user.getUserType(); // Assuming User class has a getUserType method
+                    return user.getUserType();
                 }
             }
             throw new Exception("User not found");
@@ -207,7 +207,7 @@ public class UserJSONProcessor {
 
             String json = jsonContent.toString().trim();
             if (json.startsWith("[") && json.endsWith("]")) {
-                json = json.substring(1, json.length() - 1); // Remove square brackets
+                json = json.substring(1, json.length() - 1);
                 String[] userObjects = json.split("\\},\\{");
                 for (String userObject : userObjects) {
                     String[] fields = userObject.split(",");

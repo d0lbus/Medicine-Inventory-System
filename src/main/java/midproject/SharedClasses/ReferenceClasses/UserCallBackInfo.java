@@ -11,7 +11,6 @@ public class UserCallBackInfo {
         this.userType = userType;
     }
 
-    // Getters
     public String getUsername() {
         return username;
     }
@@ -20,7 +19,6 @@ public class UserCallBackInfo {
         return userType;
     }
 
-    // Setters
     public void setUsername(String username) {
         this.username = username;
     }

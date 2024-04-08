@@ -147,7 +147,6 @@ public class MedicineJSONProcessor {
         writeMedicinesToFile(medicines, filePath);
     }
 
-    // Generates the next medicine ID with synchronized for thread safety
     public static synchronized String generateNextMedicineId() {
         int lastIdNumber = readLastIdNumber();
         int nextIdNumber = lastIdNumber + 1;
@@ -155,7 +154,6 @@ public class MedicineJSONProcessor {
         return "M" + nextIdNumber;
     }
 
-    // Reads the last ID number from the tracker file, also synchronized
     private static synchronized int readLastIdNumber() {
         try {
             File file = new File(ID_TRACKER_FILE_PATH);
@@ -166,11 +164,10 @@ public class MedicineJSONProcessor {
             return Integer.parseInt(content.trim());
         } catch (IOException | NumberFormatException e) {
             e.printStackTrace();
-            return 0; // Default to 0 in case of error
+            return 0;
         }
     }
 
-    // Updates the tracker file with the new last used ID number, also synchronized
     private static synchronized void updateIdTrackerFile(int newLastIdNumber) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ID_TRACKER_FILE_PATH))) {
             writer.write(Integer.toString(newLastIdNumber));
