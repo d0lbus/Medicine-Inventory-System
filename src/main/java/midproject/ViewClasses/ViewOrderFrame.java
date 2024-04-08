@@ -7,6 +7,8 @@ package midproject.ViewClasses;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
+import java.awt.*;
+
 /**
  *
  * @author Freskkie
@@ -18,6 +20,9 @@ public class ViewOrderFrame extends javax.swing.JFrame {
      */
     public ViewOrderFrame() {
         initComponents();
+        Image logo = Toolkit.getDefaultToolkit().getImage("Icons/logo.png");
+        setIconImage(logo);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -33,6 +38,7 @@ public class ViewOrderFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quantum Drugstore");
+        setResizable(false);
 
         viewPanel.setBackground(new java.awt.Color(255, 255, 255));
 
