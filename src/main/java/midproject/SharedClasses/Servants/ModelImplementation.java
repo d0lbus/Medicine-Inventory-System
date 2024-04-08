@@ -1,9 +1,6 @@
-package midproject.SharedClasses.Implementations;
+package midproject.SharedClasses.Servants;
 
 import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.util.*;
 import java.rmi.server.*;
@@ -12,10 +9,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.Interfaces.MessageCallback;
 import midproject.SharedClasses.ReferenceClasses.*;

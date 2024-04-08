@@ -2,7 +2,7 @@ package midproject.Server;
 
 import java.rmi.registry.*;
 
-import midproject.SharedClasses.Implementations.ModelImplementation;
+import midproject.SharedClasses.Servants.ModelImplementation;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 
 public class Server {

@@ -1,14 +1,11 @@
-package midproject.SharedClasses.Implementations;
+package midproject.SharedClasses.Servants;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Base64;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 import midproject.SharedClasses.Interfaces.MessageCallback;
 import midproject.SharedClasses.ReferenceClasses.*;
@@ -21,8 +18,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-
-import static midproject.SharedClasses.Utilities.MedicineJSONProcessor.getMedicineById;
 
 public class CallbackImplementation extends UnicastRemoteObject implements MessageCallback, Serializable {
 	private User user;

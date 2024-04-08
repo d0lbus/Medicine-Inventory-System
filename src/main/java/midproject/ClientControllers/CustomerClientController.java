@@ -5,16 +5,14 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import midproject.SharedClasses.Implementations.CallbackImplementation;
+import midproject.SharedClasses.Servants.CallbackImplementation;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.OrderItem;
 import midproject.SharedClasses.ReferenceClasses.User;
@@ -30,11 +28,6 @@ import java.util.List;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
-import javax.swing.text.html.HTMLEditorKit;
 
 
 public class CustomerClientController {

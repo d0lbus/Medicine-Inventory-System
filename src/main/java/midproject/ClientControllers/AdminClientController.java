@@ -9,7 +9,7 @@ import java.rmi.registry.Registry;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import midproject.SharedClasses.Implementations.CallbackImplementation;
+import midproject.SharedClasses.Servants.CallbackImplementation;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.Medicine;
 import midproject.SharedClasses.ReferenceClasses.Order;
