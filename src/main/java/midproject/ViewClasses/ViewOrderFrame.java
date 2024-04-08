@@ -1,6 +1,13 @@
-package midproject.ViewClasses;
+package integ;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -23,6 +30,8 @@ public class ViewOrderFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         viewPanel = new javax.swing.JPanel();
+        viewTextPane = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quantum Drugstore");
@@ -30,15 +39,23 @@ public class ViewOrderFrame extends javax.swing.JFrame {
 
         viewPanel.setBackground(new java.awt.Color(255, 255, 255));
 
+        viewTextPane.setViewportView(jTextPane1);
+
         javax.swing.GroupLayout viewPanelLayout = new javax.swing.GroupLayout(viewPanel);
         viewPanel.setLayout(viewPanelLayout);
         viewPanelLayout.setHorizontalGroup(
             viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 404, Short.MAX_VALUE)
+            .addGroup(viewPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(viewTextPane, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
+                .addContainerGap())
         );
         viewPanelLayout.setVerticalGroup(
             viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 541, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(viewTextPane, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -73,7 +90,17 @@ public class ViewOrderFrame extends javax.swing.JFrame {
         });
     }
 
+    public JPanel getViewPanel() {
+        return viewPanel;
+    }
+
+    public JScrollPane getViewTextPane() {
+        return viewTextPane;
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JPanel viewPanel;
-
-
+    private javax.swing.JScrollPane viewTextPane;
+    // End of variables declaration//GEN-END:variables
 }
