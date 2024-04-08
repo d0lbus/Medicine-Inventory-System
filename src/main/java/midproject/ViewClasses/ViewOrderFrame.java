@@ -1,9 +1,5 @@
-package integ;
+package midproject.ViewClasses;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
@@ -88,6 +84,22 @@ public class ViewOrderFrame extends javax.swing.JFrame {
                 new ViewOrderFrame().setVisible(true);
             }
         });
+    }
+
+    public JTextPane getjTextPane1() {
+        return jTextPane1;
+    }
+
+    public void setjTextPane1(JTextPane jTextPane1) {
+        this.jTextPane1 = jTextPane1;
+    }
+
+    public void setViewPanel(JPanel viewPanel) {
+        this.viewPanel = viewPanel;
+    }
+
+    public void setViewTextPane(JScrollPane viewTextPane) {
+        this.viewTextPane = viewTextPane;
     }
 
     public JPanel getViewPanel() {

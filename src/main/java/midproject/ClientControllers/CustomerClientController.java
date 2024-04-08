@@ -236,13 +236,13 @@ public class CustomerClientController {
 
 						ImageIcon imageIcon = new ImageIcon(imageBytes);
 
-						/*StyledDocument doc = (StyledDocument) viewOrderFrame.getjTextPane1().getDocument();
+						StyledDocument doc = (StyledDocument) viewOrderFrame.getjTextPane1().getDocument();
 						doc.insertString(doc.getLength(), buildOrderDetailsString(user, orderId, orderDetails, chosenOrder.getModeOfDelivery(), chosenOrder.getPaymentMethod()), null);
 
 
 						Style style = doc.addStyle("ImageStyle", null);
 						StyleConstants.setIcon(style, imageIcon);
-						doc.insertString(doc.getLength(), "ignored text", style);*/
+						doc.insertString(doc.getLength(), "ignored text", style);
 
 					} catch (Exception ex) {
 						ex.printStackTrace();
@@ -585,7 +585,7 @@ public class CustomerClientController {
 
 	private static String buildOrderDetailsString(User user, String orderID, StringBuilder orderDetails, String modeOfDelivery, String modeOfPayment) {
 		StringBuilder details = new StringBuilder();
-		details.append("John Doe's Official Receipt("+orderID+")"+"\n\n");
+		details.append("("+orderID+")"+"\n\n");
 		details.append("Name: ").append(user.getFirstName()).append(" ").append(user.getLastName()).append("\n");
 		details.append("Address: ").append(user.getStreet()).append(" ").append(user.getAdditionalAddressDetails()).append(" ");
 		details.append(user.getCity()).append(", ").append(user.getProvince()).append(" ").append(user.getZip()).append("\n");
