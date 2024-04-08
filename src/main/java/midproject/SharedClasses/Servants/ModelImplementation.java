@@ -341,6 +341,49 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
     }
 
+    public void searchOrders(String searchText, MessageCallback callback) throws RemoteException {
+        try {
+            List<Order> allOrders = OrderJSONProcessor.readOrdersFromFile("res/Orders.json");
+
+            // Filter the orders to exclude any with "Pending" status.
+            List<Order> searchResults = allOrders.stream()
+                    .filter(order -> !order.getStatus().equalsIgnoreCase("Pending") &&
+                            (order.getOrderId().toLowerCase().contains(searchText.toLowerCase()) ||
+                                    order.getUserId().toLowerCase().contains(searchText.toLowerCase()) ||
+                                    order.getPaymentMethod().toLowerCase().contains(searchText.toLowerCase()) ||
+                                    order.getModeOfDelivery().toLowerCase().contains(searchText.toLowerCase()) ||
+                                    order.getTotal().toString().contains(searchText.toLowerCase())))
+                    .collect(Collectors.toList());
+
+            // Send the filtered results back to the client
+            callback.sendOrderSearchResults(searchResults);
+        } catch (Exception e) {
+            throw new RemoteException("Error while searching orders", e);
+        }
+    }
+
+    public void searchPendingOrders(String searchText, MessageCallback callback) throws RemoteException {
+        try {
+            List<Order> allOrders = OrderJSONProcessor.readOrdersFromFile("res/Orders.json");
+
+            // Filter the orders to include only those with "Pending" status.
+            List<Order> searchResults = allOrders.stream()
+                    .filter(order -> order.getStatus().equalsIgnoreCase("Pending") &&
+                            (order.getOrderId().toLowerCase().contains(searchText.toLowerCase()) ||
+                                    order.getUserId().toLowerCase().contains(searchText.toLowerCase()) ||
+                                    order.getPaymentMethod().toLowerCase().contains(searchText.toLowerCase()) ||
+                                    order.getModeOfDelivery().toLowerCase().contains(searchText.toLowerCase()) ||
+                                    order.getTotal().toString().contains(searchText.toLowerCase())))
+                    .collect(Collectors.toList());
+
+            // Send the filtered results back to the client
+            callback.sendPendingOrderSearchResults(searchResults);
+        } catch (Exception e) {
+            throw new RemoteException("Error while searching orders", e);
+        }
+    }
+
+
     /**
      *
      *

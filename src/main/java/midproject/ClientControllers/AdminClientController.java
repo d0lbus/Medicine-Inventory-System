@@ -442,6 +442,98 @@ public class AdminClientController {
 
         /** ORDERS RELATED METHODS */
 
+        adminGUIFrame.getoViewButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = adminGUIFrame.getoTable().getSelectedRow();
+                if (selectedRow >= 0) {
+                    String orderId = (String) adminGUIFrame.getoTable().getValueAt(selectedRow, 0);
+                    try {
+                        CompleteCancelFrame completeCancelFrame = new CompleteCancelFrame();
+                        completeCancelFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        completeCancelFrame.setLocationRelativeTo(null);
+                        completeCancelFrame.setVisible(true);
+                        Order chosenOrder = msgserver.retrieveOrderDetails(orderId);
+                        User user = msgserver.getUserDetailsbyId(chosenOrder.getUserId());
+
+                        StringBuilder orderDetails = new StringBuilder();
+
+                        for (OrderItem item : chosenOrder.getItems()) {
+                            String itemDetails = String.format("Medicine ID: %s\nGeneric Name: %s\nBrand Name: %s\nForm: %s\nQuantity: %d\nPrice: ₱%.2f\n\n",
+                                    item.getMedicineId(), item.getGenericName(), item.getBrandName(), item.getForm(),
+                                    item.getQuantity(), item.getPrice());
+                            orderDetails.append(itemDetails);
+                        }
+
+                        orderDetails.append(String.format("Total: ₱%.2f\n", chosenOrder.getTotal()));
+
+                        byte[] imageBytes = Base64.getDecoder().decode(chosenOrder.getImage());
+
+                        ImageIcon imageIcon = new ImageIcon(imageBytes);
+
+                        StyledDocument doc = (StyledDocument) completeCancelFrame.getAcceptCancelTextpane().getDocument();
+                        doc.insertString(doc.getLength(), buildOrderDetailsString(user, orderId, orderDetails, chosenOrder.getModeOfDelivery(), chosenOrder.getPaymentMethod()), null);
+
+
+                        Style style = doc.addStyle("ImageStyle", null);
+                        StyleConstants.setIcon(style, imageIcon);
+                        doc.insertString(doc.getLength(), "ignored text", style);
+
+                        completeCancelFrame.getCompleteButton().addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                String status = "Completed";
+                                try {
+                                    msgserver.updateOrderStatus(orderId,status);
+                                    JOptionPane.showMessageDialog(completeCancelFrame, "Order " + chosenOrder.getOrderId() + " Completed Successfully", "Complete Order", JOptionPane.INFORMATION_MESSAGE);
+                                    completeCancelFrame.setVisible(false);
+                                    autoRefreshOrderRelatedComponents();
+                                } catch (RemoteException ex) {
+                                    throw new RuntimeException(ex);
+                                } catch (Exception ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            }
+                        });
+
+                        completeCancelFrame.getCancelButton().addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                String status = "Cancelled";
+                                try {
+                                    msgserver.updateOrderStatus(orderId ,status);
+                                    JOptionPane.showMessageDialog(completeCancelFrame, "Order " + chosenOrder.getOrderId() + " Cancelled Successfully", "Cancel Order", JOptionPane.INFORMATION_MESSAGE);
+                                    completeCancelFrame.setVisible(false);
+                                    autoRefreshOrderRelatedComponents();
+                                } catch (RemoteException ex) {
+                                    throw new RuntimeException(ex);
+                                } catch (Exception ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            }
+                        });
+
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(adminGUIFrame, "Failed to load order details.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select an order to view.", "No Selection", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+        adminGUIFrame.getoSearchTextfield().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String searchText = adminGUIFrame.getoSearchTextfield().getText().trim().toLowerCase();
+                try {
+                    msgserver.searchOrders(searchText, mci);
+                } catch (RemoteException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
 
         /** PENDING ORDERS RELATED METHODS */
 
@@ -527,84 +619,14 @@ public class AdminClientController {
             }
         });
 
-        adminGUIFrame.getoViewButton().addActionListener(new ActionListener() {
+        adminGUIFrame.getpSearchTextfield().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int selectedRow = adminGUIFrame.getoTable().getSelectedRow();
-                if (selectedRow >= 0) {
-                    String orderId = (String) adminGUIFrame.getoTable().getValueAt(selectedRow, 0);
-                    try {
-                        CompleteCancelFrame completeCancelFrame = new CompleteCancelFrame();
-                        completeCancelFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        completeCancelFrame.setLocationRelativeTo(null);
-                        completeCancelFrame.setVisible(true);
-                        Order chosenOrder = msgserver.retrieveOrderDetails(orderId);
-                        User user = msgserver.getUserDetailsbyId(chosenOrder.getUserId());
-
-                        StringBuilder orderDetails = new StringBuilder();
-
-                        for (OrderItem item : chosenOrder.getItems()) {
-                            String itemDetails = String.format("Medicine ID: %s\nGeneric Name: %s\nBrand Name: %s\nForm: %s\nQuantity: %d\nPrice: ₱%.2f\n\n",
-                                    item.getMedicineId(), item.getGenericName(), item.getBrandName(), item.getForm(),
-                                    item.getQuantity(), item.getPrice());
-                            orderDetails.append(itemDetails);
-                        }
-
-                        orderDetails.append(String.format("Total: ₱%.2f\n", chosenOrder.getTotal()));
-
-                        byte[] imageBytes = Base64.getDecoder().decode(chosenOrder.getImage());
-
-                        ImageIcon imageIcon = new ImageIcon(imageBytes);
-
-                        StyledDocument doc = (StyledDocument) completeCancelFrame.getAcceptCancelTextpane().getDocument();
-                        doc.insertString(doc.getLength(), buildOrderDetailsString(user, orderId, orderDetails, chosenOrder.getModeOfDelivery(), chosenOrder.getPaymentMethod()), null);
-
-
-                        Style style = doc.addStyle("ImageStyle", null);
-                        StyleConstants.setIcon(style, imageIcon);
-                        doc.insertString(doc.getLength(), "ignored text", style);
-
-                        completeCancelFrame.getCompleteButton().addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                String status = "Completed";
-                                try {
-                                    msgserver.updateOrderStatus(orderId,status);
-                                    JOptionPane.showMessageDialog(completeCancelFrame, "Order " + chosenOrder.getOrderId() + " Completed Successfully", "Complete Order", JOptionPane.INFORMATION_MESSAGE);
-                                    completeCancelFrame.setVisible(false);
-                                    autoRefreshOrderRelatedComponents();
-                                } catch (RemoteException ex) {
-                                    throw new RuntimeException(ex);
-                                } catch (Exception ex) {
-                                    throw new RuntimeException(ex);
-                                }
-                            }
-                        });
-
-                        completeCancelFrame.getCancelButton().addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                String status = "Cancelled";
-                                try {
-                                    msgserver.updateOrderStatus(orderId ,status);
-                                    JOptionPane.showMessageDialog(completeCancelFrame, "Order " + chosenOrder.getOrderId() + " Cancelled Successfully", "Cancel Order", JOptionPane.INFORMATION_MESSAGE);
-                                    completeCancelFrame.setVisible(false);
-                                    autoRefreshOrderRelatedComponents();
-                                } catch (RemoteException ex) {
-                                    throw new RuntimeException(ex);
-                                } catch (Exception ex) {
-                                    throw new RuntimeException(ex);
-                                }
-                            }
-                        });
-
-
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                        JOptionPane.showMessageDialog(adminGUIFrame, "Failed to load order details.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select an order to view.", "No Selection", JOptionPane.WARNING_MESSAGE);
+                String searchText = adminGUIFrame.getpSearchTextfield().getText().trim().toLowerCase();
+                try {
+                    msgserver.searchPendingOrders(searchText, mci);
+                } catch (RemoteException ex) {
+                    ex.printStackTrace();
                 }
             }
         });

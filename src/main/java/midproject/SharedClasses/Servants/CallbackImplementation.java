@@ -246,7 +246,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			JOptionPane.showMessageDialog(null, userDetails, "Details of " + user.getFirstName() + " " + user.getLastName(), JOptionPane.INFORMATION_MESSAGE);
 		});
 	}
-
 	public void notifyUserRegisteredByAdmin(String adminUsername, User user) throws RemoteException{
 		SwingUtilities.invokeLater(() -> {
 			String message = "["+formattedDateTime+"]" + "ADMIN " + adminUsername + " registered user "
@@ -397,6 +396,42 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 				}
 			}
 
+		});
+	}
+
+	public void sendOrderSearchResults(List<Order> searchResults) throws RemoteException{
+		SwingUtilities.invokeLater(() -> {
+			DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getoTable().getModel();
+			model.setRowCount(0);
+			for (Order order : searchResults) {
+				Object[] rowData = {
+						order.getOrderId(),
+						order.getUserId(),
+						order.getModeOfDelivery(),
+						order.getPaymentMethod(),
+						order.getStatus(),
+						order.getTotal()
+				};
+				model.addRow(rowData);
+			}
+		});
+	}
+
+	public void sendPendingOrderSearchResults(List<Order> searchResults) throws RemoteException{
+		SwingUtilities.invokeLater(() -> {
+			DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getpTable().getModel();
+			model.setRowCount(0);
+			for (Order order : searchResults) {
+				Object[] rowData = {
+						order.getOrderId(),
+						order.getUserId(),
+						order.getModeOfDelivery(),
+						order.getPaymentMethod(),
+						order.getStatus(),
+						order.getTotal()
+				};
+				model.addRow(rowData);
+			}
 		});
 	}
 	@Override

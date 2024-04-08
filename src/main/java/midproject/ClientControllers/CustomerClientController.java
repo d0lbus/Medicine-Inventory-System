@@ -17,6 +17,8 @@ import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.OrderItem;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.MedicineOutOfStockException;
+import midproject.SharedClasses.UserDefinedExceptions.MedicineQuantityUpdateFailedException;
+import midproject.SharedClasses.UserDefinedExceptions.MedicineRemovalFailedException;
 import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
 import midproject.ViewClasses.ClientGUIFrame;
 import midproject.ViewClasses.QuantityFrame;
@@ -245,8 +247,10 @@ public class CustomerClientController {
 								quantityFrame.dispose();
 							} catch (RemoteException exc) {
 								JOptionPane.showMessageDialog(quantityFrame, "Failed to update quantity: " + exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-							}
-						} else {
+							} catch (MedicineQuantityUpdateFailedException exception) {
+                                throw new RuntimeException(exception);
+                            }
+                        } else {
 							JOptionPane.showMessageDialog(quantityFrame, "Please select a valid quantity.", "Invalid Quantity", JOptionPane.WARNING_MESSAGE);
 						}
 					});
@@ -268,8 +272,10 @@ public class CustomerClientController {
 							msgserver.removeMedicineInCart(medicineId, mci, username);
 						} catch (RemoteException exc) {
 							JOptionPane.showMessageDialog(clientGUIFrame, "Failed to remove item from cart: " + exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-						}
-					}
+						} catch (MedicineRemovalFailedException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
 					JOptionPane.showMessageDialog(clientGUIFrame, "Selected items removed from cart successfully.", "Items Removed", JOptionPane.INFORMATION_MESSAGE);
 
 				} else {

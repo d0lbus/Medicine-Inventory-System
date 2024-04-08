@@ -59,6 +59,10 @@ public interface MessageCallback extends Remote {
 
 	void sendArchivedUserSearchResults(List<User> searchResults) throws RemoteException;
 
+	void sendOrderSearchResults(List<Order> searchResults) throws RemoteException;
+
+	void sendPendingOrderSearchResults(List<Order> searchResults) throws RemoteException;
+
 	void notifyUserUpdatedByAdmin(String adminUsername, User editedUser, User originalUser) throws RemoteException;
 
 	void notifyUserOrdersToAdmins(String username, String orderId) throws RemoteException;

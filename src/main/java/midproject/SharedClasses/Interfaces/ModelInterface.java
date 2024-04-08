@@ -39,6 +39,10 @@ public interface ModelInterface extends Remote {
 
     public void updateOrdersTable() throws Exception;
 
+    public void searchOrders(String searchText, MessageCallback callback) throws RemoteException;
+
+    public void searchPendingOrders(String searchText, MessageCallback callback) throws RemoteException;
+
     public Order retrieveOrderDetails(String orderId)  throws RemoteException;
 
     public void updateOrderStatus(String orderId, String newStatus) throws RemoteException;
