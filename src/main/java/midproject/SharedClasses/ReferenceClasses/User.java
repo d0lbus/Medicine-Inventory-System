@@ -11,7 +11,7 @@ public class User implements Serializable {
 	private String birthdate;
 	private String age;
 	private String gender;
-	private String personWithDisability;
+	private boolean personWithDisability;
 	private String email;
 	private String contactNumber;
 	private String username;
@@ -51,7 +51,7 @@ public class User implements Serializable {
 		this.gender = gender;
 	}
 
-	public void setPersonWithDisability(String personWithDisability) {
+	public void setPersonWithDisability(boolean personWithDisability) {
 		this.personWithDisability = personWithDisability;
 	}
 
@@ -128,7 +128,7 @@ public class User implements Serializable {
 		this.birthdate = birthdate;
 		this.age = age;
 		this.gender = gender;
-		this.personWithDisability = String.valueOf(personWithDisability);
+		this.personWithDisability = Boolean.parseBoolean(String.valueOf(personWithDisability));
 		this.email = email;
 		this.contactNumber = contactNumber;
 		this.username = username;
@@ -238,7 +238,7 @@ public class User implements Serializable {
 	 * @return A string indicating whether the user has a disability.
 	 */
 	public boolean getPersonWithDisability() {
-		return Boolean.parseBoolean(personWithDisability);
+		return personWithDisability;
 	}
 
 	/**

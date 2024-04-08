@@ -173,6 +173,7 @@ public class AdminClientController {
             }
         });
 
+        /**
         adminGUIFrame.getrUsersEditButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -182,7 +183,7 @@ public class AdminClientController {
                     throw new RuntimeException(ex);
                 }
             }
-        });
+        });*/
 
         adminGUIFrame.getrUsersArchiveButton().addActionListener(new ActionListener() {
             @Override
@@ -226,30 +227,66 @@ public class AdminClientController {
                 if (selectedRow >= 0) {
                     DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getrUsersTable().getModel();
 
-                    User selectedUserT = new User();
-                    selectedUserT.setLastName(model.getValueAt(selectedRow, 1).toString());
-                    selectedUserT.setFirstName(model.getValueAt(selectedRow, 2).toString());
-                    selectedUserT.setUserType(model.getValueAt(selectedRow, 3).toString());
-                    selectedUserT.setUsername(model.getValueAt(selectedRow, 4).toString());
-
-                    String userId = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 0).toString();
-                    User selectedUser = fetchUserInformationFromDataSource(userId, "res/UserInformation.json");
-
-                    EditUserFrame editUserFrame = new EditUserFrame(selectedUser);
+                    EditUserFrame editUserFrame = new EditUserFrame();
                     editUserFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     editUserFrame.setLocationRelativeTo(null);
                     editUserFrame.setVisible(true);
 
+                    User selectedUser = new User();
+                    selectedUser.setLastName(model.getValueAt(selectedRow, 1).toString());
+                    selectedUser.setFirstName(model.getValueAt(selectedRow, 2).toString());
+                    selectedUser.setUserType(model.getValueAt(selectedRow, 3).toString());
+                    selectedUser.setUsername(model.getValueAt(selectedRow, 4).toString());
+
+                    String userId = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 0).toString();
+                    selectedUser = fetchUserInformationFromDataSource(userId, "res/UserInformation.json");
+
+                    String selectedUserId = selectedUser.getUserId();
+
+                    editUserFrame.getFirstNameTextField().setText(selectedUser.getFirstName());
+                    editUserFrame.getLastNameTextField().setText(selectedUser.getLastName());
+                    editUserFrame.getMiddleNameTextField().setText(selectedUser.getMiddleName());
+                    editUserFrame.getBirthdateTextField().setText(selectedUser.getBirthdate());
+                    editUserFrame.getAgeTextField().setText(selectedUser.getAge());
+                    editUserFrame.getGenderComboBox().setSelectedItem(selectedUser.getGender());
+                    //editUserFrame.getPersonWithDisabilityCheckBox().setSelected(selectedUser.getPersonWithDisability());
+                    editUserFrame.getEmailAddressTextField().setText(selectedUser.getEmail());
+                    editUserFrame.getContactNumberTextField().setText(selectedUser.getContactNumber());
+                    editUserFrame.getStreetAddressTextField().setText(selectedUser.getStreet());
+                    editUserFrame.getOptionalDetailsTextField().setText(selectedUser.getAdditionalAddressDetails());
+                    editUserFrame.getCityMunicipalityTextField().setText(selectedUser.getCity());
+                    editUserFrame.getProvinceTextField().setText(selectedUser.getProvince());
+                    editUserFrame.getPostalCodeTextField().setText(selectedUser.getZip());
+
+
+                    User finalSelectedUser = selectedUser;
                     editUserFrame.getEditAccountButton().addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
+                            User editedUser = new User();
                             // Get the edited user details from the editUserFrame
-                            User editedUser = editUserFrame.getEditedUser();
+                            //User editedUser = editUserFrame.getEditedUser();
+
+                            editedUser.setUserId(selectedUserId);
+                            editedUser.setFirstName(editUserFrame.getFirstNameTextField().getText());
+                            editedUser.setLastName(editUserFrame.getLastNameTextField().getText());
+                            editedUser.setMiddleName(editUserFrame.getMiddleNameTextField().getText());
+                            editedUser.setBirthdate(editUserFrame.getBirthdateTextField().getText());
+                            editedUser.setAge(editUserFrame.getAgeTextField().getText());
+                            editedUser.setGender((String) editUserFrame.getGenderComboBox().getSelectedItem());
+                            //editedUser.setPersonWithDisability(editUserFrame.getPersonWithDisabilityCheckBox().getAction().isEnabled());
+                            editedUser.setEmail(editUserFrame.getEmailAddressTextField().getText());
+                            editedUser.setContactNumber(editUserFrame.getContactNumberTextField().getText());
+                            editedUser.setStreet(editUserFrame.getStreetAddressTextField().getText());
+                            editedUser.setAdditionalAddressDetails(editUserFrame.getOptionalDetailsTextField().getText());
+                            editedUser.setCity(editUserFrame.getCityMunicipalityTextField().getText());
+                            editedUser.setProvince(editUserFrame.getProvinceTextField().getText());
+                            editedUser.setZip(editUserFrame.getPostalCodeTextField().getText());
 
                             try {
-                                // Call the method in msgserver to update user details
-                                msgserver.updateUser(editedUser, selectedUser, mci, username);
-                                // Refresh any necessary components
+
+                                msgserver.updateUser(editedUser, finalSelectedUser, mci, username);
+
                                 autoRefreshUserRelatedComponents();
                                 JOptionPane.showMessageDialog(editUserFrame, "User updated successfully.");
                                 editUserFrame.dispose();
@@ -805,6 +842,7 @@ public class AdminClientController {
         msgserver.updateRegisteredUsersTable();
         msgserver.updateRegisteredUsersCount();
         msgserver.updateArchivedUsersTable();
+        msgserver.updateRegisteredUsersTable();
     }
 
     private static void autoRefreshMedicineRelatedComponents() throws Exception{

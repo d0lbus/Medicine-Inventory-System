@@ -2,6 +2,7 @@ package midproject.SharedClasses.Utilities;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import midproject.SharedClasses.ReferenceClasses.Medicine;
 import midproject.SharedClasses.ReferenceClasses.User;
 
 
@@ -102,7 +103,7 @@ public class UserJSONProcessor {
         }
     }
 
-    public static void updateUserInJsonFile(User updatedUser, String filePath) {
+    public static void updateUserInJsonFile(User updatedUser, String filePath) throws Exception {
 
         /**
         try {
@@ -116,7 +117,7 @@ public class UserJSONProcessor {
             writeUsersToFile(users, filePath);
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
 
 
 
@@ -140,6 +141,17 @@ public class UserJSONProcessor {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    } */
+
+        List<User> users = readUsersFromFile(filePath);
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+            if (user.getUserId().equals(updatedUser.getUserId())) {
+                users.set(i, updatedUser);
+                break;
+            }
+        }
+        writeUsersToFile(users, filePath);
     }
 
     public static void transferUserToDifferentFile(String userId, String originalFilePath, String destinationFilePath) {

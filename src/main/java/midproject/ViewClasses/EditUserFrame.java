@@ -379,7 +379,7 @@ public class EditUserFrame extends javax.swing.JFrame {
         editedUser.setBirthdate(birthdateTextField.getText());
         editedUser.setAge(String.valueOf(Integer.parseInt(ageTextField.getText())));
         editedUser.setGender(Objects.requireNonNull(genderComboBox.getSelectedItem()).toString());
-        editedUser.setPersonWithDisability(String.valueOf(personWithDisabilityCheckBox.isSelected()));
+        editedUser.setPersonWithDisability(personWithDisabilityCheckBox.getAction().isEnabled());
         editedUser.setStreet(streetAddressTextField.getText());
         editedUser.setUserType(Objects.requireNonNull(userTypeComboBox.getSelectedItem()).toString());
         editedUser.setEmail(emailAddressTextField.getText());
@@ -401,11 +401,6 @@ public class EditUserFrame extends javax.swing.JFrame {
                 // For example, show an error message or log the error
             }
         }
-
-
-
-
-
         return editedUser;
     }
 
