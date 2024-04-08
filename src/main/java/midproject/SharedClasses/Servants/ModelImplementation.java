@@ -421,6 +421,7 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
             List<Medicine> searchResults = allMedicine.stream()
                     .filter(medicine ->
+                            medicine.getMedicineID().toLowerCase().contains(searchText.toLowerCase()) ||
                             medicine.getCategory().toLowerCase().contains(searchText.toLowerCase()) ||
                                     medicine.getBrandName().toLowerCase().contains(searchText.toLowerCase()) ||
                                     medicine.getGenericName().toLowerCase().contains(searchText.toLowerCase()) ||
@@ -923,6 +924,19 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
     }
 
+    public void sendMessageToAdmins(String message, String username) throws RemoteException{
+        msgCallbacks.entrySet().forEach(entry -> {
+            UserCallBackInfo userInfo = entry.getKey();
+            MessageCallback callback = entry.getValue();
+            if ("Admin".equals(userInfo.getUserType())) {
+                try {
+                    callback.getUserMessage(message, username);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
     private static double getTotal(User user, List<OrderItem> orderItems) {
         double total;
 

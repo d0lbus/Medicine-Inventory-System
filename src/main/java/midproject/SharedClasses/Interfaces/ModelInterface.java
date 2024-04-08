@@ -65,6 +65,8 @@ public interface ModelInterface extends Remote {
 
     public void updateUser(User editedUser, User originalUser, MessageCallback callback, String adminUsername) throws Exception;
 
+    void sendMessageToAdmins(String message, String username) throws RemoteException;
+
     /**CUSTOMER SIDE**/
     User getUserDetailsbyId(String userID) throws Exception, UserNotFoundException;
     User getUserDetails(String username, MessageCallback msgCallback) throws Exception, UserNotFoundException;
