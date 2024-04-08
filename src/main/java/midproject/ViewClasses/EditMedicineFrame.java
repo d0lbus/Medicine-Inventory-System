@@ -7,6 +7,7 @@ package midproject.ViewClasses;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  *
@@ -19,6 +20,8 @@ public class EditMedicineFrame extends javax.swing.JFrame {
      */
     public EditMedicineFrame() {
         initComponents();
+        Image logo = Toolkit.getDefaultToolkit().getImage("Icons/logo.png");
+        setIconImage(logo);
         setLocationRelativeTo(null);
     }
 

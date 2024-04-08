@@ -29,6 +29,8 @@ public class AdminGUIFrame extends javax.swing.JFrame {
      */
     public AdminGUIFrame() {
         initComponents();
+        Image logo = Toolkit.getDefaultToolkit().getImage("Icons/logo.png");
+        setIconImage(logo);
         setLocationRelativeTo(null);
     }
 

@@ -3,6 +3,7 @@ package midproject.ViewClasses;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  *
@@ -15,6 +16,8 @@ public class AcceptRejectFrame extends javax.swing.JFrame {
      */
     public AcceptRejectFrame() {
         initComponents();
+        Image logo = Toolkit.getDefaultToolkit().getImage("Icons/logo.png");
+        setIconImage(logo);
         setLocationRelativeTo(null);
     }
 

@@ -8,6 +8,7 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import midproject.SharedClasses.ReferenceClasses.User;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Objects;
 
 /**
@@ -21,6 +22,8 @@ public class EditUserFrame extends javax.swing.JFrame {
      */
     public EditUserFrame() {
         initComponents();
+        Image logo = Toolkit.getDefaultToolkit().getImage("Icons/logo.png");
+        setIconImage(logo);
         setLocationRelativeTo(null);
     }
 

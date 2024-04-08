@@ -3,6 +3,7 @@ package midproject.ViewClasses;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
 import javax.swing.*;
+import java.awt.*;
 
 
 /**
@@ -21,6 +22,8 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
     public ClientGUIFrame() {
         initComponents();
+        Image logo = Toolkit.getDefaultToolkit().getImage("Icons/logo.png");
+        setIconImage(logo);
         setLocationRelativeTo(null);
     }
 

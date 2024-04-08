@@ -8,6 +8,7 @@ package midproject.ViewClasses;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  *
@@ -20,6 +21,8 @@ public class CompleteCancelFrame extends javax.swing.JFrame {
      */
     public CompleteCancelFrame() {
         initComponents();
+        Image logo = Toolkit.getDefaultToolkit().getImage("Icons/logo.png");
+        setIconImage(logo);
         setLocationRelativeTo(null);
     }
 
