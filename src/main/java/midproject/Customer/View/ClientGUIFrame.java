@@ -1031,7 +1031,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Medicine ID", "Category", "Generic Name", "Brand Name", "Form", "Total"
+                "ORDER ID", "USER ID", "STATUS", "DELIVERY METHOD", "PAYMENT METHOD", "TOTAL"
             }
         ) {
             boolean[] canEdit = new boolean [] {
