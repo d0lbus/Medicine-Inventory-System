@@ -1,7 +1,6 @@
 package midproject.ViewClasses;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,7 +9,6 @@ import java.awt.*;
  * This class is used for designing the whole Client GUI program
  * 
  * @author Encarnacion, Ma. Earl Freskkie
- * @since January 31 - February 17, 2024
  */
 public class ClientGUIFrame extends javax.swing.JFrame {
 
@@ -61,7 +59,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         goToCartButton = new javax.swing.JButton();
         yourCartMainPanel = new javax.swing.JPanel();
         yourCartLabel = new javax.swing.JLabel();
-        searchLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         categoryTable1 = new javax.swing.JTable();
         removeButton = new javax.swing.JButton();
@@ -403,7 +400,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
                 .addGroup(categoryPanelLayout.createSequentialGroup()
                     .addGap(276, 276, 276)
                     .addComponent(selectQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(277, Short.MAX_VALUE)))
+                    .addContainerGap(281, Short.MAX_VALUE)))
         );
 
         containerPanel.add(categoryPanel, "categoryPanel");
@@ -414,11 +411,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         yourCartLabel.setForeground(new java.awt.Color(33, 37, 41));
         yourCartLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         yourCartLabel.setText("Your Cart");
-
-        searchLabel1.setFont(new java.awt.Font("Sitka Heading", 1, 18)); // NOI18N
-        searchLabel1.setForeground(new java.awt.Color(33, 37, 41));
-        searchLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        searchLabel1.setText("Search your generic medicine");
 
         categoryTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -492,16 +484,12 @@ public class ClientGUIFrame extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(yourCartLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1272, Short.MAX_VALUE))
                     .addGroup(yourCartMainPanelLayout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addGroup(yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 969, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(yourCartMainPanelLayout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(searchLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(70, 70, 70)
-                        .addGroup(yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(editOrderButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(99, 99, 99)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 969, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)
+                        .addGroup(yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(editOrderButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(yourCartMainPanelLayout.createSequentialGroup()
@@ -516,16 +504,16 @@ public class ClientGUIFrame extends javax.swing.JFrame {
             .addGroup(yourCartMainPanelLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(yourCartLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(searchLabel1)
-                .addGap(57, 57, 57)
-                .addGroup(yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGroup(yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(yourCartMainPanelLayout.createSequentialGroup()
                         .addComponent(editOrderButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yourCartMainPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61)))
                 .addGroup(yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backYourCartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -971,7 +959,7 @@ public class ClientGUIFrame extends javax.swing.JFrame {
             .addGroup(notificationsPanelLayout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         containerPanel.add(notificationsPanel, "card10");
@@ -1119,158 +1107,148 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void iconLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconLabelMouseClicked
-    }//GEN-LAST:event_iconLabelMouseClicked
-
-    private void overthecounterButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        containerPanel.removeAll();
-        containerPanel.add(categoryPanel);
-        containerPanel.repaint();
-        containerPanel.revalidate();
+    private void iconLabelMouseClicked(java.awt.event.MouseEvent evt) {
     }
 
-    private void searchTextfieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextfieldKeyPressed
+    private void searchTextfieldKeyPressed(java.awt.event.KeyEvent evt) {
 
-    }//GEN-LAST:event_searchTextfieldKeyPressed
+    }
 
     private void addToCartButtonActionPerformed(java.awt.event.ActionEvent evt) {
         selectQuantity.setVisible(true);
 
     }
 
-    private void pickUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pickUpButtonActionPerformed
+    private void pickUpButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
-    }//GEN-LAST:event_pickUpButtonActionPerformed
+    }
 
-    private void deliveryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliveryButtonActionPerformed
+    private void deliveryButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_deliveryButtonActionPerformed
+    }
 
     private void nextButtonModeOfPaymennextButtonModeOfDeliveryActionPerformed(java.awt.event.ActionEvent evt) {
-//GEN-FIRST:event_nextButtonModeOfPaymennextButtonModeOfDeliveryActionPerformed
 
-    }//GEN-LAST:event_nextButtonModeOfPaymennextButtonModeOfDeliveryActionPerformed
+    }
 
-    private void backButtonModeOfDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonModeOfDeliveryActionPerformed
+    private void backButtonModeOfDeliveryActionPerformed(java.awt.event.ActionEvent evt) {
         containerPanel.removeAll();
         containerPanel.add(yourCartMainPanel);
         containerPanel.repaint();
         containerPanel.revalidate();
-    }//GEN-LAST:event_backButtonModeOfDeliveryActionPerformed
+    }
 
-    private void checkOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkOutButtonActionPerformed
+    private void checkOutButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
-    }//GEN-LAST:event_checkOutButtonActionPerformed
+    }
 
-    private void orderHistoryLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderHistoryLabelMouseClicked
+    private void orderHistoryLabelMouseClicked(java.awt.event.MouseEvent evt) {
         containerPanel.removeAll();
         containerPanel.add(orderHistoryPanel);
         containerPanel.repaint();
         containerPanel.revalidate();
-    }//GEN-LAST:event_orderHistoryLabelMouseClicked
+    }
 
-    private void helpLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpLabelMouseClicked
+    private void helpLabelMouseClicked(java.awt.event.MouseEvent evt) {
         containerPanel.removeAll();
         containerPanel.add(sendMessagePanel);
         containerPanel.repaint();
         containerPanel.revalidate();
-    }//GEN-LAST:event_helpLabelMouseClicked
+    }
 
-    private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutButtonActionPerformed
+    private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    }//GEN-LAST:event_logOutButtonActionPerformed
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-    }//GEN-LAST:event_saveButtonActionPerformed
-
-    private void backYourCartButtonCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backYourCartButtonCategoryActionPerformed
+    private void backYourCartButtonCategoryActionPerformed(java.awt.event.ActionEvent evt) {
         containerPanel.removeAll();
         containerPanel.add(categoryPanel);
         containerPanel.repaint();
         containerPanel.revalidate();
-    }//GEN-LAST:event_backYourCartButtonCategoryActionPerformed
+    }
 
-    private void uploadPrescriptionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadPrescriptionButtonActionPerformed
+    private void uploadPrescriptionButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_uploadPrescriptionButtonActionPerformed
+    }
 
-    private void editOrderButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editOrderButton1ActionPerformed
+    private void editOrderButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_editOrderButton1ActionPerformed
+    }                                                
 
-    private void cartLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartLabelMouseClicked
+    private void cartLabelMouseClicked(java.awt.event.MouseEvent evt) {
         containerPanel.removeAll();
         containerPanel.add(yourCartMainPanel);
         containerPanel.repaint();
         containerPanel.revalidate();
-    }//GEN-LAST:event_cartLabelMouseClicked
+    }
 
-    private void storeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_storeLabelMouseClicked
+    private void storeLabelMouseClicked(java.awt.event.MouseEvent evt) {
         containerPanel.removeAll();
         containerPanel.add(categoryPanel);
         containerPanel.repaint();
         containerPanel.revalidate();
-    }//GEN-LAST:event_storeLabelMouseClicked
+    }
 
-    private void profileLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profileLabelMouseClicked
+    private void profileLabelMouseClicked(java.awt.event.MouseEvent evt) {
         containerPanel.removeAll();
         containerPanel.add(profilePanel);
         containerPanel.repaint();
         containerPanel.revalidate();
-    }//GEN-LAST:event_profileLabelMouseClicked
+    }
 
-    private void notificationsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notificationsLabelMouseClicked
+    private void notificationsLabelMouseClicked(java.awt.event.MouseEvent evt) {
         containerPanel.removeAll();
         containerPanel.add(notificationsPanel);
         containerPanel.repaint();
         containerPanel.revalidate();
-    }//GEN-LAST:event_notificationsLabelMouseClicked
+    }
 
-    private void searchTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextfieldActionPerformed
+    private void searchTextfieldActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_searchTextfieldActionPerformed
+    }
 
-    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_removeButtonActionPerformed
+    }
 
-    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    }
 
-    }//GEN-LAST:event_submitButtonActionPerformed
-
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_cancelButtonActionPerformed
+    }
 
-    private void proceedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedButtonActionPerformed
+    private void proceedButtonActionPerformed(java.awt.event.ActionEvent evt) {
         containerPanel.removeAll();
         containerPanel.add(yourCartMainPanel);
         containerPanel.repaint();
         containerPanel.revalidate();
-    }//GEN-LAST:event_proceedButtonActionPerformed
+    }
 
-    private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
+    private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_sendButtonActionPerformed
+    }
 
-    private void goToCartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goToCartButtonActionPerformed
+    private void goToCartButtonActionPerformed(java.awt.event.ActionEvent evt) {
         containerPanel.removeAll();
         containerPanel.add(yourCartMainPanel);
         containerPanel.repaint();
         containerPanel.revalidate();
-    }//GEN-LAST:event_goToCartButtonActionPerformed
+    }
 
-    private void backYourOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backYourOrderButtonActionPerformed
+    private void backYourOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {
         containerPanel.removeAll();
         containerPanel.add(modeOfDeliveryPanel);
         containerPanel.repaint();
         containerPanel.revalidate();
-    }//GEN-LAST:event_backYourOrderButtonActionPerformed
+    }
 
-    private void viewOrderHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewOrderHistoryButtonActionPerformed
+    private void viewOrderHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
-    }//GEN-LAST:event_viewOrderHistoryButtonActionPerformed
+    }
 
     public static void main(String args[]) {
         FlatMacLightLaf.setup();
@@ -1285,89 +1263,24 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         return addToCartButton;
     }
 
-    public void setAddToCartButton(JButton addToCartButton) {
-        this.addToCartButton = addToCartButton;
-    }
-
-    public JButton getBackButtonModeOfDelivery() {
-        return backButtonModeOfDelivery;
-    }
-
     public void setBackButtonModeOfDelivery(JButton backButtonModeOfDelivery) {
         this.backButtonModeOfDelivery = backButtonModeOfDelivery;
-    }
-
-    public JButton getBackYourCartButton() {
-        return backYourCartButton;
-    }
-
-    public void setBackYourCartButton(JButton backYourCartButton) {
-        this.backYourCartButton = backYourCartButton;
-    }
-
-    public JSeparator getButtonSeparator() {
-        return buttonSeparator;
-    }
-
-    public void setButtonSeparator(JSeparator buttonSeparator) {
-        this.buttonSeparator = buttonSeparator;
-    }
-
-    public JButton getCancelButton() {
-        return cancelButton;
-    }
-
-    public void setCancelButton(JButton cancelButton) {
-        this.cancelButton = cancelButton;
-    }
-
-
-    public JLabel getCartIcon() {
-        return cartIcon;
-    }
-
-    public void setCartIcon(JLabel cartIcon) {
-        this.cartIcon = cartIcon;
     }
 
     public JLabel getCartLabel() {
         return cartLabel;
     }
 
-    public void setCartLabel(JLabel cartLabel) {
-        this.cartLabel = cartLabel;
-    }
-
-    public JPanel getCategoryPanel() {
-        return categoryPanel;
-    }
-
-    public void setCategoryPanel(JPanel categoryPanel) {
-        this.categoryPanel = categoryPanel;
-    }
-
     public JTable getCategoryTable() {
         return categoryTable;
-    }
-
-    public void setCategoryTable(JTable categoryTable) {
-        this.categoryTable = categoryTable;
     }
 
     public JTable getCategoryTable1() {
         return categoryTable1;
     }
 
-    public void setCategoryTable1(JTable categoryTable1) {
-        this.categoryTable1 = categoryTable1;
-    }
-
     public JButton getCheckOutButton() {
         return checkOutButton;
-    }
-
-    public void setCheckOutButton(JButton checkOutButton) {
-        this.checkOutButton = checkOutButton;
     }
 
     public JPasswordField getConfirmPasswordField() {
@@ -1378,32 +1291,12 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         this.confirmPasswordField = confirmPasswordField;
     }
 
-    public JLabel getConfirmPasswordLabel() {
-        return confirmPasswordLabel;
-    }
-
-    public void setConfirmPasswordLabel(JLabel confirmPasswordLabel) {
-        this.confirmPasswordLabel = confirmPasswordLabel;
-    }
-
-    public JScrollPane getjScrollPane4() {
-        return jScrollPane4;
-    }
-
-    public JScrollPane getjScrollPane6() {
-        return jScrollPane6;
-    }
-
     public JTextPane getOrderPlacedTextpane() {
         return orderPlacedTextpane;
     }
 
     public JButton getSendButton() {
         return sendButton;
-    }
-
-    public JPanel getSendMessagePanel() {
-        return sendMessagePanel;
     }
 
     public JTextArea getSendMessageTextArea() {
@@ -1414,24 +1307,8 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         return containerPanel;
     }
 
-    public void setContainerPanel(JPanel containerPanel) {
-        this.containerPanel = containerPanel;
-    }
-
     public JPasswordField getCurrentPasswordField() {
         return currentPasswordField;
-    }
-
-    public void setCurrentPasswordField(JPasswordField currentPasswordField) {
-        this.currentPasswordField = currentPasswordField;
-    }
-
-    public JLabel getCurrentPasswordLabel() {
-        return currentPasswordLabel;
-    }
-
-    public void setCurrentPasswordLabel(JLabel currentPasswordLabel) {
-        this.currentPasswordLabel = currentPasswordLabel;
     }
 
     public JButton getDeliveryButton() {
@@ -1446,155 +1323,16 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         return editOrderButton1;
     }
 
-    public void setEditOrderButton1(JButton editOrderButton1) {
-        this.editOrderButton1 = editOrderButton1;
-    }
-
-    public JLabel getEnvelopeIcon() {
-        return envelopeIcon;
-    }
-
-    public void setEnvelopeIcon(JLabel envelopeIcon) {
-        this.envelopeIcon = envelopeIcon;
-    }
-
-    public JLabel getFooterLabel() {
-        return footerLabel;
-    }
-
-    public void setFooterLabel(JLabel footerLabel) {
-        this.footerLabel = footerLabel;
-    }
-
-    public JPanel getFooterPanel() {
-        return footerPanel;
-    }
-
-    public void setFooterPanel(JPanel footerPanel) {
-        this.footerPanel = footerPanel;
-    }
-    public JPanel getHeaderPanel() {
-        return headerPanel;
-    }
-
-    public void setHeaderPanel(JPanel headerPanel) {
-        this.headerPanel = headerPanel;
-    }
-
-    public JLabel getHelpLabel() {
-        return helpLabel;
-    }
-
-    public void setHelpLabel(JLabel helpLabel) {
-        this.helpLabel = helpLabel;
-    }
-
-    public JLabel getIconLabel() {
-        return iconLabel;
-    }
-
-    public void setIconLabel(JLabel iconLabel) {
-        this.iconLabel = iconLabel;
-    }
-
-    public JLabel getjLabel1() {
-        return jLabel1;
-    }
-
-    public void setjLabel1(JLabel jLabel1) {
-        this.jLabel1 = jLabel1;
-    }
-
-    public JScrollPane getjScrollPane1() {
-        return jScrollPane1;
-    }
-
-    public void setjScrollPane1(JScrollPane jScrollPane1) {
-        this.jScrollPane1 = jScrollPane1;
-    }
-
-
-    public JScrollPane getjScrollPane12() {
-        return jScrollPane12;
-    }
-
-    public void setjScrollPane12(JScrollPane jScrollPane12) {
-        this.jScrollPane12 = jScrollPane12;
-    }
-
-    public JScrollPane getjScrollPane18() {
-        return jScrollPane18;
-    }
-
-    public void setjScrollPane18(JScrollPane jScrollPane18) {
-        this.jScrollPane18 = jScrollPane18;
-    }
-
-    public JScrollPane getjScrollPane2() {
-        return jScrollPane2;
-    }
-
-    public void setjScrollPane2(JScrollPane jScrollPane2) {
-        this.jScrollPane2 = jScrollPane2;
-    }
-
-    public JScrollPane getjScrollPane3() {
-        return jScrollPane3;
-    }
-
-    public void setjScrollPane3(JScrollPane jScrollPane3) {
-        this.jScrollPane3 = jScrollPane3;
-    }
-
-    public JSpinner getjSpinner1() {
-        return jSpinner1;
-    }
-
-    public void setjSpinner1(JSpinner jSpinner1) {
-        this.jSpinner1 = jSpinner1;
-    }
-
-    public JTextArea getjTextArea1() {
-        return jTextArea1;
-    }
-
-    public void setjTextArea1(JTextArea jTextArea1) {
-        this.jTextArea1 = jTextArea1;
-    }
-
-    public JButton getLogOutButton() {
+    public JButton getLogOutButton(){
         return logOutButton;
     }
-
-    public void setLogOutButton(JButton logOutButton) {
-        this.logOutButton = logOutButton;
-    }
-
-
-    public JLabel getModeOfDeliveryLabel() {
-        return modeOfDeliveryLabel;
-    }
-
-    public void setModeOfDeliveryLabel(JLabel modeOfDeliveryLabel) {
-        this.modeOfDeliveryLabel = modeOfDeliveryLabel;
-    }
-
-
 
     public JPanel getModeOfDeliveryPanel() {
         return modeOfDeliveryPanel;
     }
 
-    public void setModeOfDeliveryPanel(JPanel modeOfDeliveryPanel) {
-        this.modeOfDeliveryPanel = modeOfDeliveryPanel;
-    }
-
     public JLabel getNameOnlyLabel() {
         return nameOnlyLabel;
-    }
-
-    public void setNameOnlyLabel(JLabel nameOnlyLabel) {
-        this.nameOnlyLabel = nameOnlyLabel;
     }
 
     public JPasswordField getNewPasswordField() {
@@ -1643,14 +1381,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
 
     public void setNotificationsTextArea(JTextArea notificationsTextArea) {
         this.notificationsTextArea = notificationsTextArea;
-    }
-
-    public JLabel getOrderHistoryLabel() {
-        return orderHistoryLabel;
-    }
-
-    public void setOrderHistoryLabel(JLabel orderHistoryLabel) {
-        this.orderHistoryLabel = orderHistoryLabel;
     }
 
     public JPanel getPartOftheProfilePanel() {
@@ -1789,48 +1519,19 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         this.searchLabel = searchLabel;
     }
 
-    public JLabel getSearchLabel1() {
-        return searchLabel1;
-    }
-
-    public void setSearchLabel1(JLabel searchLabel1) {
-        this.searchLabel1 = searchLabel1;
-    }
-
     public JTextField getSearchTextfield() {
         return searchTextfield;
     }
 
-    public void setSearchTextfield(JTextField searchTextfield) {
-        this.searchTextfield = searchTextfield;
-    }
-
-    public JInternalFrame getSelectQuantity() {
-        return selectQuantity;
-    }
-
-    public void setSelectQuantity(JInternalFrame selectQuantity) {
-        this.selectQuantity = selectQuantity;
-    }
-
-    public JLabel getSettingLabel() {
-        return settingLabel;
-    }
-
-    public void setSettingLabel(JLabel settingLabel) {
-        this.settingLabel = settingLabel;
-    }
-
-    public JLabel getStoreLabel() {
-        return storeLabel;
-    }
-
-    public void setStoreLabel(JLabel storeLabel) {
-        this.storeLabel = storeLabel;
-    }
-
     public JButton getSubmitButton() {
         return submitButton;
+    }
+    public JTable getOrderHistoryTable() {
+        return orderHistoryTable;
+    }
+
+    public JLabel getOrderHistoryLabel() {
+        return orderHistoryLabel;
     }
 
     public JButton getUploadPrescriptionButton() {
@@ -1929,7 +1630,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JButton removeButton;
     private javax.swing.JButton saveButton;
     private javax.swing.JLabel searchLabel;
-    private javax.swing.JLabel searchLabel1;
     private javax.swing.JTextField searchTextfield;
     private javax.swing.JInternalFrame selectQuantity;
     private javax.swing.JButton sendButton;
