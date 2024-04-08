@@ -25,6 +25,7 @@ import midproject.SharedClasses.Utilities.OrderJSONProcessor;
 import midproject.SharedClasses.Utilities.UserJSONProcessor;
 import midproject.SharedClasses.Utilities.CartJSONProcessor;
 
+import static midproject.SharedClasses.Utilities.OrderJSONProcessor.readOrdersFromFile;
 import static midproject.SharedClasses.Utilities.SessionIDGenerator.generateUniqueSessionId;
 import static midproject.SharedClasses.Utilities.UserJSONProcessor.*;
 
@@ -217,7 +218,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
     }
 
-
     /**
      *
      * ARCHIVED USERS RELATED METHODS
@@ -342,8 +342,8 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
                             e.printStackTrace();
                         }
                     });
-
-
+        notifyNewPendingOrders();
+        notifyNewOrders();
         } catch (Exception e){
         }
     }
@@ -402,13 +402,15 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
     public void updateMedicine(Medicine editedMedicine, Medicine originalMedicine, MessageCallback callback, String adminUsername) throws Exception {
         MedicineJSONProcessor.updateMedicine(editedMedicine, "res/Medicine.json");
 
-        for (Map.Entry<UserCallBackInfo, MessageCallback> entry : msgCallbacks.entrySet()) {
-            UserCallBackInfo userInfo = entry.getKey();
-            MessageCallback adminCallback = entry.getValue();
-            if ("Admin".equals(userInfo.getUserType()) || "Customer".equals(userInfo.getUserType()) ) {
-                adminCallback.notifyMedicineUpdatedByAdmin(adminUsername, editedMedicine, originalMedicine);
-            }
-        }
+        msgCallbacks.entrySet().forEach(entry -> {UserCallBackInfo userInfo = entry.getKey();
+            MessageCallback callBack = entry.getValue();
+            if ("Admin".equals(userInfo.getUserType()) || "Customer".equals(userInfo.getUserType())) {
+                try {
+                    callBack.notifyMedicineUpdatedByAdmin(adminUsername, editedMedicine, originalMedicine);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }});
 
         Map<String, UserCart> allUserCarts = CartJSONProcessor.readUserCartsFromFile();
         boolean cartUpdated = false;
@@ -418,7 +420,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             UserCart cart = entry.getValue();
 
             if (cart.getItems().containsKey(editedMedicine.getMedicineID())) {
-                // Update the cart with the new medicine details
                 cart.addOrUpdateItem(editedMedicine.getMedicineID(), cart.getItems().get(editedMedicine.getMedicineID()));
                 cartUpdated = true;
 
@@ -432,11 +433,8 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         for (Map.Entry<UserCallBackInfo, MessageCallback> entry : msgCallbacks.entrySet()) {
             UserCallBackInfo userInfo = entry.getKey();
             MessageCallback customerCallback = entry.getValue();
-
-            // Check if the user type is Customer
             if ("Customer".equals(userInfo.getUserType())) {
                 try {
-                    // Get the userId based on the username
                     String userId = "";
                     try {
                         User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", userInfo.getUsername());
@@ -487,6 +485,10 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
      *
      * */
 
+    public void updateDashboard() throws Exception{
+        notifyNewPendingOrders();
+        notifyNewOrders();
+    }
     public void updateRegisteredUsersTable() throws Exception {
         String filepath = "res/UserInformation.json";
         List<User> usersList = UserJSONProcessor.readUsersFromFile(filepath);
@@ -576,7 +578,7 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
     public void updateOrdersTable() throws Exception {
         String filepath = "res/Orders.json";
-        List<Order> orderList = OrderJSONProcessor.readOrdersFromFile(filepath);
+        List<Order> orderList = readOrdersFromFile(filepath);
 
         msgCallbacks.entrySet().forEach(entry -> {
             UserCallBackInfo userInfo = entry.getKey();
@@ -627,7 +629,45 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             });
         }
     }
+    public void notifyNewOrders() throws IOException {
+        List<Order> orders = readOrdersFromFile("res/Orders.json");
+        long pendingCount = orders.stream()
+                .filter(order -> "Pending".equals(order.getStatus()))
+                .count();
+        long otherCount = orders.size() - pendingCount;
+
+        msgCallbacks.entrySet().forEach(entry -> {
+            UserCallBackInfo userInfo = entry.getKey();
+            MessageCallback callback = entry.getValue();
+            if ("Admin".equals(userInfo.getUserType())) {
+                try {
+                    callback.updateOrdersCount((int) otherCount);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+    public void notifyNewPendingOrders() throws IOException {
+        List<Order> orders = readOrdersFromFile("res/Orders.json");
+        long pendingCount = orders.stream()
+                .filter(order -> "Pending".equals(order.getStatus()))
+                .count();
+        msgCallbacks.entrySet().forEach(entry -> {
+            UserCallBackInfo userInfo = entry.getKey();
+            MessageCallback callback = entry.getValue();
+            if ("Admin".equals(userInfo.getUserType())) {
+                try {
+                    callback.updatePendingOrdersCount((int) pendingCount);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
     /**CUSTOMER SIDE**/
+
     public User getUserDetailsbyId(String userID) throws Exception {
         User user = UserJSONProcessor.getUserById("res/UserInformation.json", userID);;
         return user;
@@ -796,6 +836,8 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
         updateInventoryTable();
         updateOrdersTable();
+        notifyNewPendingOrders();
+        notifyNewOrders();
 
         } catch (RemoteException ex){
             ex.printStackTrace();

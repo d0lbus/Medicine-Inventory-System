@@ -786,6 +786,7 @@ public class AdminClientController {
 
     private static void autoRefreshOrderRelatedComponents() throws Exception{
         msgserver.updateOrdersTable();
+        msgserver.updateDashboard();
     }
 
     private static void resetTextFields(AdminGUIFrame adminGUIFrame) {

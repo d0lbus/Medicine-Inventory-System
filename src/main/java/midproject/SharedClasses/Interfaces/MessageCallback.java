@@ -24,6 +24,10 @@ public interface MessageCallback extends Remote {
 
 	public void updateOnlineUsers(int count) throws RemoteException;
 
+	public void updatePendingOrdersCount (int count) throws RemoteException;
+
+	public void updateOrdersCount (int count) throws RemoteException;
+
 	public void readRUsersList(List<User> users) throws RemoteException;
 	public void readAUsersList(List<User> users) throws RemoteException;
 
@@ -58,7 +62,6 @@ public interface MessageCallback extends Remote {
 	void notifyUserUpdatedByAdmin(String adminUsername, User editedUser, User originalUser) throws RemoteException;
 
 	void notifyUserOrdersToAdmins(String username, String orderId) throws RemoteException;
-
 
 	/**CUSTOMER SIDE**/
 	void updateCart(UserCart userCart) throws RemoteException;

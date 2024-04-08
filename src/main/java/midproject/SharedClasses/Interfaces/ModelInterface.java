@@ -30,6 +30,8 @@ public interface ModelInterface extends Remote {
 
     void archiveUser(String userId, MessageCallback callback, String adminUsername) throws RemoteException;
 
+    public void updateDashboard() throws Exception;
+
     public void updateRegisteredUsersTable() throws Exception;
 
     public void updateArchivedUsersTable() throws Exception;

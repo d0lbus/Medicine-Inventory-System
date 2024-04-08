@@ -1,8 +1,10 @@
 {
   "C1": {
     "userId": "C1",
-    "items": {
-      "M2": 10
-    }
+    "items": {}
+  },
+  "C3": {
+    "userId": "C3",
+    "items": {}
   }
 }
