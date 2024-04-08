@@ -2,13 +2,8 @@ package midproject.SharedClasses.Utilities;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import midproject.SharedClasses.ReferenceClasses.Medicine;
 import midproject.SharedClasses.ReferenceClasses.User;
-
-
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
@@ -21,14 +16,11 @@ public class UserJSONProcessor {
 
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public static User parseUserFromJson(String json) {
-        return gson.fromJson(json, User.class);
-    }
-
-    public static String userToJson(User user) {
-        return gson.toJson(user);
-    }
-
+    /**
+     * Adds a new user to a JSON file.
+     * @param newUser The new User to add.
+     * @param filePath The path to the JSON file.
+     */
     public static void addUserToJsonFile(User newUser, String filePath) {
         try (FileReader reader = new FileReader(filePath)) {
             Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
@@ -47,6 +39,14 @@ public class UserJSONProcessor {
         }
     }
 
+    /**
+     * Validates the credentials of a user.
+     * @param username The username.
+     * @param password The password.
+     * @param filePath The path to the JSON file containing user data.
+     * @param userTypeRequest The type of user to validate against.
+     * @return True if the credentials are valid, false otherwise.
+     */
     public static boolean isValidCredentials(String username, String password, String filePath, String userTypeRequest) {
         try {
             String json = new String(Files.readAllBytes(Paths.get(filePath)));
@@ -64,7 +64,13 @@ public class UserJSONProcessor {
         return false;
     }
 
-
+    /**
+     * Retrieves a User object by its ID from a JSON file.
+     * @param filePath The path to the JSON file containing user data.
+     * @param userId The ID of the user to retrieve.
+     * @return The User object corresponding to the provided ID, or null if not found.
+     * @throws Exception If an error occurs during file reading or processing.
+     */
     public static User getUserById(String filePath, String userId) throws Exception {
         List<User> users = readUsersFromFile(filePath);
         for (User user : users) {
@@ -75,6 +81,13 @@ public class UserJSONProcessor {
         return null;
     }
 
+    /**
+     * Retrieves a User object by its username from a JSON file.
+     * @param filePath The path to the JSON file containing user data.
+     * @param username The username of the user to retrieve.
+     * @return The User object corresponding to the provided username, or null if not found.
+     * @throws Exception If an error occurs during file reading or processing.
+     */
     public static User getUserByUsername(String filePath, String username) throws Exception {
         List<User> users = readUsersFromFile(filePath);
         for (User user : users) {
@@ -85,7 +98,13 @@ public class UserJSONProcessor {
         return null;
     }
 
-
+    /**
+     * Retrieves the type of a user by their username from a JSON file.
+     * @param filePath The path to the JSON file containing user data.
+     * @param username The username of the user.
+     * @return The type of the user corresponding to the provided username.
+     * @throws Exception If the user is not found or an error occurs during file reading or processing.
+     */
     public static String getUserTypeByUsername(String filePath, String username) throws Exception {
         try (FileReader reader = new FileReader(filePath)) {
             Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
@@ -103,46 +122,13 @@ public class UserJSONProcessor {
         }
     }
 
+    /**
+     * Updates a user's information in a JSON file.
+     * @param updatedUser The updated User object.
+     * @param filePath The path to the JSON file containing user data.
+     * @throws Exception If an error occurs during file reading, processing, or writing.
+     */
     public static void updateUserInJsonFile(User updatedUser, String filePath) throws Exception {
-
-        /**
-        try {
-            List<User> users = readUsersFromFile(filePath);
-            for (int i = 0; i < users.size(); i++) {
-                if (users.get(i).getUserId().equals(updatedUser.getUserId())) {
-                    users.set(i, updatedUser);
-                    break;
-                }
-            }
-            writeUsersToFile(users, filePath);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-
-        try (FileReader reader = new FileReader(filePath)) {
-            Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
-            List<User> users = gson.fromJson(reader, userListType);
-            if (users == null) {
-                users = new ArrayList<>();
-                System.out.println("No users found.");
-                return;
-            }
-            for (int i = 0; i < users.size(); i++) {
-                if (users.get(i).getUserId().equals(updatedUser.getUserId())) {
-                    users.set(i, updatedUser);
-                    break;
-                }
-            }
-            try (FileWriter writer = new FileWriter(filePath)) {
-                gson.toJson(users, writer);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    } */
-
         List<User> users = readUsersFromFile(filePath);
         for (int i = 0; i < users.size(); i++) {
             User user = users.get(i);
@@ -154,6 +140,12 @@ public class UserJSONProcessor {
         writeUsersToFile(users, filePath);
     }
 
+    /**
+     * Transfers a user from one JSON file to another.
+     * @param userId The ID of the user to transfer.
+     * @param originalFilePath The path to the original JSON file.
+     * @param destinationFilePath The path to the destination JSON file.
+     */
     public static void transferUserToDifferentFile(String userId, String originalFilePath, String destinationFilePath) {
         try {
             List<User> users = readUsersFromFile(originalFilePath);
@@ -172,6 +164,12 @@ public class UserJSONProcessor {
         }
     }
 
+    /**
+     * Reads User objects from a JSON file.
+     * @param filePath The path to the JSON file containing user data.
+     * @return A list of User objects read from the file.
+     * @throws Exception If an error occurs during file reading or processing.
+     */
     public static List<User> readUsersFromFile(String filePath) throws Exception {
         String json = new String(Files.readAllBytes(Paths.get(filePath)));
         Type userListType = new TypeToken<List<User>>(){}.getType();
@@ -179,58 +177,24 @@ public class UserJSONProcessor {
         return users != null ? users : new ArrayList<>();
     }
 
+    /**
+     * Writes User objects to a JSON file.
+     * @param users The list of User objects to write.
+     * @param filePath The path to the JSON file to write to.
+     * @throws Exception If an error occurs during file writing.
+     */
     private static void writeUsersToFile(List<User> users, String filePath) throws Exception {
         try (FileWriter writer = new FileWriter(filePath)) {
             gson.toJson(users, writer);
         }
     }
 
-    public static void saveUsersToFile(List<User> archivedUsers, String archiveFilePath) {
-        try {
-            try (FileWriter writer = new FileWriter(archiveFilePath)) {
-                gson.toJson(archivedUsers, writer);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static User getArchivedUser(String userId, String archiveFilePath) {
-        try {
-            List<User> archivedUsers = readUsersFromFile(archiveFilePath);
-            for (User user : archivedUsers) {
-                if (user.getUserId().equals(userId)) {
-                    return user;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static List<User> searchArchivedUsers(String searchText, String filePath) throws Exception {
-        List<User> archivedUsers = new ArrayList<>();
-        try {
-            List<User> allUsers = readUsersFromFile(filePath);
-            for (User user : allUsers) {
-                // Check if the user is archived and matches the search text
-                if (user.isArchived() && containsSearchText(user, searchText)) {
-                    archivedUsers.add(user);
-                }
-            }
-        } catch (Exception e) {
-            throw new Exception("Error searching archived users: " + e.getMessage());
-        }
-        return archivedUsers;
-    }
-
-    private static boolean containsSearchText(User user, String searchText) {
-        // Modify this method according to your search criteria
-        // For example, you can check if the user's name contains the search text
-        return user.getFirstName().toLowerCase().contains(searchText.toLowerCase()) ||
-                user.getLastName().toLowerCase().contains(searchText.toLowerCase());
-    }
+    /**
+     * Loads user IDs from a JSON file and an ID tracker file.
+     * @param filePath The path to the JSON file containing user data.
+     * @param idTrackerFilePath The path to the ID tracker file.
+     * @return A list of user IDs.
+     */
     public static List<String> loadUserIdsFromJsonFile(String filePath, String idTrackerFilePath) {
         List<String> userIds = new ArrayList<>();
 
@@ -244,7 +208,7 @@ public class UserJSONProcessor {
             String json = jsonContent.toString().trim();
             if (json.startsWith("[") && json.endsWith("]")) {
                 json = json.substring(1, json.length() - 1); // Remove square brackets
-                String[] userObjects = json.split("\\},\\{"); // Split by '},{'
+                String[] userObjects = json.split("\\},\\{");
                 for (String userObject : userObjects) {
                     String[] fields = userObject.split(",");
                     for (String field : fields) {
@@ -263,7 +227,6 @@ public class UserJSONProcessor {
             e.printStackTrace();
         }
 
-        // Read and update ID tracker file
         try (BufferedReader br = new BufferedReader(new FileReader(idTrackerFilePath))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -276,23 +239,18 @@ public class UserJSONProcessor {
         return userIds;
     }
 
-    public static void appendIdToTrackerFile(String id, String idTrackerFilePath) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(idTrackerFilePath, true))) {
-            bw.write(id);
-            bw.newLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * Fetches user information from a data source based on user ID.
+     * @param userId The ID of the user to fetch information for.
+     * @param filePath The path to the JSON file containing user data.
+     * @return The User object corresponding to the provided ID, or null if not found.
+     */
     public static User fetchUserInformationFromDataSource(String userId, String filePath) {
         try (FileReader reader = new FileReader(filePath)) {
-            // Parse JSON file into a list of User objects
             Gson gson = new Gson();
             Type userListType = new TypeToken<List<User>>(){}.getType();
             List<User> users = gson.fromJson(reader, userListType);
 
-            // Find the user with the given userId
             for (User user : users) {
                 if (user.getUserId().equals(userId)) {
                     return user;
@@ -301,14 +259,27 @@ public class UserJSONProcessor {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null; // User not found
+        return null;
     }
 
+    /**
+     * Validates the old password of a user.
+     * @param username The username of the user.
+     * @param oldPassword The old password to validate.
+     * @return True if the old password matches the stored password for the user, false otherwise.
+     * @throws Exception If an error occurs during user retrieval.
+     */
     public static boolean validateOldPassword(String username, String oldPassword) throws Exception {
         User user = getUserByUsername("res/UserInformation.json", username);
         return user != null && user.getPassword().equals(oldPassword);
     }
 
+    /**
+     * Updates the password of a user.
+     * @param username The username of the user.
+     * @param newPassword The new password to set.
+     * @throws Exception If an error occurs during user retrieval or password update.
+     */
     public static void updateUserPassword(String username, String newPassword) throws Exception {
         User user = getUserByUsername("res/UserInformation.json", username);
         if (user != null) {

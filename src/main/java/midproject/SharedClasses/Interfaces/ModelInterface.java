@@ -5,57 +5,56 @@ import midproject.SharedClasses.ReferenceClasses.Order;
 import midproject.SharedClasses.ReferenceClasses.OrderItem;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.*;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
 public interface ModelInterface extends Remote {
-    public String login(MessageCallback msgCallback, String username, String password, String userTypeRequest)
+    String login(MessageCallback msgCallback, String username, String password, String userTypeRequest)
             throws RemoteException, UserExistsException,
             AlreadyLoggedInException, AuthenticationFailedException;
 
-    public void logout(MessageCallback msgCallback, String sessionID)
+    void logout(MessageCallback msgCallback, String sessionID)
             throws Exception, UserExistsException;
 
-    public void broadcast(String username, String msg)
+    void broadcast(String username, String msg)
             throws Exception;
 
-    public void sendRUserDetailsToAdmins(String userId, MessageCallback msgCallback) throws RemoteException;
+    void sendRUserDetailsToAdmins(String userId, MessageCallback msgCallback) throws RemoteException;
 
-    public void sendAUserDetailsToAdmins(String userId, MessageCallback msgCallback) throws RemoteException;
+    void sendAUserDetailsToAdmins(String userId, MessageCallback msgCallback) throws RemoteException;
 
     void archiveUser(String userId, MessageCallback callback, String adminUsername) throws RemoteException;
 
-    public void updateDashboard() throws Exception;
+    void updateDashboard() throws Exception;
 
-    public void updateRegisteredUsersTable() throws Exception;
+    void updateRegisteredUsersTable() throws Exception;
 
-    public void updateArchivedUsersTable() throws Exception;
+    void updateArchivedUsersTable() throws Exception;
 
-    public void updateRegisteredUsersCount() throws Exception;
+    void updateRegisteredUsersCount() throws Exception;
 
-    public void updateInventoryTable() throws Exception;
+    void updateInventoryTable() throws Exception;
 
-    public void updateOrdersTable() throws Exception;
+    void updateOrdersTable() throws Exception;
 
-    public void searchOrders(String searchText, MessageCallback callback) throws RemoteException;
+    void searchOrders(String searchText, MessageCallback callback) throws RemoteException;
 
-    public void searchPendingOrders(String searchText, MessageCallback callback) throws RemoteException;
+    void searchPendingOrders(String searchText, MessageCallback callback) throws RemoteException;
 
-    public Order retrieveOrderDetails(String orderId)  throws RemoteException;
+    Order retrieveOrderDetails(String orderId)  throws RemoteException;
 
-    public void updateOrderStatus(String orderId, String newStatus) throws RemoteException;
+    void updateOrderStatus(String orderId, String newStatus) throws RemoteException;
 
-    public void addMedicine(Medicine medicine, MessageCallback callback, String adminUsername) throws Exception;
+    void addMedicine(Medicine medicine, MessageCallback callback, String adminUsername) throws Exception;
 
-    public void deleteMedicine(Medicine medicine, MessageCallback callback, String adminUsername) throws Exception;
+    void deleteMedicine(Medicine medicine, MessageCallback callback, String adminUsername) throws Exception;
 
-    public void searchMedicine(String searchText, MessageCallback callback) throws RemoteException;
+    void searchMedicine(String searchText, MessageCallback callback) throws RemoteException;
 
-    public void updateMedicine(Medicine editedMedicine, Medicine originalMedicine, MessageCallback callback, String adminUsername) throws Exception;
+    void updateMedicine(Medicine editedMedicine, Medicine originalMedicine, MessageCallback callback, String adminUsername) throws Exception;
 
-    public void registerUser(User newUser, String adminUsername) throws Exception, InvalidInputException;
+    void registerUser(User newUser, String adminUsername) throws Exception, InvalidInputException;
 
     void searchUsers(String searchText, MessageCallback callback) throws RemoteException, NoUserFoundException;
 
@@ -63,7 +62,7 @@ public interface ModelInterface extends Remote {
 
     void searchArchivedUsers(String searchText, MessageCallback callback) throws RemoteException, NoUserFoundException;
 
-    public void updateUser(User editedUser, User originalUser, MessageCallback callback, String adminUsername) throws Exception;
+    void updateUser(User editedUser, User originalUser, MessageCallback callback, String adminUsername) throws Exception;
 
     void sendMessageToAdmins(String message, String username) throws RemoteException;
 

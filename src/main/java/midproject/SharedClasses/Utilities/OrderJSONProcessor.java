@@ -1,9 +1,9 @@
 package midproject.SharedClasses.Utilities;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import midproject.SharedClasses.ReferenceClasses.Order;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -14,6 +14,11 @@ public class OrderJSONProcessor {
     private static final String ORDER_ID_FILE = "res/LastOrderId.txt";
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
+    /**
+     * Writes an order to the orders JSON file.
+     * @param updatedOrder The order to write.
+     * @throws IOException If an I/O error occurs.
+     */
     public static void writeOrderToFile(Order updatedOrder) throws IOException {
         List<Order> orders = new ArrayList<>();
         File orderFile = new File(ORDER_FILE_PATH);
@@ -34,6 +39,12 @@ public class OrderJSONProcessor {
         }
     }
 
+    /**
+     * Reads orders from the specified file path.
+     * @param filepath The path to the JSON file containing orders.
+     * @return A list of Order objects.
+     * @throws IOException If an I/O error occurs.
+     */
     public static List<Order> readOrdersFromFile(String filepath) throws IOException {
         File orderFile = new File(filepath);
         if (orderFile.exists() && !orderFile.isDirectory()) {
@@ -51,6 +62,12 @@ public class OrderJSONProcessor {
         return new ArrayList<>();
     }
 
+    /**
+     * Reads an order by its ID.
+     * @param orderId The ID of the order to read.
+     * @return The Order object corresponding to the provided ID, or null if not found.
+     * @throws IOException If an I/O error occurs.
+     */
     public static Order readOrderById(String orderId) throws IOException {
         List<Order> orders = readOrdersFromFile(ORDER_FILE_PATH);
         for (Order order : orders) {
@@ -62,7 +79,11 @@ public class OrderJSONProcessor {
     }
 
 
-    // Generates a new order ID
+    /**
+     * Generates a new order ID.
+     * @return The newly generated order ID.
+     * @throws IOException If an I/O error occurs.
+     */
     public static String generateOrderId() throws IOException {
         int lastOrderId = getLastOrderId();
         int newOrderId = lastOrderId + 1;
@@ -76,7 +97,7 @@ public class OrderJSONProcessor {
             String lastIdStr = new String(Files.readAllBytes(Paths.get(ORDER_ID_FILE)));
             return Integer.parseInt(lastIdStr);
         } catch (FileNotFoundException | NumberFormatException e) {
-            return 0; // If file does not exist or is empty, start from 0
+            return 0;
         }
     }
 
