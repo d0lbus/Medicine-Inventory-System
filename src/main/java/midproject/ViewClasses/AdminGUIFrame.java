@@ -166,7 +166,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         sendMessageTextArea = new javax.swing.JTextArea();
         sendButton = new javax.swing.JButton();
-        comboBox = new javax.swing.JComboBox<>();
+        selectOnlineUsersComboBox = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         serverLogsPanel = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -1283,13 +1283,14 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                         .addGap(148, 148, 148))
                     .addGroup(registrationPanelLayout.createSequentialGroup()
                         .addGap(49, 49, 49)
-                        .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(provinceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(birthdateCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(registrationPanelLayout.createSequentialGroup()
+                        .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registrationPanelLayout.createSequentialGroup()
                                 .addComponent(setPasswordLabel)
-                                .addGap(15, 15, 15)))
+                                .addGap(15, 15, 15))
+                            .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(ageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(provinceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(birthdateCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(registrationPanelLayout.createSequentialGroup()
                                 .addGap(28, 28, 28)
@@ -1298,9 +1299,8 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                                     .addComponent(genderComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(27, 27, 27))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registrationPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(confirmPasswordLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1328,10 +1328,10 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
-        comboBox.addActionListener(new java.awt.event.ActionListener() {
+        selectOnlineUsersComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        selectOnlineUsersComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxActionPerformed(evt);
+                selectOnlineUsersComboBoxActionPerformed(evt);
             }
         });
 
@@ -1348,7 +1348,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                     .addGroup(sendMessagePanelLayout.createSequentialGroup()
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(selectOnlineUsersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(154, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sendMessagePanelLayout.createSequentialGroup()
@@ -1361,7 +1361,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sendMessagePanelLayout.createSequentialGroup()
                 .addContainerGap(40, Short.MAX_VALUE)
                 .addGroup(sendMessagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectOnlineUsersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1553,9 +1553,9 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         containerPanel.revalidate();
     }//GEN-LAST:event_serverLogsMouseClickedMouseClicked
 
-    private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
+    private void selectOnlineUsersComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectOnlineUsersComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxActionPerformed
+    }//GEN-LAST:event_selectOnlineUsersComboBoxActionPerformed
 
     private void jPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldActionPerformed
         // TODO add your handling code here:
@@ -1634,7 +1634,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     }
 
     public JComboBox<String> getComboBox() {
-        return comboBox;
+        return selectOnlineUsersComboBox;
     }
 
     public JLabel getConfirmPasswordLabel() {
@@ -2084,7 +2084,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JPanel archivedUsersPanel;
     private com.toedter.calendar.JDateChooser birthdateCalendar;
     private javax.swing.JLabel birthdateLabel;
-    private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JLabel confirmPasswordLabel;
     private javax.swing.JLabel contactNumberLabel;
     private javax.swing.JTextField contactNumberTextField;
@@ -2173,6 +2172,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JLabel registeredUsersLabel;
     private javax.swing.JPanel registeredUsersPanel;
     private javax.swing.JPanel registrationPanel;
+    private javax.swing.JComboBox<String> selectOnlineUsersComboBox;
     private javax.swing.JButton sendButton;
     private javax.swing.JButton sendMessageButton;
     private javax.swing.JPanel sendMessagePanel;

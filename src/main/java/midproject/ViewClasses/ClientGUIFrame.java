@@ -62,7 +62,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         yourCartMainPanel = new javax.swing.JPanel();
         yourCartLabel = new javax.swing.JLabel();
         searchLabel1 = new javax.swing.JLabel();
-        searchTextfield1 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         categoryTable1 = new javax.swing.JTable();
         removeButton = new javax.swing.JButton();
@@ -420,17 +419,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         searchLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         searchLabel1.setText("Search your generic medicine");
 
-        searchTextfield1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchTextfield1ActionPerformed(evt);
-            }
-        });
-        searchTextfield1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                searchTextfield1KeyPressed(evt);
-            }
-        });
-
         categoryTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -506,9 +494,9 @@ public class ClientGUIFrame extends javax.swing.JFrame {
                         .addGap(100, 100, 100)
                         .addGroup(yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 969, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(searchLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(searchTextfield1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(yourCartMainPanelLayout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(searchLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(70, 70, 70)
                         .addGroup(yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(editOrderButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -529,16 +517,14 @@ public class ClientGUIFrame extends javax.swing.JFrame {
                 .addComponent(yourCartLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(searchLabel1)
-                .addGap(5, 5, 5)
-                .addComponent(searchTextfield1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(57, 57, 57)
                 .addGroup(yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(yourCartMainPanelLayout.createSequentialGroup()
                         .addComponent(editOrderButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(yourCartMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backYourCartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1190,10 +1176,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
     }//GEN-LAST:event_saveButtonActionPerformed
 
-    private void searchTextfield1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextfield1KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchTextfield1KeyPressed
-
     private void backYourCartButtonCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backYourCartButtonCategoryActionPerformed
         containerPanel.removeAll();
         containerPanel.add(categoryPanel);
@@ -1240,10 +1222,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private void searchTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextfieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchTextfieldActionPerformed
-
-    private void searchTextfield1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextfield1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchTextfield1ActionPerformed
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
         // TODO add your handling code here:
@@ -1819,14 +1797,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         this.searchTextfield = searchTextfield;
     }
 
-    public JTextField getSearchTextfield1() {
-        return searchTextfield1;
-    }
-
-    public void setSearchTextfield1(JTextField searchTextfield1) {
-        this.searchTextfield1 = searchTextfield1;
-    }
-
     public JInternalFrame getSelectQuantity() {
         return selectQuantity;
     }
@@ -1952,7 +1922,6 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     private javax.swing.JLabel searchLabel;
     private javax.swing.JLabel searchLabel1;
     private javax.swing.JTextField searchTextfield;
-    private javax.swing.JTextField searchTextfield1;
     private javax.swing.JInternalFrame selectQuantity;
     private javax.swing.JButton sendButton;
     private javax.swing.JPanel sendMessagePanel;

@@ -189,15 +189,6 @@ public class CustomerClientController {
 				}
 			});
 
-			clientGUIFrame.getSearchTextfield1().addActionListener(e ->{
-				String searchText = clientGUIFrame.getSearchTextfield1().getText().trim().toLowerCase();
-				try {
-					msgserver.searchMedicine(searchText, mci);
-				} catch (RemoteException ex) {
-					ex.printStackTrace();
-				}
-			});
-
 			clientGUIFrame.getAddToCartButton().addActionListener(e ->{
 				int selectedRow = clientGUIFrame.getCategoryTable().getSelectedRow();
 				if (selectedRow >= 0) {
