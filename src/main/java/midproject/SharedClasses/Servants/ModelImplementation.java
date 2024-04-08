@@ -382,8 +382,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             throw new RemoteException("Error while searching orders", e);
         }
     }
-
-
     /**
      *
      *
@@ -647,8 +645,9 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
      *
      * */
 
-    public void notifyOnlineUsersChanged() {
+    public void notifyOnlineUsersChanged() throws RemoteException {
         int onlineUsersCount = sessionUserMap.size();
+        List<String> onlineUserNames = getOnlineUsernames();
         System.out.println("Updating online users count...");
         if (onlineUsersCount == 0) {
             System.out.println("No users are online.");
@@ -658,13 +657,17 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
                 MessageCallback callback = entry.getValue();
                 if ("Admin".equals(userInfo.getUserType())) {
                     try {
-                        callback.updateOnlineUsers(onlineUsersCount);
+                        callback.updateOnlineUsers(onlineUsersCount, onlineUserNames);
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }
                 }
             });
         }
+    }
+
+    public List<String> getOnlineUsernames() throws RemoteException {
+        return new ArrayList<>(sessionUserMap.values());
     }
     public void notifyNewOrders() throws IOException {
         List<Order> orders = readOrdersFromFile("res/Orders.json");
@@ -923,7 +926,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             throw new RuntimeException(e);
         }
     }
-
     public void sendMessageToAdmins(String message, String username) throws RemoteException{
         msgCallbacks.entrySet().forEach(entry -> {
             UserCallBackInfo userInfo = entry.getKey();
@@ -953,4 +955,5 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
         return total;
     }
+
 }

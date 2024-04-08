@@ -447,7 +447,6 @@ public class CustomerClientController {
 				}
 			});
 
-
 			/**
 			 *
 			 *	SEND MESSAGE TO ADMINS
@@ -465,7 +464,6 @@ public class CustomerClientController {
 				}
 			});
 		}
-
 	/**HELPER METHODS**/
 
 	private static List<OrderItem> getOrderItemsFromSelectedRows() {

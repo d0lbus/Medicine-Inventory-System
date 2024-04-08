@@ -56,12 +56,17 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		System.out.println(user.getUsername() + " logged out...");
 	}
 
-	public void updateOnlineUsers(int count) {
+	public void updateOnlineUsers(int count, List<String> onlineUserNames) {
 		SwingUtilities.invokeLater(() -> {
 				String sCount = String.valueOf(count);
 				adminGUIFrame.getOnlineUsersLabel().setText(sCount);
 				adminGUIFrame.getOnlineUsersLabel().revalidate();
 				adminGUIFrame.getOnlineUsersLabel().repaint();
+
+			for (String username : onlineUserNames) {
+				adminGUIFrame.getComboBox().addItem(username);
+			}
+
 		});
 	}
 

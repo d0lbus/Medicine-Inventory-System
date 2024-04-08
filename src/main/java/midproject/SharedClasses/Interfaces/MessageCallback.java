@@ -22,7 +22,7 @@ public interface MessageCallback extends Remote {
 
     //public void sendArchivedUsersList(List<User> archivedUsers);
 
-	public void updateOnlineUsers(int count) throws RemoteException;
+	public void updateOnlineUsers(int count, List<String> onlineUserNames) throws RemoteException;
 
 	public void updatePendingOrdersCount (int count) throws RemoteException;
 
