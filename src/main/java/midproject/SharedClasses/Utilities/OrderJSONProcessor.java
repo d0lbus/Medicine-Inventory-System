@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import midproject.SharedClasses.ReferenceClasses.Order;
 import java.io.*;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
@@ -106,5 +107,28 @@ public class OrderJSONProcessor {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ORDER_ID_FILE))) {
             writer.write(Integer.toString(lastOrderId));
         }
+    }
+
+    public static List<Order> getOrdersByUserId(String filePath, String userId) {
+        List<Order> orders = new ArrayList<>();
+
+        try (FileReader reader = new FileReader("res/Orders.json")) {
+            // Read the JSON file and parse it into a list of orders
+            Gson gson = new Gson();
+            Type orderListType = new TypeToken<List<Order>>() {}.getType();
+            List<Order> allOrders = gson.fromJson(reader, orderListType);
+
+            // Filter orders by user ID
+            for (Order order : allOrders) {
+                if (order.getUserId().equals(userId)) {
+                    orders.add(order);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle IOException
+        }
+
+        return orders;
     }
 }
