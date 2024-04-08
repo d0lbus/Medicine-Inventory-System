@@ -16,10 +16,7 @@ import midproject.SharedClasses.Servants.CallbackImplementation;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.OrderItem;
 import midproject.SharedClasses.ReferenceClasses.User;
-import midproject.SharedClasses.UserDefinedExceptions.MedicineOutOfStockException;
-import midproject.SharedClasses.UserDefinedExceptions.MedicineQuantityUpdateFailedException;
-import midproject.SharedClasses.UserDefinedExceptions.MedicineRemovalFailedException;
-import midproject.SharedClasses.UserDefinedExceptions.NotLoggedInException;
+import midproject.SharedClasses.UserDefinedExceptions.*;
 import midproject.ViewClasses.ClientGUIFrame;
 import midproject.ViewClasses.QuantityFrame;
 import midproject.ViewClasses.Login;
@@ -161,8 +158,56 @@ public class CustomerClientController {
 		});
 
 		clientGUIFrame.getSaveButton().addActionListener(e ->{
+			String oldPassword = new String(clientGUIFrame.getCurrentPasswordField().getPassword());
+			String newPassword = new String(clientGUIFrame.getNewPasswordField().getPassword());
+			String confirmPassword = new String(clientGUIFrame.getConfirmPasswordField().getPassword());
+
+			// Validate if new password matches confirm password
+			if (!newPassword.equals(confirmPassword)) {
+				JOptionPane.showMessageDialog(clientGUIFrame, "New password and confirm password do not match.",
+						"Password Mismatch", JOptionPane.ERROR_MESSAGE);
+				return; // Exit the method if passwords don't match
+			}
+
+			// Call the method to change password on the server
+			try {
+				boolean isPasswordChanged = msgserver.changeUserPassword(username, oldPassword, newPassword, mci);
+
+				if (isPasswordChanged) {
+					JOptionPane.showMessageDialog(clientGUIFrame, "Password changed successfully.",
+							"Success", JOptionPane.INFORMATION_MESSAGE);
+					// Clear password fields after successful password change
+					clientGUIFrame.getCurrentPasswordField().setText("");
+					clientGUIFrame.getNewPasswordField().setText("");
+					clientGUIFrame.getConfirmPasswordField().setText("");
+				} else {
+					JOptionPane.showMessageDialog(clientGUIFrame, "Failed to change password. Please check your old password.",
+							"Password Change Failed", JOptionPane.ERROR_MESSAGE);
+				}
+			} catch (RemoteException ex) {
+				JOptionPane.showMessageDialog(clientGUIFrame, "Error communicating with the server.",
+						"Server Error", JOptionPane.ERROR_MESSAGE);
+				ex.printStackTrace(); // Print stack trace for debugging
+			} catch (PasswordChangeFailedException ex) {
+				throw new RuntimeException(ex);
+			}
 
 		});
+
+		clientGUIFrame.getOrderHistoryLabel().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CallbackImplementation callbackImplementation = new CallbackImplementation();
+				// Call a method to retrieve and display the order history
+				try {
+					callbackImplementation.displayOrderHistory(msgserver.getOrderHistory(username));
+				} catch (RemoteException ex) {
+					ex.printStackTrace();
+						JOptionPane.showMessageDialog(clientGUIFrame, "Error retrieving order history: " + ex.getMessage(), "Order History Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+
 
 		/**
 		 * 	SHOPPING FOR MEDICINE RELATED FUNCTIONS

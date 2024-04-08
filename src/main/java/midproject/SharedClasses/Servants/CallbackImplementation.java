@@ -579,4 +579,24 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		details.append(orderDetails);
 		return details.toString();
 	}
+
+	public void displayOrderHistory(List<Order> orderHistory) {
+		SwingUtilities.invokeLater(() -> {
+			JTable orderHistoryTable = clientGUIFrame.getOrderHistoryTable();
+			DefaultTableModel model = (DefaultTableModel) orderHistoryTable.getModel();
+			model.setRowCount(0);
+
+			for (Order order : orderHistory) {
+				String orderId = order.getOrderId();
+				String userId = order.getUserId();
+				String status = order.getStatus();
+				String modeOfDelivery = order.getModeOfDelivery();
+				String paymentMethod = order.getPaymentMethod();
+
+				Object[] rowData = {orderId, userId, status, modeOfDelivery, paymentMethod};
+
+				model.addRow(rowData);
+			}
+		});
+	}
 }
