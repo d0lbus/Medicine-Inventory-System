@@ -1401,9 +1401,9 @@
                                   <Component id="setUsernameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="setUsernameTextField" alignment="0" max="32767" attributes="0"/>
                                   <Component id="setPasswordLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="setPasswordTextField" alignment="0" max="32767" attributes="0"/>
                                   <Component id="confirmPasswordLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="confirmPasswordTextField" alignment="0" pref="306" max="32767" attributes="0"/>
+                                  <Component id="jPasswordField" pref="306" max="32767" attributes="0"/>
+                                  <Component id="jConfirmPasswordField" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -1468,47 +1468,57 @@
                           <Component id="municipalityTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="setUsernameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="birthdateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ageLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="provinceLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="setPasswordLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="ageTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="provinceTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="setPasswordTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="birthdateCalendar" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="genderLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="genderComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="birthdateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ageLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="provinceLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                              <Component id="zipCodeLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="zipCodeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="confirmPasswordLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ageTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="provinceTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="birthdateCalendar" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="setPasswordLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="genderLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="genderComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jPasswordField" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="25" max="32767" attributes="0"/>
+                                      <Component id="confirmPasswordLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="personWithDisabilityLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="personWithDisabilityCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="zipCodeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jConfirmPasswordField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="47" max="32767" attributes="0"/>
+                              <Component id="createAccountButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="personWithDisabilityLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="personWithDisabilityCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="zipCodeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="confirmPasswordTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="29" max="32767" attributes="0"/>
-                      <Component id="createAccountButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1740,8 +1750,6 @@
                 <Property name="text" type="java.lang.String" value="Set Password"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="setPasswordTextField">
-            </Component>
             <Component class="javax.swing.JLabel" name="confirmPasswordLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1752,8 +1760,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Confirm Password"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="confirmPasswordTextField">
             </Component>
             <Component class="javax.swing.JButton" name="createAccountButton">
               <Properties>
@@ -1788,6 +1794,22 @@
               </AuxValues>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="birthdateCalendar">
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="jPasswordField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jPasswordFieldActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="jConfirmPasswordField">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jConfirmPasswordFieldActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -1874,6 +1896,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBoxActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
