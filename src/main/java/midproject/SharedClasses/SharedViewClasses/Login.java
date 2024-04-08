@@ -1,4 +1,4 @@
-package midproject.ViewClasses;
+package midproject.SharedClasses.SharedViewClasses;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import javax.swing.*;

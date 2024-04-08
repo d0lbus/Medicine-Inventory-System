@@ -1,4 +1,4 @@
-package midproject.ViewClasses;
+package midproject.Customer.View;
 
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;

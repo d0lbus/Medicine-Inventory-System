@@ -10,8 +10,8 @@ import java.util.List;
 import midproject.SharedClasses.Interfaces.MessageCallback;
 import midproject.SharedClasses.ReferenceClasses.*;
 import midproject.SharedClasses.Utilities.MedicineJSONProcessor;
-import midproject.ViewClasses.AdminGUIFrame;
-import midproject.ViewClasses.ClientGUIFrame;
+import midproject.Admin.View.AdminGUIFrame;
+import midproject.Customer.View.ClientGUIFrame;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

@@ -1,14 +1,10 @@
 package midproject.SharedClasses.Interfaces;
 
 import midproject.SharedClasses.ReferenceClasses.*;
-import midproject.ViewClasses.AdminGUIFrame;
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
-import java.util.Map;
 
 
 public interface MessageCallback extends Remote {

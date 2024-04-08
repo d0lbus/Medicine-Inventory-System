@@ -1,4 +1,4 @@
-package midproject.Server;
+package midproject.SharedClasses.Server;
 
 import java.rmi.registry.*;
 

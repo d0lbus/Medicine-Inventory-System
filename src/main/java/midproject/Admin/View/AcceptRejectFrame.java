@@ -1,4 +1,4 @@
-package midproject.ViewClasses;
+package midproject.Admin.View;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import javax.swing.*;

@@ -1,4 +1,4 @@
-package midproject.ClientControllers;
+package midproject.Customer.CustomerController;
 
 import java.awt.event.*;
 import java.io.File;
@@ -10,13 +10,16 @@ import java.rmi.registry.Registry;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import midproject.Customer.View.ClientGUIFrame;
+import midproject.Customer.View.QuantityFrame;
+import midproject.Customer.View.ViewOrderFrame;
 import midproject.SharedClasses.ReferenceClasses.Order;
 import midproject.SharedClasses.Servants.CallbackImplementation;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.OrderItem;
 import midproject.SharedClasses.ReferenceClasses.User;
+import midproject.SharedClasses.SharedViewClasses.Login;
 import midproject.SharedClasses.UserDefinedExceptions.*;
-import midproject.ViewClasses.*;
 
 import java.util.ArrayList;
 import java.util.Base64;

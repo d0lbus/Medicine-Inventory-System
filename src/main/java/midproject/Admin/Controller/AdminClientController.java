@@ -1,4 +1,4 @@
-package midproject.ClientControllers;
+package midproject.Admin.Controller;
 
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
@@ -9,15 +9,17 @@ import java.rmi.registry.Registry;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import midproject.Admin.View.*;
 import midproject.SharedClasses.Servants.CallbackImplementation;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.Medicine;
 import midproject.SharedClasses.ReferenceClasses.Order;
 import midproject.SharedClasses.ReferenceClasses.OrderItem;
 import midproject.SharedClasses.ReferenceClasses.User;
+import midproject.SharedClasses.SharedViewClasses.Login;
 import midproject.SharedClasses.UserDefinedExceptions.*;
 import midproject.SharedClasses.Utilities.UserJSONProcessor;
-import midproject.ViewClasses.*;
+import midproject.SharedClasses.SharedViewClasses.*;
 
 import java.util.Base64;
 import java.util.Calendar;

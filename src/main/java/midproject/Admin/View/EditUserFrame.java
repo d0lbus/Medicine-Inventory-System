@@ -1,10 +1,9 @@
-package midproject.ViewClasses;
+package midproject.Admin.View;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import midproject.SharedClasses.ReferenceClasses.User;
 import javax.swing.*;
 import java.awt.*;
-import java.util.Objects;
 
 /**
  *
