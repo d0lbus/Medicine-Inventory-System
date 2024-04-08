@@ -75,4 +75,6 @@ public interface MessageCallback extends Remote {
 	void notifyOrderStatusChanged(String orderID, String newStatus) throws RemoteException;
 
     void notifyPasswordChangeResult(boolean b, String s) throws RemoteException;
+
+	void getUserMessage(String message, String username) throws RemoteException;
 }

@@ -551,6 +551,11 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		});
 	}
 
+	public void getUserMessage(String message, String username) throws RemoteException{
+		SwingUtilities.invokeLater(() -> {
+			adminGUIFrame.getServerLogsTextArea().append("["+formattedDateTime+"][FROM USER: " + username+"]"+message);
+		});
+	}
 
 	public void notifyOrderStatusChanged(String orderID, String newStatus) throws RemoteException{
 		SwingUtilities.invokeLater(() -> {

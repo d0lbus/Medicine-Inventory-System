@@ -155,15 +155,13 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         setUsernameLabel = new javax.swing.JLabel();
         setUsernameTextField = new javax.swing.JTextField();
         setPasswordLabel = new javax.swing.JLabel();
-        setPasswordTextField = new javax.swing.JTextField();
         confirmPasswordLabel = new javax.swing.JLabel();
-        confirmPasswordTextField = new javax.swing.JTextField();
-        passwordField = new javax.swing.JPasswordField();
-        confirmPasswordField = new javax.swing.JPasswordField();
         createAccountButton = new javax.swing.JButton();
         userTypeLabel = new javax.swing.JLabel();
         userTypeComboBox = new javax.swing.JComboBox<>();
         birthdateCalendar = new com.toedter.calendar.JDateChooser();
+        jPasswordField = new javax.swing.JPasswordField();
+        jConfirmPasswordField = new javax.swing.JPasswordField();
         sendMessagePanel = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         sendMessageTextArea = new javax.swing.JTextArea();
@@ -175,7 +173,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         serverLogsTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
         setTitle("Quantum Drugstore");
 
         headerPanel.setBackground(new java.awt.Color(69, 123, 157));
@@ -395,7 +392,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(rUsersTable);
 
-        rUsersArchiveButton.setBackground(new java.awt.Color(247,163,153));
+        rUsersArchiveButton.setBackground(new java.awt.Color(120, 0, 0));
         rUsersArchiveButton.setText("Archive");
         rUsersArchiveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -403,7 +400,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        rUsersViewButton.setBackground(new java.awt.Color(207,225,185));
+        rUsersViewButton.setBackground(new java.awt.Color(56, 102, 65));
         rUsersViewButton.setText("View User");
         rUsersViewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -411,7 +408,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        rUsersEditButton.setBackground(new java.awt.Color(202,233,255));
+        rUsersEditButton.setBackground(new java.awt.Color(18, 69, 89));
         rUsersEditButton.setText("Edit User");
         rUsersEditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -506,7 +503,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(aUsersTable);
 
-        aUsersUnarchiveButton.setBackground(new java.awt.Color(247,163,153));
+        aUsersUnarchiveButton.setBackground(new java.awt.Color(120, 0, 0));
         aUsersUnarchiveButton.setText("Unarchive");
         aUsersUnarchiveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -514,7 +511,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        aUsersViewButton.setBackground(new java.awt.Color(207,225,185));
+        aUsersViewButton.setBackground(new java.awt.Color(56, 102, 65));
         aUsersViewButton.setText("View User");
         aUsersViewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -599,7 +596,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(pTable);
 
-        pViewButton.setBackground(new java.awt.Color(207,225,185));
+        pViewButton.setBackground(new java.awt.Color(56, 102, 65));
         pViewButton.setText("View Orders");
 
         pendingOrderLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -667,7 +664,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Order ID", "User ID", "Mode of Delivery", "Mode of Payment", "Status", "Total"
+                "Order ID", "User ID", "Last Name", "First Name", "Status", "Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -680,7 +677,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(oTable);
 
-        oViewButton.setBackground(new java.awt.Color(207,225,185));
+        oViewButton.setBackground(new java.awt.Color(56, 102, 65));
         oViewButton.setText("View Orders");
 
         orderLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -943,14 +940,22 @@ public class AdminGUIFrame extends javax.swing.JFrame {
 
         iTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Medicine ID", "Category", "Generic Name", "Brand Name", "Form", "Quantity", "Price"
+                "Category", "Generic Name", "Brand Name", "Form", "Quantity", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -959,7 +964,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(iTable);
 
-        iAddButton.setBackground(new java.awt.Color(207,225,185));
+        iAddButton.setBackground(new java.awt.Color(56, 102, 65));
         iAddButton.setText("Add");
         iAddButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -971,7 +976,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         inventoryLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         inventoryLabel.setText("Inventory");
 
-        iEditButton.setBackground(new java.awt.Color(202,233,255));
+        iEditButton.setBackground(new java.awt.Color(18, 69, 89));
         iEditButton.setText("Edit");
         iEditButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -979,7 +984,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        iDeleteButton.setBackground(new java.awt.Color(247,163,153));
+        iDeleteButton.setBackground(new java.awt.Color(120, 0, 0));
         iDeleteButton.setText("Delete");
         iDeleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1139,7 +1144,21 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         userTypeLabel.setForeground(new java.awt.Color(51, 51, 51));
         userTypeLabel.setText("User Type");
 
-        userTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Customer" }));
+        userTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Client" }));
+
+        jPasswordField.setText("jPasswordField1");
+        jPasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordFieldActionPerformed(evt);
+            }
+        });
+
+        jConfirmPasswordField.setText("jPasswordField1");
+        jConfirmPasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConfirmPasswordFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout registrationPanelLayout = new javax.swing.GroupLayout(registrationPanel);
         registrationPanel.setLayout(registrationPanelLayout);
@@ -1201,9 +1220,9 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                             .addComponent(setUsernameLabel)
                             .addComponent(setUsernameTextField)
                             .addComponent(setPasswordLabel)
-                            .addComponent(passwordField)
                             .addComponent(confirmPasswordLabel)
-                            .addComponent(confirmPasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))))
+                            .addComponent(jPasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                            .addComponent(jConfirmPasswordField))))
                 .addContainerGap(42, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registrationPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1252,39 +1271,46 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                     .addComponent(middleNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(municipalityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(setUsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(birthdateLabel)
-                    .addComponent(ageLabel)
-                    .addComponent(provinceLabel)
-                    .addComponent(setPasswordLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(provinceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(birthdateCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(registrationPanelLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(genderLabel)
-                            .addComponent(genderComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registrationPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(birthdateLabel)
+                            .addComponent(ageLabel)
+                            .addComponent(provinceLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(zipCodeLabel)
+                        .addGap(148, 148, 148))
+                    .addGroup(registrationPanelLayout.createSequentialGroup()
+                        .addGap(49, 49, 49)
                         .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(zipCodeLabel)
-                            .addComponent(confirmPasswordLabel))
-                        .addGap(18, 18, 18)))
-                .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(personWithDisabilityLabel)
-                    .addComponent(personWithDisabilityCheckBox)
-                    .addComponent(zipCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(confirmPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(createAccountButton)
-                .addGap(38, 38, 38))
+                            .addComponent(ageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(provinceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(birthdateCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(registrationPanelLayout.createSequentialGroup()
+                                .addComponent(setPasswordLabel)
+                                .addGap(15, 15, 15)))
+                        .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(registrationPanelLayout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(genderLabel)
+                                    .addComponent(genderComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registrationPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                                .addComponent(confirmPasswordLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(registrationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(personWithDisabilityLabel)
+                            .addComponent(personWithDisabilityCheckBox)
+                            .addComponent(zipCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jConfirmPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addComponent(createAccountButton)
+                        .addGap(38, 38, 38))))
         );
 
         containerPanel.add(registrationPanel, "registrationPanel");
@@ -1303,6 +1329,11 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
 
         comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        comboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setText("Select user");
@@ -1522,6 +1553,18 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         containerPanel.revalidate();
     }//GEN-LAST:event_serverLogsMouseClickedMouseClicked
 
+    private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxActionPerformed
+
+    private void jPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordFieldActionPerformed
+
+    private void jConfirmPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConfirmPasswordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jConfirmPasswordFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1599,7 +1642,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     }
 
     public JTextField getConfirmPasswordTextField() {
-        return confirmPasswordTextField;
+        return jConfirmPasswordField;
     }
 
     public JLabel getContactNumberLabel() {
@@ -1963,15 +2006,15 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     }
 
     public JTextField getSetPasswordTextField() {
-        return setPasswordTextField;
+        return jPasswordField;
     }
 
     public JPasswordField getPasswordField() {
-        return passwordField;
+        return jPasswordField;
     }
 
     public JPasswordField getConfirmPasswordField() {
-        return confirmPasswordField;
+        return jConfirmPasswordField;
     }
 
     public JLabel getSetUsernameLabel() {
@@ -2043,7 +2086,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JLabel birthdateLabel;
     private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JLabel confirmPasswordLabel;
-    private javax.swing.JTextField confirmPasswordTextField;
     private javax.swing.JLabel contactNumberLabel;
     private javax.swing.JTextField contactNumberTextField;
     private javax.swing.JPanel containerPanel;
@@ -2068,6 +2110,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JButton inventoryButton;
     private javax.swing.JLabel inventoryLabel;
     private javax.swing.JPanel inventoryPanel;
+    private javax.swing.JPasswordField jConfirmPasswordField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2083,6 +2126,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -2137,9 +2181,6 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JPanel serverLogsPanel;
     private javax.swing.JTextArea serverLogsTextArea;
     private javax.swing.JLabel setPasswordLabel;
-    private javax.swing.JTextField setPasswordTextField;
-    private javax.swing.JPasswordField passwordField;
-    private javax.swing.JPasswordField confirmPasswordField;
     private javax.swing.JLabel setUsernameLabel;
     private javax.swing.JTextField setUsernameTextField;
     private javax.swing.JLabel streetAddressLabel;

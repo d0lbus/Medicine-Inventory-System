@@ -456,6 +456,23 @@ public class CustomerClientController {
 				}
 			});
 
+
+			/**
+			 *
+			 *	SEND MESSAGE TO ADMINS
+			 *
+			 * */
+
+			clientGUIFrame.getSendButton().addActionListener(e -> {
+				String message = clientGUIFrame.getSendMessageTextArea().getText();
+				try {
+					msgserver.sendMessageToAdmins(message, username);
+					JOptionPane.showMessageDialog(clientGUIFrame, "Message sent successfully to admins!","Message Sent", JOptionPane.INFORMATION_MESSAGE);
+					clientGUIFrame.getSendMessageTextArea().setText("");
+				} catch (RemoteException ex) {
+					throw new RuntimeException(ex);
+				}
+			});
 		}
 
 	/**HELPER METHODS**/

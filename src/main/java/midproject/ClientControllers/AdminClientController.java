@@ -823,14 +823,15 @@ public class AdminClientController {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 if ("date".equals(evt.getPropertyName())) {
-                    // Get the selected date from the JDateChooser
                     Date selectedDate = (Date) evt.getNewValue();
+                    int age;
+                    try {
+                        age = calculateAge(selectedDate);
+                        adminGUIFrame.getAgeTextField().setText(String.valueOf(age));
 
-                    // Calculate age based on the selected date
-                    int age = calculateAge(selectedDate);
-
-                    // Update the ageTextField
-                    adminGUIFrame.getAgeTextField().setText(String.valueOf(age));
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         });
@@ -877,39 +878,36 @@ public class AdminClientController {
     // Method to check if username already exists
     private static boolean isUsernameAlreadyExists(String username) {
         try {
-            // Retrieve all users from file or database
             List<User> users = UserJSONProcessor.readUsersFromFile("res/UserInformation.json");
 
-            // Check if any user has the same username
             for (User existingUser : users) {
                 if (existingUser.getUsername().equals(username)) {
-                    return true; // Username already exists
+                    return true;
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return false; // Username does not exist
+        return false;
     }
 
-    private static int calculateAge(Date birthdate) {
+    private static int calculateAge(Date birthdate) throws Exception {
         Calendar birthdateCal = Calendar.getInstance();
         birthdateCal.setTime(birthdate);
         Calendar now = Calendar.getInstance();
 
-        // Check if birthdate is after today
         if (now.before(birthdateCal)) {
             return 0;
         }
 
         int age = now.get(Calendar.YEAR) - birthdateCal.get(Calendar.YEAR);
 
-        // Adjust age if birthday has not yet occurred this year
+
         birthdateCal.add(Calendar.YEAR, age);
         if (now.before(birthdateCal)) {
             age--;
         }
-
+        autoRefreshMedicineRelatedComponents();
         return age;
     }
 
