@@ -15,6 +15,7 @@ import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import midproject.SharedClasses.Implementations.CallbackImplementation;
+import midproject.SharedClasses.Interfaces.MessageCallback;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.OrderItem;
 import midproject.SharedClasses.ReferenceClasses.User;
@@ -165,15 +166,45 @@ public class CustomerClientController {
             }
 		});
 
-		clientGUIFrame.getSaveButton().addActionListener(e ->{
+		clientGUIFrame.getSaveButton().addActionListener(e -> {
+			String oldPassword = new String(clientGUIFrame.getCurrentPasswordField().getPassword());
+			String newPassword = new String(clientGUIFrame.getNewPasswordField().getPassword());
+			String confirmPassword = new String(clientGUIFrame.getConfirmPasswordField().getPassword());
+			// Validate if new password matches confirm password
+			if (!newPassword.equals(confirmPassword)) {
+				JOptionPane.showMessageDialog(clientGUIFrame, "New password and confirm password do not match.",
+						"Password Mismatch", JOptionPane.ERROR_MESSAGE);
+				return; // Exit the method if passwords don't match
+			}
+			// Call the method to change password on the server
+			try {
+				boolean isPasswordChanged = msgserver.changeUserPassword(username, oldPassword, newPassword, mci);
+				if (isPasswordChanged) {
+					JOptionPane.showMessageDialog(clientGUIFrame, "Password changed successfully.",
+							"Success", JOptionPane.INFORMATION_MESSAGE);
+					// Clear password fields after successful password change
+					clientGUIFrame.getCurrentPasswordField().setText("");
+					clientGUIFrame.getNewPasswordField().setText("");
+					clientGUIFrame.getConfirmPasswordField().setText("");
+				} else {
+					JOptionPane.showMessageDialog(clientGUIFrame, "Failed to change password. Please check your old password.",
+							"Password Change Failed", JOptionPane.ERROR_MESSAGE);
+				}
+			} catch (RemoteException ex) {
+					JOptionPane.showMessageDialog(clientGUIFrame, "Error communicating with the server.",
+							"Server Error", JOptionPane.ERROR_MESSAGE);
+					ex.printStackTrace(); // Print stack trace for debugging
+			}
 
 		});
 
-		/**
-		 * 	SHOPPING FOR MEDICINE RELATED FUNCTIONS
-		 *
-		 *
-		 * */
+
+
+			/**
+             * 	SHOPPING FOR MEDICINE RELATED FUNCTIONS
+             *
+             *
+             * */
 			clientGUIFrame.getSearchTextfield().addActionListener(e ->{
 				String searchText = clientGUIFrame.getSearchTextfield().getText().trim().toLowerCase();
 				try {

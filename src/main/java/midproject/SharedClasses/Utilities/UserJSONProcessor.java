@@ -139,7 +139,7 @@ public class UserJSONProcessor {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } 
+        }
     }
 
     public static void transferUserToDifferentFile(String userId, String originalFilePath, String destinationFilePath) {
@@ -290,5 +290,18 @@ public class UserJSONProcessor {
             e.printStackTrace();
         }
         return null; // User not found
+    }
+
+    public static boolean validateOldPassword(String username, String oldPassword) throws Exception {
+        User user = getUserByUsername("res/UserInformation.json", username);
+        return user != null && user.getPassword().equals(oldPassword);
+    }
+
+    public static void updateUserPassword(String username, String newPassword) throws Exception {
+        User user = getUserByUsername("res/UserInformation.json", username);
+        if (user != null) {
+            user.setPassword(newPassword);
+            updateUserInJsonFile(user, "res/UserInformation.json");
+        }
     }
 }

@@ -251,6 +251,7 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			JOptionPane.showMessageDialog(null, userDetails, "Details of " + user.getFirstName() + " " + user.getLastName(), JOptionPane.INFORMATION_MESSAGE);
 		});
 	}
+
 	public void notifyUserRegisteredByAdmin(String adminUsername, User user) throws RemoteException{
 		SwingUtilities.invokeLater(() -> {
 			String message = "["+formattedDateTime+"]" + "ADMIN " + adminUsername + " registered user "
@@ -439,6 +440,14 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		userDetails.append("Phone: ").append(user.getContactNumber()).append("\n");
 		clientGUIFrame.getPersonalInformationTextArea().setText(String.valueOf(userDetails));
 	}
+	public void notifyPasswordChangeResult(boolean isSuccess, String message) throws RemoteException {
+		if (isSuccess) {
+			System.out.println("Password changed successfully for user: " + user.getUsername());
+		} else {
+			System.out.println("Failed to change password for user: " + user.getUsername() + ". Reason: " + message);
+		}
+	}
+	
 	public void updateCart(UserCart userCart) throws RemoteException {
 		SwingUtilities.invokeLater(() -> {
 			DefaultTableModel model = (DefaultTableModel) clientGUIFrame.getCategoryTable1().getModel();

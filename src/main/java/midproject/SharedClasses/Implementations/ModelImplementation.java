@@ -677,6 +677,47 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         msgCallback.displayProfileDetails(user);
         return user;
     }
+
+    public User getUserByUsername(String username) throws RemoteException {
+        try {
+            return UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
+        } catch (Exception e) {
+            throw new RemoteException("Error retrieving user information: " + e.getMessage(), e);
+        }
+    }
+
+    public boolean validateOldPassword(String username, String oldPassword) throws RemoteException {
+        try {
+            return UserJSONProcessor.validateOldPassword(username, oldPassword);
+        } catch (Exception e) {
+            throw new RemoteException("Error validating old password: " + e.getMessage(), e);
+        }
+    }
+
+    public void updateUserPassword(String username, String newPassword) throws RemoteException {
+        try {
+            UserJSONProcessor.updateUserPassword(username, newPassword);
+        } catch (Exception e) {
+            throw new RemoteException("Error updating user password: " + e.getMessage(), e);
+        }
+    }
+
+    public boolean changeUserPassword(String username, String oldPassword, String newPassword, MessageCallback clientCallback) throws RemoteException {
+        try {
+            if (validateOldPassword(username, oldPassword)) {
+                updateUserPassword(username, newPassword);
+                clientCallback.notifyPasswordChangeResult(true, "Password changed successfully.");
+                return true;
+            } else {
+                clientCallback.notifyPasswordChangeResult(false, "Invalid old password.");
+                return false;
+            }
+        } catch (Exception e) {
+            clientCallback.notifyPasswordChangeResult(false, "Error changing password: " + e.getMessage());
+            return false;
+        }
+    }
+
     public void getCartDetails(String username, MessageCallback clientCallback) throws RemoteException{
         try {
             User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
@@ -845,6 +886,7 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             throw new RuntimeException(e);
         }
     }
+
     private static double getTotal(User user, List<OrderItem> orderItems) {
         double total;
 
