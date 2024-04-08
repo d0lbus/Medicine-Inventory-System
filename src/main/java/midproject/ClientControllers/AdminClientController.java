@@ -808,13 +808,31 @@ public class AdminClientController {
         adminGUIFrame.getSendButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String selectedUsername = (String) adminGUIFrame.getComboBox().getSelectedItem();
                 String broadcastMessage = adminGUIFrame.getSendMessageTextArea().getText();
+
+                if (selectedUsername == null || selectedUsername.isEmpty()) {
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a user.", "No User Selected", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                if (broadcastMessage.isEmpty()) {
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Please enter a message to send.", "No Message", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
                 try {
-                    msgserver.broadcast(broadcastMessage);
+                    msgserver.broadcast(selectedUsername, broadcastMessage);
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Message sent to " + selectedUsername + ".", "Message Sent", JOptionPane.INFORMATION_MESSAGE);
                 } catch (RemoteException ex) {
-                    throw new RuntimeException(ex);
+                    JOptionPane.showMessageDialog(adminGUIFrame, "Failed to send the message due to a server error.", "Server Error", JOptionPane.ERROR_MESSAGE);
+                    ex.printStackTrace();
                 } catch (NotLoggedInException ex) {
-                    throw new RuntimeException(ex);
+                    JOptionPane.showMessageDialog(adminGUIFrame, "You are not logged in.", "Not Logged In", JOptionPane.ERROR_MESSAGE);
+                    ex.printStackTrace();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(adminGUIFrame, "An unexpected error occurred.", "Error", JOptionPane.ERROR_MESSAGE);
+                    ex.printStackTrace();
                 }
             }
         });

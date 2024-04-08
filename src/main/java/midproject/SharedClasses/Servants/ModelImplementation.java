@@ -480,10 +480,8 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
                         e.printStackTrace();
                     }
 
-                    // Fetch the updated cart for this user using the userId
                     UserCart updatedCart = allUserCarts.get(userId);
                     if (updatedCart != null && !updatedCart.getItems().isEmpty()) {
-                        // If there's an updated cart, and it's not empty, notify the customer
                         customerCallback.updateCart(updatedCart);
                     }
                 } catch (RemoteException e) {
@@ -499,18 +497,33 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
      *
      * */
 
-    public synchronized void broadcast(String msg) throws RemoteException, NotLoggedInException {
-        for (Map.Entry<UserCallBackInfo, MessageCallback> entry : msgCallbacks.entrySet()) {
-            UserCallBackInfo userInfo = entry.getKey();
-            MessageCallback callback = entry.getValue();
+    public synchronized void broadcast(String username, String msg) throws Exception {
+        User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
 
-            if ("Customer".equals(userInfo.getUserType())) {
-                try {
-                    callback.broadcastCall(msg);
-                } catch (RemoteException e) {
-                    System.err.println("Failed to broadcast message to " + userInfo.getUsername() + ": " + e.getMessage());
+        if (username.equals("All")){
+            for (Map.Entry<UserCallBackInfo, MessageCallback> entry : msgCallbacks.entrySet()) {
+                UserCallBackInfo userInfo = entry.getKey();
+                MessageCallback callback = entry.getValue();
+
+                if ("Customer".equals(userInfo.getUserType())) {
+                    try {
+                        callback.broadcastCall(msg);
+                    } catch (RemoteException e) {
+                        System.err.println("Failed to broadcast message to " + userInfo.getUsername() + ": " + e.getMessage());
+                    }
                 }
             }
+        } else {
+            msgCallbacks.entrySet().stream()
+                    .filter(entry -> entry.getKey().getUsername().equals(user.getUsername()))
+                    .findFirst()
+                    .ifPresent(entry -> {
+                        try {
+                            entry.getValue().broadcastCall(msg);
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
+                    });
         }
     }
 

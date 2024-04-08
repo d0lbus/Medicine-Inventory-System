@@ -18,8 +18,8 @@ public interface ModelInterface extends Remote {
     public void logout(MessageCallback msgCallback, String sessionID)
             throws Exception, UserExistsException;
 
-    public void broadcast(String msg)
-            throws RemoteException, NotLoggedInException;
+    public void broadcast(String username, String msg)
+            throws Exception;
 
     public void sendRUserDetailsToAdmins(String userId, MessageCallback msgCallback) throws RemoteException;
 

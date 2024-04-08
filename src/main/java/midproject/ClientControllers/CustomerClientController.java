@@ -457,6 +457,12 @@ public class CustomerClientController {
 				String message = clientGUIFrame.getSendMessageTextArea().getText();
 				try {
 					msgserver.sendMessageToAdmins(message, username);
+
+					if (message.isEmpty()) {
+						JOptionPane.showMessageDialog(clientGUIFrame, "Please enter a message to send.", "No Message", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+
 					JOptionPane.showMessageDialog(clientGUIFrame, "Message sent successfully to admins!","Message Sent", JOptionPane.INFORMATION_MESSAGE);
 					clientGUIFrame.getSendMessageTextArea().setText("");
 				} catch (RemoteException ex) {
