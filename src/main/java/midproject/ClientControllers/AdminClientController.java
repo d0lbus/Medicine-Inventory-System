@@ -32,7 +32,9 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import static midproject.SharedClasses.Utilities.UserJSONProcessor.fetchUserInformationFromDataSource;
-
+/**
+ * This class controls the admin client's user interface interactions.
+ */
 public class AdminClientController {
 
     private static Login loginFrame = new Login();
@@ -46,6 +48,10 @@ public class AdminClientController {
 
     private static String sessionID;
 
+    /**
+     * The main method starts the admin client application.
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
@@ -61,7 +67,9 @@ public class AdminClientController {
             loginFrame.setVisible(true);
         });
     }
-
+    /**
+     * Initiates the login process when the user clicks the login button.
+     */
     private static void initiateLoginProcess() {
         FlatMacLightLaf.setup();
         loginFrame.setVisible(true);
@@ -96,7 +104,10 @@ public class AdminClientController {
             }
         });
     }
-
+    /**
+     * Displays the admin GUI and sets up various listeners.
+     * @throws Exception If an error occurs during setup.
+     */
     private static void showClientGUI() throws Exception {
         adminGUIFrame.setLocationRelativeTo(null);
         adminGUIFrame.setVisible(true);
@@ -106,6 +117,10 @@ public class AdminClientController {
         autoRefreshOrderRelatedComponents();
 
         /** LOGOUT RELATED METHODS */
+
+        /**
+         * Handles logout actions.
+         */
         adminGUIFrame.getLogoutMouseClicked().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 try {
@@ -121,6 +136,9 @@ public class AdminClientController {
             }
         });
 
+        /**
+         * Adds a window listener to the admin GUI frame to handle logout actions.
+         */
         adminGUIFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -139,6 +157,11 @@ public class AdminClientController {
 
 
         /** DASHBOARD RELATED METHODS */
+
+        /**
+         * Adds an action listener to the dashboard button on the admin GUI frame.
+         * This listener triggers the automatic refresh of user-related components.
+         */
         adminGUIFrame.getDashboardButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -151,6 +174,11 @@ public class AdminClientController {
         });
 
         /** REGISTERED USERS RELATED METHODS */
+
+        /**
+         * Adds an action listener to the "View" button for registered users on the admin GUI frame.
+         * This listener retrieves details of the selected user and sends them to the admins.
+         */
         adminGUIFrame.getrUsersViewButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -174,17 +202,9 @@ public class AdminClientController {
         });
 
         /**
-        adminGUIFrame.getrUsersEditButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    autoRefreshUserRelatedComponents();
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });*/
-
+         * Adds an action listener to the "Archive" button for registered users on the admin GUI frame.
+         * This listener archives the selected user and triggers an automatic refresh of user-related components.
+         */
         adminGUIFrame.getrUsersArchiveButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -210,6 +230,10 @@ public class AdminClientController {
             }
         });
 
+        /**
+         * Adds an action listener to the search text field for registered users on the admin GUI frame.
+         * This listener searches for users based on the input text and displays the results.
+         */
         adminGUIFrame.getrUsersSearchTextfield().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -224,6 +248,10 @@ public class AdminClientController {
             }
         });
 
+        /**
+         * Adds an action listener to the "Edit" button for registered users on the admin GUI frame.
+         * This listener allows editing of the selected user's information.
+         */
         adminGUIFrame.getrUsersEditButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -253,7 +281,6 @@ public class AdminClientController {
                     editUserFrame.getBirthdateTextField().setText(selectedUser.getBirthdate());
                     editUserFrame.getAgeTextField().setText(selectedUser.getAge());
                     editUserFrame.getGenderComboBox().setSelectedItem(selectedUser.getGender());
-                    //editUserFrame.getPersonWithDisabilityCheckBox().setSelected(selectedUser.getPersonWithDisability());
                     editUserFrame.getEmailAddressTextField().setText(selectedUser.getEmail());
                     editUserFrame.getContactNumberTextField().setText(selectedUser.getContactNumber());
                     editUserFrame.getStreetAddressTextField().setText(selectedUser.getStreet());
@@ -268,9 +295,6 @@ public class AdminClientController {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             User editedUser = new User();
-                            // Get the edited user details from the editUserFrame
-                            //User editedUser = editUserFrame.getEditedUser();
-
                             editedUser.setUserId(selectedUserId);
                             editedUser.setFirstName(editUserFrame.getFirstNameTextField().getText());
                             editedUser.setLastName(editUserFrame.getLastNameTextField().getText());
@@ -278,7 +302,6 @@ public class AdminClientController {
                             editedUser.setBirthdate(editUserFrame.getBirthdateTextField().getText());
                             editedUser.setAge(editUserFrame.getAgeTextField().getText());
                             editedUser.setGender((String) editUserFrame.getGenderComboBox().getSelectedItem());
-                            //editedUser.setPersonWithDisability(editUserFrame.getPersonWithDisabilityCheckBox().getAction().isEnabled());
                             editedUser.setEmail(editUserFrame.getEmailAddressTextField().getText());
                             editedUser.setContactNumber(editUserFrame.getContactNumberTextField().getText());
                             editedUser.setStreet(editUserFrame.getStreetAddressTextField().getText());
@@ -311,33 +334,12 @@ public class AdminClientController {
         });
 
 
-        /**
-        adminGUIFrame.getrUsersEditButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int selectedRow = adminGUIFrame.getrUsersTable().getSelectedRow();
-                if (selectedRow != -1) {
-                    String userId = adminGUIFrame.getrUsersTable().getValueAt(selectedRow, 0).toString();
-                    User selectedUser = fetchUserInformationFromDataSource(userId, "res/UserInformation.json");
-                    if (selectedUser != null) {
-                        EditUserFrame editUserFrame = new EditUserFrame(selectedUser);
-                        editUserFrame.setVisible(true);
-                    } else {
-                        JOptionPane.showMessageDialog(adminGUIFrame, "Failed to retrieve user information.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    try {
-                        throw new SelectionRequiredUserException("Please select a user first.");
-                    } catch (SelectionRequiredUserException exception) {
-                        JOptionPane.showMessageDialog(adminGUIFrame, exception.getMessage(), "Selection Required", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }
-        }); */
-
-
         /** ARCHIVED USERS RELATED METHODS */
 
+        /**
+         * Adds an action listener to the "View" button for archived users on the admin GUI frame.
+         * This listener sends the details of the selected archived user to admins.
+         */
         adminGUIFrame.getaUsersViewButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -360,6 +362,10 @@ public class AdminClientController {
             }
         });
 
+        /**
+         * Adds an action listener to the "Unarchive" button for archived users on the admin GUI frame.
+         * This listener unarchives the selected user and triggers an automatic refresh of user-related components.
+         */
         adminGUIFrame.getaUsersUnarchiveButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -385,6 +391,10 @@ public class AdminClientController {
             }
         });
 
+        /**
+         * Adds an action listener to the search text field for archived users on the admin GUI frame.
+         * This listener searches for archived users based on the input text and displays the results.
+         */
         adminGUIFrame.getaUsersSearchTextfield().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -401,6 +411,10 @@ public class AdminClientController {
 
         /** REGISTER USER RELATED METHODS */
 
+        /**
+         * Adds an action listener to the "Create Account" button for registering users on the admin GUI frame.
+         * This listener handles the process of creating a new user account.
+         */
         adminGUIFrame.getCreateAccountButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -424,34 +438,28 @@ public class AdminClientController {
                     String province = adminGUIFrame.getProvinceTextField().getText();
                     String zip = adminGUIFrame.getZipCodeTextField().getText();
 
-                    // Perform input validation
                     if (firstName.isEmpty() || lastName.isEmpty() || birthdate.isEmpty() || age.isEmpty() ||
                             gender.isEmpty() || email.isEmpty() || contactNumber.isEmpty() || username.isEmpty() || password.isEmpty() ||
                             street.isEmpty() || city.isEmpty() || province.isEmpty() || zip.isEmpty() || confirmPassword.isEmpty()) {
                         throw new MissingFieldException("Please fill in empty fields.");
                     }
 
-                    // Validate contact number format
                     if (!Pattern.matches("\\d{11}", contactNumber)) {
                         throw new InvalidInputException("Invalid contact number format. Please enter a 11-digit number.");
                     }
 
-                    // Check if password and confirm password match
                     if (!password.equals(confirmPassword)) {
                         throw new InvalidInputException("Passwords do not match. Please re-enter.");
                     }
 
-                    // Validate email format
                     if (!Pattern.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{3,}", email)) {
                         throw new InvalidInputException("Invalid email format.");
                     }
 
-                    // Check if username already exists
                     if (isUsernameAlreadyExists(username)) {
                         throw new UsernameAlreadyExistsException("Username already exists, please choose a different one.");
                     }
 
-                    // Create a User object
                     User newUser = new User(null, userType, firstName, lastName, middleName, birthdate, age, gender,
                             personWithDisability, email, contactNumber, username, password, confirmPassword,
                             street, additionalAddress, city, province, zip);
@@ -459,10 +467,8 @@ public class AdminClientController {
 
                     msgserver.registerUser(newUser, username);
 
-                    // Show confirmation message
                     JOptionPane.showMessageDialog(adminGUIFrame, "Account created successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
 
-                    // Reset text fields
                     resetTextFields(adminGUIFrame);
 
                     try {
@@ -487,6 +493,10 @@ public class AdminClientController {
 
         /** ORDERS RELATED METHODS */
 
+        /**
+         * Adds an action listener to the "View" button for orders on the admin GUI frame.
+         * This listener retrieves the details of the selected order and displays them to admins.
+         */
         adminGUIFrame.getoViewButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -572,6 +582,11 @@ public class AdminClientController {
                 }
             }
         });
+
+        /**
+         * Adds an action listener to the search text field for orders on the admin GUI frame.
+         * This listener searches for orders based on the input text and displays the results.
+         */
         adminGUIFrame.getoSearchTextfield().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -588,6 +603,10 @@ public class AdminClientController {
 
         /** PENDING ORDERS RELATED METHODS */
 
+        /**
+         * Adds an action listener to the "View" button for pending orders on the admin GUI frame.
+         * This listener retrieves the details of the selected pending order and displays them to admins.
+         */
         adminGUIFrame.getpViewButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -674,6 +693,10 @@ public class AdminClientController {
             }
         });
 
+        /**
+         * Adds an action listener to the search text field for pending orders on the admin GUI frame.
+         * This listener searches for pending orders based on the input text and displays the results.
+         */
         adminGUIFrame.getpSearchTextfield().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -688,6 +711,10 @@ public class AdminClientController {
 
         /** INVENTORY RELATED METHODS */
 
+        /**
+         * Adds an action listener to the search text field for inventory on the admin GUI frame.
+         * This listener searches for medicine inventory based on the input text and displays the results.
+         */
         adminGUIFrame.getiSearchTextfield().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -700,6 +727,10 @@ public class AdminClientController {
             }
         });
 
+        /**
+         * Adds an action listener to the "Add" button for medicine on the admin GUI frame.
+         * This listener creates a new frame for adding medicine and handles the addition process.
+         */
         adminGUIFrame.getiAddButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -731,6 +762,10 @@ public class AdminClientController {
             }
         });
 
+        /**
+         * Adds an action listener to the "Edit" button for medicine on the admin GUI frame.
+         * This listener allows admins to edit details of selected medicine.
+         */
         adminGUIFrame.getiEditButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -795,6 +830,10 @@ public class AdminClientController {
             }
         });
 
+        /**
+         * Initializes action listeners for the "Delete" button in the inventory section of the admin GUI frame.
+         * This listener handles the deletion of selected medicine.
+         */
         adminGUIFrame.getiDeleteButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -827,6 +866,10 @@ public class AdminClientController {
 
         /** SEND MESSAGE RELATED METHODS */
 
+        /**
+         * Initializes action listener for the "Send" button in the admin GUI frame.
+         * This listener sends a message to the selected user.
+         */
         adminGUIFrame.getSendButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -859,6 +902,10 @@ public class AdminClientController {
             }
         });
 
+        /**
+         * Sets up a listener for the birthdate calendar component to calculate the age automatically and update the age text field.
+         * @param adminGUIFrame The admin GUI frame containing components to interact with.
+         */
         adminGUIFrame.getBirthdateCalendar().addPropertyChangeListener("date", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
@@ -879,6 +926,10 @@ public class AdminClientController {
 
     /** AUTOREFRESH / HELPER METHODS */
 
+    /**
+     * Automatically refreshes components related to user management.
+     * @throws Exception if there's an error during the refresh process.
+     */
     private static void autoRefreshUserRelatedComponents() throws Exception {
         msgserver.updateRegisteredUsersTable();
         msgserver.updateRegisteredUsersCount();
@@ -886,15 +937,27 @@ public class AdminClientController {
         msgserver.updateRegisteredUsersTable();
     }
 
+    /**
+     * Automatically refreshes components related to medicine management.
+     * @throws Exception if there's an error during the refresh process.
+     */
     private static void autoRefreshMedicineRelatedComponents() throws Exception{
         msgserver.updateInventoryTable();
     }
 
+    /**
+     * Automatically refreshes components related to order management.
+     * @throws Exception if there's an error during the refresh process.
+     */
     private static void autoRefreshOrderRelatedComponents() throws Exception{
         msgserver.updateOrdersTable();
         msgserver.updateDashboard();
     }
 
+    /**
+     * Resets text fields in the admin GUI frame.
+     * @param adminGUIFrame The admin GUI frame containing text fields to reset.
+     */
     private static void resetTextFields(AdminGUIFrame adminGUIFrame) {
         adminGUIFrame.getFirstNameTextField().setText("");
         adminGUIFrame.getLastNameTextField().setText("");
@@ -915,7 +978,11 @@ public class AdminClientController {
         adminGUIFrame.getBirthdateCalendar().setDate(new Date());
     }
 
-    // Method to check if username already exists
+    /**
+     * Checks if a given username already exists in the system.
+     * @param username The username to check for existence.
+     * @return true if the username already exists, false otherwise.
+     */
     private static boolean isUsernameAlreadyExists(String username) {
         try {
             List<User> users = UserJSONProcessor.readUsersFromFile("res/UserInformation.json");
@@ -931,6 +998,12 @@ public class AdminClientController {
         return false;
     }
 
+    /**
+     * Calculates the age based on the provided birthdate.
+     * @param birthdate The birthdate of the user.
+     * @return The calculated age.
+     * @throws Exception if there's an error during the calculation process.
+     */
     private static int calculateAge(Date birthdate) throws Exception {
         Calendar birthdateCal = Calendar.getInstance();
         birthdateCal.setTime(birthdate);
@@ -951,6 +1024,15 @@ public class AdminClientController {
         return age;
     }
 
+    /**
+     * Builds a string containing order details for display.
+     * @param user The user for whom the order was placed.
+     * @param orderID The ID of the order.
+     * @param orderDetails Additional details about the order.
+     * @param modeOfDelivery The mode of delivery for the order.
+     * @param modeOfPayment The mode of payment for the order.
+     * @return A string containing formatted order details.
+     */
     private static String buildOrderDetailsString(User user, String orderID, StringBuilder orderDetails, String modeOfDelivery, String modeOfPayment) {
         StringBuilder details = new StringBuilder();
         details.append("John Doe's Official Receipt("+orderID+")"+"\n\n");

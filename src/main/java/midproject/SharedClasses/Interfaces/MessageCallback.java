@@ -1,39 +1,31 @@
 package midproject.SharedClasses.Interfaces;
 
 import midproject.SharedClasses.ReferenceClasses.*;
-import midproject.ViewClasses.AdminGUIFrame;
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
-import java.util.Map;
-
 
 public interface MessageCallback extends Remote {
-	public User getUser() throws RemoteException;
+	User getUser() throws RemoteException;
 
-	public void loginCall(User user) throws RemoteException;
+	void loginCall(User user) throws RemoteException;
 
-	public void broadcastCall(String msg) throws RemoteException;
+	void broadcastCall(String msg) throws RemoteException;
 
-	public void logoutCall(User user) throws RemoteException;
+	void logoutCall(User user) throws RemoteException;
 
-    //public void sendArchivedUsersList(List<User> archivedUsers);
+	void updateOnlineUsers(int count, List<String> onlineUserNames) throws RemoteException;
 
-	public void updateOnlineUsers(int count, List<String> onlineUserNames) throws RemoteException;
+	void updatePendingOrdersCount (int count) throws RemoteException;
 
-	public void updatePendingOrdersCount (int count) throws RemoteException;
+	void updateOrdersCount (int count) throws RemoteException;
 
-	public void updateOrdersCount (int count) throws RemoteException;
+	void readRUsersList(List<User> users) throws RemoteException;
+	void readAUsersList(List<User> users) throws RemoteException;
 
-	public void readRUsersList(List<User> users) throws RemoteException;
-	public void readAUsersList(List<User> users) throws RemoteException;
+	void readOrdersList(List<Order> orders) throws RemoteException;
 
-	public void readOrdersList(List<Order> orders) throws RemoteException;
-
-	public void readMedicineList(List<Medicine> medicine) throws RemoteException;
+	void readMedicineList(List<Medicine> medicine) throws RemoteException;
 
     void countUsersList(List<User> users) throws RemoteException;
 

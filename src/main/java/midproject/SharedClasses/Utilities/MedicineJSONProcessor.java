@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import midproject.SharedClasses.ReferenceClasses.*;
-
 import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
@@ -13,12 +12,20 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Utility class to read and write Medicine objects to/from JSON files.
+ */
 public class MedicineJSONProcessor {
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     private static final String ID_TRACKER_FILE_PATH = "res/medicineIDTracker.txt";
 
+    /**
+     * Reads medicines from a JSON file.
+     * @param filePath The path to the JSON file.
+     * @return A list of Medicine objects read from the file.
+     * @throws IOException If an I/O error occurs.
+     */
     public static List<Medicine> readMedicinesFromFile(String filePath) throws IOException {
         try {
             String json = new String(Files.readAllBytes(Paths.get(filePath)));
@@ -31,6 +38,13 @@ public class MedicineJSONProcessor {
         }
     }
 
+    /**
+     * Retrieves a medicine by its ID.
+     * @param filePath The path to the JSON file containing medicines.
+     * @param medicineId The ID of the medicine to retrieve.
+     * @return The Medicine object corresponding to the provided ID.
+     * @throws Exception If the medicine with the given ID is not found.
+     */
     public static Medicine getMedicineById(String filePath, String medicineId) throws Exception {
         List<Medicine> medicineList = readMedicinesFromFile(filePath);
 
@@ -42,6 +56,13 @@ public class MedicineJSONProcessor {
         return null;
     }
 
+    /**
+     * Retrieves the price of a medicine by its ID.
+     * @param filePath The path to the JSON file containing medicines.
+     * @param medicineId The ID of the medicine to retrieve the price for.
+     * @return The price of the medicine corresponding to the provided ID.
+     * @throws IOException If the medicine with the given ID is not found.
+     */
     public static double getPriceById(String filePath, String medicineId) throws IOException {
         List<Medicine> medicineList = readMedicinesFromFile(filePath);
 
@@ -58,6 +79,11 @@ public class MedicineJSONProcessor {
         }
     }
 
+    /**
+     * Writes medicines to a JSON file.
+     * @param filePath The path to the JSON file to write to.
+     * @throws IOException If an I/O error occurs.
+     */
     public static void addMedicineToFile(Medicine medicine, String filePath) throws IOException {
         medicine.setMedicineID(generateNextMedicineId());
         List<Medicine> medicines = readMedicinesFromFile(filePath);
@@ -65,7 +91,11 @@ public class MedicineJSONProcessor {
         writeMedicinesToFile(medicines, filePath);
     }
 
-    // Example method: Find by category
+    /**
+     * Adds a medicine to a JSON file.
+     * @param filePath The path to the JSON file to add the medicine to.
+     * @throws IOException If an I/O error occurs.
+     */
     public static List<Medicine> findMedicinesByCategory(String category, String filePath) throws IOException {
         List<Medicine> allMedicines = readMedicinesFromFile(filePath);
         List<Medicine> filteredMedicines = new ArrayList<>();
@@ -77,6 +107,12 @@ public class MedicineJSONProcessor {
         return filteredMedicines;
     }
 
+    /**
+     * Updates a medicine in the JSON file.
+     * @param updatedMedicine The updated medicine object.
+     * @param filePath The path to the JSON file containing medicines.
+     * @throws IOException If an I/O error occurs.
+     */
     public static void updateMedicine(Medicine updatedMedicine, String filePath) throws IOException {
         List<Medicine> medicines = readMedicinesFromFile(filePath);
         for (int i = 0; i < medicines.size(); i++) {
@@ -88,6 +124,13 @@ public class MedicineJSONProcessor {
         }
         writeMedicinesToFile(medicines, filePath);
     }
+
+    /**
+     * Removes a specific medicine from the JSON file.
+     * @param targetMedicine The medicine to remove.
+     * @param filePath The path to the JSON file containing medicines.
+     * @throws IOException If an I/O error occurs.
+     */
     public static void removeSpecificMedicine(Medicine targetMedicine, String filePath) throws IOException {
         List<Medicine> medicines = readMedicinesFromFile(filePath);
 
@@ -117,7 +160,7 @@ public class MedicineJSONProcessor {
         try {
             File file = new File(ID_TRACKER_FILE_PATH);
             if (!file.exists()) {
-                return 0; // Start from 0 because we'll increment before using
+                return 0;
             }
             String content = new String(Files.readAllBytes(Paths.get(ID_TRACKER_FILE_PATH)));
             return Integer.parseInt(content.trim());
