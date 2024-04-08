@@ -832,10 +832,19 @@ public class AdminClientController {
         birthdateCal.setTime(birthdate);
         Calendar now = Calendar.getInstance();
 
+        // Check if birthdate is after today
+        if (now.before(birthdateCal)) {
+            return 0;
+        }
+
         int age = now.get(Calendar.YEAR) - birthdateCal.get(Calendar.YEAR);
-        if (now.get(Calendar.DAY_OF_YEAR) < birthdateCal.get(Calendar.DAY_OF_YEAR)) {
+
+        // Adjust age if birthday has not yet occurred this year
+        birthdateCal.add(Calendar.YEAR, age);
+        if (now.before(birthdateCal)) {
             age--;
         }
+
         return age;
     }
 
