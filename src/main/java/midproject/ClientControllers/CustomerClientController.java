@@ -1,8 +1,6 @@
 package midproject.ClientControllers;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,21 +10,23 @@ import java.rmi.registry.Registry;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import midproject.SharedClasses.ReferenceClasses.Order;
 import midproject.SharedClasses.Servants.CallbackImplementation;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.OrderItem;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.*;
-import midproject.ViewClasses.ClientGUIFrame;
-import midproject.ViewClasses.QuantityFrame;
-import midproject.ViewClasses.Login;
-import java.awt.event.MouseAdapter;
+import midproject.ViewClasses.*;
+
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 
 public class CustomerClientController {
@@ -197,16 +197,68 @@ public class CustomerClientController {
 		clientGUIFrame.getOrderHistoryLabel().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CallbackImplementation callbackImplementation = new CallbackImplementation();
-				// Call a method to retrieve and display the order history
 				try {
-					callbackImplementation.displayOrderHistory(msgserver.getOrderHistory(username));
+					msgserver.getOrderHistory(username, mci);
 				} catch (RemoteException ex) {
 					ex.printStackTrace();
 						JOptionPane.showMessageDialog(clientGUIFrame, "Error retrieving order history: " + ex.getMessage(), "Order History Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
+
+		clientGUIFrame.getViewOrderHistoryButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int selectedRow = clientGUIFrame.getOrderHistoryTable().getSelectedRow();
+				if (selectedRow >= 0) {
+					String orderId = (String) clientGUIFrame.getOrderHistoryTable().getValueAt(selectedRow, 0);
+					try {
+						ViewOrderFrame viewOrderFrame = new ViewOrderFrame();
+						viewOrderFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						viewOrderFrame.setLocationRelativeTo(null);
+						viewOrderFrame.setVisible(true);
+
+						Order chosenOrder = msgserver.retrieveOrderDetails(orderId);
+						User user = msgserver.getUserDetailsbyId(chosenOrder.getUserId());
+
+						StringBuilder orderDetails = new StringBuilder();
+
+						for (OrderItem item : chosenOrder.getItems()) {
+							String itemDetails = String.format("Medicine ID: %s\nGeneric Name: %s\nBrand Name: %s\nForm: %s\nQuantity: %d\nPrice: ₱%.2f\n\n",
+									item.getMedicineId(), item.getGenericName(), item.getBrandName(), item.getForm(),
+									item.getQuantity(), item.getPrice());
+							orderDetails.append(itemDetails);
+						}
+
+						orderDetails.append(String.format("Total: ₱%.2f\n", chosenOrder.getTotal()));
+
+						byte[] imageBytes = Base64.getDecoder().decode(chosenOrder.getImage());
+
+						ImageIcon imageIcon = new ImageIcon(imageBytes);
+
+						/*StyledDocument doc = (StyledDocument) viewOrderFrame.getjTextPane1().getDocument();
+						doc.insertString(doc.getLength(), buildOrderDetailsString(user, orderId, orderDetails, chosenOrder.getModeOfDelivery(), chosenOrder.getPaymentMethod()), null);
+
+
+						Style style = doc.addStyle("ImageStyle", null);
+						StyleConstants.setIcon(style, imageIcon);
+						doc.insertString(doc.getLength(), "ignored text", style);*/
+
+					} catch (Exception ex) {
+						ex.printStackTrace();
+						JOptionPane.showMessageDialog(clientGUIFrame, "Failed to load order details.", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+				} else {
+					try {
+						throw new SelectionRequiredException("Please select an order to view");
+					} catch (SelectionRequiredException ex) {
+						JOptionPane.showMessageDialog(clientGUIFrame, ex.getMessage(), "Selection Required", JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			}
+
+		});
+
 
 
 		/**
@@ -531,6 +583,17 @@ public class CustomerClientController {
 		return orderItems;
 	}
 
+	private static String buildOrderDetailsString(User user, String orderID, StringBuilder orderDetails, String modeOfDelivery, String modeOfPayment) {
+		StringBuilder details = new StringBuilder();
+		details.append("John Doe's Official Receipt("+orderID+")"+"\n\n");
+		details.append("Name: ").append(user.getFirstName()).append(" ").append(user.getLastName()).append("\n");
+		details.append("Address: ").append(user.getStreet()).append(" ").append(user.getAdditionalAddressDetails()).append(" ");
+		details.append(user.getCity()).append(", ").append(user.getProvince()).append(" ").append(user.getZip()).append("\n");
+		details.append("Mode of Delivery: ").append(modeOfDelivery).append("\n");
+		details.append("Mode of Payment: ").append(modeOfPayment).append("\n\n");
+		details.append(orderDetails);
+		return details.toString();
+	}
 
 
 }

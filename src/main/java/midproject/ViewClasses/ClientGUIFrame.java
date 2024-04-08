@@ -1259,6 +1259,14 @@ public class ClientGUIFrame extends javax.swing.JFrame {
         });
     }
 
+    public JTable getOrderHistoryTable() {
+        return orderHistoryTable;
+    }
+
+    public void setOrderHistoryTable(JTable orderHistoryTable) {
+        this.orderHistoryTable = orderHistoryTable;
+    }
+
     public JButton getAddToCartButton() {
         return addToCartButton;
     }
@@ -1526,8 +1534,13 @@ public class ClientGUIFrame extends javax.swing.JFrame {
     public JButton getSubmitButton() {
         return submitButton;
     }
-    public JTable getOrderHistoryTable() {
-        return orderHistoryTable;
+
+    public JButton getViewOrderHistoryButton() {
+        return viewOrderHistoryButton;
+    }
+
+    public void setViewOrderHistoryButton(JButton viewOrderHistoryButton) {
+        this.viewOrderHistoryButton = viewOrderHistoryButton;
     }
 
     public JLabel getOrderHistoryLabel() {

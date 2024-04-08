@@ -70,6 +70,7 @@ public interface ModelInterface extends Remote {
     /**CUSTOMER SIDE**/
     User getUserDetailsbyId(String userID) throws Exception, UserNotFoundException;
     User getUserDetails(String username, MessageCallback msgCallback) throws Exception, UserNotFoundException;
+    void getOrderHistory(String username, MessageCallback clientCallback) throws RemoteException;
     void getCartDetails(String username, MessageCallback clientCallback) throws RemoteException, CartDetailsFetchFailedException;
     void addMedicineToCart(String medicineId, int quantity, MessageCallback clientCallback, String username) throws RemoteException, MedicineOutOfStockException;
     void updateMedicineQuantityInCart(String medicineId, int newQuantity, MessageCallback clientCallback, String username) throws RemoteException, MedicineQuantityUpdateFailedException;

@@ -74,4 +74,6 @@ public class ViewOrderFrame extends javax.swing.JFrame {
     }
 
     private javax.swing.JPanel viewPanel;
+
+
 }

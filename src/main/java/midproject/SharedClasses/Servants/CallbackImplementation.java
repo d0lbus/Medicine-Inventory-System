@@ -582,18 +582,17 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 
 	public void displayOrderHistory(List<Order> orderHistory) {
 		SwingUtilities.invokeLater(() -> {
-			JTable orderHistoryTable = clientGUIFrame.getOrderHistoryTable();
-			DefaultTableModel model = (DefaultTableModel) orderHistoryTable.getModel();
+			DefaultTableModel model = (DefaultTableModel) clientGUIFrame.getOrderHistoryTable().getModel();
 			model.setRowCount(0);
-
 			for (Order order : orderHistory) {
 				String orderId = order.getOrderId();
 				String userId = order.getUserId();
 				String status = order.getStatus();
 				String modeOfDelivery = order.getModeOfDelivery();
 				String paymentMethod = order.getPaymentMethod();
+				String total = String.valueOf(order.getTotal());
 
-				Object[] rowData = {orderId, userId, status, modeOfDelivery, paymentMethod};
+				Object[] rowData = {orderId, userId, status, modeOfDelivery, paymentMethod, "₱"+total};
 
 				model.addRow(rowData);
 			}

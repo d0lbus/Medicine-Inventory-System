@@ -779,13 +779,13 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
     }
 
-    public List<Order> getOrderHistory(String username, MessageCallback clientCallback) throws RemoteException {
+    public void getOrderHistory(String username, MessageCallback clientCallback) throws RemoteException {
         try {
             User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
             String userId = user.getUserId();
             List<Order> orderHistory = OrderJSONProcessor.getOrdersByUserId("res/Orders.json", userId);
-            clientCallback.displayOrderHistory(orderHistory); // Call the displayOrderHistory method
-            return orderHistory;
+            clientCallback.displayOrderHistory(orderHistory);
+
         } catch (Exception e) {
             throw new RemoteException("Error retrieving order history: " + e.getMessage(), e);
         }
