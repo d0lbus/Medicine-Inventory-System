@@ -804,8 +804,8 @@ public class AdminClientController {
         adminGUIFrame.getEmailAddressTextField().setText("");
         adminGUIFrame.getContactNumberTextField().setText("");
         adminGUIFrame.getSetUsernameTextField().setText("");
-        adminGUIFrame.getSetPasswordTextField().setText("");
-        adminGUIFrame.getConfirmPasswordTextField().setText("");
+        adminGUIFrame.getPasswordField().setText("");
+        adminGUIFrame.getConfirmPasswordField().setText("");
         adminGUIFrame.getStreetAddressTextField().setText("");
         adminGUIFrame.getAptSuiteOptionalTextField().setText("");
         adminGUIFrame.getMunicipalityTextField().setText("");
