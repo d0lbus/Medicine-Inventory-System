@@ -846,18 +846,19 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
     }
     private static double getTotal(User user, List<OrderItem> orderItems) {
-        double total = 0;
-        double discountAmount = 0;
+        double total;
 
-        for (OrderItem item : orderItems) {
-            if ("yes".equals(user.getPersonWithDisability())) {
-                discountAmount = total * 0.2;
-                total -= discountAmount;
-            } else {
-                total += item.getPrice() * item.getQuantity();
-            }
+        // Calculate total price of order items
+        total = OrderItem.calculateTotalPrice(orderItems);
 
+        // Apply discount if applicable
+        double discountRate = 0.0;
+        if ("yes".equals(user.getPersonWithDisability())) {
+            discountRate = 0.2; // Assuming the discount rate is 20% for PWD
+            double discountAmount = total * discountRate;
+            total -= discountAmount;
         }
+
         return total;
     }
 }

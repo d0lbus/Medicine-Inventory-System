@@ -347,7 +347,7 @@ public class CustomerClientController {
 					try {
 						StringBuilder orderDetails = new StringBuilder();
 						User user = msgserver.getUserDetails(username, mci);
-						double total = 0;
+						double total = OrderItem.calculateTotalPrice(orderItems);
 						double discountAmount = 0;
 
 						String pwdDiscount = "";
@@ -357,32 +357,33 @@ public class CustomerClientController {
 									item.getMedicineId(), item.getGenericName(), item.getBrandName(), item.getForm(),
 									item.getQuantity(), item.getPrice());
 							orderDetails.append(itemDetails);
-							if ("yes".equals(user.getPersonWithDisability())) {
-								pwdDiscount = "20%";
-								discountAmount = total * 0.2;
-								total -= discountAmount;
-							} else {
-								total += item.getPrice() * item.getQuantity();
-								pwdDiscount = "0%";
-							}
-
 						}
+
+						double discountRate = 0.0;
+						if ("yes".equals(user.getPersonWithDisability())) {
+							discountRate = 0.2; // Assuming the discount rate is 20% for PWD
+							pwdDiscount = "20%";
+						} else {
+							pwdDiscount = "0%";
+						}
+
+						discountAmount = total * discountRate;
+						total -= discountAmount;
 
 						orderDetails.append(String.format("PWD Discount: %s\n", pwdDiscount));
 						orderDetails.append(String.format("Discount Amount: ₱%.2f\n", discountAmount));
 						orderDetails.append(String.format("Total after Discount: ₱%.2f\n", total));
 
+						// Set order details in the GUI
+						clientGUIFrame.getYourOrderTextPane().setText(
+								"Name: " + user.getFirstName() + " " + user.getLastName() +
+										"\nAddress: " + user.getStreet() + " " + user.getAdditionalAddressDetails() + " " +
+										user.getCity() + ", " + user.getProvince() + " " + user.getZip() +
+										"\nMode of Delivery: " + modeOfDelivery +
+										"\nMode of Payment: " + modeOfPayment + "\n\n" +
+										orderDetails.toString()
+						);
 
-						clientGUIFrame.getYourOrderTextPane().setText
-								("Name: " + user.getFirstName() + " " + user.getLastName()
-										+ "\nAddress: " + user.getStreet() + " " + user.getAdditionalAddressDetails() + " " +
-										user.getCity() + ", " + user.getProvince() + " " + user.getZip()
-										+ "\n"
-										+ "Mode of Delivery: " + modeOfDelivery + "\n"
-										+ "Mode of Payment: " + modeOfPayment + "\n\n"
-										+ orderDetails.toString()
-
-								);
 					} catch (Exception ex) {
 						throw new RuntimeException(ex);
 					}
@@ -467,12 +468,13 @@ public class CustomerClientController {
 			String genericName = (String) clientGUIFrame.getCategoryTable1().getValueAt(selectedRow, 2);
 			String brandName = (String) clientGUIFrame.getCategoryTable1().getValueAt(selectedRow, 3);
 			String form = (String) clientGUIFrame.getCategoryTable1().getValueAt(selectedRow, 4);
-			int quantity = (Integer) clientGUIFrame.getCategoryTable1().getValueAt(selectedRow, 6);
-			double price = (Double) clientGUIFrame.getCategoryTable1().getValueAt(selectedRow, 5);
+			int quantity = (Integer) clientGUIFrame.getCategoryTable1().getValueAt(selectedRow, 6); // Quantity
+			double price = (Double) clientGUIFrame.getCategoryTable1().getValueAt(selectedRow, 5); // Price
 			orderItems.add(new OrderItem(medicineId, genericName, brandName, form, quantity, price));
 		}
 		return orderItems;
 	}
+
 
 
 }

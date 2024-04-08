@@ -448,7 +448,7 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 					Medicine medicine = MedicineJSONProcessor.getMedicineById("res/Medicine.json", medicineId);
 					if(medicine != null) {
 						model.addRow(new Object[]{medicine.getMedicineID(), medicine.getCategory(), medicine.getGenericName(),
-								medicine.getBrandName(), medicine.getForm(), quantity * medicine.getPrice(), quantity, medicine.getQuantity()});
+								medicine.getBrandName(), medicine.getForm(), medicine.getPrice(), quantity, medicine.getQuantity()});
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -456,11 +456,11 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			});
 		});
 	}
-	public void notifyOrderProcessed(String orderId, User user, List<OrderItem> orderItems, byte[] imageBytes, String modeOfDelivery, String modeOfPayment) throws RemoteException{
+	public void notifyOrderProcessed(String orderId, User user, List<OrderItem> orderItems, byte[] imageBytes, String modeOfDelivery, String modeOfPayment) throws RemoteException {
 		SwingUtilities.invokeLater(() -> {
 			try {
 				StringBuilder orderDetails = new StringBuilder();
-				double total = 0;
+				double total = OrderItem.calculateTotalPrice(orderItems);
 				double discountAmount = 0;
 
 				String pwdDiscount = "";
@@ -469,15 +469,19 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 							item.getMedicineId(), item.getGenericName(), item.getBrandName(), item.getForm(),
 							item.getQuantity(), item.getPrice());
 					orderDetails.append(itemDetails);
-					if ("yes".equals(user.getPersonWithDisability())) {
-						pwdDiscount = "20%";
-						discountAmount = total * 0.2;
-						total -= discountAmount;
-					} else {
-						total += item.getPrice() * item.getQuantity();
-						pwdDiscount = "0%";
-					}
 				}
+
+				double discountRate = 0.0;
+				if ("yes".equals(user.getPersonWithDisability())) {
+					discountRate = 0.2; // Assuming the discount rate is 20% for PWD
+					pwdDiscount = "20%";
+				} else {
+					pwdDiscount = "0%";
+				}
+
+				discountAmount = total * discountRate;
+				total -= discountAmount;
+
 				orderDetails.append(String.format("PWD Discount: %s\n", pwdDiscount));
 				orderDetails.append(String.format("Discount Amount: ₱%.2f\n", discountAmount));
 				orderDetails.append(String.format("Total after Discount: ₱%.2f\n", total));
@@ -486,7 +490,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 
 				StyledDocument doc = (StyledDocument) clientGUIFrame.getOrderPlacedTextpane().getDocument();
 				doc.insertString(doc.getLength(), buildOrderDetailsString(user, orderId, orderDetails, modeOfDelivery, modeOfPayment), null);
-
 
 				Style style = doc.addStyle("ImageStyle", null);
 				StyleConstants.setIcon(style, imageIcon);
@@ -500,7 +503,7 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 				containerPanel.repaint();
 				containerPanel.revalidate();
 
-				String message = "[SERVER NOTIFICATION]["+formattedDateTime+"]Your order " + orderId + " has been placed. Please wait while we review your uploaded prescription.\n";
+				String message = "[SERVER NOTIFICATION][" + formattedDateTime + "]Your order " + orderId + " has been placed. Please wait while we review your uploaded prescription.\n";
 				clientGUIFrame.getNotificationsTextArea().append(message);
 
 			} catch (Exception ex) {
@@ -508,6 +511,8 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			}
 		});
 	}
+
+
 	public void notifyOrderStatusChanged(String orderID, String newStatus) throws RemoteException{
 		SwingUtilities.invokeLater(() -> {
 			String message = "[SERVER NOTIFICATION]["+formattedDateTime+"]Your order " + orderID + " has been "+newStatus+".\n";
