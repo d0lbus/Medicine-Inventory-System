@@ -2018,6 +2018,14 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         return birthdateCalendar.getDate();
     }
 
+    public JTextArea getServerLogsTextArea() {
+        return serverLogsTextArea;
+    }
+
+    public void setServerLogsTextArea(JTextArea serverLogsTextArea) {
+        this.serverLogsTextArea = serverLogsTextArea;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel aUsersSearchLabel;
     private javax.swing.JTextField aUsersSearchTextfield;

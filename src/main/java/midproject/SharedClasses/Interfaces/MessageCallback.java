@@ -57,6 +57,8 @@ public interface MessageCallback extends Remote {
 
 	void notifyUserUpdatedByAdmin(String adminUsername, User editedUser, User originalUser) throws RemoteException;
 
+	void notifyUserOrdersToAdmins(String username, String orderId) throws RemoteException;
+
 
 	/**CUSTOMER SIDE**/
 	void updateCart(UserCart userCart) throws RemoteException;

@@ -458,7 +458,6 @@ public class CustomerClientController {
 
 		}
 
-
 	/**HELPER METHODS**/
 
 	private static List<OrderItem> getOrderItemsFromSelectedRows() {

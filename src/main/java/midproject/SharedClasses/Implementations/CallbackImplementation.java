@@ -27,14 +27,9 @@ import static midproject.SharedClasses.Utilities.MedicineJSONProcessor.getMedici
 public class CallbackImplementation extends UnicastRemoteObject implements MessageCallback, Serializable {
 	private User user;
 	private UserCallBackInfo userInfo;
-
 	private AdminGUIFrame adminGUIFrame;
 	private ClientGUIFrame clientGUIFrame;
-
-	// Get the current date and time
 	LocalDateTime now = LocalDateTime.now();
-
-	// Format the date and time
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	String formattedDateTime = now.format(formatter);
 
@@ -240,69 +235,95 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		});
 	}
 	public void notifyUserRegisteredByAdmin(String adminUsername, User user) throws RemoteException{
-		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " registered user "
-				+ "\nID: " + user.getUserId()
-				+ "\nUser Type: " + user.getUserType()
-				+ "\nUsername: " + user.getUsername()
-				+ "\nFirst Name: " + user.getFirstName()
-				+ "\nLast Name: " + user.getLastName());
-
+		SwingUtilities.invokeLater(() -> {
+			String message = "["+formattedDateTime+"]" + "ADMIN " + adminUsername + " registered user "
+					+ "\nID: " + user.getUserId()
+					+ "\nUser Type: " + user.getUserType()
+					+ "\nUsername: " + user.getUsername()
+					+ "\nFirst Name: " + user.getFirstName()
+					+ "\nLast Name: " + user.getLastName() +
+					"\n";
+			adminGUIFrame.getServerLogsTextArea().append(message);
+		});
 	}
 	public void notifyUserArchivedByAdmin(String adminUsername, String archivedUsername) throws RemoteException {
-		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " archived user " + archivedUsername);
+		SwingUtilities.invokeLater(() -> {
+			String message = "["+formattedDateTime+"]" + "ADMIN " + adminUsername + " archived user " + archivedUsername+"\n";
+			adminGUIFrame.getServerLogsTextArea().append(message);
+		});
 	}
 	public void notifyUserUnarchivedByAdmin(String adminUsername, String unarchivedUsername) throws RemoteException {
-		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " unarchived user " + unarchivedUsername);
+		SwingUtilities.invokeLater(() -> {
+			String message = "["+formattedDateTime+"]" + "ADMIN " + adminUsername + " unarchived user " + unarchivedUsername+"\n";
+			adminGUIFrame.getServerLogsTextArea().append(message);
+		});
 	}
 	public void notifyMedicineAddedByAdmin(String adminUsername, Medicine medicine) throws RemoteException{
-		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " added a new medicine: "
-				+ "\nMedicine ID" + medicine.getMedicineID()
-				+ "\nCategory: " + medicine.getCategory()
-				+ "\nGeneric Name: " + medicine.getGenericName()
-				+ "\nBrand Name: " + medicine.getBrandName()
-				+ "\nForm: " + medicine.getForm()
-				+ "\nQuantity: " + medicine.getQuantity()
-				+ "\nPrice: " + medicine.getPrice());
+		SwingUtilities.invokeLater(() -> {
+			String message =
+					"["+formattedDateTime+"]" + "ADMIN " + adminUsername + " added a new medicine: "
+							+ "\nMedicine ID" + medicine.getMedicineID()
+							+ "\nCategory: " + medicine.getCategory()
+							+ "\nGeneric Name: " + medicine.getGenericName()
+							+ "\nBrand Name: " + medicine.getBrandName()
+							+ "\nForm: " + medicine.getForm()
+							+ "\nQuantity: " + medicine.getQuantity()
+							+ "\nPrice: " + medicine.getPrice() + "\n";
+			adminGUIFrame.getServerLogsTextArea().append(message);
+		});
 	}
 	public void notifyMedicineArchivedByAdmin(String adminUsername, Medicine medicine) throws RemoteException{
-		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " archived the medicine " + medicine.getGenericName() + " with a brand name " + medicine.getBrandName() + " under the category " + medicine.getCategory());
+		SwingUtilities.invokeLater(() -> {
+		String message = "["+formattedDateTime+"]" + "ADMIN " + adminUsername + " deleted the medicine " + medicine.getGenericName() + " " +
+				"with a brand name " + medicine.getBrandName() + " under the category " + medicine.getCategory()+"\n";
+		adminGUIFrame.getServerLogsTextArea().append(message);
+		});
 	}
 	public void notifyMedicineUpdatedByAdmin(String adminUsername, Medicine editedMedicine, Medicine originalMedicine) throws RemoteException{
-		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " edited the medicine entry. Changes made: "
-				+ "\nCategory: from '" + originalMedicine.getCategory() + "' to '" + editedMedicine.getCategory() + "'"
-				+ "\nGeneric Name: from '" + originalMedicine.getGenericName() + "' to '" + editedMedicine.getGenericName() + "'"
-				+ "\nBrand Name: from '" + originalMedicine.getBrandName() + "' to '" + editedMedicine.getBrandName() + "'"
-				+ "\nForm: from '" + originalMedicine.getForm() + "' to '" + editedMedicine.getForm() + "'"
-				+ "\nQuantity: from '" + originalMedicine.getQuantity() + "' to '" + editedMedicine.getQuantity() + "'"
-				+ "\nPrice: from " + originalMedicine.getPrice() + " to " + editedMedicine.getPrice());
+		SwingUtilities.invokeLater(() -> {
+			String message = "["+formattedDateTime+"]" + "ADMIN " + adminUsername + " edited the medicine entry. Changes made: "
+					+ "\nCategory: from '" + originalMedicine.getCategory() + "' to '" + editedMedicine.getCategory() + "'"
+					+ "\nGeneric Name: from '" + originalMedicine.getGenericName() + "' to '" + editedMedicine.getGenericName() + "'"
+					+ "\nBrand Name: from '" + originalMedicine.getBrandName() + "' to '" + editedMedicine.getBrandName() + "'"
+					+ "\nForm: from '" + originalMedicine.getForm() + "' to '" + editedMedicine.getForm() + "'"
+					+ "\nQuantity: from '" + originalMedicine.getQuantity() + "' to '" + editedMedicine.getQuantity() + "'"
+					+ "\nPrice: from " + originalMedicine.getPrice() + " to " + editedMedicine.getPrice()+"\n";
+			adminGUIFrame.getServerLogsTextArea().append(message);
+		});
 	}
-
 	public void notifyUserUpdatedByAdmin(String adminUsername, User editedUser, User originalUser) throws RemoteException {
-		System.out.println("["+formattedDateTime+"]" + "ADMIN " + adminUsername + " edited the user entry. Changes made: "
-				+ "\nFirst Name: from '" + originalUser.getFirstName() + "' to '" + editedUser.getFirstName() + "'"
-				+ "\nLast Name: from '" + originalUser.getLastName() + "' to '" + editedUser.getLastName() + "'"
-				+ "\nMiddle Name: from '" + originalUser.getMiddleName() + "' to '" + editedUser.getMiddleName() + "'"
-				+ "\nBirthdate: from '" + originalUser.getBirthdate() + "' to '" + editedUser.getBirthdate() + "'"
-				+ "\nAge: from '" + originalUser.getAge() + "' to '" + editedUser.getAge() + "'"
-				+ "\nGender: from '" + originalUser.getGender() + "' to '" + editedUser.getGender() + "'"
-				+ "\nStreet Address: from '" + originalUser.getStreet() + "' to '" + editedUser.getStreet() + "'"
-				+ "\nAdditional Address Details: from '" + originalUser.getAdditionalAddressDetails() + "' to '"
-				+ editedUser.getAdditionalAddressDetails() + "'"
-				+ "\nCity: from '" + originalUser.getCity() + "' to '" + editedUser.getCity() + "'"
-				+ "\nProvince: from '" + originalUser.getProvince() + "' to '" + editedUser.getProvince() + "'"
-				+ "\nZip: from '" + originalUser.getZip() + "' to '" + editedUser.getZip() + "'"
-				+ "\nEmail: from '" + originalUser.getEmail() + "' to '" + editedUser.getEmail() + "'"
-				+ "\nContact Number: from '" + originalUser.getContactNumber() + "' to '" + editedUser.getContactNumber() + "'"
-		);
+		SwingUtilities.invokeLater(() -> {
+			String message = "["+formattedDateTime+"]" + "ADMIN " + adminUsername + " edited the user entry. Changes made: "
+					+ "\nFirst Name: from '" + originalUser.getFirstName() + "' to '" + editedUser.getFirstName() + "'"
+					+ "\nLast Name: from '" + originalUser.getLastName() + "' to '" + editedUser.getLastName() + "'"
+					+ "\nMiddle Name: from '" + originalUser.getMiddleName() + "' to '" + editedUser.getMiddleName() + "'"
+					+ "\nBirthdate: from '" + originalUser.getBirthdate() + "' to '" + editedUser.getBirthdate() + "'"
+					+ "\nAge: from '" + originalUser.getAge() + "' to '" + editedUser.getAge() + "'"
+					+ "\nGender: from '" + originalUser.getGender() + "' to '" + editedUser.getGender() + "'"
+					+ "\nStreet Address: from '" + originalUser.getStreet() + "' to '" + editedUser.getStreet() + "'"
+					+ "\nAdditional Address Details: from '" + originalUser.getAdditionalAddressDetails() + "' to '"
+					+ editedUser.getAdditionalAddressDetails() + "'"
+					+ "\nCity: from '" + originalUser.getCity() + "' to '" + editedUser.getCity() + "'"
+					+ "\nProvince: from '" + originalUser.getProvince() + "' to '" + editedUser.getProvince() + "'"
+					+ "\nZip: from '" + originalUser.getZip() + "' to '" + editedUser.getZip() + "'"
+					+ "\nEmail: from '" + originalUser.getEmail() + "' to '" + editedUser.getEmail() + "'"
+					+ "\nContact Number: from '" + originalUser.getContactNumber() + "' to '" + editedUser.getContactNumber() + "'\n";
+					adminGUIFrame.getServerLogsTextArea().append(message);
+		});
 	}
 
-
+	public void notifyUserOrdersToAdmins(String username, String orderId) throws RemoteException{
+		SwingUtilities.invokeLater(() -> {
+			String message =
+					"User " + username + " has placed an order ("+orderId+"\n";
+			adminGUIFrame.getServerLogsTextArea().append(message);
+		});
+	}
 
 	public void sendSearchResults(List<User> results) throws RemoteException {
 		SwingUtilities.invokeLater(() -> {
 			DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getrUsersTable().getModel();
 			model.setRowCount(0);
-
 			for (User user : results) {
 				Object[] rowData = {
 						user.getUserId(),
@@ -432,7 +453,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 						total += item.getPrice() * item.getQuantity();
 						pwdDiscount = "0%";
 					}
-
 				}
 				orderDetails.append(String.format("PWD Discount: %s\n", pwdDiscount));
 				orderDetails.append(String.format("Discount Amount: ₱%.2f\n", discountAmount));
@@ -456,6 +476,9 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 				containerPanel.repaint();
 				containerPanel.revalidate();
 
+				String message = "[SERVER NOTIFICATION]["+formattedDateTime+"]Your order " + orderId + " has been placed. Please wait while we review your uploaded prescription.\n";
+				clientGUIFrame.getNotificationsTextArea().append(message);
+
 			} catch (Exception ex) {
 				throw new RuntimeException(ex);
 			}
@@ -469,7 +492,7 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 	}
 	private static String buildOrderDetailsString(User user, String orderID, StringBuilder orderDetails, String modeOfDelivery, String modeOfPayment) {
 		StringBuilder details = new StringBuilder();
-		details.append("John Doe's Official Receipt("+orderID+")"+"\n\n");
+		details.append("Official Receipt("+orderID+")"+"\n\n");
 		details.append("Name: ").append(user.getFirstName()).append(" ").append(user.getLastName()).append("\n");
 		details.append("Address: ").append(user.getStreet()).append(" ").append(user.getAdditionalAddressDetails()).append(" ");
 		details.append(user.getCity()).append(", ").append(user.getProvince()).append(" ").append(user.getZip()).append("\n");

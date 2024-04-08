@@ -205,12 +205,10 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
     public void updateUser(User editedUser, User originalUser, MessageCallback callback, String adminUsername) throws Exception {
         UserJSONProcessor.updateUserInJsonFile(editedUser, "res/UserInformation.json");
 
-        // Notify all callbacks about the user update
         for (Map.Entry<UserCallBackInfo, MessageCallback> entry : msgCallbacks.entrySet()) {
             UserCallBackInfo userInfo = entry.getKey();
             MessageCallback adminCallback = entry.getValue();
 
-            // Check if the user type is Admin or Customer
             if ("Admin".equals(userInfo.getUserType()) || "Customer".equals(userInfo.getUserType())) {
                 adminCallback.notifyUserUpdatedByAdmin(adminUsername, editedUser, originalUser);
             }
@@ -775,7 +773,26 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
         CartJSONProcessor.writeUserCartsToFile(userCarts);
         clientCallback.updateCart(userCart);
-        clientCallback.notifyOrderProcessed(orderId, user, orderItems, imageBytes, modeOfDelivery, modeOfPayment);
+
+        msgCallbacks.entrySet().stream()
+                    .filter(entry -> entry.getKey().getUsername().equals(user.getUsername()))
+                    .findFirst()
+                    .ifPresent(entry -> {
+                        try {
+                            entry.getValue().notifyOrderProcessed(orderId, user, orderItems, imageBytes, modeOfDelivery, modeOfPayment);
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
+                    });
+
+        for (Map.Entry<UserCallBackInfo, MessageCallback> entry : msgCallbacks.entrySet()) {
+                UserCallBackInfo userInfo = entry.getKey();
+                MessageCallback adminCallback = entry.getValue();
+
+                if ("Admin".equals(userInfo.getUserType())) {
+                    adminCallback.notifyUserOrdersToAdmins(user.getUsername(), orderId);
+                }
+            }
 
         updateInventoryTable();
         updateOrdersTable();

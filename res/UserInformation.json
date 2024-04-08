@@ -20,26 +20,6 @@
     "zip": "67890"
   },
   {
-    "userId": "C1",
-    "userType": "Customer",
-    "firstName": "John",
-    "lastName": "Doe",
-    "middleName": "Edward",
-    "birthdate": "1990-01-01",
-    "age": "30",
-    "gender": "male",
-    "personWithDisability": "no",
-    "email": "john.doe@example.com",
-    "contactNumber": "+1234567890",
-    "username": "johndoe",
-    "password": "password123",
-    "street": "123 Main St",
-    "additionalAddressDetails": "Apartment 4B",
-    "city": "Anytown",
-    "province": "Anystate",
-    "zip": "12345"
-  },
-  {
     "userId": "C3",
     "userType": "Customer",
     "firstName": "FN",
@@ -101,5 +81,25 @@
     "city": "CITY",
     "province": "PROVINCE",
     "zip": "1111"
+  },
+  {
+    "userId": "C1",
+    "userType": "Customer",
+    "firstName": "John",
+    "lastName": "Doe",
+    "middleName": "Edward",
+    "birthdate": "1990-01-01",
+    "age": "30",
+    "gender": "male",
+    "personWithDisability": "no",
+    "email": "john.doe@example.com",
+    "contactNumber": "+1234567890",
+    "username": "johndoe",
+    "password": "password123",
+    "street": "123 Main St",
+    "additionalAddressDetails": "Apartment 4B",
+    "city": "Anytown",
+    "province": "Anystate",
+    "zip": "12345"
   }
 ]
