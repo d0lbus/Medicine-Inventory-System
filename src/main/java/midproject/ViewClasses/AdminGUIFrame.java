@@ -1144,7 +1144,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         userTypeLabel.setForeground(new java.awt.Color(51, 51, 51));
         userTypeLabel.setText("User Type");
 
-        userTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Client" }));
+        userTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Customer" }));
 
         jPasswordField.setText("jPasswordField1");
         jPasswordField.addActionListener(new java.awt.event.ActionListener() {
