@@ -196,16 +196,24 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         }
     }
 
-    public void updateUser(User editedUser, User originalUser, MessageCallback callback, String adminUsername) throws Exception {
-        UserJSONProcessor.updateUserInJsonFile(editedUser, "res/UserInformation.json");
+    public void updateUser(User editedUser, User originalUser, MessageCallback callback, String adminUsername) throws RemoteException, SelectionRequiredException {
 
-        for (Map.Entry<UserCallBackInfo, MessageCallback> entry : msgCallbacks.entrySet()) {
-            UserCallBackInfo userInfo = entry.getKey();
-            MessageCallback adminCallback = entry.getValue();
+        try {
+            UserJSONProcessor.updateUserInJsonFile(editedUser, "res/UserInformation.json");
 
-            if ("Admin".equals(userInfo.getUserType()) || "Customer".equals(userInfo.getUserType())) {
-                adminCallback.notifyUserUpdatedByAdmin(adminUsername, editedUser, originalUser);
+
+            for (Map.Entry<UserCallBackInfo, MessageCallback> entry : msgCallbacks.entrySet()) {
+                UserCallBackInfo userInfo = entry.getKey();
+                MessageCallback adminCallback = entry.getValue();
+
+                if ("Admin".equals(userInfo.getUserType()) || "Customer".equals(userInfo.getUserType())) {
+                    adminCallback.notifyUserUpdatedByAdmin(adminUsername, editedUser, originalUser);
+                }
             }
+        } catch (SelectionRequiredException e) {
+            throw new SelectionRequiredException("Please select a user first.");
+        } catch (Exception e) {
+            throw new RemoteException("Error while editing user", e);
         }
 
 

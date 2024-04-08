@@ -39,7 +39,7 @@ public interface ModelInterface extends Remote {
 
     public void updateOrdersTable() throws Exception;
 
-    public void searchOrders(String searchText, MessageCallback callback) throws RemoteException;
+    public void searchOrders(String searchText, MessageCallback callback) throws RemoteException, NoOrdersFoundException;
 
     public void searchPendingOrders(String searchText, MessageCallback callback) throws RemoteException;
 
@@ -49,13 +49,13 @@ public interface ModelInterface extends Remote {
 
     public void addMedicine(Medicine medicine, MessageCallback callback, String adminUsername) throws Exception;
 
-    public void deleteMedicine(Medicine medicine, MessageCallback callback, String adminUsername) throws Exception;
+    public void deleteMedicine(Medicine medicine, MessageCallback callback, String adminUsername) throws Exception, SelectionRequiredException;
 
     public void searchMedicine(String searchText, MessageCallback callback) throws RemoteException;
 
     public void updateMedicine(Medicine editedMedicine, Medicine originalMedicine, MessageCallback callback, String adminUsername) throws Exception;
 
-    public void registerUser(User newUser, String adminUsername) throws Exception, InvalidInputException;
+    public void registerUser(User newUser, String adminUsername) throws RemoteException, InvalidInputException;
 
     void searchUsers(String searchText, MessageCallback callback) throws RemoteException, NoUserFoundException;
 
@@ -63,7 +63,7 @@ public interface ModelInterface extends Remote {
 
     void searchArchivedUsers(String searchText, MessageCallback callback) throws RemoteException, NoUserFoundException;
 
-    public void updateUser(User editedUser, User originalUser, MessageCallback callback, String adminUsername) throws Exception;
+    public void updateUser(User editedUser, User originalUser, MessageCallback callback, String adminUsername) throws RemoteException, SelectionRequiredException;
 
     void sendMessageToAdmins(String message, String username) throws RemoteException;
 

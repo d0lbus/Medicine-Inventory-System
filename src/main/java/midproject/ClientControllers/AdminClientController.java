@@ -165,8 +165,8 @@ public class AdminClientController {
                     }
                 } else {
                     try {
-                        throw new SelectionRequiredUserException("Please select a user first.");
-                    } catch (SelectionRequiredUserException exception) {
+                        throw new SelectionRequiredException("Please select a user first.");
+                    } catch (SelectionRequiredException exception) {
                         JOptionPane.showMessageDialog(adminGUIFrame, exception.getMessage(), "Selection Required", JOptionPane.WARNING_MESSAGE);
                     }
                 }
@@ -201,7 +201,11 @@ public class AdminClientController {
                         throw new RuntimeException(ex);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a user first.", "Selection Required", JOptionPane.WARNING_MESSAGE);
+                    try {
+                        throw new SelectionRequiredException("Please select a user first.");
+                    } catch (SelectionRequiredException ex) {
+                        JOptionPane.showMessageDialog(adminGUIFrame, ex.getMessage(), "Selection Required", JOptionPane.WARNING_MESSAGE);
+                    }
                 }
             }
         });
@@ -297,7 +301,11 @@ public class AdminClientController {
                         }
                     });
                 } else {
-                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a user to edit.", "No Selection", JOptionPane.WARNING_MESSAGE);
+                    try {
+                        throw new SelectionRequiredException("Please select a user first.");
+                    } catch (SelectionRequiredException exception) {
+                        JOptionPane.showMessageDialog(adminGUIFrame, exception.getMessage(), "Selection Required", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         });
@@ -344,8 +352,8 @@ public class AdminClientController {
                     }
                 } else {
                     try {
-                        throw new SelectionRequiredUserException("Please select a user first.");
-                    } catch (SelectionRequiredUserException exception) {
+                        throw new SelectionRequiredException("Please select a user first.");
+                    } catch (SelectionRequiredException exception) {
                         JOptionPane.showMessageDialog(adminGUIFrame, exception.getMessage(), "Selection Required", JOptionPane.ERROR_MESSAGE);
                     }
                 }
@@ -369,8 +377,8 @@ public class AdminClientController {
                     }
                 } else {
                     try {
-                        throw new SelectionRequiredUserException("Please select a user first.");
-                    } catch (SelectionRequiredUserException exception) {
+                        throw new SelectionRequiredException("Please select a user first.");
+                    } catch (SelectionRequiredException exception) {
                         JOptionPane.showMessageDialog(adminGUIFrame, exception.getMessage(), "Selection Required", JOptionPane.WARNING_MESSAGE);
                     }
                 }
@@ -556,7 +564,11 @@ public class AdminClientController {
                         JOptionPane.showMessageDialog(adminGUIFrame, "Failed to load order details.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select an order to view.", "No Selection", JOptionPane.WARNING_MESSAGE);
+                    try {
+                        throw new SelectionRequiredException("Please select an order to view.");
+                    } catch (SelectionRequiredException ex) {
+                        JOptionPane.showMessageDialog(adminGUIFrame, ex.getMessage(), "No Selection", JOptionPane.WARNING_MESSAGE);
+                    }
                 }
             }
         });
@@ -566,6 +578,8 @@ public class AdminClientController {
                 String searchText = adminGUIFrame.getoSearchTextfield().getText().trim().toLowerCase();
                 try {
                     msgserver.searchOrders(searchText, mci);
+                } catch (NoOrdersFoundException ex) {
+                    JOptionPane.showMessageDialog(adminGUIFrame, ex.getMessage(), "No Order Found", JOptionPane.ERROR_MESSAGE);
                 } catch (RemoteException ex) {
                     ex.printStackTrace();
                 }
@@ -651,7 +665,11 @@ public class AdminClientController {
                         JOptionPane.showMessageDialog(adminGUIFrame, "Failed to load order details.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select an order to view.", "No Selection", JOptionPane.WARNING_MESSAGE);
+                    try {
+                        throw new SelectionRequiredException("Please select an order to view");
+                    } catch (SelectionRequiredException ex) {
+                        JOptionPane.showMessageDialog(adminGUIFrame, ex.getMessage(), "Selection Required", JOptionPane.WARNING_MESSAGE);
+                    }
                 }
             }
         });
@@ -768,7 +786,11 @@ public class AdminClientController {
                         }
                     });
                 } else {
-                    JOptionPane.showMessageDialog(adminGUIFrame, "Please select a medicine to edit.", "No Selection", JOptionPane.WARNING_MESSAGE);
+                    try {
+                        throw new SelectionRequiredException("Please select a medicine to edit.");
+                    } catch (SelectionRequiredException ex) {
+                        JOptionPane.showMessageDialog(adminGUIFrame, ex.getMessage(), "No Selection", JOptionPane.WARNING_MESSAGE);
+                    }
                 }
             }
         });
