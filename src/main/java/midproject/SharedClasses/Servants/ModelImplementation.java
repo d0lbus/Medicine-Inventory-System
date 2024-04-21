@@ -320,7 +320,7 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
      *
      * */
 
-    public void updateOrderStatus(String orderId, String newStatus) throws RemoteException{
+    public synchronized void updateOrderStatus(String orderId, String newStatus) throws RemoteException{
         try {
             Order order = OrderJSONProcessor.readOrderById(orderId);
             order.setStatus(newStatus);
