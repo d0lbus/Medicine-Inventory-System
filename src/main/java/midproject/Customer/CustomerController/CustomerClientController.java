@@ -289,7 +289,7 @@ public class CustomerClientController {
 				}
 			});
 
-			clientGUIFrame.getAddToCartButton().addActionListener(e ->{
+			clientGUIFrame.getAddToCartButton().addActionListener(e -> {
 				int selectedRow = clientGUIFrame.getCategoryTable().getSelectedRow();
 				if (selectedRow >= 0) {
 					String medicineId = clientGUIFrame.getCategoryTable().getValueAt(selectedRow, 0).toString();
@@ -301,56 +301,93 @@ public class CustomerClientController {
 
 					quantityFrame.getProceedButton().addActionListener(ex -> {
 						int quantity = quantityFrame.getSelectedQuantity();
-						if(quantity > 0) {
+						if (quantity > 0) {
 							try {
-								msgserver.addMedicineToCart(medicineId, quantity, mci, username);
-								JOptionPane.showMessageDialog(clientGUIFrame, "Item added to cart successfully", "Add To Cart Successful",JOptionPane.INFORMATION_MESSAGE);
+								int currentStock = msgserver.retrieveMedicineStock(medicineId);
+								if (currentStock == 0) {
+									// Inform user that the medicine is out of stock
+									JOptionPane.showMessageDialog(clientGUIFrame, "Medicine is out of stock", "Out of Stock", JOptionPane.WARNING_MESSAGE);
+								} else if (currentStock <= 15 && currentStock > 1) {
+									// Prompt the user if they want to add the medicine to their cart
+									int option = JOptionPane.showConfirmDialog(clientGUIFrame, "The medicine is low on stock. Do you want to add it to your cart?", "Low Stock Alert", JOptionPane.YES_NO_OPTION);
+									if (option == JOptionPane.YES_OPTION) {
+										// Add the medicine to the cart if the user chooses to
+										msgserver.addMedicineToCart(medicineId, quantity, mci, username);
+										JOptionPane.showMessageDialog(clientGUIFrame, "Item added to cart successfully", "Add To Cart Successful", JOptionPane.INFORMATION_MESSAGE);
+									} else {
+										// Do nothing if the user chooses not to add the medicine to the cart
+										JOptionPane.showMessageDialog(clientGUIFrame, "You chose not to add the item to your cart", "Add To Cart Canceled", JOptionPane.INFORMATION_MESSAGE);
+									}
+								} else {
+									// Add the medicine directly to the cart
+									msgserver.addMedicineToCart(medicineId, quantity, mci, username);
+									JOptionPane.showMessageDialog(clientGUIFrame, "Item added to cart successfully", "Add To Cart Successful", JOptionPane.INFORMATION_MESSAGE);
+								}
 								quantityFrame.dispose();
 							} catch (RemoteException exc) {
 								throw new RuntimeException(exc);
 							} catch (MedicineOutOfStockException exception) {
 								JOptionPane.showMessageDialog(clientGUIFrame, "Medicine is currently out of stock", "Out Of Stock", JOptionPane.ERROR_MESSAGE);
-                                throw new RuntimeException(exception);
-                            }
-                        }
+								throw new RuntimeException(exception);
+							} catch (Exception exc) {
+								JOptionPane.showMessageDialog(clientGUIFrame, "Error adding medicine to cart: " + exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+								throw new RuntimeException(exc);
+							}
+						}
 					});
 				} else {
-					JOptionPane.showMessageDialog(clientGUIFrame, "No item selected", "Add To Cart Failed",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(clientGUIFrame, "No item selected", "Add To Cart Failed", JOptionPane.ERROR_MESSAGE);
 				}
 			});
 
-			clientGUIFrame.getEditOrderButton1().addActionListener(e -> {
-				int[] selectedRows = clientGUIFrame.getCategoryTable1().getSelectedRows();
-				if (selectedRows.length == 1) {
-					int selectedRow = selectedRows[0];
-					String medicineId = clientGUIFrame.getCategoryTable1().getValueAt(selectedRow, 0).toString();
+			clientGUIFrame.getAddToCartButton().addActionListener(e -> {
+				int selectedRow = clientGUIFrame.getCategoryTable().getSelectedRow();
+				if (selectedRow >= 0) {
+					String medicineId = clientGUIFrame.getCategoryTable().getValueAt(selectedRow, 0).toString();
+
 					QuantityFrame quantityFrame = new QuantityFrame();
 					quantityFrame.setLocationRelativeTo(clientGUIFrame);
 					quantityFrame.setVisible(true);
 					quantityFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 					quantityFrame.getProceedButton().addActionListener(ex -> {
-						int newQuantity = quantityFrame.getSelectedQuantity();
-						if (newQuantity > 0) {
+						int quantity = quantityFrame.getSelectedQuantity();
+						if (quantity > 0) {
 							try {
-								msgserver.updateMedicineQuantityInCart(medicineId, newQuantity, mci, username);
-								JOptionPane.showMessageDialog(quantityFrame, "Quantity updated successfully.");
+								int currentStock = msgserver.retrieveMedicineStock(medicineId);
+								if (currentStock <= 15 && currentStock > 1) {
+									// Prompt the user if they want to add the medicine to their cart
+									int option = JOptionPane.showConfirmDialog(clientGUIFrame, "The medicine is low on stock. Do you want to add it to your cart?", "Low Stock Alert", JOptionPane.YES_NO_OPTION);
+									if (option == JOptionPane.YES_OPTION) {
+										// Add the medicine to the cart if the user chooses to
+										msgserver.addMedicineToCart(medicineId, quantity, mci, username);
+										JOptionPane.showMessageDialog(clientGUIFrame, "Item added to cart successfully", "Add To Cart Successful", JOptionPane.INFORMATION_MESSAGE);
+									} else {
+										// Do nothing if the user chooses not to add the medicine to the cart
+										JOptionPane.showMessageDialog(clientGUIFrame, "You chose not to add the item to your cart", "Add To Cart Canceled", JOptionPane.INFORMATION_MESSAGE);
+									}
+								} else {
+									// Add the medicine directly to the cart
+									msgserver.addMedicineToCart(medicineId, quantity, mci, username);
+									JOptionPane.showMessageDialog(clientGUIFrame, "Item added to cart successfully", "Add To Cart Successful", JOptionPane.INFORMATION_MESSAGE);
+								}
 								quantityFrame.dispose();
 							} catch (RemoteException exc) {
-								JOptionPane.showMessageDialog(quantityFrame, "Failed to update quantity: " + exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-							} catch (MedicineQuantityUpdateFailedException exception) {
-                                throw new RuntimeException(exception);
-                            }
-                        } else {
-							JOptionPane.showMessageDialog(quantityFrame, "Please select a valid quantity.", "Invalid Quantity", JOptionPane.WARNING_MESSAGE);
+								throw new RuntimeException(exc);
+							} catch (MedicineOutOfStockException exception) {
+								JOptionPane.showMessageDialog(clientGUIFrame, "Medicine is currently out of stock", "Out Of Stock", JOptionPane.ERROR_MESSAGE);
+								throw new RuntimeException(exception);
+							} catch (Exception exc) {
+								JOptionPane.showMessageDialog(clientGUIFrame, "Error adding medicine to cart: " + exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+								throw new RuntimeException(exc);
+							}
 						}
 					});
-				} else if (selectedRows.length > 1) {
-					JOptionPane.showMessageDialog(clientGUIFrame, "Please select only one row to edit.", "Multiple Rows Selected", JOptionPane.ERROR_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(clientGUIFrame, "Please select a row to edit.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(clientGUIFrame, "No item selected", "Add To Cart Failed", JOptionPane.ERROR_MESSAGE);
 				}
 			});
+
 
 			clientGUIFrame.getRemoveButton().addActionListener(e -> {
 				int[] selectedRows = clientGUIFrame.getCategoryTable1().getSelectedRows();

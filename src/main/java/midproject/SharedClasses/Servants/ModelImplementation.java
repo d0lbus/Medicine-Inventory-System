@@ -18,6 +18,8 @@ import midproject.SharedClasses.Utilities.OrderJSONProcessor;
 import midproject.SharedClasses.Utilities.UserJSONProcessor;
 import midproject.SharedClasses.Utilities.CartJSONProcessor;
 
+import javax.swing.*;
+
 import static midproject.SharedClasses.Utilities.OrderJSONProcessor.readOrdersFromFile;
 import static midproject.SharedClasses.Utilities.SessionIDGenerator.generateUniqueSessionId;
 import static midproject.SharedClasses.Utilities.UserJSONProcessor.*;
@@ -801,17 +803,16 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
             UserCart userCart = userCarts.getOrDefault(userID, new UserCart(userID));
 
+            // Add the medicine to the cart
             userCart.addOrUpdateItem(medicineId, quantity);
-
             userCarts.put(userID, userCart);
-
             CartJSONProcessor.writeUserCartsToFile(userCarts);
-
             clientCallback.updateCart(userCart);
         } catch (Exception e) {
             throw new RemoteException("Error adding medicine to cart: " + e.getMessage(), e);
         }
     }
+
     public synchronized void updateMedicineQuantityInCart(String medicineId, int newQuantity, MessageCallback clientCallback, String username) throws RemoteException {
         try {
             Map<String, UserCart> userCarts = CartJSONProcessor.readUserCartsFromFile();
