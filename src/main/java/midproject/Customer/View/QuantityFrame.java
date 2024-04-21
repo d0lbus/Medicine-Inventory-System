@@ -29,7 +29,7 @@ public class QuantityFrame extends javax.swing.JFrame {
         setTitle("Quantity Drugstore");
         setResizable(false);
 
-        quantitySpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50, 1));
+        quantitySpinner.setModel(new javax.swing.SpinnerNumberModel(0, -50, 50, 1));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Select Quantity");
@@ -119,6 +119,14 @@ public class QuantityFrame extends javax.swing.JFrame {
         return (int) quantitySpinner.getValue();
     }
 
+
+    public JButton getCancelButton() {
+        return cancelButton;
+    }
+
+    public void setCancelButton(JButton cancelButton) {
+        this.cancelButton = cancelButton;
+    }
 
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel1;

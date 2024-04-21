@@ -1,5 +1,6 @@
 package midproject.SharedClasses.Servants;
 
+import java.awt.*;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -14,6 +15,7 @@ import midproject.Admin.View.AdminGUIFrame;
 import midproject.Customer.View.ClientGUIFrame;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
@@ -27,6 +29,10 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	String formattedDateTime = now.format(formatter);
 
+	private int notificationsCount = 0;
+
+	private int serverLogsCount = 0;
+
 	public CallbackImplementation(User user, AdminGUIFrame adminGUIFrame) throws RemoteException {
 		this.user = user;
 		this.adminGUIFrame = adminGUIFrame;
@@ -37,24 +43,32 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		this.clientGUIFrame = clientGUIFrame;
 	}
 
+	public void hasReadNotifications() throws RemoteException{
+		notificationsCount = 0;
+		clientGUIFrame.getNotificationsLabel().setText("NOTICES("+notificationsCount+")");
+	}
+
+	public void hasReadServerLogs() throws RemoteException{
+		serverLogsCount = 0;
+		adminGUIFrame.getServerLogsMouseClicked().setText("SERVER LOGS("+serverLogsCount+")");
+	}
 	public void loginCall(User user) throws RemoteException {
 		System.out.println(user.getUsername() + " logged in...");
 	}
-
 	public void broadcastCall(String msg) throws RemoteException {
 		SwingUtilities.invokeLater(() -> {
 			if (clientGUIFrame != null) {
+				notificationsCount++;
+				clientGUIFrame.getNotificationsLabel().setText("NOTICES("+notificationsCount+")");
 				clientGUIFrame.getNotificationsTextArea().append("[SERVER NOTIFICATION]: " + msg + "\n");
 			} else {
 				System.err.println("Client GUI frame is null.");
 			}
 		});
 	}
-
 	public void logoutCall(User user) throws RemoteException  {
 		System.out.println(user.getUsername() + " logged out...");
 	}
-
 	public void updateOnlineUsers(int count, List<String> onlineUserNames) {
 		SwingUtilities.invokeLater(() -> {
 				String sCount = String.valueOf(count);
@@ -68,7 +82,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 
 		});
 	}
-
 	public void updateOrdersCount(int count) throws RemoteException{
 		SwingUtilities.invokeLater(() -> {
 			String sCount = String.valueOf(count);
@@ -77,7 +90,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			adminGUIFrame.getTotalOrdersLabel().repaint();
 		});
 	}
-
 	public void updatePendingOrdersCount (int count) throws RemoteException{
 		SwingUtilities.invokeLater(() -> {
 			String sCount = String.valueOf(count);
@@ -86,7 +98,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			adminGUIFrame.getPendingOrdersLabel().repaint();
 		});
 	}
-
 	public void readRUsersList(List<User> users) {
 		SwingUtilities.invokeLater(() -> {
 			if (adminGUIFrame != null) {
@@ -108,7 +119,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			}
 		});
 	}
-
 	public void readAUsersList(List<User> users) {
 		SwingUtilities.invokeLater(() -> {
 			if (adminGUIFrame != null) {
@@ -130,7 +140,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			}
 		});
 	}
-
 	public void readOrdersList(List<Order> orders){
 		SwingUtilities.invokeLater(() -> {
 			if (adminGUIFrame != null) {
@@ -168,7 +177,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			}
 		});
 	}
-
 	public void countUsersList(List<User> users) {
 		int count = users.size();
 		SwingUtilities.invokeLater(() -> {
@@ -183,7 +191,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			}
 		});
 	}
-
 	public void readMedicineList(List<Medicine> medicineList) {
 		SwingUtilities.invokeLater(() -> {
 			if (adminGUIFrame != null || clientGUIFrame != null) {
@@ -202,6 +209,7 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 						};
 						adminModel.addRow(adminRowData);
 					}
+					adminGUIFrame.getiTable().setDefaultRenderer(Object.class, new MedicineCellRenderer());
 				}
 
 
@@ -225,6 +233,26 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 				System.err.println("Both Admin GUI and Client GUI frames are null.");
 			}
 		});
+	}
+	private class MedicineCellRenderer extends DefaultTableCellRenderer {
+		@Override
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+			int quantity = (Integer) table.getModel().getValueAt(row, 5);
+
+			if (isSelected) {
+				component.setForeground(table.getSelectionForeground());
+				component.setBackground(table.getSelectionBackground());
+			} else {
+				component.setForeground(Color.BLACK);
+				if (quantity < 10) {
+					component.setBackground(Color.RED);
+				} else {
+					component.setBackground(Color.WHITE);
+				}
+			}
+			return component;
+		}
 	}
 	public User getUser() throws RemoteException {
 		return user;
@@ -259,18 +287,24 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 					+ "\nFirst Name: " + user.getFirstName()
 					+ "\nLast Name: " + user.getLastName() +
 					"\n";
+			serverLogsCount++;
+			adminGUIFrame.getServerLogsMouseClicked().setText("SERVER LOGS("+serverLogsCount+")");
 			adminGUIFrame.getServerLogsTextArea().append(message);
 		});
 	}
 	public void notifyUserArchivedByAdmin(String adminUsername, String archivedUsername) throws RemoteException {
 		SwingUtilities.invokeLater(() -> {
 			String message = "["+formattedDateTime+"]" + "ADMIN " + adminUsername + " archived user " + archivedUsername+"\n";
+			serverLogsCount++;
+			adminGUIFrame.getServerLogsMouseClicked().setText("SERVER LOGS("+serverLogsCount+")");
 			adminGUIFrame.getServerLogsTextArea().append(message);
 		});
 	}
 	public void notifyUserUnarchivedByAdmin(String adminUsername, String unarchivedUsername) throws RemoteException {
 		SwingUtilities.invokeLater(() -> {
 			String message = "["+formattedDateTime+"]" + "ADMIN " + adminUsername + " unarchived user " + unarchivedUsername+"\n";
+			serverLogsCount++;
+			adminGUIFrame.getServerLogsMouseClicked().setText("SERVER LOGS("+serverLogsCount+")");
 			adminGUIFrame.getServerLogsTextArea().append(message);
 		});
 	}
@@ -285,6 +319,8 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 							+ "\nForm: " + medicine.getForm()
 							+ "\nQuantity: " + medicine.getQuantity()
 							+ "\nPrice: " + medicine.getPrice() + "\n";
+			serverLogsCount++;
+			adminGUIFrame.getServerLogsMouseClicked().setText("SERVER LOGS("+serverLogsCount+")");
 			adminGUIFrame.getServerLogsTextArea().append(message);
 		});
 	}
@@ -292,6 +328,8 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		SwingUtilities.invokeLater(() -> {
 		String message = "["+formattedDateTime+"]" + "ADMIN " + adminUsername + " deleted the medicine " + medicine.getGenericName() + " " +
 				"with a brand name " + medicine.getBrandName() + " under the category " + medicine.getCategory()+"\n";
+		serverLogsCount++;
+		adminGUIFrame.getServerLogsMouseClicked().setText("SERVER LOGS("+serverLogsCount+")");
 		adminGUIFrame.getServerLogsTextArea().append(message);
 		});
 	}
@@ -307,10 +345,41 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 
 			if (adminGUIFrame != null || clientGUIFrame != null) {
 				if (adminGUIFrame != null) {
+					serverLogsCount++;
+					adminGUIFrame.getServerLogsMouseClicked().setText("SERVER LOGS("+serverLogsCount+")");
 					adminGUIFrame.getServerLogsTextArea().append(message);
 				}
 				if (clientGUIFrame != null) {
 					clientGUIFrame.getNotificationsTextArea().append(message);
+					notificationsCount++;
+					clientGUIFrame.getNotificationsLabel().setText("NOTICES("+notificationsCount+")");
+				}
+			} else {
+				System.err.println("Both Admin GUI and Client GUI frames are null.");
+			}
+		});
+	}
+	public void notifyMedicineStockUpdatedByAdmin(String adminUsername, Medicine editedMedicine, Medicine originalMedicine, int chosenStock) throws RemoteException{
+		int newStock = editedMedicine.getQuantity() + chosenStock;
+		SwingUtilities.invokeLater(() -> {
+			String message = "["+formattedDateTime+"]" + "ADMIN " + adminUsername + " made changes on the stock of the medicine entry. Changes made: "
+					+ "\nCategory: from '" + originalMedicine.getCategory() + "' to '" + editedMedicine.getCategory() + "'"
+					+ "\nGeneric Name: from '" + originalMedicine.getGenericName() + "' to '" + editedMedicine.getGenericName() + "'"
+					+ "\nBrand Name: from '" + originalMedicine.getBrandName() + "' to '" + editedMedicine.getBrandName() + "'"
+					+ "\nForm: from '" + originalMedicine.getForm() + "' to '" + editedMedicine.getForm() + "'"
+					+ "\nQuantity: from '" + originalMedicine.getQuantity() + "' to '" + newStock + "'"
+					+ "\nPrice: from " + originalMedicine.getPrice() + " to " + editedMedicine.getPrice()+"\n";
+
+			if (adminGUIFrame != null || clientGUIFrame != null) {
+				if (adminGUIFrame != null) {
+					serverLogsCount++;
+					adminGUIFrame.getServerLogsMouseClicked().setText("SERVER LOGS("+serverLogsCount+")");
+					adminGUIFrame.getServerLogsTextArea().append(message);
+				}
+				if (clientGUIFrame != null) {
+					clientGUIFrame.getNotificationsTextArea().append(message);
+					notificationsCount++;
+					clientGUIFrame.getNotificationsLabel().setText("NOTICES("+notificationsCount+")");
 				}
 			} else {
 				System.err.println("Both Admin GUI and Client GUI frames are null.");
@@ -334,13 +403,17 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 					+ "\nZip: from '" + originalUser.getZip() + "' to '" + editedUser.getZip() + "'"
 					+ "\nEmail: from '" + originalUser.getEmail() + "' to '" + editedUser.getEmail() + "'"
 					+ "\nContact Number: from '" + originalUser.getContactNumber() + "' to '" + editedUser.getContactNumber() + "'\n";
-					adminGUIFrame.getServerLogsTextArea().append(message);
+			serverLogsCount++;
+			adminGUIFrame.getServerLogsMouseClicked().setText("SERVER LOGS("+serverLogsCount+")");
+			adminGUIFrame.getServerLogsTextArea().append(message);
 		});
 	}
 	public void notifyUserOrdersToAdmins(String username, String orderId) throws RemoteException{
 		SwingUtilities.invokeLater(() -> {
 			String message =
 					"User " + username + " has placed an order ("+orderId+")\n";
+			serverLogsCount++;
+			adminGUIFrame.getServerLogsMouseClicked().setText("SERVER LOGS("+serverLogsCount+")");
 			adminGUIFrame.getServerLogsTextArea().append(message);
 		});
 	}
@@ -402,7 +475,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 
 		});
 	}
-
 	public void sendOrderSearchResults(List<Order> searchResults) throws RemoteException{
 		SwingUtilities.invokeLater(() -> {
 			DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getoTable().getModel();
@@ -420,7 +492,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			}
 		});
 	}
-
 	public void sendPendingOrderSearchResults(List<Order> searchResults) throws RemoteException{
 		SwingUtilities.invokeLater(() -> {
 			DefaultTableModel model = (DefaultTableModel) adminGUIFrame.getpTable().getModel();
@@ -481,7 +552,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			System.out.println("Failed to change password for user: " + user.getUsername() + ". Reason: " + message);
 		}
 	}
-	
 	public void updateCart(UserCart userCart) throws RemoteException {
 		SwingUtilities.invokeLater(() -> {
 			DefaultTableModel model = (DefaultTableModel) clientGUIFrame.getCategoryTable1().getModel();
@@ -547,6 +617,8 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 				containerPanel.revalidate();
 
 				String message = "[SERVER NOTIFICATION][" + formattedDateTime + "]Your order " + orderId + " has been placed. Please wait while we review your uploaded prescription.\n";
+				notificationsCount++;
+				clientGUIFrame.getNotificationsLabel().setText("NOTICES("+notificationsCount+")");
 				clientGUIFrame.getNotificationsTextArea().append(message);
 
 			} catch (Exception ex) {
@@ -554,16 +626,18 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 			}
 		});
 	}
-
 	public void getUserMessage(String message, String username) throws RemoteException{
 		SwingUtilities.invokeLater(() -> {
+			serverLogsCount++;
+			adminGUIFrame.getServerLogsMouseClicked().setText("SERVER LOGS("+serverLogsCount+")");
 			adminGUIFrame.getServerLogsTextArea().append("["+formattedDateTime+"][FROM USER: " + username+"]"+message);
 		});
 	}
-
 	public void notifyOrderStatusChanged(String orderID, String newStatus) throws RemoteException{
 		SwingUtilities.invokeLater(() -> {
 			String message = "[SERVER NOTIFICATION]["+formattedDateTime+"]Your order " + orderID + " has been "+newStatus+".\n";
+			notificationsCount++;
+			clientGUIFrame.getNotificationsLabel().setText("NOTICES("+notificationsCount+")");
 			clientGUIFrame.getNotificationsTextArea().append(message);
 		});
 	}
@@ -578,7 +652,6 @@ public class CallbackImplementation extends UnicastRemoteObject implements Messa
 		details.append(orderDetails);
 		return details.toString();
 	}
-
 	public void displayOrderHistory(List<Order> orderHistory) {
 		SwingUtilities.invokeLater(() -> {
 			DefaultTableModel model = (DefaultTableModel) clientGUIFrame.getOrderHistoryTable().getModel();

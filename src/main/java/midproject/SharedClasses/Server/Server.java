@@ -14,10 +14,11 @@ public class Server {
 	 * @param args The command line arguments (not used in this implementation).
 	 */
 	public static void main(String[] args) {
+		System.setProperty("java.rmi.server.hostname", "192.168.1.107");
 		try {
 			ModelInterface servant = new ModelImplementation();
 			Registry reg = LocateRegistry.createRegistry(1099);
-			reg.rebind("msgserver",servant);
+			reg.bind("msgserver",servant);
 			System.out.println("Server running...");
 		} catch (Exception e) {
 			e.printStackTrace();

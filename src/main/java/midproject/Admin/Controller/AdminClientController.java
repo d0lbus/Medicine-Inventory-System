@@ -10,6 +10,7 @@ import java.rmi.registry.Registry;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import midproject.Admin.View.*;
+import midproject.Customer.View.QuantityFrame;
 import midproject.SharedClasses.Servants.CallbackImplementation;
 import midproject.SharedClasses.Interfaces.ModelInterface;
 import midproject.SharedClasses.ReferenceClasses.Medicine;
@@ -19,7 +20,6 @@ import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.SharedViewClasses.Login;
 import midproject.SharedClasses.UserDefinedExceptions.*;
 import midproject.SharedClasses.Utilities.UserJSONProcessor;
-import midproject.SharedClasses.SharedViewClasses.*;
 
 import java.util.Base64;
 import java.util.Calendar;
@@ -113,6 +113,7 @@ public class AdminClientController {
     private static void showClientGUI() throws Exception {
         adminGUIFrame.setLocationRelativeTo(null);
         adminGUIFrame.setVisible(true);
+        adminGUIFrame.getServerLogsMouseClicked().setText("SERVER LOGS(0)");
 
         autoRefreshUserRelatedComponents();
         autoRefreshMedicineRelatedComponents();
@@ -158,6 +159,15 @@ public class AdminClientController {
         });
 
 
+        adminGUIFrame.getServerLogsMouseClicked().addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    mci.hasReadServerLogs();
+                }  catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
         /** DASHBOARD RELATED METHODS */
 
         /**
@@ -780,6 +790,8 @@ public class AdminClientController {
                     editMedicineFrame.setLocationRelativeTo(null);
                     editMedicineFrame.setVisible(true);
 
+                    editMedicineFrame.getQuantityTextField().setEditable(false);
+
                     Medicine selectedMedicine = new Medicine();
                     selectedMedicine.setMedicineID(model.getValueAt(selectedRow,0).toString());
                     selectedMedicine.setCategory(model.getValueAt(selectedRow, 1).toString());
@@ -815,13 +827,58 @@ public class AdminClientController {
                                 msgserver.updateMedicine(editedMedicine, selectedMedicine, mci, username);
                                 autoRefreshMedicineRelatedComponents();
                                 JOptionPane.showMessageDialog(editMedicineFrame, "Medicine updated successfully.");
-                                editMedicineFrame.dispose();
                             } catch (Exception ex) {
                                 ex.printStackTrace();
                                 JOptionPane.showMessageDialog(editMedicineFrame, "Error updating medicine: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                             }
                         }
                     });
+
+                    editMedicineFrame.getEditStock().addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            QuantityFrame quantityFrame = new QuantityFrame();
+                            quantityFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                            quantityFrame.setLocationRelativeTo(null);
+                            quantityFrame.setVisible(true);
+                            quantityFrame.getProceedButton().addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    try {
+                                        Medicine editedStockMedicine = new Medicine();
+                                        int quantity = quantityFrame.getSelectedQuantity();
+
+                                        editedStockMedicine.setMedicineID(selectedMedicineID);
+                                        editedStockMedicine.setMedicineID(selectedMedicineID);
+                                        editedStockMedicine.setCategory(editMedicineFrame.getCategoryTextField().getText());
+                                        editedStockMedicine.setGenericName(editMedicineFrame.getGenericNameTextField().getText());
+                                        editedStockMedicine.setBrandName(editMedicineFrame.getBrandNameTextField().getText());
+                                        editedStockMedicine.setForm(editMedicineFrame.getFormTextField().getText());
+                                        editedStockMedicine.setQuantity(Integer.parseInt(editMedicineFrame.getQuantityTextField().getText()));
+                                        editedStockMedicine.setPrice(Double.parseDouble(editMedicineFrame.getAmmountTextField().getText()));
+                                        msgserver.updateMedicineStock(quantity, editedStockMedicine, selectedMedicine, mci, username);
+                                        autoRefreshMedicineRelatedComponents();
+                                        JOptionPane.showMessageDialog(editMedicineFrame, "Medicine updated successfully.");
+                                        quantityFrame.dispose();
+                                    } catch (Exception ex){
+                                        JOptionPane.showMessageDialog(editMedicineFrame, "Error updating stock: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                                    }
+                                }
+                            });
+
+                            quantityFrame.getCancelButton().addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    quantityFrame.dispose();
+                                }
+                            });
+
+
+
+
+                        }
+                    });
+
                 } else {
                     try {
                         throw new SelectionRequiredException("Please select a medicine to edit.");

@@ -30,6 +30,7 @@ public class EditMedicineFrame extends javax.swing.JFrame {
         quantityTextField = new javax.swing.JTextField();
         ammountTextField = new javax.swing.JTextField();
         editButton = new javax.swing.JButton();
+        editStock = new javax.swing.JButton();
         formLabel = new javax.swing.JLabel();
         quantityLabel = new javax.swing.JLabel();
         amountLabel = new javax.swing.JLabel();
@@ -52,6 +53,7 @@ public class EditMedicineFrame extends javax.swing.JFrame {
         brandNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         brandNameLabel.setText("Brand Name:");
 
+        editStock.setText("Edit Stock");
         editButton.setText("Edit");
 
         formLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -93,7 +95,10 @@ public class EditMedicineFrame extends javax.swing.JFrame {
                         .addComponent(ammountTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(17, 17, 17)
-                            .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(20, 20, 20)
+                            .addComponent(editStock, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+
                     .addComponent(categoryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(81, Short.MAX_VALUE))
         );
@@ -130,6 +135,8 @@ public class EditMedicineFrame extends javax.swing.JFrame {
                         .addComponent(genericNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(editButton)
+                    .addGap(18, 18, 18)
+                    .addComponent(editStock)
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -176,6 +183,11 @@ public class EditMedicineFrame extends javax.swing.JFrame {
         return quantityTextField;
     }
 
+    public JButton getEditStock() {
+        return editStock;
+    }
+
+
     private javax.swing.JTextField ammountTextField;
     private javax.swing.JLabel amountLabel;
     private javax.swing.JLabel brandNameLabel;
@@ -183,6 +195,7 @@ public class EditMedicineFrame extends javax.swing.JFrame {
     private javax.swing.JLabel categoryLabel;
     private javax.swing.JTextField categoryTextField;
     private javax.swing.JButton editButton;
+    private javax.swing.JButton editStock;
     private javax.swing.JLabel editMedicineLabel;
     private javax.swing.JLabel formLabel;
     private javax.swing.JTextField formTextField;

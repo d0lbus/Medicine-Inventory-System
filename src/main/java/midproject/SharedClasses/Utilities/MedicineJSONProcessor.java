@@ -125,6 +125,31 @@ public class MedicineJSONProcessor {
         writeMedicinesToFile(medicines, filePath);
     }
 
+    public static void updateStock(Medicine editedMedicine, int quantityChange, String filepath) throws IOException {
+        List<Medicine> medicines = readMedicinesFromFile(filepath);
+
+        boolean isMedicineFound = false;
+        for (Medicine medicine : medicines) {
+            if (medicine.getMedicineID().equals(editedMedicine.getMedicineID())) {
+                int updatedQuantity = medicine.getQuantity() + quantityChange;
+                if (updatedQuantity < 0) {
+                    throw new IllegalArgumentException("Stock cannot go below zero for: " + editedMedicine.getMedicineID());
+                }
+                medicine.setQuantity(updatedQuantity);
+                isMedicineFound = true;
+                break;
+            }
+        }
+
+        if (!isMedicineFound) {
+            throw new IllegalArgumentException("Medicine with ID " + editedMedicine.getMedicineID() + " not found.");
+        }
+
+        writeMedicinesToFile(medicines, filepath);
+    }
+
+
+
     /**
      * Removes a specific medicine from the JSON file.
      * @param targetMedicine The medicine to remove.

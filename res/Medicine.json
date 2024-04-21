@@ -1,12 +1,12 @@
 [
   {
     "MedicineID": "M1",
-    "Category": "Painkillers",
-    "GenericName": "Citalopram",
-    "BrandName": "Celexar",
+    "Category": "Painkiller",
+    "GenericName": "Citalopra",
+    "BrandName": "Celexas",
     "Form": "Tablet",
-    "Quantity": 40,
-    "Price": 10.0
+    "Quantity": 4,
+    "Price": 100.0
   },
   {
     "MedicineID": "M2",

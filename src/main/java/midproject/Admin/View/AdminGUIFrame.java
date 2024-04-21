@@ -189,7 +189,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
 
         serverLogsMouseClicked.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         serverLogsMouseClicked.setForeground(new java.awt.Color(255, 255, 255));
-        serverLogsMouseClicked.setText("SERVER LOGS");
+        serverLogsMouseClicked.setText("SERVER LOGS(0)");
         serverLogsMouseClicked.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 serverLogsMouseClickedMouseClicked(evt);
@@ -283,7 +283,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
         });
 
         inventoryButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        inventoryButton.setText("Inventory");
+        inventoryButton.setText("Medicine");
         inventoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inventoryButtonActionPerformed(evt);
@@ -937,11 +937,11 @@ public class AdminGUIFrame extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Category", "Generic Name", "Brand Name", "Form", "Quantity", "Price"
+                "Medicine ID", "Category", "Generic Name", "Brand Name", "Form", "Quantity", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -960,7 +960,7 @@ public class AdminGUIFrame extends javax.swing.JFrame {
 
         inventoryLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         inventoryLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        inventoryLabel.setText("Inventory");
+        inventoryLabel.setText("Medicine");
 
         iEditButton.setBackground(new java.awt.Color(18, 69, 89));
         iEditButton.setText("Edit");
@@ -1896,4 +1896,12 @@ public class AdminGUIFrame extends javax.swing.JFrame {
     private javax.swing.JLabel userTypeLabel;
     private javax.swing.JLabel zipCodeLabel;
     private javax.swing.JTextField zipCodeTextField;
+
+    public JLabel getServerLogsMouseClicked() {
+        return serverLogsMouseClicked;
+    }
+
+    public void setServerLogsMouseClicked(JLabel serverLogsMouseClicked) {
+        this.serverLogsMouseClicked = serverLogsMouseClicked;
+    }
 }

@@ -1,7 +1,9 @@
 {
   "C1": {
     "userId": "C1",
-    "items": {}
+    "items": {
+      "M1": 5
+    }
   },
   "C3": {
     "userId": "C3",

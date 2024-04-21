@@ -10,6 +10,8 @@ import java.util.List;
 public interface MessageCallback extends Remote {
 	User getUser() throws RemoteException;
 
+	void hasReadNotifications() throws RemoteException;
+
 	void loginCall(User user) throws RemoteException;
 
 	void broadcastCall(String msg) throws RemoteException;
@@ -46,6 +48,8 @@ public interface MessageCallback extends Remote {
 	void notifyMedicineArchivedByAdmin(String adminUsername, Medicine medicine) throws RemoteException;
 
 	void notifyMedicineUpdatedByAdmin(String adminUsername, Medicine editedMedicine, Medicine originalMedicine) throws RemoteException;
+
+	void notifyMedicineStockUpdatedByAdmin(String adminUsername, Medicine editedMedicine, Medicine originalMedicine, int chosenStock) throws RemoteException;
 
 	void sendSearchResults(List<User> users) throws RemoteException;
 

@@ -448,7 +448,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
         Map<String, UserCart> allUserCarts = CartJSONProcessor.readUserCartsFromFile();
         boolean cartUpdated = false;
-
         for (Map.Entry<String, UserCart> entry : allUserCarts.entrySet()) {
             String userId = entry.getKey();
             UserCart cart = entry.getValue();
@@ -491,6 +490,69 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
     }
 
+    public void updateMedicineStock(int chosenStock, Medicine editedStockMedicine, Medicine originalMedicine, MessageCallback callback, String adminUsername) throws RemoteException {
+        try {
+            MedicineJSONProcessor.updateStock(editedStockMedicine, chosenStock, "res/Medicine.json");
+
+            msgCallbacks.entrySet().forEach(entry -> {UserCallBackInfo userInfo = entry.getKey();
+                MessageCallback callBack = entry.getValue();
+                if ("Admin".equals(userInfo.getUserType()) || "Customer".equals(userInfo.getUserType())) {
+                    try {
+                        callBack.notifyMedicineStockUpdatedByAdmin(adminUsername, editedStockMedicine, originalMedicine, chosenStock);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }});
+
+            Map<String, UserCart> allUserCarts = CartJSONProcessor.readUserCartsFromFile();
+            boolean cartUpdated = false;
+            for (Map.Entry<String, UserCart> entry : allUserCarts.entrySet()) {
+                String userId = entry.getKey();
+                UserCart cart = entry.getValue();
+
+                if (cart.getItems().containsKey(editedStockMedicine.getMedicineID())) {
+                    cart.addOrUpdateItem(editedStockMedicine.getMedicineID(), cart.getItems().get(editedStockMedicine.getMedicineID()));
+                    cartUpdated = true;
+
+                }
+            }
+
+            if (cartUpdated) {
+                CartJSONProcessor.writeUserCartsToFile(allUserCarts);
+            }
+
+            for (Map.Entry<UserCallBackInfo, MessageCallback> entry : msgCallbacks.entrySet()) {
+                UserCallBackInfo userInfo = entry.getKey();
+                MessageCallback customerCallback = entry.getValue();
+                if ("Customer".equals(userInfo.getUserType())) {
+                    try {
+                        String userId = "";
+                        try {
+                            User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", userInfo.getUsername());
+                            if (user != null) {
+                                userId = user.getUserId();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        UserCart updatedCart = allUserCarts.get(userId);
+                        if (updatedCart != null && !updatedCart.getItems().isEmpty()) {
+                            customerCallback.updateCart(updatedCart);
+                        }
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+
+        } catch (IOException ex){
+
+        }
+
+    }
+
     /**
      * MESSAGE RELATED METHODS
      *
@@ -528,7 +590,7 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
     /**
      *
-     * AUTO REFRESH REALTED METHODS
+     * AUTO REFRESH RELATED METHODS
      *
      * */
 
@@ -677,7 +739,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             });
         }
     }
-
     public List<String> getOnlineUsernames() throws RemoteException {
         return new ArrayList<>(sessionUserMap.values());
     }
@@ -729,7 +790,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
         msgCallback.displayProfileDetails(user);
         return user;
     }
-
     public User getUserByUsername(String username) throws RemoteException {
         try {
             return UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
@@ -737,7 +797,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             throw new RemoteException("Error retrieving user information: " + e.getMessage(), e);
         }
     }
-
     public boolean validateOldPassword(String username, String oldPassword) throws RemoteException {
         try {
             return UserJSONProcessor.validateOldPassword(username, oldPassword);
@@ -745,7 +804,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             throw new RemoteException("Error validating old password: " + e.getMessage(), e);
         }
     }
-
     public void updateUserPassword(String username, String newPassword) throws RemoteException {
         try {
             UserJSONProcessor.updateUserPassword(username, newPassword);
@@ -753,7 +811,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             throw new RemoteException("Error updating user password: " + e.getMessage(), e);
         }
     }
-
     public boolean changeUserPassword(String username, String oldPassword, String newPassword, MessageCallback clientCallback) throws RemoteException {
         try {
             if (validateOldPassword(username, oldPassword)) {
@@ -769,7 +826,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             return false;
         }
     }
-
     public void getOrderHistory(String username, MessageCallback clientCallback) throws RemoteException {
         try {
             User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
@@ -781,7 +837,6 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             throw new RemoteException("Error retrieving order history: " + e.getMessage(), e);
         }
     }
-
     public void getCartDetails(String username, MessageCallback clientCallback) throws RemoteException{
         try {
             User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
@@ -812,30 +867,21 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             throw new RemoteException("Error adding medicine to cart: " + e.getMessage(), e);
         }
     }
-
     public synchronized void updateMedicineQuantityInCart(String medicineId, int newQuantity, MessageCallback clientCallback, String username) throws RemoteException {
         try {
             Map<String, UserCart> userCarts = CartJSONProcessor.readUserCartsFromFile();
-
             User user = UserJSONProcessor.getUserByUsername("res/UserInformation.json", username);
             String userId = user.getUserId();
-
             if (userId == null || !userCarts.containsKey(userId)) {
                 throw new RemoteException("Cart for user not found.");
             }
-
             UserCart userCart = userCarts.get(userId);
-
             if (userCart == null) {
                 throw new RemoteException("Cart not initialized correctly.");
             }
-
             userCart.updateMedicineQuantity(medicineId, newQuantity);
-
             CartJSONProcessor.writeUserCartsToFile(userCarts);
-
             clientCallback.updateCart(userCart);
-
         } catch (Exception e) {
             throw new RemoteException("Error updating medicine quantity in cart: " + e.getMessage(), e);
         }
@@ -899,6 +945,48 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
             medicine.setQuantity(newStock);
             MedicineJSONProcessor.updateMedicine(medicine, "res/Medicine.json");
             userCart.removeItem(item.getMedicineId());
+
+            Map<String, UserCart> allUserCarts = CartJSONProcessor.readUserCartsFromFile();
+            boolean cartUpdated = false;
+            for (Map.Entry<String, UserCart> entry : allUserCarts.entrySet()) {
+                String allUserId = entry.getKey();
+                UserCart cart = entry.getValue();
+
+                if (cart.getItems().containsKey(medicine.getMedicineID())) {
+                    cart.addOrUpdateItem(medicine.getMedicineID(), cart.getItems().get(medicine.getMedicineID()));
+                    cartUpdated = true;
+
+                }
+            }
+
+            if (cartUpdated) {
+                CartJSONProcessor.writeUserCartsToFile(allUserCarts);
+            }
+
+            for (Map.Entry<UserCallBackInfo, MessageCallback> entry : msgCallbacks.entrySet()) {
+                UserCallBackInfo userInfo = entry.getKey();
+                MessageCallback customerCallback = entry.getValue();
+                if ("Customer".equals(userInfo.getUserType())) {
+                    try {
+                        String allUserId = "";
+                        try {
+                            User allUser = UserJSONProcessor.getUserByUsername("res/UserInformation.json", userInfo.getUsername());
+                            if (allUser != null) {
+                                allUserId = allUser.getUserId();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        UserCart updatedCart = allUserCarts.get(allUserId);
+                        if (updatedCart != null && !updatedCart.getItems().isEmpty()) {
+                            customerCallback.updateCart(updatedCart);
+                        }
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
 
         CartJSONProcessor.writeUserCartsToFile(userCarts);
@@ -962,6 +1050,5 @@ public class ModelImplementation extends UnicastRemoteObject implements ModelInt
 
         return total;
     }
-
 
 }

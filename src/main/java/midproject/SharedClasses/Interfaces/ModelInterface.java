@@ -6,6 +6,7 @@ import midproject.SharedClasses.ReferenceClasses.OrderItem;
 import midproject.SharedClasses.ReferenceClasses.User;
 import midproject.SharedClasses.UserDefinedExceptions.*;
 
+import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
@@ -54,6 +55,8 @@ public interface ModelInterface extends Remote {
     void searchMedicine(String searchText, MessageCallback callback) throws RemoteException;
 
     void updateMedicine(Medicine editedMedicine, Medicine originalMedicine, MessageCallback callback, String adminUsername) throws Exception;
+
+    void updateMedicineStock(int chosenStock, Medicine medicine, Medicine originalMedicine, MessageCallback callback, String adminUsername) throws IOException;
 
     void registerUser(User newUser, String adminUsername) throws RemoteException, InvalidInputException;
 

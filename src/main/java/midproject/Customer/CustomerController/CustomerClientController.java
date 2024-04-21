@@ -106,6 +106,7 @@ public class CustomerClientController {
 			}
 
 			clientGUIFrame.setVisible(true);
+			clientGUIFrame.getNotificationsLabel().setText("NOTICES(0)");
 
 			try{
 				msgserver.updateInventoryTable();
@@ -158,6 +159,16 @@ public class CustomerClientController {
                     throw new RuntimeException(ex);
                 }
             }
+		});
+
+		clientGUIFrame.getNotificationsLabel().addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					try {
+						mci.hasReadNotifications();
+					}  catch (Exception ex) {
+						throw new RuntimeException(ex);
+					}
+				}
 		});
 
 		clientGUIFrame.getSaveButton().addActionListener(e ->{
@@ -607,8 +618,8 @@ public class CustomerClientController {
 				}
 			});
 		}
-	/**HELPER METHODS**/
 
+	/**HELPER METHODS**/
 	private static List<OrderItem> getOrderItemsFromSelectedRows() {
 		List<OrderItem> orderItems = new ArrayList<>();
 		for (int selectedRow : clientGUIFrame.getCategoryTable1().getSelectedRows()) {
