@@ -1,6 +1,6 @@
-# IT 222L - Midterm Project (Medicine Inventory System)
+# IT 222L Integrative Technologies - Midterm Project (Medicine Inventory System)
 
-## Overview
+## Project Overview
 This project is a **GUI-based Medicine Inventory System** built with **Java RMI (Remote Method Invocation)** and **JSON file processing**.  
 It manages users, medicines, and transactions securely in a client-server environment, ensuring real-time updates across connected clients.
 
@@ -17,3 +17,12 @@ It manages users, medicines, and transactions securely in a client-server enviro
 - JSON Processing  
 - Java Swing/JavaFX  
 
+## Team Quantum Tech
+- AQUINO, Jan Dolby
+- ABITAN, Julianne Therese
+- CAHANAP, Jerilyn Louise
+- CHOY, Nikko Andrei
+- ENCARNACION, Ma. Earl Freskkie
+- GARCIA, Anton
+- LICTAG, Bryane Harry
+---
